@@ -1,0 +1,294 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Misc. internal tools &#8212; AnyPyTools 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    <script type="text/javascript" src="../_static/cloud.js"></script>
+    <link rel="shortcut icon" href="../_static/anypytools.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PyTest plugin." href="../pytest_plugin.html" />
+    <link rel="prev" title="anypytools.h5py_wrapper" href="h5py_wrapper.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             accesskey="C">toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../pytest_plugin.html" title="PyTest plugin."
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="h5py_wrapper.html" title="anypytools.h5py_wrapper"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS overrides for cloud theme */
+
+/* nicer titles and more space for info and warning logos */
+
+div.admonition > .first {
+    background: rgba(0, 0, 0, .05);
+    margin: .5em -1em;
+    margin-top: -.5em !important;
+    padding: .5em .5em .5em 2.65em;
+}
+
+/* indent single paragraph */
+div.admonition {
+    text-indent: 20px;
+}
+/* don't indent multiple paragraphs */
+div.admonition > p {
+    text-indent: 0;
+}
+/* remove excessive padding */
+div.admonition.inline-title p.admonition-title {
+    padding-left: .2em;
+}
+</style>
+<div class="section" id="module-anypytools.tools">
+<span id="misc-internal-tools"></span><h1>Misc. internal tools<a class="headerlink" href="#module-anypytools.tools" title="Permalink to this headline">¶</a></h1>
+<p>Created on Sun Sep  7 13:25:38 2014</p>
+<p>&#64;author: Morten</p>
+<dl class="class">
+<dt id="anypytools.tools.AnyPyProcessOutput">
+<em class="property">class </em><code class="descclassname">anypytools.tools.</code><code class="descname">AnyPyProcessOutput</code><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subclassed OrderedDict which supports partial key access</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="anypytools.tools.AnyPyProcessOutputList">
+<em class="property">class </em><code class="descclassname">anypytools.tools.</code><code class="descname">AnyPyProcessOutputList</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutputList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList" title="Permalink to this definition">¶</a></dt>
+<dd><p>List like class to wrap the output of model simulations.</p>
+<p>The class behaves as a normal list but provide
+extra function to easily access data.</p>
+<dl class="method">
+<dt id="anypytools.tools.AnyPyProcessOutputList.filter">
+<code class="descname">filter</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutputList.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a AnyPyProcessOutputList object from those elements
+where function returns true.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="anypytools.tools.AnyPyProcessOutputList.tolist">
+<code class="descname">tolist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutputList.tolist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList.tolist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return as native python types (list of dicts)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="anypytools.tools.anybodycon_version">
+<code class="descclassname">anypytools.tools.</code><code class="descname">anybodycon_version</code><span class="sig-paren">(</span><em>anybodyconpath</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#anybodycon_version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.anybodycon_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls AnyBodyCon and extract version</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="anypytools.tools.array2anyscript">
+<code class="descclassname">anypytools.tools.</code><code class="descname">array2anyscript</code><span class="sig-paren">(</span><em>arr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#array2anyscript"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.array2anyscript" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format a numpy array as an anyscript variable</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="anypytools.tools.find_ammr_version">
+<code class="descclassname">anypytools.tools.</code><code class="descname">find_ammr_version</code><span class="sig-paren">(</span><em>folder</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#find_ammr_version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.find_ammr_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the AMMR version if possible.
+The function will walk up a directory tree looking
+for a ammr_verion.any file to parse</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="anypytools.tools.get_anybodycon_path">
+<code class="descclassname">anypytools.tools.</code><code class="descname">get_anybodycon_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_anybodycon_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.get_anybodycon_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the path to default AnyBody console application</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="anypytools.tools.get_git_branch_info">
+<code class="descclassname">anypytools.tools.</code><code class="descname">get_git_branch_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_git_branch_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.get_git_branch_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the branch name for git repository</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="anypytools.tools.get_ncpu">
+<code class="descclassname">anypytools.tools.</code><code class="descname">get_ncpu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_ncpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.get_ncpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of CPUs in the computer</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="anypytools.tools.getsubdirs">
+<code class="descclassname">anypytools.tools.</code><code class="descname">getsubdirs</code><span class="sig-paren">(</span><em>toppath</em>, <em>search_string='.'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#getsubdirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.getsubdirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find all directories below a given top path.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>toppath: top directory when searching for sub directories
+search_string: Limit to directories matching the this regular expression</dd>
+<dt>Returns:</dt>
+<dd>List of directories</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="anypytools.tools.make_hash">
+<code class="descclassname">anypytools.tools.</code><code class="descname">make_hash</code><span class="sig-paren">(</span><em>o</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#make_hash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.make_hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a hash from a dictionary, list, tuple or set to any level, that contains
+only other hashable types (including any lists, tuples, sets, and
+dictionaries).
+<a class="reference external" href="http://stackoverflow.com/questions/5884066/hashing-a-python-dictionary">http://stackoverflow.com/questions/5884066/hashing-a-python-dictionary</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="anypytools.tools.silentremove">
+<code class="descclassname">anypytools.tools.</code><code class="descname">silentremove</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#silentremove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.silentremove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a file ignoring cases where the file does not exits.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="anypytools.tools.walk_up">
+<code class="descclassname">anypytools.tools.</code><code class="descname">walk_up</code><span class="sig-paren">(</span><em>bottom</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#walk_up"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.walk_up" title="Permalink to this definition">¶</a></dt>
+<dd><p>mimic os.walk, but walk ‘up’
+instead of down the directory tree</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html" title="index">
+          <img class="logo" src="../_static/anypytools_logo.png" alt="Logo"/>
+        </a></p>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="h5py_wrapper.html"
+                          title="Previous page">&larr; anypytools.h5py_wrapper</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="../pytest_plugin.html"
+                          title="Next page">&rarr; PyTest plugin.</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/tools.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             >toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../pytest_plugin.html" title="PyTest plugin."
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="h5py_wrapper.html" title="anypytools.h5py_wrapper"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Morten Enemark Lund.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

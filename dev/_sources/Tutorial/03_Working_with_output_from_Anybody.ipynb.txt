@@ -1,0 +1,306 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Working with data from AnyBody"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "There are several ways to output data from AnyBody. The previous tutorials used the 'Dump' class operation to export specific variables. Another option is to have AnyBody write specific variables to a file by adding the 'AnyOutputFile' class to the AnyBody model."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Working with AnyOutputFiles"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "To come..."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Working with HDF5 files"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Sometimes, it can be convenient to save the entire model along with all its data (although this can be several hundred megabytes). It is useful if we later want to analyze other output variables from the model. It can also be useful if we want to load the data in the AnyBody graphical user application and replay the result.\n",
+    "\n",
+    "AnyBody has a feature to save the output of a study to an HDF5 file. And like most things in AnyBody, this can also be done with a macro command. \n",
+    "\n",
+    "Let us try this with the model from the previous tutorials."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "macrolist = [[\n",
+    "  'load \"Knee.any\"',\n",
+    "  'operation Main.MyStudy.Kinematics',\n",
+    "  'run',\n",
+    "  'classoperation Main.MyStudy.Output \"Save data\" --type=\"Deep\" --file=\"output.anydata.h5\"',\n",
+    "  'exit']] "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    " Here we have added a \"`Save data`\" classoperation to the macro. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "from anypytools.abcutils import AnyPyProcess \n",
+    "app = AnyPyProcess()\n",
+    "\n",
+    "app.start_macro(macrolist);"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The data stored in the file **output.anydata.h5** can be re-loaded in the AnyBody GUI application. To do this; load the model, and then right click the `Main.MyStudy.Output` folder and select \"Load data\". \n",
+    "\n",
+    "Moreover, since we set **`type=\"Deep\"`** in the macro we can also load the data into external programs, e.g. Matlab or Python. In python this is done using the *`h5py`* module\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[ 0.03517107  0.03518544  0.03522538  0.03529129  0.03538355  0.03550231\n",
+      "  0.03564761  0.03581929  0.03601707  0.03624048  0.03648895  0.03676178\n",
+      "  0.03705816  0.03737724  0.03771812  0.03807991  0.03846173  0.03886281\n",
+      "  0.03928244  0.03972002  0.0401751   0.04064731  0.04113638  0.04164206\n",
+      "  0.04216406  0.04270195  0.04325503  0.04382223  0.04440197  0.04499208\n",
+      "  0.04558969  0.04619126  0.04679259  0.04738895  0.04797527  0.04854637\n",
+      "  0.0490972   0.04962319  0.05012044  0.0505859   0.051017    0.0514114\n",
+      "  0.05176698  0.0520819   0.05235456  0.05258365  0.05276812  0.05290715\n",
+      "  0.05300015  0.05304675  0.05304675  0.05300015  0.05290715  0.05276812\n",
+      "  0.05258365  0.05235456  0.0520819   0.05176698  0.0514114   0.051017\n",
+      "  0.0505859   0.05012044  0.04962319  0.0490972   0.04854637  0.04797527\n",
+      "  0.04738895  0.04679259  0.04619126  0.04558969  0.04499208  0.04440197\n",
+      "  0.04382223  0.04325503  0.04270195  0.04216406  0.04164206  0.04113638\n",
+      "  0.04064731  0.0401751   0.03972002  0.03928244  0.03886281  0.03846173\n",
+      "  0.03807991  0.03771812  0.03737724  0.03705816  0.03676178  0.03648895\n",
+      "  0.03624048  0.03601707  0.03581929  0.03564761  0.03550231  0.03538355\n",
+      "  0.03529129  0.03522538  0.03518546  0.03517104]\n"
+     ]
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "import h5py\n",
+    "\n",
+    "h5file = h5py.File('output.anydata.h5')\n",
+    "data = np.array( h5file['/Output/MomentArm'] )\n",
+    "h5file.close()\n",
+    "print(data)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The data structure of the HDF5 files can, unfortunately, be very confusing. AnyBody does not save duplicate copies of the same data. If there are multiple references to the same folder, only one will be present in the HDF5 file. \n",
+    "In our model `Knee.any` we have a reference to the **`Knee`** joint folder just before the **`Model`** folder in the study section. Thus, all variables inside the **`Knee`** folder cannot be accessed with the path '/Output/Model/Knee/...', but only through the path of the reference '/Output/kneeref/...'.\n",
+    "\n",
+    "We can see the problem in the following code snippet:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "False\n",
+      "True\n"
+     ]
+    }
+   ],
+   "source": [
+    "with h5py.File('output.anydata.h5') as f:\n",
+    "    print( '/Output/Model/Knee/Pos' in f )\n",
+    "    print( '/Output/kneeref/Pos' in f )\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This makes it difficult to find the correct path in large models with many references. AnyPyTools contains a wrapper for the h5py module, which automatically locates the right data, no matter what path is used. Using this module, we can easily locate the data. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "True\n",
+      "True\n"
+     ]
+    }
+   ],
+   "source": [
+    "import anypytools.h5py_wrapper as h5py2\n",
+    "with h5py2.File('output.anydata.h5') as f:\n",
+    "    print( '/Output/Model/Knee/Pos' in f )\n",
+    "    print( '/Output/kneeref/Pos' in f )"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The h5py wrapper will also let us use the AnyScript variable names directly, so we don't have to replace every . (dot) with a / (slash), and remove the stuff before the Output folder. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "with h5py2.File('output.anydata.h5') as f:\n",
+    "    momentarm = np.array(f['Output.MomentArm'] )                   # dot notation\n",
+    "    kneeangle = np.array(f['Main.MyStudy.Output.Model.Knee.Pos'] ) # dot notation with full path\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "image/png": "iVBORw0KGgoAAAANSUhEUgAAAYkAAAEPCAYAAAC3NDh4AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz\nAAALEgAACxIB0t1+/AAAIABJREFUeJzt3XmYVNXV7/HvakDEAUGQSRREcUBxwgGNxk5UFEWMvioa\n5xENcY6JbzQXMLlRY8QhaHCe50QTFb3OaEyMqEhQQUXFAREQUURUZFj3j306XbRVTXV11dlVXb/P\n8/Cw69SpOovqplfvvc9e29wdERGRbGpiByAiIuVLSUJERHJSkhARkZyUJEREJCclCRERyUlJQkRE\ncmpd6guY2fvAAmA5sMTdd2jw/G7A34H3kkP3u/vvSh2XiIisXMmTBCE51Lr7542c85y7D00hFhER\naYI0hpssj+tYCnGIiEgTpZEkHHjMzF4ysxNznDPQzF41s/Fm1i+FmEREJA9pDDft7O6zzWwd4Akz\nm+buz2c8/wrQy92/NrPBwN+AjVOIS0REVsLSrN1kZiOBhe4+ppFzZgAD3H1+g+MqMiUiUgB3L3hI\nv6TDTWa2mpmtkbRXBwYBrzc4p2tGewdC4lohQdRx97L6M3LkyOgxVEpcikkxVUNc5RhTc5V6uKkr\n8EDSC2gN3OHuj5vZcMDd/VrgIDM7BVgCfAMMK3FMIiKSp5ImCXefAWyd5fg1Ge2rgKtKGYeIiBRG\nK66boba2NnYIWZVjXIopP4opf+UYVznG1FypTlw3h5l5pcQqIlIuzAwv14lrERGpbEoSIiKSk5KE\niIjkpCQhIiI5KUmIiEhOShIiIpKTkoSIiOSkJCEiIjkpSYiISE5KEiIikpOShIiI5KQkISIiOSlJ\niIhITkoSIiKSk5JEhqVLQdXIRUTqKUlkGD4camrg3XdjRyIiUh606VCGb7+Fdu1C+8474bDDSno5\nEZGS06ZDRbTqqmG4ae+94ac/hWHDYkckIhKXehI53HADnHBCaC9eDKusktqlRUSKprk9CSWJRkyb\nBv36hfY778CGG6Z6eRGRZtNwUwltthl8801ob7RRmKcQEakmShIrUTdPMXgwHH44HHxw7IhERNKj\n4aYmuPFGOP740NY8hYhUAs1JpOzNN8MwFMD06WEYSkSkXGlOImWbblo/T9G3L9x2W9x4RERKSUmi\nAHXzFEOGwFFHwf77x45IRKQ0NNzUTDffDMceG9rffgtt20YNR0RkBZqTKAPTp8PGG4f2tGlhSEpE\npBxoTqIM9O0b7naCMKl9ww1x4xERKRYliSJZZZUwT3HQQaGcx157xY5IRKT5NNxUAnffXV9BdtEi\nWG21uPGISPXSnESZev992GCD0J4yBfr3jxqOiFQpzUmUqd69YcmS0N5ySxg7Nmo4IiIFUZIoodat\nwzzFCSfAqafCwIGxIxIRaRoNN6Xk4Ydhv/1Ce8ECaN8+bjwiUh003FQhhgyBWbNCe6214IUX4sYj\nIpIPJYkUde8Oy5bBOuvAzjvDqFGxIxIRaZySRMpqamDuXDj3XBg9GtZbL8xbiIiUI81JRPTcc7Db\nbqE9ezZ07Ro3HhFpeTQnUcF++EOYPz+0u3WDRx6JG4+ISENKEpF17AjLl8O228K++8KJJ8aOSESk\nnoabysiVV8Lpp4f2d99BmzZx4xGRyqeyHC3Ma6+FFdoAb78dKsyKiBRKcxItTP/+9dujbrwxXHdd\n3HhEpLopSZShuu1Rhw2Dk06CXXaJHZGIVKuSDzeZ2fvAAmA5sMTdd8hyzpXAYGARcIy7T85yTlUM\nNzX0wANw4IGh/fnn0KFD3HhEpLJUwnDTcqDW3bfJkSAGAxu6e19gODAuhZgqxgEHwMcfh3bHjmFt\nhYhIWtJIEraS6+wP3Arg7i8Ca5mZlpVl6NEjlPNYd92w+O7ss2NHJCLVIo0k4cBjZvaSmWVbBbAu\n8FHG44+TY5KhpgZmzoQLLoAxY0IZ8qVLY0clIi1d6xSusbO7zzazdYAnzGyauz+f8Xy2sbKskw+j\nMiri1dbWUltbW8w4K8JvfhMW3Q0YENZR6DZZEck0YcIEJkyYULT3S3WdhJmNBBa6+5iMY+OAZ9z9\nnuTxm8Bu7j6nwWurcuI6l2++qd87+5prwl1QIiINlfXEtZmtZmZrJO3VgUHA6w1OexA4KjlnIPBF\nwwQh39euXbhN9tBDYfhw2GEHVZMVkeIraU/CzDYAHiAMH7UG7nD3i8xsOODufm1y3lhgb8ItsMe6\n+6Qs76WeRA4PPQRDh4b2vHnQqVPceESkfKgshwBhj4q6UuOPPgp77x03HhEpD2U93CTp6dIlVJPt\n3x8GD4Yjj4wdkYi0BOpJtEBXXw0jRoT2okX1E9wiUn003CRZTZ8eCgQCTJwI228fNx4RiUPDTZJV\n375hsd2aa4Y7n37969gRiUglUpJowVq1gi+/hPPPhwsvDNVltUpbRJpCw01V4uWX64ecpk2DTTeN\nG4+IpEPDTZKX7bar38xos83gj3+MG4+IVAYliSpSt5nRySfDOedA9+7htlkRkVw03FSlnnsulB0H\nePdd6NMnbjwiUholvwXWzHoChwK7Aj2Abwj1l8YDj7p7Kr+LKkkU31dfhbufAK66Cn72s7jxiEjx\nlTRJmNlNhL0dHgZeBuYCqwIbAz8CBgDnunvJ90tTkiidww+HO++ETTYJk9pW8LeTiJSbUieJLdy9\nYdXWzOdXAdZ393cKDSBfShKl9fjjsNdeof3BB7D++nHjEZHi0IprKZoFC6BDh9AeNy6UIBeRypbK\nLbBmNsTMXjWz+Wb2pZktNLMvC72olKe11gp3Px1ySLgDqm9f7VEhUu3y6kmY2TvAgcBrsX6dV08i\nXZnDTzNmQO/eUcMRkQKltZjuI+B1/ZSuHoMGheEngA02CHc/iUj1ybcnsT3wW+BZYHHd8cy9qktN\nPYl4jjgC7rgjTGbPmAE1WoIpUjHS6kn8X+Brwu2va2b8kSpw++3w5JPw4YehaOA7Jb+XTUTKRb49\nidfdfYsU4mksBvUkIstcfHfRRfCrX8WNR0RWLq2exCNmNqjQi0jLsMYa4W6n4cPh3HNh9dVhyZLY\nUYlIKeXbk1gIrE6Yj1gCGODu3r604a0Qg3oSZeTFF2HgwNCeNAm22SZuPCKSnRbTSTSLF4fKsgBn\nnQWXXho3HhH5vrQW0x1gZmtlPO5gZj8p9KLSMrRtG4afRo6EMWNCzaevv44dlYgUU77DTZPdfesG\nx15199QGGdSTKG/TpkG/fqH9zDNQWxs1HBFJpDVxne281oVeVFqezTYL+2evtx786EehtIeIVL58\nk8TLZjbGzDY0sz5mdhnwSikDk8rTqlVYSzFuHNx3Xxh++vTT2FGJSHPkmyROBb4D7gHuJWw8NKJU\nQUllGz4cZs0K7S5d4Oabo4YjIs2gu5ukpPbdFx55JNR/eucdlfQQSVtJ5yTM7Foz65/judXN7Dgz\nO7zQi0vLN358qCg7Y0YYjpo6NXZEItIUK9uZbmvg10B/wr7WnxLqN/UF2gM3AuPcfXHONylWoOpJ\nVLSvvw4rtCGU87joorjxiFSLVBbTmdkawHZAd8J8xDR3f6vQixZCSaJlOPdcuPji0P7qq/rEISKl\noRXXUnGmToXNNw/thx8O8xYiUhpKElKRli+HLbYIi/B23hmefz7cMisixZXWYjqRoqqpCT2Ke+6B\nf/0rPH733dhRiUhDShIS1SGHwBdfhPZGG4U6UCJSPvKduN4OOA/oRSjHUVcqfMvShrdCDBpuauHO\nPBMuvzy0NaktUhxp3d30FnAO8BqwvO64u39Q6IWbSkmiOrzxRpirAE1qixRDWknieXffpdCLFIOS\nRPVYvhz69w9zFjvuCC+8oEltkUKllSR2Bw4DniLsTgeAu99f6IWbSkmi+tx3X3012alTQ6VZEWma\ntJLE7cCmwBvUDze5ux9X6IWbSkmiOi1cCO2TTXJPOw2uuCJuPCKVJrU5CXffpNCLFIOSRHUbNQpG\njw7tefOgU6eo4YhUjLTWSfzLzPoVehGR5ho1KhQJBOjcGW64IWo4IlUj357ENGBDYAZhTkK3wEo0\n++0X7nzq2BHmzIE2bWJHJFK+0hpu6pXtuG6BlViefx523TW0n30WfvjDuPGIlKuSJwkzqwGmuvum\nhV6kGJQkpKElS6BnT5g7F/bcEx57TLfKijRU8jkJd18OvGVm6xd6EZFSaNMmDDfdcgs88USo//RW\nqgXsRVq+fIebngO2ASYCi+qOu/vQ0oX2vRjUk5CcFiyADh1Ce8QIGDs2bjwi5SKtOYndsh1392fz\nukgYsnoZmNkwsZjZ0cAlwMzk0Fh3vzHLeyhJyEpdcEF9kcDZs6Fr17jxiMRWEftJmNmZwACgfY4k\nMcDdT1vJeyhJSF5mzoT11gvtSy+Fs86KG49ITKmskzCzgWb2kpl9ZWbfmdkyM/syz9f2BPYBrm/s\ntHzeSyQfPXuCOxx5JJx9dpjMXrRo5a8Tke/LdzHdWELtpulAO+AE4Ko8X3sZoYJsY92AA81sspnd\nmyQVkWa79VaYPDm011gD7r03bjwilah1vie6+ztm1srdlwE3mdmrwP829hoz2xeY4+6TzayW7D2G\nB4E73X2JmQ0HbgF2z/Z+o0aN+m+7traW2trafMOXKrXVVqGq7E47wbBhcPrp8OGHWoAnLdeECROY\nMGFC0d6vKXc37UEYMpoNfAIc4+5breR1vweOAJYSeiBrAve7+1E5zq8B5rt7hyzPaU5CmuWpp2CP\nPUL7iSfq2yItWZorrucAqwBnAmsBV7v7O00IdDfg7CwT193cfXbSPgA4x913zvJ6JQlptqVLYYMN\nwuT2ttvCSy+F9RUiLVVzk0Rew00Z5Te+BUYXerE6ZjYaeMndHwZOM7OhwBJgPnBMc99fJJfWreGj\nj+Cvf4WDDoJWrWDiRNh++9iRiZSnVG6BLQb1JKTYvvkmTGgvXw5DhsCDD6qsh7Q8aZUKF2lx2rWD\nZcvgmmtCVdmaGnjzzdhRiZSXfNdJHJzPMZFKdNJJ8Pnnob3ZZnDiiXHjESkn+fYkst3q2ujtryKV\npEOHsADvd7+D668Pw07vvx87KpH4Gp2TMLPBhNXShwD3ZDzVHujn7juUNrwVYtGchKRizhzo1i20\nzzgDLrssbjwizVHqOYlZhMJ83wKvZPx5ENir0IuKlLOuXUOv4txz4fLLQ69i1qzYUYnEke86iTbu\nviSFeBqLQT0JSV1mscDzz4ff/jZuPCJNldZiuh8Ao4BehLUVdXtc9yn0wk2lJCExnXYa/OlPoT1n\nDnTpEjcekXyllSTeJKy0fgVYVnfc3T8r9MJNpSQhsc2YAX2SX4suvDAMR4mUu7SSxIvuvmOhFykG\nJQkpF8cdBzfdFNrz5kGnTnHjEWlMWkniIqAVcD+wuO64u08q9MJNpSQh5eTtt2GTTUL7kkvgF7+I\nG49ILmkliWeyHHZ3/3GhF24qJQkpR0ccAXfcEdqffQZrrx03HpGGKmL70mJQkpBy9eabYaU2wJgx\ncOaZceMRyZTW9qVdzewGM3s0edzPzI4v9KIiLcmmm4Z1FcOGhf20zerLfIhUunzLctwMPAb0SB6/\nDZxRioBEKtXdd8Mbb4T22mvDFVfEjUekGPJNEp3d/V5gOYC7LyXjVlgRCfr1C72Kgw4KJT3M4Isv\nYkclUrh8k8QiM+sEOICZDQQWlCwqkQp3333w+uuh3bGjehVSufK9u2lb4E/AFsDrwDrAQe4+pbTh\nrRCDJq6lIh1ySEgaAPPnh6QhkpbU7m4ys9bAJoSSHG+lXctJSUIq2dSpsPnmoX3ppWGCWyQNaa2T\naAXsC/QmY19sdx9T6IWbSklCWoLDDgsT3KB1FZKOtLYvfQg4BugErJnxR0Sa4K67Qq8CQjmPSy6J\nG4/IyuTbk5ji7lumEE9jMagnIS3KkUfC7beHtmpASamk1ZN41MwGFXoREfm+224Lq7UBOncOlWVF\nyk2+PYkDgNsJSWUJ9ftJtC9teCvEoJ6EtFjHHgs33xzac+fCOutEDUdakLR6EmOAnYDV3L29u6+Z\nZoIQaeluugmmTw/tLl3gggvixiNSJ9+exHNArbsvL31IOWNQT0KqwkknwXXXhfYnn0C3bnHjkcqW\n1i2wNwN9gEdZcT8J3QIrUgLvvQcbbhja2ltbmiOt4aYZwFPAKugWWJGS69Mn1IAaMQJ+97tQA2rW\nrNhRSTVq0n4SZrYmYcL6q9KFlPPa6klIVfrgA+jdO7R/9Su46KKo4UiFSWs/iS3M7FVC3aY3zOwV\nM9u80IuKSP569Qq9ijPOgIsvDr2KmTNjRyXVIt/hpmuBs9y9l7v3As4GritdWCLS0GWXwUcfhfZ6\n66n+k6Qj3ySxurv/d59rd58ArF6SiEQkp549Q6/il78MScMsDEeJlEq+SeI9M/uNmfVO/pxPmMwW\nkQguvhg+/ji0e/eGU0+NGo60YPkmieMIe0jcDzyQtI8tVVAisnI9eoRexfnnw9ixoVcxQ7+6SZE1\n6e6mmHR3k0huc+bUL7o75RS4+uq48Uj5KOliOjN7sLEXu/vQQi/cVEoSIis3ejSMGhXa774b1ltI\ndSt1kvgU+Ai4C3iRUNjvv9z92UIv3FRKEiL5yexVDB8O48bFjUfiKnWSaAXsCRwGbAmMB+5y9zcK\nvWChlCREmuaCC2DkyNBWr6J6pbnHdVtCsrgEuMDd/1ToRQuhJCHSdHPnQteuoX3CCfWFA6V6lHzF\ntZm1NbMDCftJjACuJNzlJCJlrkuXcAfUBRfA9deHO6Deey92VFJJVjbcdAuwBaH6693u/npagWWJ\nRT0JkWbI7FWcfDL8+c9x45F0lHpOYjmwKHmYeaJ2phOpUKNGhbugIKyrqCseKC1TanMSsSlJiBTP\n7NnQvXto//zn8KdUZxglTWntJyEiLUi3bmGu4rzz6ldrf/hh7KikHKknIVLlZs2CddcN7bPOgksv\njRuPFJd6EiLSLHU1oM45B8aMCb2KTz6JHZWUCyUJEQHgD3+oLzveo0e4bVZEw00i8j0nnwzXXBPa\n8+ZBp05x45HCVcRwk5nVmNmkbAUDzWwVM7vbzKab2Qtmtn4aMYlIbuPGwdtvh3bnznD55XHjkXjS\nGm46HZia47njgfnu3he4HPhDSjGJSCP69g1zFcOGwZlnhrmKhQtjRyVpK3mSMLOewD7A9TlO2R+4\nJWn/Bdi91DGJSP7uvhumTAnt9u3h1lvjxiPpSqMncRlwDiuu2M60LqEcOe6+DPjCzNZOIS4RyVP/\n/rB8Oey+Oxx9dEgWixfHjkrS0LqUb25m+wJz3H2ymdXSYD+KutOyPM6aUEbV7aYC1NbWUltbW5Q4\nRWTlzODJJ+Gf/4RddoFVV4Xx42GffWJHJpkmTJjAhAkTivZ+Jb27ycx+DxwBLAXaAWsC97v7URnn\nPAqMcvcXk/0rPnH3LlneS3c3iZSJZcugX78wub355mE4qkY31Jelsr67yd1/7e7ru3sf4FDg6cwE\nkXgIODppHww8XcqYRKT5WrWCt96Cv/8d3ngjPH7xxdhRSSlEyf1mNtrMhiQPbwA6m9l04Azg3Bgx\niUjTDR0K33wThp4GDoQDD4wdkRSbFtOJSFFcc01YhAdhY6MNNogbjwRlPdwkItVj+PCwOhvCftrn\nnRc3HikO9SREpOjOPjsUCwT4/HPo0CFuPNVMPQkRKTuXXlpf1qNjR7jllsbPl/KlnoSIlIw77L03\nPP542Ojoo4+gdUlXZ0lD6kmISNkyg8ceg6efDlumtmkDEyfGjkqaQj0JEUnF4sWhnMd338Fhh8Gd\nd8aOqDqoJyEiFaFt25AorrgC7ror9DJmz44dlayMkoSIpOq008K+2gDdu8PVV8eNRxqn4SYRiebQ\nQ+Gee2DttWHOHE1ql4KGm0SkYt19N/zjHzB/fpjUfuWV2BFJQ0oSIhLVLrvAt9+GKrLbbRdWbkv5\nUJIQkejatg3lxy+8EK69Nkxqf/FF7KgENCchImVmxoxQ+wlCKfKhQ+PGU+k0JyEiLcoGG4StUrfZ\nBvbfH/bcM3ZE1U1JQkTKjhlMmgS33Ra2TDULdz9J+pQkRKRsHXFEfXLo1i0kDUmXkoSIlLUuXeoL\nBR51FAwYEB5LOjRxLSIV46GH6ieyZ80KK7alcZq4FpGqsd9+8Nlnod2jB9xxR9x4qoGShIhUlLXX\nDsNNgwaFOYuddtLwUylpuElEKtb998P//E9of/opdO4cN55ypOEmEalaBx4Ic+eG9jrrwPjxceNp\niZQkRKSirbNOWHy39dYwZEgYgpLi0XCTiLQY48bBKaeE9tdfQ7t2ceMpB80dblKSEJEWZfp02Hjj\n0J48GbbaKm48sWlOQkQkQ9++sGRJaG+9Nfzxj3HjqXRKEiLS4rRuHW6LPeUUOOcc2Gwz3SZbKA03\niUiL9vjjsNdeof3ZZ2GdRTXRcJOISCMGDaq/TbZTJ3j++bjxVBolCRFp8epuk+3eHXbdFUaNih1R\n5VCSEJGqYBaKAv7ylzB6dJjg1gj2ymlOQkSqztNPw+67h/aCBdC+fdx4SknrJERECjBnTtjICODV\nV8Ptsi2RJq5FRArQtSssXQqtWoX9tK+5JnZE5UlJQkSqVqtWIVEceSScfHJ9RVmpp+EmERHg1lvh\n6KNDu66H0RJoTkJEpEimTKmv9TRvXlhXUek0JyEiUiRbbhnudoKwgdGkSXHjKQdKEiIiGdq3h2XL\nQpnxAQPglltiRxSXkoSISAM1NWE/ioMPhmOOCZPa1UpzEiIijbjySjj9dNhoo7BXRaXRxLWISIk9\n8wz8+MehvXgxrLJK3HiaQklCRCQFH3wAvXuH9ty5oWhgJdDdTSIiKejVCxYuDO0uXeD11+PGkxYl\nCRGRPK2xRrjzCaB/fxg/Pm48aVCSEBFpgpqaUGJ84EAYMgQuvzx2RKVV0iRhZm3N7EUze9XMXjOz\nkVnOOdrM5prZpOTPcaWMSUSkGF54AUaMgDPPhBNOiB1N6ZQ0Sbj7YuBH7r4NsDUw2Mx2yHLq3e6+\nbfLnxlLGVEwTJkyIHUJW5RiXYsqPYspfOcQ1dixcdRXccAPsuGN5xFRsJR9ucvevk2ZboDWQ7Ral\ngmfeYyrXb4hyjEsx5Ucx5a9c4vrZz+CRR2DiRNh77wmxwym6kicJM6sxs1eB2cAT7v5SltMONLPJ\nZnavmfUsdUwiIsU0eHDYuGi77WJHUnxp9CSWJ8NNPYEdzaxfg1MeBHq7+9bAU0CVV0oRkUq09daw\nxx6xoyi+VBfTmdn/Ab5y9zE5nq8B5rt7hyzPaSWdiEgBmrOYrnUxA2nIzDoDS9x9gZm1A/YALmpw\nTjd3n5083B+Ymu29mvOPFBGRwpQ0SQDdgVuSHkINcI+7P2Jmo4GX3P1h4DQzGwosAeYDx5Q4JhER\nyVPF1G4SEZH0leWKazO7wczmmNmUjGMdzexxM3vLzB4zs7VSjqmnmT1tZlOThYGnxY4r12JFM+tt\nZv9OYrrLzErdY8wWW02yOPLBMorpfTP7T/J5TUyOxf6+WsvM7jOzaWb2hpntGPl7auPk85mU/L3A\nzE4rg8/pTDN73cymmNkdZrZK7O8pMzs9+X8X9edBU39emtmVZjY9uaN065W9f1kmCeAmYK8Gx84F\nnnT3TYCngf9NOaalwFnu3g/YCRhhZpvGjCvHYsUdgYuBS5OYvgCOTyumDKez4vxSOcS0HKh1923c\nvW5RZ+zvqyuAR9x9M2Ar4M2YMbn728nnsy0wAFgEPBAzJjPrAZwKbOvuWxKGyQ8j4veUmW2eXG87\nwv+9IWa2EXE+p7x/XprZYGBDd+8LDAfGrfTd3b0s/wC9gCkZj98EuibtbsCbkeP7G2EiviziAlYD\nXgZ2AOYCNcnxgcD/SzmWnsATQC3wYHLs05gxJdedAXRqcCza1w9YE3g3y/Fy+Z4aBPwjdkxAD+AD\noCMhQTwI7Bnz+xw4CLg24/H5wDnAtBifUx4/L6cl7XHAsIzz/htvrj/l2pPIpou7zwHwcDdUtGru\nZtab8NvDvwkfcLS4Gi5WBN4FvnD35ckpMwn/ydJ0GeE/jCcxdgI+jxwTSTyPmdlLZlZXbSfm168P\nMM/MbkqGd641s9Uix5RpGHBn0o4Wk7vPAi4FPgQ+BhYAk4j7ff468MNkWGc1YB9gPcrna9fw52WX\n5Pi6wEcZ532cHMupkpJEWTCzNYC/AKe7+1dkLzOSGl9xseIOwGbZTksrHjPbF5jj7pOpL7diGe3U\nY8qws7tvR/gPPcLMdo0UR53WwLbAVR6GdxYRhgmi301iZm2AocB9yaFoMZlZB8Lt8b0IiWB1YHCW\nU1OL0d3fJAx3PQk8AkwmDEmXu2xLCRr93CopScwxs64Q1lYQupqpSibG/gLc5u5/L5e4ANz9S+BZ\nQre7Q3LbMYTkMSvFUH4ADDWz94C7gB8DlwNrRYwJ+O9vVLj7p4Thwh2I+/WbCXzk7i8nj/9KSBrl\n8D01GHjF3eclj2PGtAfwnrvPd/dlhDmSnYn7fY673+TuA9y9FvgceJvy+NrRSBwzCT2eOiv93Mo5\nSTT87fNB6tdQHA38veELUnAjMNXdr8g4Fi0uM+tcd9eC1S9WnAo8AxwcIyZ3/7W7r+/ufYBDgafd\n/YiYMQGY2WpJLxAzW50w3v4aEb9+yXDAR2a2cXJod+CNmDFlOIyQ5OvEjOlDYKCZrWpmRv3nFPt7\nap3k7/WBAwifV6zPqbGfl8dkxPEgcBSAmQ0kDNnNafSd05roaeIkzJ2E7LaY8A1yLGHS6kngLcLY\ne4eUY/oBsIzQrXyVMCa6N7B2rLiA/kkck4EpwHnJ8Q2AFwm/2dwDtIn0ddyN+onrqDEl16/72r0G\nnJscj/b1S66/FfBSEtv9wFplEFM7wo0Ga2Ycix3TSMIk6xRCfbc2ZfA99RxhbuJVwl1zUT6npv68\nBMYC7wD/Idwx1uj7azGdiIjkVM7DTSIiEpmShIiI5KQkISIiOSlJiIhITkoSIiKSk5KEiIjkpCQh\nZcfMFma090nKHfcs4fV2ScpQTzKzTc3stQLfZ4CZXV7EuJ6qWwDY4PhIMzurwPfsbGaPNj86qRZK\nElKO6grt/c9fAAAD9ElEQVQD7k4opb2Xu88s4fUOB37voX7SNxRYA8jdX3H3M4oRkJntA0z2UB+s\naDyU2ZhlZjsV832l5VKSkHJkZrYLcA2wj7u/nxy8ycyuMLN/mtk7ZnZgxgt+YWYTk41URmYcP9zC\nxkyTzOzPSVmHzAsdDxwC/NbMbmvwXI2Z/SF5/WQzOzE5/hMzeyJpd096Ol3MbDczeyg53tHMHrCw\nydG/zGyL5PjIZJOYZ5J/w6k5PoPDySjpYGbnJdd5Dtgk43gfM3s0qWz7bF2Jj+T4C8n1f5vZO0ve\n94h8vhAiShJSjtoSCvD9xN2nN3ium7v/ANiPUIUTM9sT6OthI6FtgO2SIaRNCeWud056CcsJP3z/\ny91vINSzOcfdj2xwreMJtW12JBQDPMnMern734BPzGwEcC3wG3evK6BW1wsZDUxy962A84DMBLQJ\nYT+EHYGRZtYqy2fwA+CV5N+3LSGRbQnsC2yfcd61wM/dfXtCefY/J8evAC5Lrj+TFXtHLwO7Zrmm\nyPekvoWkSB6WAP8CTgAaDt/8DcDdp5lZXY38QcCeZjaJUORsdaAvoS7SAOClpAexKtB4MbMVDQL6\nm1ldEbn2yft+AJxGqNvzgrvfm+W1uwAHJrE+Y2Zrm9mayXPj3X0p8JmZzQG68v1KnGu7+6KkvSvw\ngIedCBdb/ZawqxOqod6X0UNqk/y9E6G8NoTaPpdkvPdcoHu+H4JUNyUJKUfLCL85P2Vm/+vuF2Y8\ntzijnblfxYXufl3mm5jZz4Gb3f28AuMw4FR3fyLLcz0JPZOujby2obrf5jP/DcvJ/v9wSY7XZqoh\nbOa0bSPXyhbLqoS5F5GV0nCTlCNz92+BIcBPzezYXOclfz8GHJf8Zo2Z9UjKOD8FHJRR0rljUtY5\nX48BP7Owjwhm1tfM2iWPbySU055mZmdnee1zJOP+ZlYLzGviJPRbZtYn470OMLO2SW9kPwB3XwjM\nMLOD6l5kZlsmzX8TttiEULI908aEXpDISqknIeXIAdz9cwsbtz9rZvP4/m/Tdec9kcw/vJCMuiwE\njkiGpM4HHrewOc13wAhCOeXvvU8W1wO9gUnJcM5c4CfAL4Dn3P2fZvYfYKKZPdzgtaOAm5LnF5HU\n8M/1b81iPPAjwmY7r5rZPYQy2XOAiRnnHQH8Ofl3tgbuTs47E7jdzH5NSHYLMl7zo+T9RVZKpcJF\nypCF3cRucfe9Cnx9O3f/JmkPAw519wOSxxOA/d19QSNvIQKoJyFSltx9tpldZ2ZrFLhWYoCZjSUM\nyX0OHAdhMR0wRglC8qWehIiI5KSJaxERyUlJQkREclKSEBGRnJQkREQkJyUJERHJSUlCRERy+v9l\nBgDMx5+4fQAAAABJRU5ErkJggg==\n",
+      "text/plain": [
+       "<matplotlib.figure.Figure at 0x1cf07543eb8>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "%matplotlib inline\n",
+    "import matplotlib.pyplot as plt\n",
+    "\n",
+    "plt.plot(np.degrees(kneeangle),100*momentarm)\n",
+    "plt.xlabel('Knee flexion (deg)')\n",
+    "plt.ylabel('Moment arm (cm)');"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.5.2"
+  },
+  "widgets": {
+   "state": {
+    "2e65788ea5d0449ea6773edaeef12923": {
+     "views": []
+    },
+    "4a056ce1aaa3423097fe34bd87a497aa": {
+     "views": []
+    },
+    "51206d446ca140ee805ac130579e754b": {
+     "views": [
+      {
+       "cell_index": 8
+      }
+     ]
+    },
+    "750152ac021b4b5b80d6f408e2402a03": {
+     "views": []
+    },
+    "8863d80b4a3b46f88dd77846157bbf1f": {
+     "views": [
+      {
+       "cell_index": 8
+      }
+     ]
+    },
+    "bc798391dcce4288a7cc34ff7a64f9a7": {
+     "views": []
+    },
+    "c2dc258cb215425d896f4e1ae38f82c2": {
+     "views": []
+    },
+    "e94ff8e77ae542e8afaff2539e20cf73": {
+     "views": []
+    }
+   },
+   "version": "1.1.2"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 0
+}

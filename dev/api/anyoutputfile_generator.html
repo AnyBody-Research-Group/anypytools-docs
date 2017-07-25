@@ -1,0 +1,229 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>anypytools.datautils.anyoutputfile_generator &#8212; AnyPyTools 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    <script type="text/javascript" src="../_static/cloud.js"></script>
+    <link rel="shortcut icon" href="../_static/anypytools.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="anypytools.datautils.anydatah5_generator" href="anydatah5_generator.html" />
+    <link rel="prev" title="anypytools.datautils.read_anyoutputfile" href="read_anyoutputfile.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             accesskey="C">toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="anydatah5_generator.html" title="anypytools.datautils.anydatah5_generator"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="read_anyoutputfile.html" title="anypytools.datautils.read_anyoutputfile"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS overrides for cloud theme */
+
+/* nicer titles and more space for info and warning logos */
+
+div.admonition > .first {
+    background: rgba(0, 0, 0, .05);
+    margin: .5em -1em;
+    margin-top: -.5em !important;
+    padding: .5em .5em .5em 2.65em;
+}
+
+/* indent single paragraph */
+div.admonition {
+    text-indent: 20px;
+}
+/* don't indent multiple paragraphs */
+div.admonition > p {
+    text-indent: 0;
+}
+/* remove excessive padding */
+div.admonition.inline-title p.admonition-title {
+    padding-left: .2em;
+}
+</style>
+<div class="section" id="anypytools-datautils-anyoutputfile-generator">
+<h1>anypytools.datautils.anyoutputfile_generator<a class="headerlink" href="#anypytools-datautils-anyoutputfile-generator" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="anypytools.datautils.anyoutputfile_generator">
+<code class="descclassname">anypytools.datautils.</code><code class="descname">anyoutputfile_generator</code><span class="sig-paren">(</span><em>folder=None</em>, <em>match='.*\\.(csv|txt)'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/datautils.html#anyoutputfile_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.datautils.anyoutputfile_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a generator which opens AnyOutput files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>folder</strong> (<em>str</em><em>, </em><em>optional</em>) – path of the directory to look for AnyOutput files. Defaults is the
+current working directory</li>
+<li><strong>match</strong> (<em>str</em>) – regular expression to match with filenames. Default is to include
+file ending with .csv or .txt ‘.*(.csv|.txt)’</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>array_like</em>) – data collumns  in the anyoutput file</li>
+<li><strong>header</strong> (<em>list</em>) – list of the collumn names</li>
+<li><strong>constants</strong> (<em>dict</em>) – mapping with constants found in the file</li>
+<li><strong>filename</strong> (<em>str</em>) – name of the file from which the data was read</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">const</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span> <span class="ow">in</span> <span class="n">anyoutputfile_generator</span><span class="p">():</span>
+<span class="go">        print(fn)</span>
+<span class="go">        print(header)</span>
+<span class="go">        print(data.shape)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html" title="index">
+          <img class="logo" src="../_static/anypytools_logo.png" alt="Logo"/>
+        </a></p>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="read_anyoutputfile.html"
+                          title="Previous page">&larr; anypytools.datautils.read_anyoutputfile</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="anydatah5_generator.html"
+                          title="Next page">&rarr; anypytools.datautils.anydatah5_generator</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/anyoutputfile_generator.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             >toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="anydatah5_generator.html" title="anypytools.datautils.anydatah5_generator"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="read_anyoutputfile.html" title="anypytools.datautils.read_anyoutputfile"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Morten Enemark Lund.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

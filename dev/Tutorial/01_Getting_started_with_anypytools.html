@@ -1,0 +1,618 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Getting Started with AnyPyTools &#8212; AnyPyTools 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    <script type="text/javascript" src="../_static/cloud.js"></script>
+    <link rel="shortcut icon" href="../_static/anypytools.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Creating AnyScript Macros" href="02_Generating_macros.html" />
+    <link rel="prev" title="Install guide" href="../install_guide.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             accesskey="C">toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="02_Generating_macros.html" title="Creating AnyScript Macros"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../install_guide.html" title="Install guide"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+/* CSS overrides for cloud theme */
+
+/* nicer titles and more space for info and warning logos */
+
+div.admonition > .first {
+    background: rgba(0, 0, 0, .05);
+    margin: .5em -1em;
+    margin-top: -.5em !important;
+    padding: .5em .5em .5em 2.65em;
+}
+
+/* indent single paragraph */
+div.admonition {
+    text-indent: 20px;
+}
+/* don't indent multiple paragraphs */
+div.admonition > p {
+    text-indent: 0;
+}
+/* remove excessive padding */
+div.admonition.inline-title p.admonition-title {
+    padding-left: .2em;
+}
+</style>
+<div class="section" id="Getting-Started-with-AnyPyTools">
+<h1>Getting Started with AnyPyTools<a class="headerlink" href="#Getting-Started-with-AnyPyTools" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Running-a-simple-macro">
+<h2>Running a simple macro<a class="headerlink" href="#Running-a-simple-macro" title="Permalink to this headline">¶</a></h2>
+<p>For the sake of the tutorial we will use a small ‘toy’ model of a
+simplified knee joint (see the figure.) The model is defined in the file
+<a class="reference external" href="Knee.any">Knee.any</a>, which is placed in the current working
+directory.</p>
+<p>Next, let us run the model from python. First, we import the
+<code class="docutils literal"><span class="pre">AnyPyProcess</span></code> class and create an instance of the class.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Next, we need to instruct the AnyBody Modelling System to load the and
+run the model. We do this using <em>AnyScript</em> macro commands. These are
+short commands that can automate operations in the AnyBody Modeling
+System (AMS). Operation that are normally done by pointing and clicking
+in the AMS graphical user interface.</p>
+<p>You can read more on <em>AnyScript</em> macros in the “User Interface Features”
+tutorial that accompanies the AnyBody Modeling System.</p>
+<p>Now we define an <em>AnyScript</em> macro that we want to run on the model.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">load</span> <span class="s2">&quot;Knee.any&quot;</span>
+<span class="n">operation</span> <span class="n">Main</span><span class="o">.</span><span class="n">MyStudy</span><span class="o">.</span><span class="n">Kinematics</span>
+<span class="n">run</span>
+</pre></div>
+</div>
+<p>The macro will command AnyBody to load the model and run the Kinematics
+operation.</p>
+<p>The macro is executed by parsing it to the <code class="docutils literal"><span class="pre">start_macro()</span></code> method of
+the <code class="docutils literal"><span class="pre">AnyPyProcess</span></code> object.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;load &quot;Knee.any&quot;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;operation Main.MyStudy.Kinematics&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;run&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macrolist</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "c46070d879c84de89e24876f44bb6f5f"}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "6e99fc898d914f0395ddc0f413791c31"}</script></div>
+</div>
+</div>
+<div class="section" id="Running-multiple-macros">
+<h2>Running multiple macros<a class="headerlink" href="#Running-multiple-macros" title="Permalink to this headline">¶</a></h2>
+<p>It is easy to run multiple macros by adding an extra set of macro
+commands to the macro list.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;load &quot;Knee.any&quot;&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;operation Main.MyStudy.Kinematics&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;run&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;load &quot;Knee.any&quot;&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;operation Main.MyStudy.InverseDynamics&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;run&#39;</span><span class="p">],</span>
+<span class="p">]</span>
+<span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macrolist</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3da4471285534226be9adb769baf6913"}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "0125a2762960479097f50f88e94dd875"}</script></div>
+</div>
+</div>
+<div class="section" id="Parallel-execution">
+<h2>Parallel execution<a class="headerlink" href="#Parallel-execution" title="Permalink to this headline">¶</a></h2>
+<p>Notice that AnyPyProcess will run the anyscript macros in parallel.
+Modern computers have multiple cores, but a single AnyBody instance can
+only utilize a single core, leaving us with a great potential for
+speeding things up through parallelization.</p>
+<p>To test this, let us create ten macros in a for-loop.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">macrolist</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">):</span>
+    <span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;load &quot;Knee.any&quot;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;operation Main.MyStudy.InverseDynamics&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;run&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">macrolist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>AnyPyProcess has a parameter ‘num_processes’ that controls the number
+of parallel processes. Let us try a small example to see the difference
+in speed:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># First sequentially</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">num_processes</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macrolist</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># Then with parallization</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">num_processes</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macrolist</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p><em>Note</em>: In general you should not user a <code class="docutils literal"><span class="pre">num_processes</span></code> larger than
+the number of cores in your computer.</p>
+</div>
+<div class="section" id="Getting-data-from-the-AnyBody-Model">
+<h2>Getting data from the AnyBody Model<a class="headerlink" href="#Getting-data-from-the-AnyBody-Model" title="Permalink to this headline">¶</a></h2>
+<p>In the following macro, we have added a new class operation to ‘Dump’
+the result of the maximum muscle activity. The <code class="docutils literal"><span class="pre">start_macro</span></code> method
+will return all the dumped variables:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;load &quot;Knee.any&quot;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;operation Main.MyStudy.InverseDynamics&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;run&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;classoperation Main.MyStudy.Output.MaxMuscleActivity &quot;Dump&quot;&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macrolist</span><span class="p">)</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b29bd748490a4a49a7c1cb3d03364025"}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "2048280c4bf0462f9f6eb6abb3abbaf5"}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[6]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>[{&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;:
+    array([ 0.00890538,  0.00927552,  0.00986515,  0.01067729,  0.01171374,
+            0.01297502,  0.01446022,  0.0161669 ,  0.01809102,  0.02022675,
+            0.02256637,  0.02510015,  0.0278161 ,  0.03069982,  0.03373426,
+            0.0368995 ,  0.0401725 ,  0.04352691,  0.04693299,  0.05035756,
+            0.05376422,  0.05711384,  0.06036528,  0.06347664,  0.06640681,
+            0.0691175 ,  0.07157552,  0.07375524,  0.07564093,  0.07722862,
+            0.07852727,  0.0795589 ,  0.08035747,  0.08096676,  0.0814373 ,
+            0.08182288,  0.0821771 ,  0.08255065,  0.08298457,  0.08333915,
+            0.08355467,  0.08365939,  0.08367977,  0.08364023,  0.08356287,
+            0.08346721,  0.08336996,  0.08328478,  0.08322211,  0.083189  ,
+            0.083189  ,  0.08322211,  0.08328478,  0.08336996,  0.08346721,
+            0.08356287,  0.08364023,  0.08367977,  0.08365939,  0.08355467,
+            0.08333915,  0.08298458,  0.08255065,  0.0821771 ,  0.08182288,
+            0.0814373 ,  0.08096676,  0.08035746,  0.07955889,  0.07852727,
+            0.07722861,  0.07564092,  0.07375524,  0.07157551,  0.06911749,
+            0.06640681,  0.06347664,  0.06036528,  0.05711384,  0.05376422,
+            0.05035756,  0.04693299,  0.04352691,  0.0401725 ,  0.0368995 ,
+            0.03373426,  0.03069982,  0.0278161 ,  0.02510015,  0.02256637,
+            0.02022675,  0.01809102,  0.0161669 ,  0.01446022,  0.01297502,
+            0.01171374,  0.01067729,  0.00986515,  0.00927552,  0.00890538])}]
+</pre></div>
+</div>
+</div>
+<p>We can export more variables by adding more <code class="docutils literal"><span class="pre">classoperation</span></code>. But
+there is a better way of doing this, as we shall see in the next
+tutorials.</p>
+<p>Finally, to make a plot we import the <code class="docutils literal"><span class="pre">matplotlib</span></code> library, and enable
+inline figures.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">max_muscle_act</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">max_muscle_act</span> <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorial_01_Getting_started_with_anypytools_21_0.png" src="../_images/Tutorial_01_Getting_started_with_anypytools_21_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html" title="index">
+          <img class="logo" src="../_static/anypytools_logo.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Getting Started with AnyPyTools</a><ul>
+<li><a class="reference internal" href="#Running-a-simple-macro">Running a simple macro</a></li>
+<li><a class="reference internal" href="#Running-multiple-macros">Running multiple macros</a></li>
+<li><a class="reference internal" href="#Parallel-execution">Parallel execution</a></li>
+<li><a class="reference internal" href="#Getting-data-from-the-AnyBody-Model">Getting data from the AnyBody Model</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="../install_guide.html"
+                          title="Previous page">&larr; Install guide</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="02_Generating_macros.html"
+                          title="Next page">&rarr; Creating AnyScript Macros</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Tutorial/01_Getting_started_with_anypytools.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             >toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="02_Generating_macros.html" title="Creating AnyScript Macros"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../install_guide.html" title="Install guide"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Morten Enemark Lund.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

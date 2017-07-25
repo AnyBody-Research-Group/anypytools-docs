@@ -1,0 +1,734 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Advanced Examples &#8212; AnyPyTools 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    <script type="text/javascript" src="../_static/cloud.js"></script>
+    <link rel="shortcut icon" href="../_static/anypytools.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tips &amp; Trics for anypytools" href="06_Tips&amp;Tricks.html" />
+    <link rel="prev" title="Batch processing" href="04_Batch_processing_multiple_models.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             accesskey="C">toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="06_Tips&Tricks.html" title="Tips &amp; Trics for anypytools"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="04_Batch_processing_multiple_models.html" title="Batch processing"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+/* CSS overrides for cloud theme */
+
+/* nicer titles and more space for info and warning logos */
+
+div.admonition > .first {
+    background: rgba(0, 0, 0, .05);
+    margin: .5em -1em;
+    margin-top: -.5em !important;
+    padding: .5em .5em .5em 2.65em;
+}
+
+/* indent single paragraph */
+div.admonition {
+    text-indent: 20px;
+}
+/* don't indent multiple paragraphs */
+div.admonition > p {
+    text-indent: 0;
+}
+/* remove excessive padding */
+div.admonition.inline-title p.admonition-title {
+    padding-left: .2em;
+}
+</style>
+<div class="section" id="Advanced-Examples">
+<h1>Advanced Examples<a class="headerlink" href="#Advanced-Examples" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Making-a-Monte-Carlo-parameter-study">
+<h2>Making a Monte Carlo parameter study<a class="headerlink" href="#Making-a-Monte-Carlo-parameter-study" title="Permalink to this headline">¶</a></h2>
+<p>In this example, we will make a Monte Carlo study. This is a case where
+the python library shows it’s advantage.</p>
+<p>We will make a Monte Carlo study on the position of patella tendon
+insertion and origin in the simplified knee model used in the first
+tutorial. Thus, we need some macros that change two <code class="docutils literal"><span class="pre">sRel</span></code> variables
+in the model. In this case, we choose the values from a truncated normal
+distribution, but any statistical distribution could have been used.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">distributions</span>
+<span class="c1"># Truncated normal between +/- 2SD.</span>
+<span class="n">patella_tendon_insertion</span> <span class="o">=</span> <span class="n">distributions</span><span class="o">.</span><span class="n">truncnorm</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,[</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">])</span>
+<span class="n">patella_tendon_origin</span> <span class="o">=</span> <span class="n">distributions</span><span class="o">.</span><span class="n">truncnorm</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,[</span><span class="mf">0.0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.03</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">macro_commands</span> <span class="k">as</span> <span class="n">mc</span><span class="p">,</span> <span class="n">AnyMacro</span>
+
+<span class="n">macro</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Tibia.Patella2.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_insertion</span><span class="p">),</span>
+          <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Patella.Lig.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_origin</span> <span class="p">)</span> <span class="p">]</span>
+
+<span class="n">macro</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[2]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>[classoperation Main.MyModel.Tibia.Patella2.sRel &quot;Set Value&quot; --value=&quot;{0.02,0.12,0}&quot;,
+ classoperation Main.MyModel.Patella.Lig.sRel &quot;Set Value&quot; --value=&quot;{0,-0.03,0}&quot;]
+</pre></div>
+</div>
+</div>
+<p>The default representation of the macro is 50% percentile values from
+the distribution (i.e. the mean value). To generate something random we
+need the <code class="docutils literal"><span class="pre">AnyMacro</span></code> helper class.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyMacro</span>
+
+<span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
+<span class="n">monte_carlo_macros</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">create_macros_MonteCarlo</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The first generated macro just has the default values.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">monte_carlo_macros</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[4]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>[&#39;classoperation Main.MyModel.Tibia.Patella2.sRel &quot;Set Value&quot; --value=&quot;{0.02,0.12,0}&quot;&#39;,
+ &#39;classoperation Main.MyModel.Patella.Lig.sRel &quot;Set Value&quot; --value=&quot;{0,-0.03,0}&quot;&#39;]
+</pre></div>
+</div>
+</div>
+<p>The next two macros have random offsets.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">monte_carlo_macros</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[5]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>[[&#39;classoperation Main.MyModel.Tibia.Patella2.sRel &quot;Set Value&quot; --value=&quot;{0.0251238155152,0.112107091459,0.00548031183851}&quot;&#39;,
+  &#39;classoperation Main.MyModel.Patella.Lig.sRel &quot;Set Value&quot; --value=&quot;{-0.0114569787512,-0.0368999821558,-0.00254405335386}&quot;&#39;],
+ [&#39;classoperation Main.MyModel.Tibia.Patella2.sRel &quot;Set Value&quot; --value=&quot;{0.0129454733312,0.106424061907,0.0170348541996}&quot;&#39;,
+  &#39;classoperation Main.MyModel.Patella.Lig.sRel &quot;Set Value&quot; --value=&quot;{0.00277155454459,-0.0354332404611,-0.0102456356228}&quot;&#39;],
+ [&#39;classoperation Main.MyModel.Tibia.Patella2.sRel &quot;Set Value&quot; --value=&quot;{0.0371134534867,0.113808508294,-0.00947518717711}&quot;&#39;,
+  &#39;classoperation Main.MyModel.Patella.Lig.sRel &quot;Set Value&quot; --value=&quot;{-0.00205721456904,-0.0283615479116,0.000319013630475}&quot;&#39;]]
+</pre></div>
+</div>
+</div>
+<p>Now let us expand the macro to also load and run the model.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mc</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span><span class="p">),</span>
+          <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Tibia.Patella2.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_insertion</span> <span class="p">)</span> <span class="p">,</span>
+          <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Patella.Lig.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_origin</span> <span class="p">)</span> <span class="p">,</span>
+          <span class="n">mc</span><span class="o">.</span><span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">),</span>
+          <span class="n">mc</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.Abscissa.t&#39;</span><span class="p">),</span>
+          <span class="n">mc</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">)</span>
+        <span class="p">]</span>
+<span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">macro</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">monte_carlo_macros</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">create_macros_MonteCarlo</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Running-the-Monte-Carlo-macro">
+<h3>Running the Monte Carlo macro<a class="headerlink" href="#Running-the-Monte-Carlo-macro" title="Permalink to this headline">¶</a></h3>
+<p>The macro is passed to the AnyPyProcess object which excutes the macros</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
+<span class="n">monte_carlo_results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span> <span class="n">monte_carlo_macros</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The output object (<code class="docutils literal"><span class="pre">monte_carlo_result</span></code>) is a list-like object where
+each element is a dictionary with the output of the corresponding
+simulation.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Length :&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">monte_carlo_results</span><span class="p">)</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Data keys in first element: &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">monte_carlo_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Length : 100
+Data keys in first element:  [&#39;Main.MyStudy.Output.Abscissa.t&#39;, &#39;Main.MyStudy.Output.MaxMuscleActivity&#39;]
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Filtering-results-with-Errors">
+<h3>Filtering results with Errors<a class="headerlink" href="#Filtering-results-with-Errors" title="Permalink to this headline">¶</a></h3>
+<p>If any model errors occured in some of the simulations, then the output
+may be missing. That can be a problem for futher processing. So we may
+want to remove those simulations.</p>
+<p>That is easily done. Results from simuations with errors will contain a
+an ‘ERROR’ key. We can use that to filter the results.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">monte_carlo_results</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">monte_carlo_results</span> <span class="k">if</span> <span class="s1">&#39;ERROR&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">e</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Extracting-data-from-the-resutls">
+<h3>Extracting data from the resutls<a class="headerlink" href="#Extracting-data-from-the-resutls" title="Permalink to this headline">¶</a></h3>
+<p>The object looks and behaves like a list, but it can do more things than
+a standard Python list. If we use it as a dictionary and pass the
+variable names, it will return that variable concatenated over all runs.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">monte_carlo_results</span><span class="p">[</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[10]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>array([[ 0.00890538,  0.00927552,  0.00986515, ...,  0.00986515,
+         0.00927552,  0.00890538],
+       [ 0.00761831,  0.00793615,  0.00844398, ...,  0.00844398,
+         0.00793614,  0.00761831],
+       [ 0.00965061,  0.01004897,  0.0106812 , ...,  0.0106812 ,
+         0.01004897,  0.00965062],
+       ...,
+       [ 0.01007754,  0.0104962 ,  0.01116247, ...,  0.01116247,
+         0.01049619,  0.01007754],
+       [ 0.01026166,  0.01068757,  0.01136452, ...,  0.01136452,
+         0.01068757,  0.01026167],
+       [ 0.00981378,  0.01021894,  0.01086207, ...,  0.01086207,
+         0.01021893,  0.00981379]])
+</pre></div>
+</div>
+</div>
+<p>In fact, we don’t even have to use the full name of the variable. As
+long as the string uniquely defines the variable in the data set.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">max_muscle_activity</span>  <span class="o">=</span> <span class="n">monte_carlo_results</span><span class="p">[</span><span class="s1">&#39;MaxMus&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Plotting-the-results">
+<h3>Plotting the results<a class="headerlink" href="#Plotting-the-results" title="Permalink to this headline">¶</a></h3>
+<p>Finally we can plot the result of the Monte Carlo study</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="n">monte_carlo_results</span><span class="p">[</span><span class="s1">&#39;Abscissa.t&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">max_muscle_activity</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">max_muscle_activity</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span>  <span class="p">)</span>
+<span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">max_muscle_activity</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">trace</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.2</span> <span class="p">)</span>
+<span class="c1"># Plot result with the mean of the inputs ( stored in the first run)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">max_muscle_activity</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[12]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>[&lt;matplotlib.lines.Line2D at 0x224e0f36b70&gt;]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorial_05_Monte_Carlo_studies_etc_23_1.png" src="../_images/Tutorial_05_Monte_Carlo_studies_etc_23_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Latin-Hypercube-sampling">
+<h2>Latin Hypercube sampling<a class="headerlink" href="#Latin-Hypercube-sampling" title="Permalink to this headline">¶</a></h2>
+<p>Monte Carlo studies are not very efficient when investigating the effect
+of many parameters. It quickly becomes necessary to run the model
+thousands of times. Not very convenient if the AnyBody model takes a
+long time to run.</p>
+<p>Another approach is to use Latin Hypercube sampling. From Wikipedia &gt;
+Latin hypercube sampling (LHS) is a statistical method for generating a
+sample of plausible collections of parameter values from a
+multidimensional distribution. The sampling method is often used to
+construct computer experiments.</p>
+<p>Using LHS we can generate a sample that better spans the whole
+multidimensional space. Thus, fever model evaluations are necessary. See
+<a class="reference external" href="http://pythonhosted.org/pyDOE/randomized.html">pyDOE</a> for examples
+(and explanation of the <code class="docutils literal"><span class="pre">criterion</span></code>/<code class="docutils literal"><span class="pre">iterations</span></code> parameters which
+can be parsed to <code class="docutils literal"><span class="pre">create_macros_LHS()</span></code>).</p>
+<p>To following uses LHS to do the same as in the previous example:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">patella_tendon_insertion</span> <span class="o">=</span> <span class="n">distributions</span><span class="o">.</span><span class="n">norm</span><span class="p">([</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">])</span>
+<span class="n">patella_tendon_origin</span> <span class="o">=</span> <span class="n">distributions</span><span class="o">.</span><span class="n">norm</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.03</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">])</span>
+
+<span class="n">macro</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mc</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span><span class="p">),</span>
+          <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Tibia.Patella2.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_insertion</span> <span class="p">)</span> <span class="p">,</span>
+          <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Patella.Lig.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_origin</span> <span class="p">)</span> <span class="p">,</span>
+          <span class="n">mc</span><span class="o">.</span><span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">),</span>
+          <span class="n">mc</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.Abscissa.t&#39;</span><span class="p">),</span>
+          <span class="n">mc</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">)</span>
+        <span class="p">]</span>
+<span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">macro</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">LHS_macros</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">create_macros_LHS</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
+<span class="n">lhs_results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">LHS_macros</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="n">lhs_results</span><span class="p">[</span><span class="s1">&#39;Abscissa.t&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">lhs_results</span><span class="p">[</span><span class="s1">&#39;MaxMus&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">lhs_results</span><span class="p">[</span><span class="s1">&#39;MaxMus&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span>  <span class="p">)</span>
+<span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">lhs_results</span><span class="p">[</span><span class="s1">&#39;MaxMus&#39;</span><span class="p">]:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">trace</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.2</span> <span class="p">)</span>
+<span class="c1"># Plot the mean value that was stored in the first results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">lhs_results</span><span class="p">[</span><span class="s1">&#39;MaxMus&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[15]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>[&lt;matplotlib.lines.Line2D at 0x224e28f0b38&gt;]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorial_05_Monte_Carlo_studies_etc_28_1.png" src="../_images/Tutorial_05_Monte_Carlo_studies_etc_28_1.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html" title="index">
+          <img class="logo" src="../_static/anypytools_logo.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Advanced Examples</a><ul>
+<li><a class="reference internal" href="#Making-a-Monte-Carlo-parameter-study">Making a Monte Carlo parameter study</a><ul>
+<li><a class="reference internal" href="#Running-the-Monte-Carlo-macro">Running the Monte Carlo macro</a></li>
+<li><a class="reference internal" href="#Filtering-results-with-Errors">Filtering results with Errors</a></li>
+<li><a class="reference internal" href="#Extracting-data-from-the-resutls">Extracting data from the resutls</a></li>
+<li><a class="reference internal" href="#Plotting-the-results">Plotting the results</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Latin-Hypercube-sampling">Latin Hypercube sampling</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="04_Batch_processing_multiple_models.html"
+                          title="Previous page">&larr; Batch processing</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="06_Tips&amp;Tricks.html"
+                          title="Next page">&rarr; Tips &amp; Trics for anypytools</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Tutorial/05_Monte_Carlo_studies_etc.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             >toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="06_Tips&Tricks.html" title="Tips &amp; Trics for anypytools"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="04_Batch_processing_multiple_models.html" title="Batch processing"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Morten Enemark Lund.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
