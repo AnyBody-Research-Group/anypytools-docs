@@ -97,6 +97,9 @@
 
 
 <div class="viewcode-block" id="File"><a class="viewcode-back" href="../../api/h5py_wrapper.html#anypytools.h5py_wrapper.File">[docs]</a><span class="k">class</span> <span class="nc">File</span><span class="p">(</span><span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">):</span>
+
+    <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="o">.</span><span class="vm">__doc__</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
          <span class="nb">super</span><span class="p">(</span><span class="n">File</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
          <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span> <span class="o">=</span> <span class="kc">True</span>
@@ -150,9 +153,11 @@
                 <span class="k">pass</span>
         <span class="k">return</span> <span class="kc">False</span></div>
         
-<span class="n">File</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="o">.</span><span class="vm">__doc__</span>
 
 <div class="viewcode-block" id="Group"><a class="viewcode-back" href="../../api/h5py_wrapper.html#anypytools.h5py_wrapper.Group">[docs]</a><span class="k">class</span> <span class="nc">Group</span><span class="p">(</span><span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="p">):</span>
+
+    <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="vm">__doc__</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">arg</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Group</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span> <span class="o">=</span> <span class="kc">True</span>
@@ -205,10 +210,11 @@
                 <span class="k">pass</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
-<span class="n">Group</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="vm">__doc__</span>
         
         
 <div class="viewcode-block" id="Dataset"><a class="viewcode-back" href="../../api/h5py_wrapper.html#anypytools.h5py_wrapper.Dataset">[docs]</a><span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="n">h5py</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="vm">__doc__</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">arg</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Dataset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span> <span class="o">=</span> <span class="kc">True</span>
@@ -222,18 +228,6 @@
     <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">id</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Dataset</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">id</span>
         <span class="k">return</span> <span class="n">Group</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span></div>
-
-<span class="n">Dataset</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="vm">__doc__</span>
-        
-        
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-<span class="c1">#    for data,header,filename in csv_trial_data(&#39;C:\Users\mel\SMIModelOutput&#39;, DEBUG= True):</span>
-<span class="c1">#        print header</span>
-
-    <span class="n">outvars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/Output/Validation/EMG&#39;</span><span class="p">]</span>
-
-    <span class="k">for</span> <span class="n">data</span><span class="p">,</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">h5_trial_data</span><span class="p">(</span><span class="n">outvars</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">)</span>
 </pre></div>
 
           </div>
