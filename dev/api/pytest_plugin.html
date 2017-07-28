@@ -1,0 +1,345 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>anypytools.pytest_plugin &#8212; AnyPyTools 0.9.7 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    <script type="text/javascript" src="../_static/cloud.js"></script>
+    <link rel="shortcut icon" href="../_static/anypytools.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="anypytools.tools" href="tools.html" />
+    <link rel="prev" title="anypytools.macroutils" href="macroutils.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             accesskey="C">toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="tools.html" title="anypytools.tools"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="macroutils.html" title="anypytools.macroutils"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS overrides for cloud theme */
+
+/* nicer titles and more space for info and warning logos */
+
+div.admonition > .first {
+    background: rgba(0, 0, 0, .05);
+    margin: .5em -1em;
+    margin-top: -.5em !important;
+    padding: .5em .5em .5em 2.65em;
+}
+
+/* indent single paragraph */
+div.admonition {
+    text-indent: 20px;
+}
+/* don't indent multiple paragraphs */
+div.admonition > p {
+    text-indent: 0;
+}
+/* remove excessive padding */
+div.admonition.inline-title p.admonition-title {
+    padding-left: .2em;
+}
+</style>
+<div class="section" id="anypytools-pytest-plugin">
+<h1>anypytools.pytest_plugin<a class="headerlink" href="#anypytools-pytest-plugin" title="Permalink to this headline">¶</a></h1>
+<p>Created on Mon Sep  1 12:44:36 2014</p>
+<p>&#64;author: Morten</p>
+<dl class="exception">
+<dt>
+<em class="property">exception </em><code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">AnyException</code><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyException"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>custom exception for error reporting.</p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">AnyFile</code><span class="sig-paren">(</span><em>fspath</em>, <em>parent=None</em>, <em>config=None</em>, <em>session=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyFile"><span class="viewcode-link">[source]</span></a></dt>
+<dd><dl class="method">
+<dt>
+<code class="descname">collect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyFile.collect"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">AnyItem</code><span class="sig-paren">(</span><em>name</em>, <em>id</em>, <em>parent</em>, <em>defs</em>, <em>paths</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyItem"><span class="viewcode-link">[source]</span></a></dt>
+<dd><dl class="method">
+<dt>
+<code class="descname">reportinfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyItem.reportinfo"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">repr_failure</code><span class="sig-paren">(</span><em>excinfo</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyItem.repr_failure"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>called when self.runtest() raises an exception.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">runtest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyItem.runtest"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">AnyTestSession</code><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestSession"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Class for storing configuation of the AnyTest plugin to pytest.</p>
+<dl class="method">
+<dt>
+<code class="descname">configure</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestSession.configure"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Configures the AnyTestSession object. This can’t be in __init__()
+since it is instantiated and added to the pytest namespace very
+early in the pytest startup.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">finalize</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestSession.finalize"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">get_compare_fname</code><span class="sig-paren">(</span><em>name</em>, <em>id</em>, <em>study</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestSession.get_compare_fname"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Return the name of the compare h5file, and ensure the parent folder exists</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">get_compare_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestSession.get_compare_params"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Return (base, h5) for every file compare store.</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">get_compare_session</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestSession.get_compare_session"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Get the session to compare against</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">session_name</code></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">anybodycon_path</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#anybodycon_path"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">anytest_compare</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#anytest_compare"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">change_dir</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#change_dir"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">cwd</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#cwd"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">parse_save_name</code><span class="sig-paren">(</span><em>stringval</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#parse_save_name"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">pytest_addoption</code><span class="sig-paren">(</span><em>parser</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_addoption"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">pytest_collect_file</code><span class="sig-paren">(</span><em>parent</em>, <em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_collect_file"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">pytest_collection_finish</code><span class="sig-paren">(</span><em>session</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_collection_finish"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">pytest_collection_modifyitems</code><span class="sig-paren">(</span><em>session</em>, <em>config</em>, <em>items</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_collection_modifyitems"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">pytest_configure</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_configure"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">pytest_generate_tests</code><span class="sig-paren">(</span><em>metafunc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_generate_tests"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">pytest_namespace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_namespace"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Add an instance of the AnyTestSession class to
+to the pytest name space</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">pytest_unconfigure</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_unconfigure"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">write_macro_file</code><span class="sig-paren">(</span><em>path</em>, <em>name</em>, <em>macro</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#write_macro_file"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html" title="index">
+          <img class="logo" src="../_static/anypytools_logo.png" alt="Logo"/>
+        </a></p>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="macroutils.html"
+                          title="Previous page">&larr; anypytools.macroutils</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="tools.html"
+                          title="Next page">&rarr; anypytools.tools</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/pytest_plugin.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             >toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="tools.html" title="anypytools.tools"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="macroutils.html" title="anypytools.macroutils"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Morten Enemark Lund.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

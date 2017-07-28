@@ -7,7 +7,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>anypytools.datautils.read_anyoutputfile &#8212; AnyPyTools 0.9.7 documentation</title>
+    <title>anypytools.datautils &#8212; AnyPyTools 0.9.7 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -31,8 +31,8 @@
     <link rel="shortcut icon" href="../_static/anypytools.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="anypytools.datautils.anyoutputfile_generator" href="anyoutputfile_generator.html" />
-    <link rel="prev" title="anypytools.macro_commands" href="macro_commands.html" /> 
+    <link rel="next" title="anypytools.macroutils" href="macroutils.html" />
+    <link rel="prev" title="anypytools.abcutils" href="abcutils.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
@@ -51,10 +51,10 @@
           <a href="../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="anyoutputfile_generator.html" title="anypytools.datautils.anyoutputfile_generator"
+          <a href="macroutils.html" title="anypytools.macroutils"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="macro_commands.html" title="anypytools.macro_commands"
+          <a href="abcutils.html" title="anypytools.abcutils"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
 
@@ -95,11 +95,83 @@ div.admonition.inline-title p.admonition-title {
     padding-left: .2em;
 }
 </style>
-<div class="section" id="anypytools-datautils-read-anyoutputfile">
-<h1>anypytools.datautils.read_anyoutputfile<a class="headerlink" href="#anypytools-datautils-read-anyoutputfile" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="anypytools-datautils">
+<h1>anypytools.datautils<a class="headerlink" href="#anypytools-datautils" title="Permalink to this headline">¶</a></h1>
+<p>Created on Mon Jan 16 11:40:42 2012</p>
+<p>&#64;author: mel</p>
 <dl class="function">
-<dt id="anypytools.datautils.read_anyoutputfile">
-<code class="descclassname">anypytools.datautils.</code><code class="descname">read_anyoutputfile</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/datautils.html#read_anyoutputfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.datautils.read_anyoutputfile" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">anypytools.datautils.</code><code class="descname">anydatah5_generator</code><span class="sig-paren">(</span><em>folder=None</em>, <em>match='.*(\\.h5)'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/datautils.html#anydatah5_generator"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Create a generator which opens anydata.h5 files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>folder</strong> (<em>str</em><em>, </em><em>optional</em>) – path of the directory to look for anydata.h5 files. Defaults is the
+current working directory</li>
+<li><strong>match</strong> (<em>str</em>) – regular expression to match with filenames. Default is to include
+file ending with .h5 ‘.*(.h5)’</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><ul class="first last simple">
+<li><strong>h5py_file</strong> (<em>array_like</em>) – a h5_py file opened with anypytools.h5py_wrapper</li>
+<li><strong>filename</strong> (<em>str</em>) – name of the file from which the data was read</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="p">(</span><span class="n">h5</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span> <span class="ow">in</span> <span class="n">anydatah5_generator</span><span class="p">():</span>
+<span class="go">        print(h5)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.datautils.</code><code class="descname">anyoutputfile_generator</code><span class="sig-paren">(</span><em>folder=None</em>, <em>match='.*\\.(csv|txt)'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/datautils.html#anyoutputfile_generator"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Create a generator which opens AnyOutput files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>folder</strong> (<em>str</em><em>, </em><em>optional</em>) – path of the directory to look for AnyOutput files. Defaults is the
+current working directory</li>
+<li><strong>match</strong> (<em>str</em>) – regular expression to match with filenames. Default is to include
+file ending with .csv or .txt ‘.*(.csv|.txt)’</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>array_like</em>) – data collumns  in the anyoutput file</li>
+<li><strong>header</strong> (<em>list</em>) – list of the collumn names</li>
+<li><strong>constants</strong> (<em>dict</em>) – mapping with constants found in the file</li>
+<li><strong>filename</strong> (<em>str</em>) – name of the file from which the data was read</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">const</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span> <span class="ow">in</span> <span class="n">anyoutputfile_generator</span><span class="p">():</span>
+<span class="go">        print(fn)</span>
+<span class="go">        print(header)</span>
+<span class="go">        print(data.shape)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">anypytools.datautils.</code><code class="descname">read_anyoutputfile</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/datautils.html#read_anyoutputfile"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Read an AnyOutput file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -131,18 +203,18 @@ div.admonition.inline-title p.admonition-title {
         </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="macro_commands.html"
-                          title="Previous page">&larr; anypytools.macro_commands</a></p>
+    <p class="topless"><a href="abcutils.html"
+                          title="Previous page">&larr; anypytools.abcutils</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="anyoutputfile_generator.html"
-                          title="Next page">&rarr; anypytools.datautils.anyoutputfile_generator</a></p>
+    <p class="topless"><a href="macroutils.html"
+                          title="Next page">&rarr; anypytools.macroutils</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/read_anyoutputfile.rst.txt"
+      <li><a href="../_sources/api/datautils.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -192,10 +264,10 @@ div.admonition.inline-title p.admonition-title {
           <a href="../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="anyoutputfile_generator.html" title="anypytools.datautils.anyoutputfile_generator"
+          <a href="macroutils.html" title="anypytools.macroutils"
              >next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="macro_commands.html" title="anypytools.macro_commands"
+          <a href="abcutils.html" title="anypytools.abcutils"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
 

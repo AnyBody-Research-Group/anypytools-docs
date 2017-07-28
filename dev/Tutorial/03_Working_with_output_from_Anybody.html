@@ -7,14 +7,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Working with data from AnyBody &#8212; AnyPyTools 0.9.7.dev documentation</title>
+    <title>Working with data from AnyBody &#8212; AnyPyTools 0.9.7 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.9.7.dev',
+        VERSION:     '0.9.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="02_Generating_macros.html" title="Creating AnyScript Macros"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -274,25 +274,38 @@ user application and replay the result.</p>
 <p>AnyBody has a feature to save the output of a study to an HDF5 file. And
 like most things in AnyBody, this can also be done with a macro command.</p>
 <p>Let us try this with the model from the previous tutorials.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [1]:
+<span></span>In [9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="n">macrolist</span> <span class="o">=</span> <span class="p">[[</span>
-  <span class="s1">&#39;load &quot;Knee.any&quot;&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;operation Main.MyStudy.Kinematics&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;run&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;classoperation Main.MyStudy.Output &quot;Save data&quot; --type=&quot;Deep&quot; --file=&quot;output.anydata.h5&quot;&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;exit&#39;</span><span class="p">]]</span>
+<span></span><span class="kn">from</span> <span class="nn">anypytools.macro_commands</span> <span class="kn">import</span> <span class="n">Load</span><span class="p">,</span> <span class="n">OperationRun</span><span class="p">,</span> <span class="n">SaveData</span>
+
+<span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span><span class="p">),</span>
+  <span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Kinematics&#39;</span><span class="p">),</span>
+  <span class="n">SaveData</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy&#39;</span><span class="p">,</span> <span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+<span class="n">macrolist</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[9]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>[load &quot;Knee.any&quot;, operation Main.MyStudy.Kinematics
+ run, classoperation Main.MyStudy.Output &quot;Save data&quot; --type=&quot;Deep&quot; --file=&quot;output.anydata.h5&quot;]
 </pre></div>
 </div>
 </div>
 <p>Here we have added a “<code class="docutils literal"><span class="pre">Save</span> <span class="pre">data</span></code>” classoperation to the macro.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [2]:
+<span></span>In [10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
@@ -303,6 +316,18 @@ like most things in AnyBody, this can also be done with a macro command.</p>
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5956d7e9baec4a63b9cba7ef65755264"}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "041a7c4a2fd746f2850570e41e54a036"}</script></div>
+</div>
 <p>The data stored in the file <strong>output.anydata.h5</strong> can be re-loaded in
 the AnyBody GUI application. To do this; load the model, and then right
 click the <code class="docutils literal"><span class="pre">Main.MyStudy.Output</span></code> folder and select “Load data”.</p>
@@ -311,7 +336,7 @@ the data into external programs, e.g. Matlab or Python. In python this
 is done using the <em>``h5py``</em> module</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [3]:
+<span></span>In [1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
@@ -360,13 +385,13 @@ through the path of the reference ‘/Output/kneeref/…’.</p>
 <p>We can see the problem in the following code snippet:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [4]:
+<span></span>In [2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
 <span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span> <span class="s1">&#39;/Output/Model/Knee/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span> <span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span> <span class="s1">&#39;/Output/kneeref/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span> <span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;/Output/Model/Knee/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;/Output/kneeref/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -386,14 +411,14 @@ which automatically locates the right data, no matter what path is used.
 Using this module, we can easily locate the data.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [5]:
+<span></span>In [3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">anypytools.h5py_wrapper</span> <span class="kn">as</span> <span class="nn">h5py2</span>
 <span class="k">with</span> <span class="n">h5py2</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span> <span class="s1">&#39;/Output/Model/Knee/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span> <span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span> <span class="s1">&#39;/Output/kneeref/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span> <span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;/Output/Model/Knee/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;/Output/kneeref/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -411,26 +436,30 @@ directly, so we don’t have to replace every . (dot) with a / (slash),
 and remove the stuff before the Output folder.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [6]:
+<span></span>In [33]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
 <span></span><span class="k">with</span> <span class="n">h5py2</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">momentarm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Output.MomentArm&#39;</span><span class="p">]</span> <span class="p">)</span>                   <span class="c1"># dot notation</span>
-    <span class="n">kneeangle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Main.MyStudy.Output.Model.Knee.Pos&#39;</span><span class="p">]</span> <span class="p">)</span> <span class="c1"># dot notation with full path</span>
+    <span class="n">momentarm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;/Output/MomentArm&#39;</span><span class="p">])</span> <span class="c1"># Standard h5py notation</span>
+    <span class="n">momentarm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Output.MomentArm&#39;</span><span class="p">])</span>  <span class="c1"># dot notation</span>
+    <span class="n">kneeangle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Main.MyStudy.Output.Model.Knee.Pos&#39;</span><span class="p">])</span> <span class="c1"># dot notation with full path</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [7]:
+<span></span>In [34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
 <span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">degrees</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">FuncFormatter</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">kneeangle</span><span class="p">),</span><span class="mi">100</span><span class="o">*</span><span class="n">momentarm</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">degrees</span><span class="p">(</span><span class="n">kneeangle</span><span class="p">),</span> <span class="mi">100</span><span class="o">*</span><span class="n">momentarm</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Knee flexion (deg)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Moment arm (cm)&#39;</span><span class="p">);</span>
 </pre></div>
@@ -533,7 +562,7 @@ and remove the stuff before the Output folder.</p>
         <li class="right" >
           <a href="02_Generating_macros.html" title="Creating AnyScript Macros"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
  
       </ul>
     </div>

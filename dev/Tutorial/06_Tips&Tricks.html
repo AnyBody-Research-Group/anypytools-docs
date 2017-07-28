@@ -7,14 +7,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Tips &amp; Trics for anypytools &#8212; AnyPyTools 0.9.7.dev documentation</title>
+    <title>Tips &amp; Trics for anypytools &#8212; AnyPyTools 0.9.7 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.9.7.dev',
+        VERSION:     '0.9.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="05_Monte_Carlo_studies_etc.html" title="Advanced Examples"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -268,9 +268,13 @@ simulations, and then later restart them again.</p>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">num_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">return_task_info</span> <span class="o">=</span> <span class="bp">True</span> <span class="p">)</span>
-<span class="n">macro</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;load &quot;Knee.any&quot;&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;operation Main.MyStudy.InverseDynamics&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;run&#39;</span><span class="p">]]</span><span class="o">*</span><span class="mi">20</span>
+<span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;load &quot;Knee.any&quot;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;operation Main.MyStudy.InverseDynamics&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;run&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span><span class="n">macro</span><span class="p">]</span><span class="o">*</span><span class="mi">20</span>
 </pre></div>
 </div>
 </div>
@@ -280,15 +284,27 @@ simulations, and then later restart them again.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">);</span>
+<span></span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macrolist</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "fa56760dfec64f1d8854acfaff127595"}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+Processing interrupted</div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-Processing interrupted</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "9ef2d1eede80429e8489bf14694faf2d"}</script></div>
 </div>
 <p>Here we stopped the simulation using the Notebook interrupt button.
 Calling the <code class="docutils literal"><span class="pre">start_macro()</span></code> function again continues the processing
@@ -300,7 +316,7 @@ that exited with errors.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">);</span>
+<span></span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macrolist</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -321,10 +337,12 @@ processes.</p>
 <span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
-<span class="n">macro</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;load &quot;Knee.any&quot; -def N_STEP=&quot;10&quot;&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;operation Main.MyStudy.InverseDynamics&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;classoperation Main.MyStudy.Output.MaxMuscleActivity &quot;Dump&quot;&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;run&#39;</span><span class="p">]]</span>
+<span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;load &quot;Knee.any&quot; -def N_STEP=&quot;10&quot;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;operation Main.MyStudy.InverseDynamics&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;classoperation Main.MyStudy.Output.MaxMuscleActivity &quot;Dump&quot;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;run&#39;</span>
+<span class="p">]</span>
 <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -351,10 +369,12 @@ flag.</p>
 <span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">return_task_info</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
-<span class="n">macro</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;load &quot;Knee.any&quot; -def N_STEP=&quot;10&quot;&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;operation Main.MyStudy.InverseDynamics&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;classoperation Main.MyStudy.Output.MaxMuscleActivity &quot;Dump&quot;&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;run&#39;</span><span class="p">]]</span>
+<span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;load &quot;Knee.any&quot; -def N_STEP=&quot;10&quot;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;operation Main.MyStudy.InverseDynamics&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;classoperation Main.MyStudy.Output.MaxMuscleActivity &quot;Dump&quot;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;run&#39;</span>
+<span class="p">]</span>
 <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -398,10 +418,12 @@ processing even if the AnyPyProcess have no cached results.</p>
 <span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">return_task_info</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
-<span class="n">macro</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;load &quot;Knee.any&quot; -def N_STEP=&quot;10&quot;&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;operation Main.MyStudy.InverseDynamics&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;classoperation Main.MyStudy.Output.MaxMuscleActivity &quot;Dump&quot;&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;run&#39;</span><span class="p">]]</span>
+<span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;load &quot;Knee.any&quot; -def N_STEP=&quot;10&quot;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;operation Main.MyStudy.InverseDynamics&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;classoperation Main.MyStudy.Output.MaxMuscleActivity &quot;Dump&quot;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;run&#39;</span>
+<span class="p">]</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -471,10 +493,10 @@ later restarted. The next example illustrates this.</p>
 <span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">number_of_macros</span> <span class="o">=</span> <span class="mi">500</span><span class="p">)</span>
 <span class="n">mg</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
     <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;knee.any&#39;</span><span class="p">,</span> <span class="n">defs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;N_STEP&#39;</span><span class="p">:</span><span class="mi">20</span><span class="p">}),</span>
-    <span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Tibia.Knee.sRel&#39;</span><span class="p">,</span> <span class="n">tibia_knee_srel</span> <span class="p">),</span>
-    <span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Femur.Knee.sRel&#39;</span><span class="p">,</span><span class="n">femur_knee_srel</span>   <span class="p">),</span>
+    <span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Tibia.Knee.sRel&#39;</span><span class="p">,</span> <span class="n">tibia_knee_srel</span><span class="p">),</span>
+    <span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Femur.Knee.sRel&#39;</span><span class="p">,</span> <span class="n">femur_knee_srel</span><span class="p">),</span>
     <span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">),</span>
-    <span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">)</span>
+    <span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">),</span>
 <span class="p">])</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -677,7 +699,7 @@ Entries in file: 500
         <li class="right" >
           <a href="05_Monte_Carlo_studies_etc.html" title="Advanced Examples"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
  
       </ul>
     </div>

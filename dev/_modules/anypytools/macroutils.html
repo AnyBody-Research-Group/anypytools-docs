@@ -7,14 +7,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>anypytools.macroutils &#8212; AnyPyTools 0.9.7.dev documentation</title>
+    <title>anypytools.macroutils &#8212; AnyPyTools 0.9.7 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.9.7.dev',
+        VERSION:     '0.9.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -126,7 +126,7 @@
        <span class="k">yield</span> <span class="n">iterable</span><span class="p">[</span><span class="n">ndx</span><span class="p">:</span><span class="nb">min</span><span class="p">(</span><span class="n">ndx</span><span class="o">+</span><span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">)]</span>
 
 
-<div class="viewcode-block" id="MacroCommand"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.MacroCommand">[docs]</a><span class="k">class</span> <span class="nc">MacroCommand</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="MacroCommand"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.MacroCommand">[docs]</a><span class="k">class</span> <span class="nc">MacroCommand</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Class for custom macro commands</span>
 
 <span class="sd">    This class also serves as base class for other macro commands.</span>
@@ -147,11 +147,11 @@
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_macro</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<div class="viewcode-block" id="MacroCommand.get_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.MacroCommand.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<div class="viewcode-block" id="MacroCommand.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.MacroCommand.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="Load"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.Load">[docs]</a><span class="k">class</span> <span class="nc">Load</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
+<div class="viewcode-block" id="Load"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.Load">[docs]</a><span class="k">class</span> <span class="nc">Load</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Create a load macro command</span>
 
 <span class="sd">    Parameters</span>
@@ -185,7 +185,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">defs</span> <span class="o">=</span> <span class="n">defs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="o">=</span> <span class="n">paths</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Load.get_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.Load.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<div class="viewcode-block" id="Load.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.Load.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)]</span>
 
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="p">):</span>
@@ -198,7 +198,7 @@
         <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="SetValue"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.SetValue">[docs]</a><span class="k">class</span> <span class="nc">SetValue</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
+<div class="viewcode-block" id="SetValue"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SetValue">[docs]</a><span class="k">class</span> <span class="nc">SetValue</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Create &#39;Set Value&#39; classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
@@ -277,14 +277,14 @@
         <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">get_macro</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_elem</span><span class="p">)])</span>
 
 
-<div class="viewcode-block" id="SetValue.get_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.SetValue.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<div class="viewcode-block" id="SetValue.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SetValue.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">index</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_macro</span><span class="p">(</span><span class="n">val</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SetValue.format_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.SetValue.format_macro">[docs]</a>    <span class="k">def</span> <span class="nf">format_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+<div class="viewcode-block" id="SetValue.format_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SetValue.format_macro">[docs]</a>    <span class="k">def</span> <span class="nf">format_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="n">val</span> <span class="o">=</span> <span class="n">array2anyscript</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
@@ -295,7 +295,7 @@
                                                                      <span class="n">val</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="SetValue_random"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.SetValue_random">[docs]</a><span class="k">class</span> <span class="nc">SetValue_random</span><span class="p">(</span><span class="n">SetValue</span><span class="p">):</span>
+<div class="viewcode-block" id="SetValue_random"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SetValue_random">[docs]</a><span class="k">class</span> <span class="nc">SetValue_random</span><span class="p">(</span><span class="n">SetValue</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Create a &#39;Set Value&#39; macro command where the value is chosen from a</span>
 <span class="sd">    distibution in scipy.stats.distributions.</span>
 
@@ -377,7 +377,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_macro</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="SetValue_random.get_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.SetValue_random.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">lower_tail_probability</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<div class="viewcode-block" id="SetValue_random.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SetValue_random.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">lower_tail_probability</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">lower_tail_probability</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">lower_tail_probability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_lower_tail_probability</span>
 
@@ -392,7 +392,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_macro</span><span class="p">(</span><span class="n">val</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="Dump"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.Dump">[docs]</a><span class="k">class</span> <span class="nc">Dump</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
+<div class="viewcode-block" id="Dump"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.Dump">[docs]</a><span class="k">class</span> <span class="nc">Dump</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Create a Dump classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
@@ -429,7 +429,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">var_list</span> <span class="o">=</span> <span class="n">var</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_include_in_macro</span> <span class="o">=</span> <span class="n">include_in_macro</span>
 
-<div class="viewcode-block" id="Dump.get_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.Dump.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<div class="viewcode-block" id="Dump.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.Dump.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_include_in_macro</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_include_in_macro</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">var_list</span><span class="p">:</span>
@@ -437,7 +437,7 @@
         <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="SaveDesign"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.SaveDesign">[docs]</a><span class="k">class</span> <span class="nc">SaveDesign</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
+<div class="viewcode-block" id="SaveDesign"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SaveDesign">[docs]</a><span class="k">class</span> <span class="nc">SaveDesign</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Create a Save Design classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
@@ -457,12 +457,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">operation</span>
 
-<div class="viewcode-block" id="SaveDesign.get_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.SaveDesign.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<div class="viewcode-block" id="SaveDesign.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SaveDesign.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;classoperation </span><span class="si">{}</span><span class="s1"> &quot;Save design&quot; --file=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="LoadDesign"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.LoadDesign">[docs]</a><span class="k">class</span> <span class="nc">LoadDesign</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
+<div class="viewcode-block" id="LoadDesign"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.LoadDesign">[docs]</a><span class="k">class</span> <span class="nc">LoadDesign</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Create a Load Design classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
@@ -481,12 +481,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">operation</span>
 
-<div class="viewcode-block" id="LoadDesign.get_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.LoadDesign.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<div class="viewcode-block" id="LoadDesign.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.LoadDesign.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;classoperation </span><span class="si">{}</span><span class="s1"> &quot;Load design&quot; --file=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="SaveValues"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.SaveValues">[docs]</a><span class="k">class</span> <span class="nc">SaveValues</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
+<div class="viewcode-block" id="SaveValues"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SaveValues">[docs]</a><span class="k">class</span> <span class="nc">SaveValues</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Create a Save Values classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
@@ -502,7 +502,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
 
-<div class="viewcode-block" id="SaveValues.get_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.SaveValues.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<div class="viewcode-block" id="SaveValues.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SaveValues.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;classoperation Main &quot;Save Values&quot; --file=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span></div></div>
 
@@ -535,7 +535,7 @@
 
 
 
-<div class="viewcode-block" id="LoadValues"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.LoadValues">[docs]</a><span class="k">class</span> <span class="nc">LoadValues</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
+<div class="viewcode-block" id="LoadValues"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.LoadValues">[docs]</a><span class="k">class</span> <span class="nc">LoadValues</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Create a Load Values classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
@@ -551,12 +551,12 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
 
-<div class="viewcode-block" id="LoadValues.get_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.LoadValues.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<div class="viewcode-block" id="LoadValues.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.LoadValues.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;classoperation Main &quot;Load Values&quot; --file=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="UpdateValues"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.UpdateValues">[docs]</a><span class="k">class</span> <span class="nc">UpdateValues</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateValues"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.UpdateValues">[docs]</a><span class="k">class</span> <span class="nc">UpdateValues</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Create an &#39;Update Values&#39; classoperation macro command.</span>
 
 <span class="sd">    Examples</span>
@@ -567,11 +567,11 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
 
-<div class="viewcode-block" id="UpdateValues.get_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.UpdateValues.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<div class="viewcode-block" id="UpdateValues.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.UpdateValues.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;classoperation Main &quot;Update Values&quot;&#39;</span></div></div>
 
 
-<div class="viewcode-block" id="OperationRun"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.OperationRun">[docs]</a><span class="k">class</span> <span class="nc">OperationRun</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
+<div class="viewcode-block" id="OperationRun"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.OperationRun">[docs]</a><span class="k">class</span> <span class="nc">OperationRun</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Create a macro command to select and run an operation</span>
 
 <span class="sd">    Examples</span>
@@ -589,7 +589,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">operation</span>
 
-<div class="viewcode-block" id="OperationRun.get_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.OperationRun.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<div class="viewcode-block" id="OperationRun.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.OperationRun.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;operation </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operation</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;run&#39;</span></div></div>
 
 
@@ -893,7 +893,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>

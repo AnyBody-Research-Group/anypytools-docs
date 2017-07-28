@@ -7,14 +7,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Advanced Examples &#8212; AnyPyTools 0.9.7.dev documentation</title>
+    <title>Advanced Examples &#8212; AnyPyTools 0.9.7 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.9.7.dev',
+        VERSION:     '0.9.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="04_Batch_processing_multiple_models.html" title="Batch processing"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -286,8 +286,10 @@ distribution, but any statistical distribution could have been used.</p>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">macro_commands</span> <span class="k">as</span> <span class="n">mc</span><span class="p">,</span> <span class="n">AnyMacro</span>
 
-<span class="n">macro</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Tibia.Patella2.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_insertion</span><span class="p">),</span>
-          <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Patella.Lig.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_origin</span> <span class="p">)</span> <span class="p">]</span>
+<span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Tibia.Patella2.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_insertion</span><span class="p">),</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Patella.Lig.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_origin</span><span class="p">)</span>
+<span class="p">]</span>
 
 <span class="n">macro</span>
 </pre></div>
@@ -375,13 +377,14 @@ need the <code class="docutils literal"><span class="pre">AnyMacro</span></code>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mc</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span><span class="p">),</span>
-          <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Tibia.Patella2.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_insertion</span> <span class="p">)</span> <span class="p">,</span>
-          <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Patella.Lig.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_origin</span> <span class="p">)</span> <span class="p">,</span>
-          <span class="n">mc</span><span class="o">.</span><span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">),</span>
-          <span class="n">mc</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.Abscissa.t&#39;</span><span class="p">),</span>
-          <span class="n">mc</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">)</span>
-        <span class="p">]</span>
+<span></span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span><span class="p">),</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Tibia.Patella2.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_insertion</span> <span class="p">)</span> <span class="p">,</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Patella.Lig.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_origin</span> <span class="p">)</span> <span class="p">,</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">),</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.Abscissa.t&#39;</span><span class="p">),</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">)</span>
+<span class="p">]</span>
 <span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">macro</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">monte_carlo_macros</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">create_macros_MonteCarlo</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
@@ -440,7 +443,11 @@ an ‘ERROR’ key. We can use that to filter the results.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="n">monte_carlo_results</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">monte_carlo_results</span> <span class="k">if</span> <span class="s1">&#39;ERROR&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">e</span> <span class="p">]</span>
+<span></span><span class="n">monte_carlo_results</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">output</span>
+    <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">monte_carlo_results</span>
+    <span class="k">if</span> <span class="s1">&#39;ERROR&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">output</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -490,7 +497,7 @@ long as the string uniquely defines the variable in the data set.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="n">max_muscle_activity</span>  <span class="o">=</span> <span class="n">monte_carlo_results</span><span class="p">[</span><span class="s1">&#39;MaxMus&#39;</span><span class="p">]</span>
+<span></span><span class="n">max_muscle_activity</span> <span class="o">=</span> <span class="n">monte_carlo_results</span><span class="p">[</span><span class="s1">&#39;MaxMus&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -562,13 +569,14 @@ can be parsed to <code class="docutils literal"><span class="pre">create_macros_
 <span></span><span class="n">patella_tendon_insertion</span> <span class="o">=</span> <span class="n">distributions</span><span class="o">.</span><span class="n">norm</span><span class="p">([</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">])</span>
 <span class="n">patella_tendon_origin</span> <span class="o">=</span> <span class="n">distributions</span><span class="o">.</span><span class="n">norm</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.03</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">])</span>
 
-<span class="n">macro</span> <span class="o">=</span> <span class="p">[</span> <span class="n">mc</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span><span class="p">),</span>
-          <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Tibia.Patella2.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_insertion</span> <span class="p">)</span> <span class="p">,</span>
-          <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Patella.Lig.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_origin</span> <span class="p">)</span> <span class="p">,</span>
-          <span class="n">mc</span><span class="o">.</span><span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">),</span>
-          <span class="n">mc</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.Abscissa.t&#39;</span><span class="p">),</span>
-          <span class="n">mc</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">)</span>
-        <span class="p">]</span>
+<span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span><span class="p">),</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Tibia.Patella2.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_insertion</span> <span class="p">)</span> <span class="p">,</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Patella.Lig.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_origin</span> <span class="p">)</span> <span class="p">,</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">),</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.Abscissa.t&#39;</span><span class="p">),</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">)</span>
+<span class="p">]</span>
 <span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">macro</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">LHS_macros</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">create_macros_LHS</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
 </pre></div>
@@ -719,7 +727,7 @@ can be parsed to <code class="docutils literal"><span class="pre">create_macros_
         <li class="right" >
           <a href="04_Batch_processing_multiple_models.html" title="Batch processing"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
  
       </ul>
     </div>

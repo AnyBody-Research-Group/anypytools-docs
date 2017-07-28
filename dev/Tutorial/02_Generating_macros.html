@@ -7,14 +7,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Creating AnyScript Macros &#8212; AnyPyTools 0.9.7.dev documentation</title>
+    <title>Creating AnyScript Macros &#8212; AnyPyTools 0.9.7 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.9.7.dev',
+        VERSION:     '0.9.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="01_Getting_started_with_anypytools.html" title="Getting Started with AnyPyTools"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -266,8 +266,8 @@ do things like parameter studies, Monte Carlo simulation, etc.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">anypytools.macro_commands</span> <span class="kn">import</span> <span class="p">(</span> <span class="n">MacroCommand</span><span class="p">,</span> <span class="n">Load</span><span class="p">,</span> <span class="n">SetValue</span><span class="p">,</span> <span class="n">SetValue_random</span><span class="p">,</span>  <span class="n">Dump</span><span class="p">,</span> <span class="n">SaveDesign</span><span class="p">,</span>
-                                        <span class="n">LoadDesign</span><span class="p">,</span> <span class="n">SaveValues</span><span class="p">,</span> <span class="n">LoadValues</span><span class="p">,</span> <span class="n">UpdateValues</span><span class="p">,</span> <span class="n">OperationRun</span><span class="p">)</span>
+<span></span><span class="kn">from</span> <span class="nn">anypytools.macro_commands</span> <span class="kn">import</span> <span class="p">(</span><span class="n">MacroCommand</span><span class="p">,</span> <span class="n">Load</span><span class="p">,</span> <span class="n">SetValue</span><span class="p">,</span> <span class="n">SetValue_random</span><span class="p">,</span>  <span class="n">Dump</span><span class="p">,</span> <span class="n">SaveDesign</span><span class="p">,</span>
+                                       <span class="n">LoadDesign</span><span class="p">,</span> <span class="n">SaveValues</span><span class="p">,</span> <span class="n">LoadValues</span><span class="p">,</span> <span class="n">UpdateValues</span><span class="p">,</span> <span class="n">OperationRun</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -280,9 +280,11 @@ do things like parameter studies, Monte Carlo simulation, etc.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span><span class="p">,</span> <span class="n">defs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;SUBJECT&#39;</span><span class="p">:</span><span class="s1">&#39;&quot;S02&quot;&#39;</span><span class="p">,</span><span class="s1">&#39;TRIAL&#39;</span><span class="p">:</span><span class="s1">&#39;&quot;T04&quot;&#39;</span> <span class="p">}),</span>
-              <span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">),</span>
-              <span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">)]</span>
+<span></span><span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span><span class="p">,</span> <span class="n">defs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;SUBJECT&#39;</span><span class="p">:</span><span class="s1">&#39;&quot;S02&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;TRIAL&#39;</span><span class="p">:</span><span class="s1">&#39;&quot;T04&quot;&#39;</span><span class="p">}),</span>
+    <span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">),</span>
+    <span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">),</span>
+<span class="p">]</span>
 <span class="n">macrolist</span>
 </pre></div>
 </div>
@@ -303,7 +305,7 @@ do things like parameter studies, Monte Carlo simulation, etc.</p>
 <p>Each macro object will generate the macro commands with the correct
 syntax. The macro can be launched using the <code class="docutils literal"><span class="pre">start_macro()</span></code> method of
 the <code class="docutils literal"><span class="pre">AnyPyProcess</span></code> object.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [3]:
 </pre></div>
@@ -314,6 +316,18 @@ the <code class="docutils literal"><span class="pre">AnyPyProcess</span></code> 
 <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macrolist</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "25cab71e56be44a1809cada9f056b1b8"}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "aba550b00e0e42d0ad0a3bcf49693546"}</script></div>
 </div>
 </div>
 <div class="section" id="Overview-of-macro-commands">
@@ -342,14 +356,16 @@ is a big advantage to generate them programmatically.</p>
 macro list.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [5]:
+<span></span>In [4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyMacro</span>
 
-<span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span> <span class="p">),</span>
-              <span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">)</span> <span class="p">]</span>
+<span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span> <span class="p">),</span>
+    <span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">),</span>
+<span class="p">]</span>
 
 <span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">macrolist</span><span class="p">)</span>
 <span class="n">mg</span>
@@ -358,7 +374,7 @@ macro list.</p>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[5]:
+<span></span>Out[4]:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
@@ -370,7 +386,7 @@ macro list.</p>
 has additional attributes that specify how many macros we want.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [6]:
+<span></span>In [5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
@@ -381,7 +397,7 @@ has additional attributes that specify how many macros we want.</p>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[6]:
+<span></span>Out[5]:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
@@ -396,7 +412,7 @@ has additional attributes that specify how many macros we want.</p>
 <p>This can also be overidden when calling its <code class="docutils literal"><span class="pre">create_macros()</span></code> function</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [7]:
+<span></span>In [6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
@@ -406,7 +422,7 @@ has additional attributes that specify how many macros we want.</p>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[7]:
+<span></span>Out[6]:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
@@ -417,17 +433,30 @@ has additional attributes that specify how many macros we want.</p>
 </div>
 <p>This list of macros can also be passed to the ‘start_macro’ function to
 executed in parallel.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [8]:
+<span></span>In [7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">anybodycon_path</span><span class="o">=</span><span class="s2">&quot;C:/Program Files/AnyBody Technology/AnyBody.6.0/anybodycon.exe&quot;</span><span class="p">)</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span> <span class="n">mg</span><span class="o">.</span><span class="n">create_macros</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">mg</span><span class="o">.</span><span class="n">create_macros</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b28691033a9448ac990265d31995e221"}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "56d48fa18f9c4a48b585e6e9e645f002"}</script></div>
 </div>
 <p>Running many macros is only really useful if the macros are different.
 Some macros classes, like <code class="docutils literal"><span class="pre">SetValue()</span></code>, accepts lists of values which
@@ -472,11 +501,14 @@ The parameter study will vary the patella tendon length from 2.0cm to
 <p>First we create a list of patella length parameters.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [10]:
+<span></span>In [8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="n">patella_tendon_lengths</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.02</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.01</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)]</span>
+<span></span><span class="n">patella_tendon_lengths</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mf">0.02</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.01</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">patella_tendon_lengths</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -492,16 +524,18 @@ The parameter study will vary the patella tendon length from 2.0cm to
 <p>This list of values is added to the macros with the <code class="docutils literal"><span class="pre">SetValue</span></code> class.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [11]:
+<span></span>In [10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span><span class="p">),</span>
-         <span class="n">SetValue</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.PatellaLigament.DriverPos&#39;</span><span class="p">,</span> <span class="n">patella_tendon_lengths</span> <span class="p">),</span>
-         <span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">),</span>
-         <span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.Abscissa.t&#39;</span><span class="p">),</span>
-         <span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">),</span>
-         <span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.PatellaLigament.DriverPos&#39;</span><span class="p">)]</span>
+<span></span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span><span class="p">),</span>
+    <span class="n">SetValue</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.PatellaLigament.DriverPos&#39;</span><span class="p">,</span> <span class="n">patella_tendon_lengths</span> <span class="p">),</span>
+    <span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">),</span>
+    <span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.Abscissa.t&#39;</span><span class="p">),</span>
+    <span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">),</span>
+    <span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.PatellaLigament.DriverPos&#39;</span><span class="p">),</span>
+<span class="p">]</span>
 
 <span class="n">parameter_study_macro</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">macro</span><span class="p">,</span> <span class="n">number_of_macros</span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">patella_tendon_lengths</span><span class="p">)</span> <span class="p">)</span>
 </pre></div>
@@ -509,9 +543,9 @@ The parameter study will vary the patella tendon length from 2.0cm to
 </div>
 <p>We can now run the model and analyze the resulting maximum muscle
 activity by plotting the data in the <code class="docutils literal"><span class="pre">output</span></code> variable:</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [12]:
+<span></span>In [11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
@@ -519,9 +553,21 @@ activity by plotting the data in the <code class="docutils literal"><span class=
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "1b82c84c0ea94413aebd4310ea3e4332"}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "8d3c18178021424b8da24b0e41a674bc"}</script></div>
+</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [13]:
+<span></span>In [12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
@@ -529,10 +575,10 @@ activity by plotting the data in the <code class="docutils literal"><span class=
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
-    <span class="n">maxact</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">]</span>
+    <span class="n">max_activity</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">]</span>
     <span class="n">time</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Main.MyStudy.Output.Abscissa.t&#39;</span><span class="p">]</span>
     <span class="n">patella_ligament_length</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Main.MyModel.PatellaLigament.DriverPos&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">maxact</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;{:.1f} cm&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span> <span class="n">patella_ligament_length</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">max_activity</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;{:.1f} cm&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span> <span class="n">patella_ligament_length</span><span class="p">)</span> <span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Effect of changing patella tendon length&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time steps&#39;</span><span class="p">)</span>
@@ -546,6 +592,16 @@ activity by plotting the data in the <code class="docutils literal"><span class=
 </div>
 <div class="output_area docutils container">
 <img alt="../_images/Tutorial_02_Generating_macros_27_0.png" src="../_images/Tutorial_02_Generating_macros_27_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -643,7 +699,7 @@ activity by plotting the data in the <code class="docutils literal"><span class=
         <li class="right" >
           <a href="01_Getting_started_with_anypytools.html" title="Getting Started with AnyPyTools"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
  
       </ul>
     </div>

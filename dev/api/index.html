@@ -7,14 +7,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>AnyPyTools API &#8212; AnyPyTools 0.9.7.dev documentation</title>
+    <title>AnyPyTools API &#8212; AnyPyTools 0.9.7 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.9.7.dev',
+        VERSION:     '0.9.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="../Tutorial/06_Tips&Tricks.html" title="Tips &amp; Trics for anypytools"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -96,32 +96,54 @@ div.admonition.inline-title p.admonition-title {
 </style>
 <div class="section" id="anypytools-api">
 <span id="api"></span><h1>AnyPyTools API<a class="headerlink" href="#anypytools-api" title="Permalink to this headline">¶</a></h1>
-<p>For those of you who want the details.</p>
+<div class="section" id="userfacing-api">
+<h2>Userfacing API<a class="headerlink" href="#userfacing-api" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="processing">
-<h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
+<h3>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="AnyPyProcess.html">anypytools.AnyPyProcess</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="generating-macros">
+<h3>Generating macros<a class="headerlink" href="#generating-macros" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="AnyMacro.html">anypytools.AnyMacro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="macro_commands.html">anypytools.macro_commands</a></li>
 </ul>
 </div>
 </div>
-<div class="section" id="data-utilities">
-<h2>Data utilities<a class="headerlink" href="#data-utilities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="reading-anyoutputfiles">
+<h3>Reading AnyOutputFiles<a class="headerlink" href="#reading-anyoutputfiles" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="read_anyoutputfile.html">anypytools.datautils.read_anyoutputfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="anyoutputfile_generator.html">anypytools.datautils.anyoutputfile_generator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="anydatah5_generator.html">anypytools.datautils.anydatah5_generator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="h5py_wrapper.html">anypytools.h5py_wrapper</a></li>
 </ul>
 </div>
-<p>Internal utilities
-——————s</p>
+</div>
+<div class="section" id="reading-anydatah5-hdf5-files">
+<h3>Reading anydatah5 (hdf5) files<a class="headerlink" href="#reading-anydatah5-hdf5-files" title="Permalink to this headline">¶</a></h3>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tools.html">Misc. internal tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h5py_wrapper.html">anypytools.h5py_wrapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anydatah5_generator.html">anypytools.datautils.anydatah5_generator</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="all-modules">
+<h2>All modules<a class="headerlink" href="#all-modules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="abcutils.html">anypytools.abcutils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datautils.html">anypytools.datautils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="macroutils.html">anypytools.macroutils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h5py_wrapper.html">anypytools.h5py_wrapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytest_plugin.html">anypytools.pytest_plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">anypytools.tools</a></li>
 </ul>
 </div>
 </div>
@@ -139,10 +161,14 @@ div.admonition.inline-title p.admonition-title {
     <h3><a href="../index.html">Page contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">AnyPyTools API</a><ul>
+<li><a class="reference internal" href="#userfacing-api">Userfacing API</a><ul>
 <li><a class="reference internal" href="#processing">Processing</a></li>
-<li><a class="reference internal" href="#data-utilities">Data utilities</a><ul>
+<li><a class="reference internal" href="#generating-macros">Generating macros</a></li>
+<li><a class="reference internal" href="#reading-anyoutputfiles">Reading AnyOutputFiles</a></li>
+<li><a class="reference internal" href="#reading-anydatah5-hdf5-files">Reading anydatah5 (hdf5) files</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#all-modules">All modules</a></li>
 </ul>
 </li>
 </ul>
@@ -216,7 +242,7 @@ div.admonition.inline-title p.admonition-title {
         <li class="right" >
           <a href="../Tutorial/06_Tips&Tricks.html" title="Tips &amp; Trics for anypytools"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
  
       </ul>
     </div>

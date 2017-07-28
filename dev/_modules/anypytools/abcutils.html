@@ -7,14 +7,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>anypytools.abcutils &#8212; AnyPyTools 0.9.7.dev documentation</title>
+    <title>anypytools.abcutils &#8212; AnyPyTools 0.9.7 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.9.7.dev',
+        VERSION:     '0.9.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -394,7 +394,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_display</span><span class="p">(</span><span class="s1">&#39;Total time: </span><span class="si">{:.1f}</span><span class="s1"> seconds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_process_time</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="AnyPyProcess"><a class="viewcode-back" href="../../api/AnyPyProcess.html#anypytools.AnyPyProcess">[docs]</a><span class="k">class</span> <span class="nc">AnyPyProcess</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyPyProcess"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess">[docs]</a><span class="k">class</span> <span class="nc">AnyPyProcess</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class for configuring batch process jobs of AnyBody models.</span>
 
@@ -501,7 +501,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">AnyPyProcess initialized&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AnyPyProcess.save_results"><a class="viewcode-back" href="../../api/AnyPyProcess.html#anypytools.AnyPyProcess.save_results">[docs]</a>    <span class="k">def</span> <span class="nf">save_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyPyProcess.save_results"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.save_results">[docs]</a>    <span class="k">def</span> <span class="nf">save_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Save resently processed results</span>
 <span class="sd">        </span>
 <span class="sd">        Save results for later reloading or to continue processing unfished </span>
@@ -536,7 +536,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Noting to save&#39;</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">save_to_hdf5</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">batch_name</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyPyProcess.save_to_hdf5"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.save_to_hdf5">[docs]</a>    <span class="k">def</span> <span class="nf">save_to_hdf5</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">batch_name</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">h5py</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span><span class="p">:</span>
             <span class="n">any_output</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">get_output</span><span class="p">()</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span><span class="p">]</span>
@@ -572,9 +572,9 @@
                                     <span class="k">else</span><span class="p">:</span>
                                         <span class="n">new_folder</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span>
                             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-                                    <span class="n">new_folder</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>
+                                    <span class="n">new_folder</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">v</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AnyPyProcess.load_results"><a class="viewcode-back" href="../../api/AnyPyProcess.html#anypytools.AnyPyProcess.load_results">[docs]</a>    <span class="k">def</span> <span class="nf">load_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyPyProcess.load_results"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.load_results">[docs]</a>    <span class="k">def</span> <span class="nf">load_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Load previously saved results</span>
 <span class="sd">        </span>
 <span class="sd">        Besides reloading results the function can be used to continue</span>
@@ -617,7 +617,7 @@
         <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">get_output</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">loaded_data</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">AnyPyProcessOutputList</span><span class="p">(</span><span class="n">results</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AnyPyProcess.start_macro"><a class="viewcode-back" href="../../api/AnyPyProcess.html#anypytools.AnyPyProcess.start_macro">[docs]</a>    <span class="k">def</span> <span class="nf">start_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">macrolist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">folderlist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">search_subdirs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="AnyPyProcess.start_macro"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.start_macro">[docs]</a>    <span class="k">def</span> <span class="nf">start_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">macrolist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">folderlist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">search_subdirs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Starts a batch processing job.</span>
 
@@ -857,7 +857,7 @@
         <span class="n">totaltime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span> <span class="o">-</span> <span class="n">starttime</span>
         <span class="k">return</span> <span class="n">totaltime</span>
 
-    <span class="k">def</span> <span class="nf">cleanup_logfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasklist</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyPyProcess.cleanup_logfiles"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.cleanup_logfiles">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup_logfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasklist</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasklist</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep_logfiles</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">task</span><span class="o">.</span><span class="n">has_error</span><span class="p">:</span>
@@ -876,7 +876,7 @@
                     <span class="n">silentremove</span><span class="p">(</span><span class="n">macrofile</span><span class="p">)</span>
                 <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Could not removing &#39;</span>
-                                 <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">macrofile</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span></div>
+                                 <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">macrofile</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span></div></div>
 
 
 <span class="k">class</span> <span class="nc">_ProgressBar</span><span class="p">:</span>
@@ -993,7 +993,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 0.9.7.dev documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
