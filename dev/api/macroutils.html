@@ -97,12 +97,12 @@ div.admonition.inline-title p.admonition-title {
 </style>
 <div class="section" id="anypytools-macroutils">
 <h1>anypytools.macroutils<a class="headerlink" href="#anypytools-macroutils" title="Permalink to this headline">¶</a></h1>
-<p>Created on Mon Mar 23 21:14:59 2015</p>
+<p>Created on Mon Mar 23 21:14:59 2015.</p>
 <p>&#64;author: Morten</p>
 <dl class="class">
 <dt>
 <em class="property">class </em><code class="descclassname">anypytools.macroutils.</code><code class="descname">MacroCommand</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#MacroCommand"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Class for custom macro commands</p>
+<dd><p>Class for custom macro commands.</p>
 <p>This class also serves as base class for other macro commands.</p>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
@@ -115,14 +115,29 @@ div.admonition.inline-title p.admonition-title {
 <dl class="method">
 <dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#MacroCommand.get_macro"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
+<dd><p>Create a string representation of the macro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+use the index to generate different macros depending on the
+index.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string with the AnyScript macro</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt>
 <em class="property">class </em><code class="descclassname">anypytools.macroutils.</code><code class="descname">Load</code><span class="sig-paren">(</span><em>filename</em>, <em>defs={}</em>, <em>paths={}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#Load"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Create a load macro command</p>
+<dd><p>Create a load macro command.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -237,11 +252,6 @@ repeated</p>
 </div>
 <dl class="method">
 <dt>
-<code class="descname">format_macro</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SetValue.format_macro"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SetValue.get_macro"><span class="viewcode-link">[source]</span></a></dt>
 <dd></dd></dl>
 
@@ -250,8 +260,8 @@ repeated</p>
 <dl class="class">
 <dt>
 <em class="property">class </em><code class="descclassname">anypytools.macroutils.</code><code class="descname">SetValue_random</code><span class="sig-paren">(</span><em>var</em>, <em>frozen_distribution</em>, <em>default_lower_tail_probability=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SetValue_random"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Create a ‘Set Value’ macro command where the value is chosen from a
-distibution in scipy.stats.distributions.</p>
+<dd><p>Create a ‘Set Value’ macro command from a distribution.</p>
+<p>The value is connected to a distibution in scipy.stats.distributions.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -491,7 +501,7 @@ If None, the command is included in all macros.</li>
 <dl class="class">
 <dt>
 <em class="property">class </em><code class="descclassname">anypytools.macroutils.</code><code class="descname">OperationRun</code><span class="sig-paren">(</span><em>operation</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#OperationRun"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Create a macro command to select and run an operation</p>
+<dd><p>Create a macro command to select and run an operation.</p>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Kinematics&#39;</span><span class="p">)</span>
@@ -510,6 +520,38 @@ If None, the command is included in all macros.</li>
 <dl class="method">
 <dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#OperationRun.get_macro"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">anypytools.macroutils.</code><code class="descname">SaveData</code><span class="sig-paren">(</span><em>operation</em>, <em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveData"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Create a Save Data classoperation macro command.</p>
+<p>This macro operation will save all data from a study to a
+HDF5 file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>operation</strong> (<em>str</em>) – Operation to save the h5 from</li>
+<li><strong>filename</strong> (<em>str</em>) – The anyset file to save the values to</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SaveData</span><span class="p">(</span><span class="s1">&#39;Main.Study&#39;</span><span class="p">,</span> <span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span>
+<span class="go">classoperation Main.Study.Output &quot;Save data&quot; --type=&quot;Deep&quot; --file=&quot;output.anydata.h5&quot;</span>
+</pre></div>
+</div>
+</div>
+<dl class="method">
+<dt>
+<code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveData.get_macro"><span class="viewcode-link">[source]</span></a></dt>
 <dd></dd></dl>
 
 </dd></dl>

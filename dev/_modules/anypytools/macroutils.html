@@ -64,38 +64,40 @@
   <h1>Source code for anypytools.macroutils</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Created on Mon Mar 23 21:14:59 2015</span>
+<span class="sd">Created on Mon Mar 23 21:14:59 2015.</span>
 
 <span class="sd">@author: Morten</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
                         <span class="n">unicode_literals</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">past.builtins</span> <span class="k">import</span> <span class="n">basestring</span> <span class="k">as</span> <span class="n">string_types</span>
 
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="p">(</span><span class="n">ascii</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">chr</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="nb">hex</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span>  <span class="c1"># noqa</span>
+                      <span class="nb">int</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="nb">next</span><span class="p">,</span> <span class="nb">oct</span><span class="p">,</span> <span class="nb">open</span><span class="p">,</span> <span class="nb">pow</span><span class="p">,</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">round</span><span class="p">,</span>
+                      <span class="nb">str</span><span class="p">,</span> <span class="nb">super</span><span class="p">,</span> <span class="nb">zip</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">types</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">MutableSequence</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">distributions</span>
 
+
 <span class="k">def</span> <span class="nf">is_python2</span><span class="p">():</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+
 
 <span class="k">def</span> <span class="nf">is_python34</span><span class="p">():</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span> <span class="ow">and</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">4</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;win&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">is_python2</span><span class="p">()</span> <span class="ow">or</span> <span class="n">is_python34</span><span class="p">()):</span>
     <span class="c1"># This is a horrible hack to work around a bug in</span>
-    <span class="c1"># scipy http://stackoverflow.com/questions/15457786/ctrl-c-crashes-python-after-importing-scipy-stats</span>
+    <span class="c1"># scipy http://stackoverflow.com/questions/15457786/ctrl-c-crashes-python-after-importing-scipy-stats # noqa</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="kn">import</span> <span class="nn">thread</span>  <span class="c1">#, imp, ctypes, os</span>
+        <span class="kn">import</span> <span class="nn">thread</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">_thread</span> <span class="k">as</span> <span class="nn">thread</span>
     <span class="kn">import</span> <span class="nn">win32api</span>
@@ -108,26 +110,27 @@
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;abt.anypytools&#39;</span><span class="p">)</span>
 
-<span class="c1">#pprint is used in the doc tests</span>
-<span class="kn">from</span> <span class="nn">.tools</span> <span class="k">import</span> <span class="n">define2str</span><span class="p">,</span> <span class="n">path2str</span><span class="p">,</span> <span class="n">array2anyscript</span><span class="p">,</span> <span class="n">pprint</span>
-<span class="kn">from</span> <span class="nn">.tools</span> <span class="k">import</span> <span class="n">Py3kPrettyPrinter</span>
+<span class="c1"># pprint is used in the doc tests</span>
+<span class="kn">from</span> <span class="nn">anypytools.tools</span> <span class="k">import</span> <span class="n">define2str</span><span class="p">,</span> <span class="n">path2str</span><span class="p">,</span> <span class="n">array2anyscript</span><span class="p">,</span> <span class="n">pprint</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">anypytools.tools</span> <span class="k">import</span> <span class="n">Py3kPrettyPrinter</span>  <span class="c1"># noqa</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MacroCommand&#39;</span><span class="p">,</span> <span class="s1">&#39;Load&#39;</span><span class="p">,</span> <span class="s1">&#39;SetValue&#39;</span><span class="p">,</span> <span class="s1">&#39;SetValue_random&#39;</span><span class="p">,</span> <span class="s1">&#39;Dump&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;SaveDesign&#39;</span><span class="p">,</span> <span class="s1">&#39;LoadDesign&#39;</span><span class="p">,</span> <span class="s1">&#39;SaveValues&#39;</span><span class="p">,</span> <span class="s1">&#39;LoadValues&#39;</span><span class="p">,</span> <span class="s1">&#39;UpdateValues&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;OperationRun&#39;</span><span class="p">]</span>
+           <span class="s1">&#39;SaveDesign&#39;</span><span class="p">,</span> <span class="s1">&#39;LoadDesign&#39;</span><span class="p">,</span> <span class="s1">&#39;SaveValues&#39;</span><span class="p">,</span> <span class="s1">&#39;LoadValues&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;UpdateValues&#39;</span><span class="p">,</span> <span class="s1">&#39;OperationRun&#39;</span><span class="p">,</span> <span class="s1">&#39;SaveData&#39;</span><span class="p">]</span>
 
 
 <span class="k">def</span> <span class="nf">_isgenerator</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">GeneratorType</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">_batch</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-   <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
-   <span class="k">for</span> <span class="n">ndx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-       <span class="k">yield</span> <span class="n">iterable</span><span class="p">[</span><span class="n">ndx</span><span class="p">:</span><span class="nb">min</span><span class="p">(</span><span class="n">ndx</span><span class="o">+</span><span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">)]</span>
+
+<span class="k">def</span> <span class="nf">_batch</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ndx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">iterable</span><span class="p">[</span><span class="n">ndx</span><span class="p">:</span><span class="nb">min</span><span class="p">(</span><span class="n">ndx</span> <span class="o">+</span> <span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">)]</span>
 
 
 <div class="viewcode-block" id="MacroCommand"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.MacroCommand">[docs]</a><span class="k">class</span> <span class="nc">MacroCommand</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Class for custom macro commands</span>
+    <span class="sd">&quot;&quot;&quot;Class for custom macro commands.</span>
 
 <span class="sd">    This class also serves as base class for other macro commands.</span>
 
@@ -138,6 +141,7 @@
 <span class="sd">    operation &quot;Main.MyStudy.InverseDynamics&quot;</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">command</span><span class="p">]</span>
@@ -148,11 +152,26 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_macro</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <div class="viewcode-block" id="MacroCommand.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.MacroCommand.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a string representation of the macro.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        index : int</span>
+<span class="sd">            The index for the macro beeing generated. Some child classes</span>
+<span class="sd">            use the index to generate different macros depending on the</span>
+<span class="sd">            index.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        string</span>
+<span class="sd">            A string with the AnyScript macro</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="Load"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.Load">[docs]</a><span class="k">class</span> <span class="nc">Load</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Create a load macro command</span>
+    <span class="sd">&quot;&quot;&quot;Create a load macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -180,6 +199,7 @@
 <span class="sd">     [u&#39;load &quot;model_2.main.any&quot;&#39;]]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">defs</span><span class="o">=</span><span class="p">{},</span> <span class="n">paths</span><span class="o">=</span><span class="p">{}):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">defs</span> <span class="o">=</span> <span class="n">defs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -199,7 +219,7 @@
 
 
 <div class="viewcode-block" id="SetValue"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SetValue">[docs]</a><span class="k">class</span> <span class="nc">SetValue</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Create &#39;Set Value&#39; classoperation macro command.</span>
+    <span class="sd">&quot;&quot;&quot;Create &#39;Set Value&#39; classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -276,15 +296,14 @@
 
         <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">get_macro</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_elem</span><span class="p">)])</span>
 
-
 <div class="viewcode-block" id="SetValue.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SetValue.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">index</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_macro</span><span class="p">(</span><span class="n">val</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_macro</span><span class="p">(</span><span class="n">val</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SetValue.format_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SetValue.format_macro">[docs]</a>    <span class="k">def</span> <span class="nf">format_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_format_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="n">val</span> <span class="o">=</span> <span class="n">array2anyscript</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
@@ -292,12 +311,13 @@
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">val</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
         <span class="k">return</span> <span class="s1">&#39;classoperation </span><span class="si">{0}</span><span class="s1"> &quot;Set Value&quot; --value=&quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var</span><span class="p">,</span>
-                                                                     <span class="n">val</span><span class="p">)</span></div></div>
+                                                                     <span class="n">val</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="SetValue_random"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SetValue_random">[docs]</a><span class="k">class</span> <span class="nc">SetValue_random</span><span class="p">(</span><span class="n">SetValue</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Create a &#39;Set Value&#39; macro command where the value is chosen from a</span>
-<span class="sd">    distibution in scipy.stats.distributions.</span>
+    <span class="sd">&quot;&quot;&quot;Create a &#39;Set Value&#39; macro command from a distribution.</span>
+
+<span class="sd">    The value is connected to a distibution in scipy.stats.distributions.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -350,9 +370,9 @@
 <span class="sd">     [&#39;classoperation Main.MyVar1 &quot;Set Value&quot; --value=&quot;{-0.20265197275,0.114947152258,0.924796936287}&quot;&#39;,</span>
 <span class="sd">      &#39;classoperation Main.MyVar2 &quot;Set Value&quot; --value=&quot;{0.806864877696,4.4114188826,2.93941843565}&quot;&#39;]]</span>
 
-<span class="sd">   &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">frozen_distribution</span><span class="p">,</span> <span class="n">default_lower_tail_probability</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">frozen_distribution</span><span class="p">,</span> <span class="n">default_lower_tail_probability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">var</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">frozen_distribution</span><span class="p">,</span> <span class="n">distributions</span><span class="o">.</span><span class="n">rv_frozen</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
@@ -365,24 +385,22 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">meanvalue</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meanvalue</span><span class="o">.</span><span class="n">shape</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">n_factors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">default_lower_tail_probability</span> <span class="o">=</span> <span class="n">default_lower_tail_probability</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">default_lower_tail_probability</span> <span class="o">=</span> <span class="n">default_lower_tail_probability</span> <span class="o">*</span> \
+                <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">n_factors</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">default_lower_tail_probability</span> <span class="o">=</span> <span class="n">default_lower_tail_probability</span>
 
-
-
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_macro</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
 
 <div class="viewcode-block" id="SetValue_random.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SetValue_random.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">lower_tail_probability</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">lower_tail_probability</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">lower_tail_probability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_lower_tail_probability</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lower_tail_probability</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-                <span class="n">lower_tail_probability</span> <span class="o">=</span> <span class="n">lower_tail_probability</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">lower_tail_probability</span> <span class="o">=</span> <span class="n">lower_tail_probability</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rv</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">lower_tail_probability</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
         <span class="c1"># Replace any nan from ppf function with actual sampled values.</span>
@@ -393,7 +411,7 @@
 
 
 <div class="viewcode-block" id="Dump"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.Dump">[docs]</a><span class="k">class</span> <span class="nc">Dump</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Create a Dump classoperation macro command.</span>
+    <span class="sd">&quot;&quot;&quot;Create a Dump classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -420,9 +438,10 @@
 <span class="sd">     [&#39;load &quot;mymodel.main.any&quot;&#39;],</span>
 <span class="sd">     [&#39;load &quot;mymodel.main.any&quot;&#39;],</span>
 <span class="sd">     [&#39;load &quot;mymodel.main.any&quot;&#39;]]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">include_in_macro</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">include_in_macro</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">var_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
@@ -438,7 +457,7 @@
 
 
 <div class="viewcode-block" id="SaveDesign"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SaveDesign">[docs]</a><span class="k">class</span> <span class="nc">SaveDesign</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Create a Save Design classoperation macro command.</span>
+    <span class="sd">&quot;&quot;&quot;Create a Save Design classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -451,6 +470,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; SaveDesign(&#39;Main.MyStudy.Kinematics&#39;, &#39;c:/design.txt&#39;)</span>
 <span class="sd">    classoperation Main.MyStudy.Kinematics &quot;Save design&quot; --file=&quot;c:/design.txt&quot;</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
@@ -463,7 +483,7 @@
 
 
 <div class="viewcode-block" id="LoadDesign"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.LoadDesign">[docs]</a><span class="k">class</span> <span class="nc">LoadDesign</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Create a Load Design classoperation macro command.</span>
+    <span class="sd">&quot;&quot;&quot;Create a Load Design classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -476,7 +496,9 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; LoadDesign(&#39;Main.MyStudy.Kinematics&#39;, &#39;c:/design.txt&#39;)</span>
 <span class="sd">    classoperation Main.MyStudy.Kinematics &quot;Load design&quot; --file=&quot;c:/design.txt&quot;</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">operation</span>
@@ -487,7 +509,7 @@
 
 
 <div class="viewcode-block" id="SaveValues"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SaveValues">[docs]</a><span class="k">class</span> <span class="nc">SaveValues</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Create a Save Values classoperation macro command.</span>
+    <span class="sd">&quot;&quot;&quot;Create a Save Values classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -498,7 +520,9 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; SaveValues(&#39;c:/values.anyset&#39;)</span>
 <span class="sd">    classoperation Main &quot;Save Values&quot; --file=&quot;c:/values.anyset&quot;</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
 
@@ -507,10 +531,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="SaveData"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.SaveData">[docs]</a><span class="k">class</span> <span class="nc">SaveData</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Create a Save Data classoperation macro command.</span>
+<div class="viewcode-block" id="SaveData"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SaveData">[docs]</a><span class="k">class</span> <span class="nc">SaveData</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a Save Data classoperation macro command.</span>
 
-<span class="sd">    This macro operation will save all data from a study to a </span>
+<span class="sd">    This macro operation will save all data from a study to a</span>
 <span class="sd">    HDF5 file.</span>
 
 <span class="sd">    Parameters</span>
@@ -524,19 +548,20 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; SaveData(&#39;Main.Study&#39;, &#39;output.anydata.h5&#39;)</span>
 <span class="sd">    classoperation Main.Study.Output &quot;Save data&quot; --type=&quot;Deep&quot; --file=&quot;output.anydata.h5&quot;</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">opeation</span> <span class="o">=</span> <span class="n">operation</span>
 
-<div class="viewcode-block" id="SaveData.get_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.SaveData.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<div class="viewcode-block" id="SaveData.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SaveData.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
         <span class="n">macro_str</span> <span class="o">=</span> <span class="s1">&#39;classoperation </span><span class="si">{}</span><span class="s1">.Output &quot;Save data&quot; --type=&quot;Deep&quot; --file=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span>
         <span class="k">return</span> <span class="n">macro_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opeation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span></div></div>
 
 
-
 <div class="viewcode-block" id="LoadValues"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.LoadValues">[docs]</a><span class="k">class</span> <span class="nc">LoadValues</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Create a Load Values classoperation macro command.</span>
+    <span class="sd">&quot;&quot;&quot;Create a Load Values classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -547,7 +572,9 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; LoadValues(&#39;c:/values.anyset&#39;)</span>
 <span class="sd">    classoperation Main &quot;Load Values&quot; --file=&quot;c:/values.anyset&quot;</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
 
@@ -557,13 +584,15 @@
 
 
 <div class="viewcode-block" id="UpdateValues"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.UpdateValues">[docs]</a><span class="k">class</span> <span class="nc">UpdateValues</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Create an &#39;Update Values&#39; classoperation macro command.</span>
+    <span class="sd">&quot;&quot;&quot;Create an &#39;Update Values&#39; classoperation macro command.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; UpdateValues()</span>
 <span class="sd">    classoperation Main &quot;Update Values&quot;</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
 
@@ -572,7 +601,7 @@
 
 
 <div class="viewcode-block" id="OperationRun"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.OperationRun">[docs]</a><span class="k">class</span> <span class="nc">OperationRun</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Create a macro command to select and run an operation</span>
+    <span class="sd">&quot;&quot;&quot;Create a macro command to select and run an operation.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -585,7 +614,9 @@
 <span class="sd">                   OperationRun(&#39;Main.MyStudy.Kinematics&#39;))</span>
 <span class="sd">    &gt;&gt;&gt; mg.create_macros()</span>
 <span class="sd">    [[u&#39;load &quot;my_model.main.any&quot;&#39;, u&#39;operation Main.MyStudy.Kinematics&#39;, u&#39;run&#39;]]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">operation</span>
 
@@ -598,6 +629,7 @@
 <span class="sd">    Class to generate multiple macros.</span>
 
 <span class="sd">    Use the class to contruct multiple anyscript macros from a single macro.</span>
+<span class="sd">    E.g. for parameter studies, Monte Carlo, Latin Hyper Cube studies.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -674,7 +706,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;operator must be integer&#39;</span><span class="p">)</span>
         <span class="n">mg</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">mg</span><span class="o">.</span><span class="n">number_of_macros</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">number_of_macros</span><span class="o">*</span><span class="nb">round</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="n">mg</span><span class="o">.</span><span class="n">number_of_macros</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">number_of_macros</span> <span class="o">*</span> <span class="nb">round</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">mg</span>
 
     <span class="fm">__rmul__</span> <span class="o">=</span> <span class="fm">__mul__</span>
@@ -706,12 +738,59 @@
         <span class="n">list_idx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_list</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">list_idx</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
 
+<div class="viewcode-block" id="AnyMacro.create_macros"><a class="viewcode-back" href="../../api/AnyMacro.html#anypytools.AnyMacro.create_macros">[docs]</a>    <span class="k">def</span> <span class="nf">create_macros</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_macros</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate a given number of macros.</span>
+
+<span class="sd">        The function return its output either as list (batch_size = None) or in batches</span>
+<span class="sd">        as generator object (memory efficient when generating many macros)</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        number_of_macros : int (Optional)</span>
+<span class="sd">            The number of macro to create.</span>
+<span class="sd">        batch_size : int (Optional)</span>
+<span class="sd">            If specified the function will return a generator which creates macros in</span>
+<span class="sd">            batches.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list or generator</span>
+<span class="sd">            A list macros or a generator which creates macros in batches</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from anypytools import AnyMacro</span>
+<span class="sd">        &gt;&gt;&gt; from anypytools.macro_commands import *</span>
+<span class="sd">        &gt;&gt;&gt; macro = [</span>
+<span class="sd">        ...     Load(&#39;c:/Model.main.any&#39;),</span>
+<span class="sd">        ...     OperationRun(&#39;Main.study.Kinematics&#39;),</span>
+<span class="sd">        ... ]</span>
+<span class="sd">        &gt;&gt;&gt; mg = AnyMacro(macro, number_of_macros=4)</span>
+<span class="sd">        &gt;&gt;&gt; macrolist = mg.create_macros()</span>
+<span class="sd">        &gt;&gt;&gt; pprint(macrolist)</span>
+<span class="sd">        [[&#39;load &quot;c:/Model.main.any&quot;&#39;, &#39;operation Main.study.Kinematics&#39;, &#39;run&#39;],</span>
+<span class="sd">         [&#39;load &quot;c:/Model.main.any&quot;&#39;, &#39;operation Main.study.Kinematics&#39;, &#39;run&#39;],</span>
+<span class="sd">         [&#39;load &quot;c:/Model.main.any&quot;&#39;, &#39;operation Main.study.Kinematics&#39;, &#39;run&#39;],</span>
+<span class="sd">         [&#39;load &quot;c:/Model.main.any&quot;&#39;, &#39;operation Main.study.Kinematics&#39;, &#39;run&#39;]]</span>
 
 
+<span class="sd">        Generate macros in batches</span>
 
-    <span class="k">def</span> <span class="nf">create_macros</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_macros</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="sd">        &gt;&gt;&gt; mg = AnyMacro([Load(&#39;c:/Model.main.any&#39;)], number_of_macros = 6)</span>
+<span class="sd">        &gt;&gt;&gt; macro_gen =  mg.create_macros(batch_size=2)</span>
+<span class="sd">        &gt;&gt;&gt; for i, macros in enumerate( macro_gen ):</span>
+<span class="sd">        ...     print(&#39;Batch &#39;, i)</span>
+<span class="sd">        ...     pprint(macros)</span>
+<span class="sd">        Batch 0</span>
+<span class="sd">        [[&#39;load &quot;c:/Model.main.any&quot;&#39;], [&#39;load &quot;c:/Model.main.any&quot;&#39;]]</span>
+<span class="sd">        Batch 1</span>
+<span class="sd">        [[&#39;load &quot;c:/Model.main.any&quot;&#39;], [&#39;load &quot;c:/Model.main.any&quot;&#39;]]</span>
+<span class="sd">        Batch 2</span>
+<span class="sd">        [[&#39;load &quot;c:/Model.main.any&quot;&#39;], [&#39;load &quot;c:/Model.main.any&quot;&#39;]]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">batch_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">_batch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_macros</span><span class="p">(</span><span class="n">number_of_macros</span><span class="p">),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">batch_size</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">_batch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_macros</span><span class="p">(</span><span class="n">number_of_macros</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">number_of_macros</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">number_of_macros</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_macros</span>
@@ -727,11 +806,49 @@
                 <span class="k">if</span> <span class="n">mcr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
                     <span class="n">macro</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">mcr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span>
             <span class="n">macro_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">macro_list</span>
+        <span class="k">return</span> <span class="n">macro_list</span></div>
 
+<div class="viewcode-block" id="AnyMacro.create_macros_MonteCarlo"><a class="viewcode-back" href="../../api/AnyMacro.html#anypytools.AnyMacro.create_macros_MonteCarlo">[docs]</a>    <span class="k">def</span> <span class="nf">create_macros_MonteCarlo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_macros</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> <span class="c1"># noqa</span>
+        <span class="sd">&quot;&quot;&quot;Generate AnyScript macros for monte carlos studies.</span>
 
-    <span class="k">def</span> <span class="nf">create_macros_MonteCarlo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_macros</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="sd">        The function returns macros for Monte Carlo parameter studies. This methods</span>
+<span class="sd">        extends the `create_macros` methods with functionality to randomly vary</span>
+<span class="sd">        parameters across macros.</span>
 
+<span class="sd">        Values added with `SetValue_random` class are sampled randomly in a</span>
+<span class="sd">        &#39;Monte Carlo&#39; fashion. Note that the values of the first macro</span>
+<span class="sd">        is the defaut mean value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        number_of_macros : int (Optional)</span>
+<span class="sd">            The number of macro to create.</span>
+<span class="sd">        batch_size : int (Optional)</span>
+<span class="sd">            If specified the function will return a generator which creates macros in</span>
+<span class="sd">            batches.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list or generator</span>
+<span class="sd">            A list macros or a generator which creates macros in batches</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; np.random.seed(1)</span>
+<span class="sd">        &gt;&gt;&gt; from scipy.stats.distributions import logistic, norm</span>
+<span class="sd">        &gt;&gt;&gt; log_dist = logistic( loc= [1,3,4],scale = [0.1,0.5,1] )</span>
+<span class="sd">        &gt;&gt;&gt; norm_dist = norm( loc= [0,0,0],scale = [0.1,0.5,1] )</span>
+<span class="sd">        &gt;&gt;&gt; cmd = [SetValue_random(&#39;Main.MyVar1&#39;, log_dist), SetValue_random(&#39;Main.MyVar2&#39;, norm_dist) ]</span>
+<span class="sd">        &gt;&gt;&gt; mg = AnyMacro(cmd, number_of_macros = 3)</span>
+<span class="sd">        &gt;&gt;&gt; mg.create_macros_MonteCarlo()</span>
+<span class="sd">        [[&#39;classoperation Main.MyVar1 &quot;Set Value&quot; --value=&quot;{0,0,0}&quot;&#39;,</span>
+<span class="sd">        &#39;classoperation Main.MyVar2 &quot;Set Value&quot; --value=&quot;{1,3,4}&quot;&#39;],</span>
+<span class="sd">        [&#39;classoperation Main.MyVar1 &quot;Set Value&quot; --value=&quot;{-0.0209517840916,0.291902872134,-3.68494766954}&quot;&#39;,</span>
+<span class="sd">        &#39;classoperation Main.MyVar2 &quot;Set Value&quot; --value=&quot;{0.916378512121,2.11986245798,1.71459079162}&quot;&#39;],</span>
+<span class="sd">        [&#39;classoperation Main.MyVar1 &quot;Set Value&quot; --value=&quot;{-0.0891762169545,-0.198666812922,-0.261723075945}&quot;&#39;,</span>
+<span class="sd">        &#39;classoperation Main.MyVar2 &quot;Set Value&quot; --value=&quot;{1.01555799978,2.83695956934,4.7778636562}&quot;&#39;]]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">batch_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">_batch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_macros_MonteCarlo</span><span class="p">(</span><span class="n">number_of_macros</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">)</span>
 
@@ -741,7 +858,6 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
 
-
         <span class="n">macro_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">macro_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_macros</span><span class="p">):</span>
             <span class="n">macro</span> <span class="o">=</span> <span class="p">[]</span>
@@ -749,9 +865,10 @@
             <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">SetValue_random</span><span class="p">):</span>
                     <span class="k">if</span> <span class="n">macro_idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">lower_tail_probability</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># First macro get the default values</span>
+                        <span class="n">lower_tail_probability</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># First macro get the default values</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="n">lower_tail_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">n_factors</span><span class="p">)</span>
+                        <span class="n">lower_tail_probability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span>
+                            <span class="n">elem</span><span class="o">.</span><span class="n">n_factors</span><span class="p">)</span>
                     <span class="n">mcr</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="n">get_macro</span><span class="p">(</span><span class="n">macro_idx</span><span class="p">,</span> <span class="n">lower_tail_probability</span><span class="p">)</span>
                     <span class="n">lhs_idx</span> <span class="o">+=</span> <span class="n">elem</span><span class="o">.</span><span class="n">n_factors</span>
                 <span class="k">else</span><span class="p">:</span>
@@ -762,17 +879,65 @@
                 <span class="k">if</span> <span class="n">mcr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
                     <span class="n">macro</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">mcr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span>
             <span class="n">macro_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">macro_list</span>
+        <span class="k">return</span> <span class="n">macro_list</span></div>
+
+<div class="viewcode-block" id="AnyMacro.create_macros_LHS"><a class="viewcode-back" href="../../api/AnyMacro.html#anypytools.AnyMacro.create_macros_LHS">[docs]</a>    <span class="k">def</span> <span class="nf">create_macros_LHS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_macros</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># noqa</span>
+                          <span class="n">iterations</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">append_default</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate AnyScript macros for Latin Hyper Cube Studies studies.</span>
+
+<span class="sd">        Generates AnyScript macros for parameter studies using Latin hyper cube</span>
+<span class="sd">        sampling. The macros added with the `SetValue_random` are created with</span>
+<span class="sd">        with Latin Hypercube Sampling (LHS) of the parameter space. The number</span>
+<span class="sd">        of generated macros determines the number of LHS samples.</span>
+
+<span class="sd">        The method uses the pyDOE package to generate the LHS data.</span>
 
 
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        number_of_macros : int (Optional)</span>
+<span class="sd">            The number of macro to create.</span>
+<span class="sd">        batch_size : int (Optional)</span>
+<span class="sd">            If specified the function will return a generator which creates macros in</span>
+<span class="sd">            batches.</span>
+<span class="sd">        criterion : {None, &#39;c&#39;, &#39;m&#39;, &#39;cm&#39;, &#39;corr&#39;}</span>
+<span class="sd">            A a string that specifies how points are sampled</span>
+<span class="sd">            (see: http://pythonhosted.org/pyDOE/randomized.html)</span>
+<span class="sd">            `None` (Default) points are randomizes within the intervals.</span>
+<span class="sd">            &quot;center&quot; or &quot;c&quot; center the points within the sampling intervals</span>
+<span class="sd">            &quot;maximin&quot; or &quot;m&quot;: maximize the minimum distance between points, but place</span>
+<span class="sd">            the point in a randomized location within its interval</span>
+<span class="sd">            &quot;centermaximin&quot; or &quot;cm&quot;: same as “maximin”, but centered within the intervals</span>
+<span class="sd">            &quot;corr&quot; minimize the maximum correlation coefficient</span>
+<span class="sd">        iterations : int</span>
+<span class="sd">            Specifies how many iterations are used to accomplished the selected criterion</span>
+<span class="sd">        append_default : bool</span>
+<span class="sd">            If True a macro with default (mean) values is appended to the returned list</span>
+<span class="sd">            of returned macros</span>
 
 
-    <span class="k">def</span> <span class="nf">create_macros_LHS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                          <span class="n">number_of_macros</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                          <span class="n">criterion</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                          <span class="n">iterations</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                          <span class="n">batch_size</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                          <span class="n">append_default</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list or generator</span>
+<span class="sd">            A list macros or a generator which creates macros in batches</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; np.random.seed(1)</span>
+<span class="sd">        &gt;&gt;&gt; from scipy.stats.distributions import logistic, norm</span>
+<span class="sd">        &gt;&gt;&gt; log_dist = logistic( loc= [1,3,4],scale = [0.1,0.5,1] )</span>
+<span class="sd">        &gt;&gt;&gt; norm_dist = norm( loc= [0,0,0],scale = [0.1,0.5,1] )</span>
+<span class="sd">        &gt;&gt;&gt; cmd = [SetValue_random(&#39;Main.MyVar1&#39;, log_dist), SetValue_random(&#39;Main.MyVar2&#39;, norm_dist) ]</span>
+<span class="sd">        &gt;&gt;&gt; mg = AnyMacro(cmd, number_of_macros = 3)</span>
+<span class="sd">        &gt;&gt;&gt; mg.create_macros_LHS()</span>
+<span class="sd">        [[&#39;classoperation Main.MyVar1 &quot;Set Value&quot; --value=&quot;{0.0928967116493,-0.591418725401,-0.484696993931}&quot;&#39;,</span>
+<span class="sd">        &#39;classoperation Main.MyVar2 &quot;Set Value&quot; --value=&quot;{1.01049414425,2.46211329129,5.73806916203}&quot;&#39;],</span>
+<span class="sd">        [&#39;classoperation Main.MyVar1 &quot;Set Value&quot; --value=&quot;{-0.0166741228961,0.707722119582,-0.294180629253}&quot;&#39;,</span>
+<span class="sd">        &#39;classoperation Main.MyVar2 &quot;Set Value&quot; --value=&quot;{1.11326829265,2.66016732923,4.28054911097}&quot;&#39;],</span>
+<span class="sd">        [&#39;classoperation Main.MyVar1 &quot;Set Value&quot; --value=&quot;{-0.20265197275,0.114947152258,0.924796936287}&quot;&#39;,</span>
+<span class="sd">        &#39;classoperation Main.MyVar2 &quot;Set Value&quot; --value=&quot;{0.806864877696,4.4114188826,2.93941843565}&quot;&#39;]]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span><span class="c1"># noqa</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">pyDOE</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
@@ -782,7 +947,7 @@
         <span class="k">if</span> <span class="n">batch_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">_batch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_macros_LHS</span><span class="p">(</span><span class="n">number_of_macros</span><span class="p">,</span>
                                                  <span class="n">criterion</span><span class="p">,</span>
-                                                 <span class="n">iterations</span><span class="p">),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">batch_size</span><span class="p">)</span>
+                                                 <span class="n">iterations</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">number_of_macros</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">number_of_macros</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_macros</span>
@@ -816,16 +981,17 @@
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mcr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">macro</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">mcr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span>
             <span class="n">macro_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">append_default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">append_default</span><span class="p">:</span>
             <span class="n">macro</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
                 <span class="n">mcr</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="n">get_macro</span><span class="p">(</span><span class="n">number_of_macros</span><span class="p">)</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter_token</span><span class="p">:</span>
-                   <span class="n">mcr</span> <span class="o">=</span> <span class="n">mcr</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">counter_token</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">number_of_macros</span><span class="p">))</span>
+                    <span class="n">mcr</span> <span class="o">=</span> <span class="n">mcr</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">counter_token</span><span class="p">,</span>
+                                      <span class="nb">str</span><span class="p">(</span><span class="n">number_of_macros</span><span class="p">))</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mcr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">macro</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">mcr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span>
             <span class="n">macro_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">macro_list</span></div>
+        <span class="k">return</span> <span class="n">macro_list</span></div></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>

@@ -64,14 +64,17 @@
   <h1>Source code for anypytools.abcutils</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Utilities for working with the AnyBody Console applicaiton</span>
+<span class="sd">Utilities for working with the AnyBody Console applicaiton.</span>
 
 <span class="sd">Created on Fri Oct 19 21:14:59 2012</span>
 <span class="sd">@author: Morten</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span>
                         <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>  <span class="c1"># nopep8</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="p">(</span><span class="n">ascii</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">chr</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="nb">hex</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span>  <span class="c1"># noqa</span>
+                      <span class="nb">int</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="nb">next</span><span class="p">,</span> <span class="nb">oct</span><span class="p">,</span> <span class="nb">open</span><span class="p">,</span> <span class="nb">pow</span><span class="p">,</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">round</span><span class="p">,</span>
+                      <span class="nb">str</span><span class="p">,</span> <span class="nb">super</span><span class="p">,</span> <span class="nb">zip</span><span class="p">)</span>
+
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -83,12 +86,12 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">collections</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">subprocess</span> <span class="k">import</span> <span class="n">Popen</span>
 <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">NamedTemporaryFile</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Thread</span><span class="p">,</span> <span class="n">RLock</span>
 <span class="kn">from</span> <span class="nn">queue</span> <span class="k">import</span> <span class="n">Queue</span>
 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">future.utils</span> <span class="k">import</span> <span class="n">text_to_native_str</span>
 <span class="kn">from</span> <span class="nn">past.builtins</span> <span class="k">import</span> <span class="n">basestring</span> <span class="k">as</span> <span class="n">string_types</span>
 
@@ -98,7 +101,7 @@
 <span class="kn">from</span> <span class="nn">.macroutils</span> <span class="k">import</span> <span class="n">AnyMacro</span><span class="p">,</span> <span class="n">MacroCommand</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span> 
+    <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
     <span class="kn">import</span> <span class="nn">ipywidgets</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">ipywidgets</span> <span class="o">=</span> <span class="n">HTML</span> <span class="o">=</span> <span class="n">display</span> <span class="o">=</span> <span class="kc">None</span>
@@ -111,21 +114,21 @@
 
 
 <span class="k">class</span> <span class="nc">_SubProcessContainer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Class to hold a record of process pids from Popen.</span>
+    <span class="sd">&quot;&quot;&quot;Class to hold a record of process pids from Popen.</span>
 
-<span class="sd">        Properties</span>
-<span class="sd">        ----------</span>
-<span class="sd">        stop_all: boolean</span>
-<span class="sd">            If set to True all process held by the object will be automatically</span>
-<span class="sd">            killed</span>
+<span class="sd">    Properties</span>
+<span class="sd">    ----------</span>
+<span class="sd">    stop_all: boolean</span>
+<span class="sd">        If set to True all process held by the object will be automatically</span>
+<span class="sd">        killed</span>
 
-<span class="sd">        Methods</span>
-<span class="sd">        -------</span>
-<span class="sd">        add(pid):</span>
-<span class="sd">            Add process id to the record of process</span>
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    add(pid):</span>
+<span class="sd">        Add process id to the record of process</span>
 
-<span class="sd">        remove(pid):</span>
-<span class="sd">            Remove process id from the record</span>
+<span class="sd">    remove(pid):</span>
+<span class="sd">        Remove process id from the record</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -160,8 +163,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_stop_all</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_kill_running_processes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Clean up and shut down any running processes</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Clean up and shut down any running processes.&quot;&quot;&quot;</span>
         <span class="c1"># Kill any rouge processes that are still running.</span>
         <span class="k">with</span> <span class="n">_thread_lock</span><span class="p">:</span>
             <span class="n">killed</span> <span class="o">=</span> <span class="p">[]</span>
@@ -191,8 +193,7 @@
                         <span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span>
                         <span class="n">keep_macrofile</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                         <span class="n">env</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Launches the AnyBodyConsole applicaiton with the specified macro</span>
-<span class="sd">        saving the result to logfile &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Launch the AnyBodyConsole applicaiton.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">anybodycon_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">anybodycon_path</span> <span class="o">=</span> <span class="n">get_anybodycon_path</span><span class="p">()</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">anybodycon_path</span><span class="p">):</span>
@@ -228,7 +229,8 @@
                 <span class="n">proc</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
                 <span class="n">proc</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
                 <span class="n">logfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-                <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ERROR: AnyPyTools : Timeout after </span><span class="si">{:d}</span><span class="s1"> sec.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">timeout</span><span class="p">)))</span>
+                <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                    <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ERROR: AnyPyTools : Timeout after </span><span class="si">{:d}</span><span class="s1"> sec.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">timeout</span><span class="p">)))</span>
                 <span class="n">proc</span><span class="o">.</span><span class="n">returncode</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="k">break</span>
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
@@ -247,19 +249,19 @@
 
 
 <span class="k">class</span> <span class="nc">_Task</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class for storing processing jobs</span>
+    <span class="sd">&quot;&quot;&quot;Class for storing processing jobs.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        folder: directory in which the macro is executed</span>
 <span class="sd">        macro: list of macro commands to execute</span>
 <span class="sd">        number: id number of the task</span>
 <span class="sd">        name: name of the task, which is used for printing status informations</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">macro</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">taskname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Init the Task class with the class attributes</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Init the Task class with the class attributes.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">folder</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
@@ -333,7 +335,7 @@
 
 
 <span class="k">class</span> <span class="nc">_Summery</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; class to display the summery of task &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Class to display the summery of task.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">have_ipython</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_silent</span> <span class="o">=</span> <span class="n">silent</span>
@@ -502,17 +504,17 @@
         <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">AnyPyProcess initialized&#39;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AnyPyProcess.save_results"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.save_results">[docs]</a>    <span class="k">def</span> <span class="nf">save_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Save resently processed results</span>
-<span class="sd">        </span>
-<span class="sd">        Save results for later reloading or to continue processing unfished </span>
-<span class="sd">        results at a later time. </span>
+        <span class="sd">&quot;&quot;&quot;Save resently processed results.</span>
+
+<span class="sd">        Save results for later reloading or to continue processing unfished</span>
+<span class="sd">        results at a later time.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        filename : str</span>
 <span class="sd">            filename of the file where processing was stored.</span>
 <span class="sd">        append : bool</span>
-<span class="sd">            If true append data to what ever is already saved. This allows </span>
+<span class="sd">            If true append data to what ever is already saved. This allows</span>
 <span class="sd">            for saving data in batches.</span>
 
 <span class="sd">        Returns</span>
@@ -524,6 +526,7 @@
 <span class="sd">        &gt;&gt;&gt; macro = [&#39;load &quot;model1.any&quot;&#39;, &#39;operation Main.RunApplication&#39;, &#39;run&#39;]</span>
 <span class="sd">        &gt;&gt;&gt; app.start_macro(macro)</span>
 <span class="sd">        &gt;&gt;&gt; app.save_results(&#39;saved_data.db&#39;)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span><span class="p">:</span>
             <span class="n">savekey</span> <span class="o">=</span> <span class="n">text_to_native_str</span><span class="p">(</span><span class="s1">&#39;processed_tasks&#39;</span><span class="p">)</span>
@@ -536,50 +539,66 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Noting to save&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AnyPyProcess.save_to_hdf5"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.save_to_hdf5">[docs]</a>    <span class="k">def</span> <span class="nf">save_to_hdf5</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">batch_name</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyPyProcess.save_to_hdf5"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.save_to_hdf5">[docs]</a>    <span class="k">def</span> <span class="nf">save_to_hdf5</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">batch_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Save cached results to hdf5 file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str</span>
+<span class="sd">            filename where data should be stored</span>
+
+<span class="sd">        batch_name : str</span>
+<span class="sd">            Name of the group in the HDF5 file to</span>
+<span class="sd">            save the data within. If not specified</span>
+<span class="sd">            the group hash value of the macro will</span>
+<span class="sd">            be used.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">            None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">h5py</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span><span class="p">:</span>
-            <span class="n">any_output</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">get_output</span><span class="p">()</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span><span class="p">]</span>
-            <span class="n">any_output</span> <span class="o">=</span> <span class="n">AnyPyProcessOutputList</span><span class="p">(</span><span class="n">any_output</span><span class="p">)</span>
-            <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  <span class="c1"># , compression=&quot;gzip&quot; # Not sure how much gzip effects reading speed.</span>
-                <span class="n">group</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">batch_name</span><span class="p">)</span>
-                <span class="n">task_names</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">any_output</span><span class="p">:</span>
-                    <span class="n">task_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">run</span><span class="p">[</span><span class="s1">&#39;task_name&#39;</span><span class="p">])</span>
-                <span class="c1"># If task names are unique, these will be used as run folder names</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">task_names</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">task_names</span><span class="p">)):</span>
-                    <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">any_output</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">task_names</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">task_names</span><span class="p">)):</span>
-                                <span class="n">task_name</span> <span class="o">=</span> <span class="n">run</span><span class="p">[</span><span class="s1">&#39;task_name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">)</span>
-                                <span class="n">new_folder</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">task_name</span><span class="p">)</span>
-                                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-                                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-                                            <span class="n">new_folder</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-                                        <span class="k">else</span><span class="p">:</span>
-                                            <span class="n">new_folder</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span>
-                                    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-                                        <span class="n">new_folder</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>
-                <span class="c1"># If task names are not unique, task id&#39;s will be used as run folder names</span>
-                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">task_names</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">task_names</span><span class="p">)):</span>
-                    <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">any_output</span><span class="p">:</span>
-                        <span class="n">task_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">run</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">])</span>
-                        <span class="n">new_folder</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
-                        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-                                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-                                        <span class="n">new_folder</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-                                    <span class="k">else</span><span class="p">:</span>
-                                        <span class="n">new_folder</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span>
-                            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-                                    <span class="n">new_folder</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">v</span><span class="p">)</span></div>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;No data available for saving&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">batch_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">batch_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cached_arg_hash</span><span class="p">)</span>
+
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">text_to_native_str</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">batch_name</span> <span class="o">=</span> <span class="n">text_to_native_str</span><span class="p">(</span><span class="n">batch_name</span><span class="p">)</span>
+
+        <span class="n">any_output</span> <span class="o">=</span> <span class="n">AnyPyProcessOutputList</span><span class="p">([</span>
+            <span class="n">task</span><span class="o">.</span><span class="n">get_output</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span>
+        <span class="p">])</span>
+        <span class="n">task_names</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">elem</span><span class="p">[</span><span class="s1">&#39;task_name&#39;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">any_output</span>
+        <span class="p">]</span>
+        <span class="n">unique_names</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">task_names</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">task_names</span><span class="p">))</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5file</span><span class="p">:</span>
+            <span class="n">h5_batch_group</span> <span class="o">=</span> <span class="n">h5file</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">batch_name</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">any_output</span><span class="p">:</span>
+                <span class="n">task_name</span> <span class="o">=</span> <span class="n">run</span><span class="p">[</span><span class="s1">&#39;task_name&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">unique_names</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span>
+                    <span class="n">run</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">])</span>
+                <span class="n">task_name</span> <span class="o">=</span> <span class="n">task_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">)</span>
+                <span class="n">h5_task_group</span> <span class="o">=</span> <span class="n">h5_batch_group</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">task_name</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                            <span class="n">h5_task_group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">text_to_native_str</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="n">text_to_native_str</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">h5_task_group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">text_to_native_str</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span>
+                    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                        <span class="n">h5_task_group</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">text_to_native_str</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">v</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AnyPyProcess.load_results"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.load_results">[docs]</a>    <span class="k">def</span> <span class="nf">load_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Load previously saved results</span>
-<span class="sd">        </span>
-<span class="sd">        Besides reloading results the function can be used to continue</span>
-<span class="sd">        a partial finished processing process. </span>
+        <span class="sd">&quot;&quot;&quot;Load previously saved results.</span>
 
+<span class="sd">        Besides reloading results the function can be used to continue</span>
+<span class="sd">        a partial finished processing process.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -594,7 +613,6 @@
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-
 <span class="sd">        Results are easily reloaded:</span>
 
 <span class="sd">        &gt;&gt;&gt; app = AnyPyProcess()</span>
@@ -604,6 +622,7 @@
 
 <span class="sd">        &gt;&gt;&gt; app.load_results(&#39;unfinished_results.db&#39;)</span>
 <span class="sd">        &gt;&gt;&gt; results = app.start_macro() # rerun unfinished</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">loadkey</span> <span class="o">=</span> <span class="n">text_to_native_str</span><span class="p">(</span><span class="s1">&#39;processed_tasks&#39;</span><span class="p">)</span>
         <span class="n">db</span> <span class="o">=</span> <span class="n">shelve</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">text_to_native_str</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
@@ -619,7 +638,7 @@
 
 <div class="viewcode-block" id="AnyPyProcess.start_macro"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.start_macro">[docs]</a>    <span class="k">def</span> <span class="nf">start_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">macrolist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">folderlist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">search_subdirs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Starts a batch processing job.</span>
+        <span class="sd">&quot;&quot;&quot;Start a batch processing job.</span>
 
 <span class="sd">        Runs a list of AnyBody Macro commands in</span>
 <span class="sd">        the current directory, or in the folders specified by `folderlist`. If</span>
@@ -727,22 +746,8 @@
                        <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasklist</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">AnyPyProcessOutputList</span><span class="p">(</span><span class="n">task_output</span><span class="p">)</span></div>
 
-    <span class="c1">#    def _print_summery(self, tasks, duration):</span>
-    <span class="c1">#        unfinished_tasks = [t for t in tasks if t.processtime &lt;= 0]</span>
-    <span class="c1">#        failed_tasks = [t for t in tasks if t.has_error and t.processtime &gt; 0]</span>
-    <span class="c1">#        if len(failed_tasks):</span>
-    <span class="c1">#            _display(&#39;Tasks with errors: {:d}&#39;.format(len(failed_tasks)))</span>
-    <span class="c1">#            if not run_from_ipython():</span>
-    <span class="c1">#                _display(&#39;\n&#39;.join([t.summery() for t in failed_tasks]))</span>
-    <span class="c1">#        if len(unfinished_tasks):</span>
-    <span class="c1">#            _display(&#39;Tasks that did not complete: &#39;</span>
-    <span class="c1">#                     &#39;{:d}&#39;.format(len(unfinished_tasks)))</span>
-    <span class="c1">#        if duration:</span>
-    <span class="c1">#            _display(&#39;Total time: {:.1f} seconds&#39;.format(duration))</span>
-
     <span class="k">def</span> <span class="nf">_worker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">task_queue</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Handles processing of the tasks.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Handle processing of the tasks.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="n">_thread_lock</span><span class="p">:</span>
             <span class="n">task</span><span class="o">.</span><span class="n">process_number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -786,7 +791,8 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_obj</span><span class="p">,</span> <span class="n">exc_tb</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span>
             <span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">exc_tb</span><span class="o">.</span><span class="n">tb_frame</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_filename</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">task</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">exc_type</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc_tb</span><span class="o">.</span><span class="n">tb_lineno</span><span class="p">))</span>
+            <span class="n">task</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">exc_type</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="o">+</span>
+                           <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc_tb</span><span class="o">.</span><span class="n">tb_lineno</span><span class="p">))</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep_logfiles</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">task</span><span class="o">.</span><span class="n">has_error</span><span class="p">:</span>
@@ -909,11 +915,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">bar_widget</span><span class="o">.</span><span class="n">bar_style</span> <span class="o">=</span> <span class="s1">&#39;danger&#39;</span>
         <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterations</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bar_widget</span><span class="o">.</span><span class="n">bar_style</span> <span class="o">=</span> <span class="s1">&#39;success&#39;</span>
-            
-            
+
     <span class="k">def</span> <span class="nf">_ascii_animate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">failed</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__update_amount</span><span class="p">((</span><span class="n">val</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iterations</span><span class="p">))</span> <span class="o">*</span> <span class="mf">100.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">+=</span> <span class="s1">&#39;  </span><span class="si">%d</span><span class="s1"> of </span><span class="si">%s</span><span class="s1"> complete&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">iterations</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">+=</span> <span class="s1">&#39;  </span><span class="si">%d</span><span class="s1"> of </span><span class="si">%s</span><span class="s1"> complete&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterations</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">failed</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">+=</span> <span class="s1">&#39; (</span><span class="si">{0}</span><span class="s1"> Error)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">failed</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">failed</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -926,18 +931,15 @@
         <span class="n">percent_done</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">new_amount</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">100.0</span><span class="p">))</span>
         <span class="n">all_full</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">2</span>
         <span class="n">num_hashes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">percent_done</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">all_full</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;[&#39;</span> <span class="o">+</span>
-                         <span class="bp">self</span><span class="o">.</span><span class="n">fill_char</span> <span class="o">*</span> <span class="n">num_hashes</span> <span class="o">+</span>
-                         <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">all_full</span> <span class="o">-</span> <span class="n">num_hashes</span><span class="p">)</span> <span class="o">+</span>
-                         <span class="s1">&#39;]&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">=</span> <span class="s1">&#39;[</span><span class="si">{}{}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_char</span> <span class="o">*</span> <span class="n">num_hashes</span><span class="p">,</span>
+            <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">all_full</span> <span class="o">-</span> <span class="n">num_hashes</span><span class="p">)</span>
+        <span class="p">)</span>
         <span class="n">pct_place</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">percent_done</span><span class="p">))</span>
         <span class="n">pct_string</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%d%%</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">percent_done</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">pct_place</span><span class="p">]</span> <span class="o">+</span> \
-                        <span class="p">(</span><span class="n">pct_string</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span><span class="p">[</span><span class="n">pct_place</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">pct_string</span><span class="p">):])</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">pass</span>
+            <span class="p">(</span><span class="n">pct_string</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span><span class="p">[</span><span class="n">pct_place</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">pct_string</span><span class="p">):])</span>
 </pre></div>
 
           </div>
