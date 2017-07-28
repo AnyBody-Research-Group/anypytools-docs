@@ -514,6 +514,38 @@ If None, the command is included in all macros.</li>
 
 </dd></dl>
 
+<dl class="class">
+<dt id="anypytools.macro_commands.SaveData">
+<em class="property">class </em><code class="descclassname">anypytools.macro_commands.</code><code class="descname">SaveData</code><span class="sig-paren">(</span><em>operation</em>, <em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.macro_commands.SaveData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Save Data classoperation macro command.</p>
+<p>This macro operation will save all data from a study to a
+HDF5 file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>operation</strong> (<em>str</em>) – Operation to save the h5 from</li>
+<li><strong>filename</strong> (<em>str</em>) – The anyset file to save the values to</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SaveData</span><span class="p">(</span><span class="s1">&#39;Main.Study&#39;</span><span class="p">,</span> <span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span>
+<span class="go">classoperation Main.Study.Output &quot;Save data&quot; --type=&quot;Deep&quot; --file=&quot;output.anydata.h5&quot;</span>
+</pre></div>
+</div>
+</div>
+<dl class="method">
+<dt id="anypytools.macro_commands.SaveData.get_macro">
+<code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveData.get_macro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.macro_commands.SaveData.get_macro" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 
 

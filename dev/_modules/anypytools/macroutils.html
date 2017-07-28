@@ -507,6 +507,34 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span></div></div>
 
 
+<div class="viewcode-block" id="SaveData"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.SaveData">[docs]</a><span class="k">class</span> <span class="nc">SaveData</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Create a Save Data classoperation macro command.</span>
+
+<span class="sd">    This macro operation will save all data from a study to a </span>
+<span class="sd">    HDF5 file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    operation : str</span>
+<span class="sd">        Operation to save the h5 from</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        The anyset file to save the values to</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; SaveData(&#39;Main.Study&#39;, &#39;output.anydata.h5&#39;)</span>
+<span class="sd">    classoperation Main.Study.Output &quot;Save data&quot; --type=&quot;Deep&quot; --file=&quot;output.anydata.h5&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opeation</span> <span class="o">=</span> <span class="n">operation</span>
+
+<div class="viewcode-block" id="SaveData.get_macro"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.SaveData.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+        <span class="n">macro_str</span> <span class="o">=</span> <span class="s1">&#39;classoperation </span><span class="si">{}</span><span class="s1">.Output &quot;Save data&quot; --type=&quot;Deep&quot; --file=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span>
+        <span class="k">return</span> <span class="n">macro_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opeation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span></div></div>
+
+
+
 <div class="viewcode-block" id="LoadValues"><a class="viewcode-back" href="../../api/macro_commands.html#anypytools.LoadValues">[docs]</a><span class="k">class</span> <span class="nc">LoadValues</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Create a Load Values classoperation macro command.</span>
 
