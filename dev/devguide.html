@@ -7,14 +7,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Developer’s Guide &#8212; AnyPyTools 0.9.7 documentation</title>
+    <title>Developer’s Guide &#8212; AnyPyTools 0.10.0 documentation</title>
     <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.9.7',
+        VERSION:     '0.10.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -56,7 +56,7 @@
         <li class="right" >
           <a href="pytest_plugin.html" title="PyTest plugin."
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 0.10.0 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -121,7 +121,7 @@ ensure consistency throughout the code base.</p>
 <div class="section" id="running-the-tests">
 <h3>Running the Tests<a class="headerlink" href="#running-the-tests" title="Permalink to this headline">¶</a></h3>
 <p>Run all the tests using pytest:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pytest
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pytest --flake8
 </pre></div>
 </div>
 <p>If you want to run specific tests you can specify the test names to
@@ -200,6 +200,9 @@ tree).</p>
 <li><a class="reference external" href="http://sphinx-doc.org/">Sphinx</a></li>
 <li><a class="reference external" href="https://pythonhosted.org/cloud_sptheme/cloud_theme.html">Cloud Sphinx Theme</a></li>
 <li><a class="reference external" href="https://recommonmark.readthedocs.io/en/latest/">recommonmark</a></li>
+<li><a class="reference external" href="https://pandoc.org/">pandoc</a></li>
+<li><a class="reference external" href="http://ipython.readthedocs.io/en/stable/install/kernel_install.html">ipykernel</a></li>
+<li><a class="reference external" href="https://nbsphinx.readthedocs.io">nbsphinx</a></li>
 </ol>
 <div class="section" id="procedure-for-modifying-the-website">
 <h3>Procedure for modifying the website<a class="headerlink" href="#procedure-for-modifying-the-website" title="Permalink to this headline">¶</a></h3>
@@ -243,7 +246,24 @@ $ rm -fr build
 <div class="section" id="performing-the-release">
 <h3>Performing the Release<a class="headerlink" href="#performing-the-release" title="Permalink to this headline">¶</a></h3>
 <blockquote>
-<div>TODO</div></blockquote>
+<div><ul class="simple">
+<li>[ ] Update and push the release log</li>
+<li>[ ] Update version number in <code class="docutils literal"><span class="pre">anypytools.__init__.py</span></code></li>
+<li>[ ] Ensure test pass on python2 and python 3</li>
+<li>[ ] Make PR on GitHub, and check docs compile correctly on travis</li>
+<li>[ ] Create a tag with the version number and push it.</li>
+<li><dl class="first docutils">
+<dt>[ ] Crate PYPI pckage</dt>
+<dd><ul class="first last">
+<li>[ ] Run <code class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">sdist</span></code></li>
+<li>[ ] Run <code class="docutils literal"><span class="pre">twine</span> <span class="pre">upload</span> <span class="pre">dist/*</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>[ ] Update the conda forge package on <a class="reference external" href="https://github.com/conda-forge/anypytools-feedstock">https://github.com/conda-forge/anypytools-feedstock</a></li>
+</ul>
+</div></blockquote>
 </div>
 </div>
 <div class="section" id="document-history">
@@ -361,7 +381,7 @@ $ rm -fr build
         <li class="right" >
           <a href="pytest_plugin.html" title="PyTest plugin."
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 0.9.7 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 0.10.0 documentation</a> &#187;</li>
  
       </ul>
     </div>
