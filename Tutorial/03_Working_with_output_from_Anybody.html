@@ -1,0 +1,577 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Working with data from AnyBody &#8212; AnyPyTools 0.10.0 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.10.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    <script type="text/javascript" src="../_static/cloud.js"></script>
+    <link rel="shortcut icon" href="../_static/anypytools.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Batch processing" href="04_Batch_processing_multiple_models.html" />
+    <link rel="prev" title="Creating AnyScript Macros" href="02_Generating_macros.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             accesskey="C">toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="04_Batch_processing_multiple_models.html" title="Batch processing"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="02_Generating_macros.html" title="Creating AnyScript Macros"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.10.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+
+/* CSS overrides for cloud theme */
+
+/* nicer titles and more space for info and warning logos */
+
+div.admonition > .first {
+    background: rgba(0, 0, 0, .05);
+    margin: .5em -1em;
+    margin-top: -.5em !important;
+    padding: .5em .5em .5em 2.65em;
+}
+
+/* indent single paragraph */
+div.admonition {
+    text-indent: 20px;
+}
+/* don't indent multiple paragraphs */
+div.admonition > p {
+    text-indent: 0;
+}
+/* remove excessive padding */
+div.admonition.inline-title p.admonition-title {
+    padding-left: .2em;
+}
+</style>
+<div class="section" id="Working-with-data-from-AnyBody">
+<h1>Working with data from AnyBody<a class="headerlink" href="#Working-with-data-from-AnyBody" title="Permalink to this headline">¶</a></h1>
+<p>There are several ways to output data from AnyBody. The previous
+tutorials used the ‘Dump’ class operation to export specific variables.
+Another option is to have AnyBody write specific variables to a file by
+adding the ‘AnyOutputFile’ class to the AnyBody model.</p>
+<div class="section" id="Working-with-AnyOutputFiles">
+<h2>Working with AnyOutputFiles<a class="headerlink" href="#Working-with-AnyOutputFiles" title="Permalink to this headline">¶</a></h2>
+<p>To come…</p>
+</div>
+<div class="section" id="Working-with-HDF5-files">
+<h2>Working with HDF5 files<a class="headerlink" href="#Working-with-HDF5-files" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, it can be convenient to save the entire model along with all
+its data (although this can be several hundred megabytes). It is useful
+if we later want to analyze other output variables from the model. It
+can also be useful if we want to load the data in the AnyBody graphical
+user application and replay the result.</p>
+<p>AnyBody has a feature to save the output of a study to an HDF5 file. And
+like most things in AnyBody, this can also be done with a macro command.</p>
+<p>Let us try this with the model from the previous tutorials.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">anypytools.macro_commands</span> <span class="kn">import</span> <span class="n">Load</span><span class="p">,</span> <span class="n">OperationRun</span><span class="p">,</span> <span class="n">SaveData</span>
+
+<span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span><span class="p">),</span>
+  <span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Kinematics&#39;</span><span class="p">),</span>
+  <span class="n">SaveData</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy&#39;</span><span class="p">,</span> <span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+<span class="n">macrolist</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[9]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>[load &quot;Knee.any&quot;, operation Main.MyStudy.Kinematics
+ run, classoperation Main.MyStudy.Output &quot;Save data&quot; --type=&quot;Deep&quot; --file=&quot;output.anydata.h5&quot;]
+</pre></div>
+</div>
+</div>
+<p>Here we have added a “<code class="docutils literal"><span class="pre">Save</span> <span class="pre">data</span></code>” classoperation to the macro.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macrolist</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5956d7e9baec4a63b9cba7ef65755264"}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "041a7c4a2fd746f2850570e41e54a036"}</script></div>
+</div>
+<p>The data stored in the file <strong>output.anydata.h5</strong> can be re-loaded in
+the AnyBody GUI application. To do this; load the model, and then right
+click the <code class="docutils literal"><span class="pre">Main.MyStudy.Output</span></code> folder and select “Load data”.</p>
+<p>Moreover, since we set <strong>``type=”Deep”``</strong> in the macro we can also load
+the data into external programs, e.g. Matlab or Python. In python this
+is done using the <em>``h5py``</em> module</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">h5py</span>
+
+<span class="n">h5file</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="n">h5file</span><span class="p">[</span><span class="s1">&#39;/Output/MomentArm&#39;</span><span class="p">]</span> <span class="p">)</span>
+<span class="n">h5file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[ 0.03517107  0.03518544  0.03522538  0.03529129  0.03538355  0.03550231
+  0.03564761  0.03581929  0.03601707  0.03624048  0.03648895  0.03676178
+  0.03705816  0.03737724  0.03771812  0.03807991  0.03846173  0.03886281
+  0.03928244  0.03972002  0.0401751   0.04064731  0.04113638  0.04164206
+  0.04216406  0.04270195  0.04325503  0.04382223  0.04440197  0.04499208
+  0.04558969  0.04619126  0.04679259  0.04738895  0.04797527  0.04854637
+  0.0490972   0.04962319  0.05012044  0.0505859   0.051017    0.0514114
+  0.05176698  0.0520819   0.05235456  0.05258365  0.05276812  0.05290715
+  0.05300015  0.05304675  0.05304675  0.05300015  0.05290715  0.05276812
+  0.05258365  0.05235456  0.0520819   0.05176698  0.0514114   0.051017
+  0.0505859   0.05012044  0.04962319  0.0490972   0.04854637  0.04797527
+  0.04738895  0.04679259  0.04619126  0.04558969  0.04499208  0.04440197
+  0.04382223  0.04325503  0.04270195  0.04216406  0.04164206  0.04113638
+  0.04064731  0.0401751   0.03972002  0.03928244  0.03886281  0.03846173
+  0.03807991  0.03771812  0.03737724  0.03705816  0.03676178  0.03648895
+  0.03624048  0.03601707  0.03581929  0.03564761  0.03550231  0.03538355
+  0.03529129  0.03522538  0.03518546  0.03517104]
+</pre></div></div>
+</div>
+<p>The data structure of the HDF5 files can, unfortunately, be very
+confusing. AnyBody does not save duplicate copies of the same data. If
+there are multiple references to the same folder, only one will be
+present in the HDF5 file. In our model <code class="docutils literal"><span class="pre">Knee.any</span></code> we have a reference
+to the <strong>``Knee``</strong> joint folder just before the <strong>``Model``</strong> folder in
+the study section. Thus, all variables inside the <strong>``Knee``</strong> folder
+cannot be accessed with the path ‘/Output/Model/Knee/…’, but only
+through the path of the reference ‘/Output/kneeref/…’.</p>
+<p>We can see the problem in the following code snippet:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;/Output/Model/Knee/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;/Output/kneeref/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+False
+True
+</pre></div></div>
+</div>
+<p>This makes it difficult to find the correct path in large models with
+many references. AnyPyTools contains a wrapper for the h5py module,
+which automatically locates the right data, no matter what path is used.
+Using this module, we can easily locate the data.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">anypytools.h5py_wrapper</span> <span class="kn">as</span> <span class="nn">h5py2</span>
+<span class="k">with</span> <span class="n">h5py2</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;/Output/Model/Knee/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;/Output/kneeref/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+True
+True
+</pre></div></div>
+</div>
+<p>The h5py wrapper will also let us use the AnyScript variable names
+directly, so we don’t have to replace every . (dot) with a / (slash),
+and remove the stuff before the Output folder.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">h5py2</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">momentarm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;/Output/MomentArm&#39;</span><span class="p">])</span> <span class="c1"># Standard h5py notation</span>
+    <span class="n">momentarm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Output.MomentArm&#39;</span><span class="p">])</span>  <span class="c1"># dot notation</span>
+    <span class="n">kneeangle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Main.MyStudy.Output.Model.Knee.Pos&#39;</span><span class="p">])</span> <span class="c1"># dot notation with full path</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">degrees</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">FuncFormatter</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">degrees</span><span class="p">(</span><span class="n">kneeangle</span><span class="p">),</span> <span class="mi">100</span><span class="o">*</span><span class="n">momentarm</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Knee flexion (deg)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Moment arm (cm)&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/Tutorial_03_Working_with_output_from_Anybody_17_0.png" src="../_images/Tutorial_03_Working_with_output_from_Anybody_17_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html" title="index">
+          <img class="logo" src="../_static/anypytools_logo.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Working with data from AnyBody</a><ul>
+<li><a class="reference internal" href="#Working-with-AnyOutputFiles">Working with AnyOutputFiles</a></li>
+<li><a class="reference internal" href="#Working-with-HDF5-files">Working with HDF5 files</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="02_Generating_macros.html"
+                          title="Previous page">&larr; Creating AnyScript Macros</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="04_Batch_processing_multiple_models.html"
+                          title="Next page">&rarr; Batch processing</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Tutorial/03_Working_with_output_from_Anybody.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             >toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="04_Batch_processing_multiple_models.html" title="Batch processing"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="02_Generating_macros.html" title="Creating AnyScript Macros"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.10.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Morten Enemark Lund.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

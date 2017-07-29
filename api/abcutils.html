@@ -1,0 +1,389 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>anypytools.abcutils &#8212; AnyPyTools 0.10.0 documentation</title>
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.10.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    <script type="text/javascript" src="../_static/cloud.js"></script>
+    <link rel="shortcut icon" href="../_static/anypytools.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="anypytools.datautils" href="datautils.html" />
+    <link rel="prev" title="anypytools.datautils.anydatah5_generator" href="anydatah5_generator.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             accesskey="C">toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="datautils.html" title="anypytools.datautils"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="anydatah5_generator.html" title="anypytools.datautils.anydatah5_generator"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.10.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS overrides for cloud theme */
+
+/* nicer titles and more space for info and warning logos */
+
+div.admonition > .first {
+    background: rgba(0, 0, 0, .05);
+    margin: .5em -1em;
+    margin-top: -.5em !important;
+    padding: .5em .5em .5em 2.65em;
+}
+
+/* indent single paragraph */
+div.admonition {
+    text-indent: 20px;
+}
+/* don't indent multiple paragraphs */
+div.admonition > p {
+    text-indent: 0;
+}
+/* remove excessive padding */
+div.admonition.inline-title p.admonition-title {
+    padding-left: .2em;
+}
+</style>
+<div class="section" id="anypytools-abcutils">
+<h1>anypytools.abcutils<a class="headerlink" href="#anypytools-abcutils" title="Permalink to this headline">¶</a></h1>
+<p>Created on Fri Oct 19 21:14:59 2012
+&#64;author: Morten</p>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">anypytools.abcutils.</code><code class="descname">AnyPyProcess</code><span class="sig-paren">(</span><em>num_processes=32</em>, <em>anybodycon_path=None</em>, <em>timeout=3600</em>, <em>silent=False</em>, <em>ignore_errors=None</em>, <em>warnings_to_include=None</em>, <em>return_task_info=False</em>, <em>keep_logfiles=False</em>, <em>logfile_prefix=None</em>, <em>python_env=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Class for configuring batch process jobs of AnyBody models.</p>
+<p>This is the main interface to control the AnyBody console application from
+python. The class stores all the configuration about how AnyBody is run.
+It has one important method <cite>start_macro</cite> which launches the AnyBody with
+a given anyscript macro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>num_processes</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of anybody models to start in parallel.
+This defaults to the number of logical CPU cores in the computer.</li>
+<li><strong>anybodycon_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Overwrite the default anybodycon.exe file to
+use in batch processing. Defaults to what is found in the windows
+registry.</li>
+<li><strong>timeout</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum time (i seconds) a model can run until it is terminated.
+Defaults to 1 hour (3600 sec)-</li>
+<li><strong>ignore_errors</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of AnyBody Errors substrings to ignore when running the models.</li>
+<li><strong>return_task_info</strong> (<em>bool</em><em>, </em><em>optional</em>) – Return the task status information when running macros. Defaults to False</li>
+<li><strong>disp</strong> – Set to False to suppress output (deprecated)</li>
+<li><strong>silent</strong> (<em>bool</em><em>, </em><em>optional</em>) – Set to True to suppres any output (progress bar and error messages).</li>
+<li><strong>warnings_to_include</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of strings that are matched to warnings in the model
+output. If a warning with that string is found the warning
+is returned in the output.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">An instance of the AnyPyProcess object for running batch processing,
+parameter studies and pertubation jobs.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="AnyPyProcess.html#anypytools.AnyPyProcess" title="anypytools.AnyPyProcess">AnyPyProcess</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-example admonition">
+<p class="first admonition-title">Example</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">num_processes</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">return_task_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load &quot;MyModel.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.MyStudy.Kinematics&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<dl class="method">
+<dt>
+<code class="descname">cleanup_logfiles</code><span class="sig-paren">(</span><em>tasklist</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.cleanup_logfiles"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">load_results</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.load_results"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Load previously saved results.</p>
+<p>Besides reloading results the function can be used to continue
+a partial finished processing process.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – filename of the file where processing was stored.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A list with the output from each macro executed. This maybe empty
+the macros did not output any data.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<p>Results are easily reloaded:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">load_results</span><span class="p">(</span><span class="s1">&#39;saved_results.db&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Continue processing unfinished batches:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">load_results</span><span class="p">(</span><span class="s1">&#39;unfinished_results.db&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">()</span> <span class="c1"># rerun unfinished</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">save_results</code><span class="sig-paren">(</span><em>filename</em>, <em>append=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.save_results"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Save resently processed results.</p>
+<p>Save results for later reloading or to continue processing unfished
+results at a later time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<em>str</em>) – filename of the file where processing was stored.</li>
+<li><strong>append</strong> (<em>bool</em>) – If true append data to what ever is already saved. This allows
+for saving data in batches.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load &quot;model1.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.RunApplication&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">save_results</span><span class="p">(</span><span class="s1">&#39;saved_data.db&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">save_to_hdf5</code><span class="sig-paren">(</span><em>filename</em>, <em>batch_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.save_to_hdf5"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Save cached results to hdf5 file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<em>str</em>) – filename where data should be stored</li>
+<li><strong>batch_name</strong> (<em>str</em>) – Name of the group in the HDF5 file to
+save the data within. If not specified
+the group hash value of the macro will
+be used.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">start_macro</code><span class="sig-paren">(</span><em>macrolist=None</em>, <em>folderlist=None</em>, <em>search_subdirs=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.start_macro"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Start a batch processing job.</p>
+<p>Runs a list of AnyBody Macro commands in
+the current directory, or in the folders specified by <cite>folderlist</cite>. If
+<cite>search_subdirs</cite> is a regular expression the folderlist will be expanded
+to include all subdirectories that match the regular expression</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>macrolist</strong> (<em>list of macrocommands</em><em>, </em><em>optional</em>) – List of anyscript macro commands. This may also be obmitted in
+which case the previous macros will be re-run.</li>
+<li><strong>folderlist</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of folders in which to excute the macro commands. If <cite>None</cite> the
+current working directory is used. This may also be a list of
+tuples to specify a name to appear in the output</li>
+<li><strong>search_subdirs</strong> (<em>str</em><em>, </em><em>optional</em>) – Regular expression used to extend the folderlist with all the
+subdirectories that match the regular expression.
+Defaults to None: No subdirectories are included.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list with the output from each macro executed. This maybe empty
+the macros did not output any data.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;load &quot;model1.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.RunApplication&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
+<span class="go">             [&#39;load &quot;model2.any&quot;&#39;, &#39;operation Main.RunApplication&#39;, &#39;run&#39;],</span>
+<span class="go">             [&#39;load &quot;model3.any&quot;&#39;, &#39;operation Main.RunApplication&#39;, &#39;run&#39;]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">folderlist</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;path1/&#39;</span><span class="p">,</span> <span class="s1">&#39;name1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;path2/&#39;</span><span class="p">,</span> <span class="s1">&#39;name2&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">,</span> <span class="n">folderlist</span><span class="p">,</span> <span class="n">search_subdirs</span> <span class="o">=</span> <span class="s2">&quot;*.main.any&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../index.html" title="index">
+          <img class="logo" src="../_static/anypytools_logo.png" alt="Logo"/>
+        </a></p>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="anydatah5_generator.html"
+                          title="Previous page">&larr; anypytools.datautils.anydatah5_generator</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="datautils.html"
+                          title="Next page">&rarr; anypytools.datautils</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/abcutils.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../index.html" title="Table Of Contents"
+             >toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="datautils.html" title="anypytools.datautils"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="anydatah5_generator.html" title="anypytools.datautils.anydatah5_generator"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">AnyPyTools 0.10.0 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Morten Enemark Lund.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

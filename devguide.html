@@ -1,0 +1,396 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Developer’s Guide &#8212; AnyPyTools 0.10.0 documentation</title>
+    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.10.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="_static/cloud.base.js"></script>
+    <script type="text/javascript" src="_static/cloud.js"></script>
+    <link rel="shortcut icon" href="_static/anypytools.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="AnyPyTools Change Log" href="changelog.html" />
+    <link rel="prev" title="PyTest plugin." href="pytest_plugin.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="index.html" title="Table Of Contents"
+             accesskey="C">toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="changelog.html" title="AnyPyTools Change Log"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="pytest_plugin.html" title="PyTest plugin."
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">AnyPyTools 0.10.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS overrides for cloud theme */
+
+/* nicer titles and more space for info and warning logos */
+
+div.admonition > .first {
+    background: rgba(0, 0, 0, .05);
+    margin: .5em -1em;
+    margin-top: -.5em !important;
+    padding: .5em .5em .5em 2.65em;
+}
+
+/* indent single paragraph */
+div.admonition {
+    text-indent: 20px;
+}
+/* don't indent multiple paragraphs */
+div.admonition > p {
+    text-indent: 0;
+}
+/* remove excessive padding */
+div.admonition.inline-title p.admonition-title {
+    padding-left: .2em;
+}
+</style>
+<div class="section" id="developer-s-guide">
+<h1>Developer’s Guide<a class="headerlink" href="#developer-s-guide" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="_images/relax.png"><img alt="Don't panic" class="align-center" src="_images/relax.png" style="width: 80%;" /></a>
+<p>This is place for developer information that does not belong in the user
+guides or the API reference, but is usefull for people developing or contributing
+to AnyPyTools.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All code changes must go through the pull request review procedure.</p>
+</div>
+<div class="section" id="style-guide">
+<h2>Style Guide<a class="headerlink" href="#style-guide" title="Permalink to this headline">¶</a></h2>
+<p>AnyPyTools use PEP8 (with some relaxations to the line length) to
+ensure consistency throughout the code base.</p>
+</div>
+<div class="section" id="how-to-test">
+<h2>How to Test<a class="headerlink" href="#how-to-test" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<p>Prep your environment for running the tests:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install -r requirements-tests.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-the-tests">
+<h3>Running the Tests<a class="headerlink" href="#running-the-tests" title="Permalink to this headline">¶</a></h3>
+<p>Run all the tests using pytest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pytest --flake8
+</pre></div>
+</div>
+<p>If you want to run specific tests you can specify the test names to
+execute. For example to run test_aliases:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pytest abcutils.py
+</pre></div>
+</div>
+<p>Note that you can pass multiple test names in the above examples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pytest abcutils.py datautils.py
+</pre></div>
+</div>
+<p>Happy Testing!</p>
+</div>
+</div>
+<div class="section" id="how-to-document">
+<h2>How to Document<a class="headerlink" href="#how-to-document" title="Permalink to this headline">¶</a></h2>
+<p>Documentation takes many forms. This will guide you through the steps of
+successful documentation.</p>
+<div class="section" id="docstrings">
+<h3>Docstrings<a class="headerlink" href="#docstrings" title="Permalink to this headline">¶</a></h3>
+<p>No matter what language you are writing in, you should always have
+documentation strings along with you code. This is so important that it is
+part of the style guide.  When writing in Python, your docstrings should be
+in reStructured Text using the <a class="reference external" href="https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt">numpydoc</a> format.</p>
+</div>
+<div class="section" id="auto-documentation-hooks">
+<h3>Auto-Documentation Hooks<a class="headerlink" href="#auto-documentation-hooks" title="Permalink to this headline">¶</a></h3>
+<p>The docstrings that you have written will automatically be connected to the
+website, once the appropriate hooks have been setup.  At this stage, all
+documentation lives within AnyPyTools’s top-level <code class="docutils literal"><span class="pre">docs</span></code> directory.
+We uses the sphinx tool to manage and generate the documentation, which
+you can learn about from <a class="reference external" href="http://sphinx-doc.org/">the sphinx website</a>.
+If you want to generate the documentation, first AnyPyTools itself must be installed
+and then you may run the following command from the <code class="docutils literal"><span class="pre">docs</span></code> dir:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">~/AnyPyTools/docs $ make html</span>
+</pre></div>
+</div>
+<p>All user-facing API should be added to the sphinx documentation. This should be done the
+first time that the module, class or function appears in a pull request.  From here, call the
+new module <code class="docutils literal"><span class="pre">mymod</span></code>.  The following explains how to add hooks.</p>
+</div>
+<div class="section" id="python-hooks">
+<h3>Python Hooks<a class="headerlink" href="#python-hooks" title="Permalink to this headline">¶</a></h3>
+<p>Python documentation lives in the <code class="docutils literal"><span class="pre">docs/api</span></code> directory.
+First, create a file in this directory that represents the new module called
+<code class="docutils literal"><span class="pre">mymod.rst</span></code>.
+The <code class="docutils literal"><span class="pre">docs/api</span></code> directory matches the structure of the <code class="docutils literal"><span class="pre">AnyPyTools/</span></code> directory.
+So if your module is in a sub-package, you’ll need to go into the sub-package’s
+directory before creating <code class="docutils literal"><span class="pre">mymod.rst</span></code>.
+The contents of this file should be as follows:</p>
+<p><strong>mymod.rst:</strong></p>
+<div class="highlight-rst"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="nt">_AnyPyTools_mymod:</span>
+
+<span class="gh">=======================================</span>
+<span class="gh">My Awesome Module -- :mod:`AnyPyTools.mymod`</span>
+<span class="gh">=======================================</span>
+
+<span class="p">..</span> <span class="ow">currentmodule</span><span class="p">::</span> AnyPyTools.mymod
+
+<span class="p">..</span> <span class="ow">automodule</span><span class="p">::</span> AnyPyTools.mymod
+    <span class="nc">:members:</span>
+</pre></div>
+</div>
+<p>This will discover all of the docstrings in <code class="docutils literal"><span class="pre">mymod</span></code> and create the
+appropriate webpage. Now, you need to hook this page up to the rest of the
+website.</p>
+<p>Go into the <code class="docutils literal"><span class="pre">index.rst</span></code> file in <code class="docutils literal"><span class="pre">AnyPyTools/docs/api</span></code> and add
+<code class="docutils literal"><span class="pre">mymod</span></code> to the appropriate <code class="docutils literal"><span class="pre">toctree</span></code> (which stands for table-of-contents
+tree).</p>
+</div>
+</div>
+<div class="section" id="building-the-website">
+<h2>Building the Website<a class="headerlink" href="#building-the-website" title="Permalink to this headline">¶</a></h2>
+<p>Building the website/documentation requires the following dependencies:</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://sphinx-doc.org/">Sphinx</a></li>
+<li><a class="reference external" href="https://pythonhosted.org/cloud_sptheme/cloud_theme.html">Cloud Sphinx Theme</a></li>
+<li><a class="reference external" href="https://recommonmark.readthedocs.io/en/latest/">recommonmark</a></li>
+<li><a class="reference external" href="https://pandoc.org/">pandoc</a></li>
+<li><a class="reference external" href="http://ipython.readthedocs.io/en/stable/install/kernel_install.html">ipykernel</a></li>
+<li><a class="reference external" href="https://nbsphinx.readthedocs.io">nbsphinx</a></li>
+</ol>
+<div class="section" id="procedure-for-modifying-the-website">
+<h3>Procedure for modifying the website<a class="headerlink" href="#procedure-for-modifying-the-website" title="Permalink to this headline">¶</a></h3>
+<p>The AnyPyTools website source files are located in the <code class="docutils literal"><span class="pre">docs</span></code> directory.
+A developer first makes necessary changes, then rebuilds the website locally
+by executing the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ make html
+</pre></div>
+</div>
+<p>This will generate html files for the website in the <code class="docutils literal"><span class="pre">_build/html/</span></code> folder.
+The developer may view the local changes by opening these files with their
+favorite browser, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ google-chrome _build/html/index.html
+</pre></div>
+</div>
+<p>Once the developer is satisfied with the changes, the changes should be
+committed and pull-requested per usual. Once the pull request is accepted, the
+documentation is build automatically by travis CI and pushed to the
+anybody-research-group/anypytools-docs repository from where it is published with
+github pages.</p>
+</div>
+</div>
+<div class="section" id="branches-and-releases">
+<h2>Branches and Releases<a class="headerlink" href="#branches-and-releases" title="Permalink to this headline">¶</a></h2>
+<p>Mainline AnyPyTools development occurs on the <code class="docutils literal"><span class="pre">master</span></code> branch. Other branches
+may be used for feature development (topical branches) or to represent
+past and upcoming releases.</p>
+<p>If you have a new fix that needs to be in the next release, you
+should make a topical branch and then pull request it into the release branch.
+After this has been accepted, the topical branch should be merged with
+master as well.</p>
+<div class="section" id="maintenance-tasks">
+<h3>Maintenance Tasks<a class="headerlink" href="#maintenance-tasks" title="Permalink to this headline">¶</a></h3>
+<p>You can cleanup your local repository of transient files such as *.pyc files
+created by unit testing by running:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ rm -f AnyPyTools/*.pyc tests/*.pyc
+$ rm -fr build
+</pre></div>
+</div>
+</div>
+<div class="section" id="performing-the-release">
+<h3>Performing the Release<a class="headerlink" href="#performing-the-release" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>[ ] Update and push the release log</li>
+<li>[ ] Update version number in <code class="docutils literal"><span class="pre">anypytools.__init__.py</span></code></li>
+<li>[ ] Ensure test pass on python2 and python 3</li>
+<li>[ ] Make PR on GitHub, and check docs compile correctly on travis</li>
+<li>[ ] Create a tag with the version number and push it.</li>
+<li><dl class="first docutils">
+<dt>[ ] Crate PYPI pckage</dt>
+<dd><ul class="first last">
+<li>[ ] Run <code class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">sdist</span></code></li>
+<li>[ ] Run <code class="docutils literal"><span class="pre">twine</span> <span class="pre">upload</span> <span class="pre">dist/*</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>[ ] Update the conda forge package on <a class="reference external" href="https://github.com/conda-forge/anypytools-feedstock">https://github.com/conda-forge/anypytools-feedstock</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="document-history">
+<h2>Document History<a class="headerlink" href="#document-history" title="Permalink to this headline">¶</a></h2>
+<p>Portions of this page have been forked from
+* Xonsh documentation, Copyright 2014-2017, the Xonsh Development Team. All rights reserved.
+* PyNE documentation,Copyright 2011-2015, the PyNE Development Team. All rights reserved.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="index.html" title="index">
+          <img class="logo" src="_static/anypytools_logo.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Developer’s Guide</a><ul>
+<li><a class="reference internal" href="#style-guide">Style Guide</a></li>
+<li><a class="reference internal" href="#how-to-test">How to Test</a><ul>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#running-the-tests">Running the Tests</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-document">How to Document</a><ul>
+<li><a class="reference internal" href="#docstrings">Docstrings</a></li>
+<li><a class="reference internal" href="#auto-documentation-hooks">Auto-Documentation Hooks</a></li>
+<li><a class="reference internal" href="#python-hooks">Python Hooks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#building-the-website">Building the Website</a><ul>
+<li><a class="reference internal" href="#procedure-for-modifying-the-website">Procedure for modifying the website</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#branches-and-releases">Branches and Releases</a><ul>
+<li><a class="reference internal" href="#maintenance-tasks">Maintenance Tasks</a></li>
+<li><a class="reference internal" href="#performing-the-release">Performing the Release</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#document-history">Document History</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="pytest_plugin.html"
+                          title="Previous page">&larr; PyTest plugin.</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="changelog.html"
+                          title="Next page">&rarr; AnyPyTools Change Log</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/devguide.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="index.html" title="Table Of Contents"
+             >toc</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="changelog.html" title="AnyPyTools Change Log"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="pytest_plugin.html" title="PyTest plugin."
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">AnyPyTools 0.10.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Morten Enemark Lund.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
