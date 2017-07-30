@@ -266,7 +266,7 @@ simulations, and then later restart them again.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
+<span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">num_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">return_task_info</span> <span class="o">=</span> <span class="bp">True</span> <span class="p">)</span>
 <span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;load &quot;Knee.any&quot;&#39;</span><span class="p">,</span>
@@ -292,7 +292,7 @@ simulations, and then later restart them again.</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "fa56760dfec64f1d8854acfaff127595"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4afad8bc36384eb1b9d9fca892c0d2ba"}</script></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
@@ -304,13 +304,13 @@ Processing interrupted</div>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "9ef2d1eede80429e8489bf14694faf2d"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "91f2d7d49df94be6a2ec88593d7e95de"}</script></div>
 </div>
 <p>Here we stopped the simulation using the Notebook interrupt button.
 Calling the <code class="docutils literal"><span class="pre">start_macro()</span></code> function again continues the processing
 and re-run any task that wasn’t completed in the first run and any task
 that exited with errors.</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [3]:
 </pre></div>
@@ -319,6 +319,18 @@ that exited with errors.</p>
 <span></span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macrolist</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "1906cdfe25a94c0ebb705b33e2bd2233"}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "42b99c71060e45baa214744d2195d023"}</script></div>
 </div>
 <p>Note: That changing the input arguments <code class="docutils literal"><span class="pre">start_macro</span></code> or
 re-instanciating the <code class="docutils literal"><span class="pre">app</span></code> object will erase the cache and re-run all
@@ -330,31 +342,44 @@ processes.</p>
 ‘dump’ed by the macro commands.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [4]:
+<span></span>In [6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
+<span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
+<span class="kn">from</span> <span class="nn">anypytools.macro_commands</span> <span class="kn">import</span> <span class="n">Load</span><span class="p">,</span> <span class="n">OperationRun</span><span class="p">,</span> <span class="n">Dump</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
 <span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;load &quot;Knee.any&quot; -def N_STEP=&quot;10&quot;&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;operation Main.MyStudy.InverseDynamics&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;classoperation Main.MyStudy.Output.MaxMuscleActivity &quot;Dump&quot;&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;run&#39;</span>
+    <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;Knee.any&#39;</span><span class="p">,</span> <span class="n">defs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;N_STEP&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">}),</span>
+    <span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.InverseDynamics&#39;</span><span class="p">),</span>
+    <span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;</span><span class="p">),</span>
 <span class="p">]</span>
 <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "986393a048f341808f85e70b351fd90d"}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "dc9d8008840240c9aadef229daaf2a37"}</script></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[4]:
+<span></span>Out[6]:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
 <span></span>[{&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;:
-    array([ 0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.])}]
+    array([ 0.00890538,  0.02510015,  0.06036529,  0.08096678,  0.08356285,
+            0.08356285,  0.08096678,  0.06036529,  0.02510015,  0.00890538])}]
 </pre></div>
 </div>
 </div>
@@ -362,11 +387,11 @@ processes.</p>
 flag.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [5]:
+<span></span>In [7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
+<span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">return_task_info</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
 <span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
@@ -379,19 +404,31 @@ flag.</p>
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "1ec04173a2a945458d62bb9a3b9a3589"}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b6c8dbb1a1a64e34b7aee03c53bbd2be"}</script></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[5]:
+<span></span>Out[7]:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
 <span></span>[{&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;:
     array([ 0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]),
-  &#39;task_macro_hash&#39;: 1616505177408335756,
+  &#39;task_macro_hash&#39;: -6717722978800203534,
   &#39;task_id&#39;: 0,
-  &#39;task_work_dir&#39;: &#39;C:\\Users\\mel\\Documents\\AnyPyTools\\Tutorial&#39;,
-  &#39;task_name&#39;: &#39;AnyPyTools/Tutorial&#39;,
-  &#39;task_processtime&#39;: 0.5640992820551674,
+  &#39;task_work_dir&#39;: &#39;C:\\Users\\mel\\Documents\\AnyPyTools\\docs\\Tutorial&#39;,
+  &#39;task_name&#39;: &#39;docs/Tutorial&#39;,
+  &#39;task_processtime&#39;: 0.5640715567972734,
   &#39;task_macro&#39;:
     [&#39;load &quot;Knee.any&quot; -def N_STEP=&quot;10&quot;&#39;,
      &#39;operation Main.MyStudy.InverseDynamics&#39;,
@@ -401,21 +438,21 @@ flag.</p>
 </pre></div>
 </div>
 </div>
-<p>That returns extra meta information about the processing and the
-macros…</p>
+<p>That returns extra meta information about the processing and the macros.</p>
 </div>
 <div class="section" id="Saving-output-to-re-process-at-a-later-time">
 <h2>Saving output to re-process at a later time<a class="headerlink" href="#Saving-output-to-re-process-at-a-later-time" title="Permalink to this headline">¶</a></h2>
-<p>Saving data with ‘extra’ task information, gives some extra options. The
-output from <code class="docutils literal"><span class="pre">start_macro</span></code> can be used as input to restart the same
-processing even if the AnyPyProcess have no cached results.</p>
-<div class="nbinput nblast docutils container">
+<p>Saving data with ‘extra’ task information, gives some other
+posibilities. The results from running batch processin (i.e. output f
+<code class="docutils literal"><span class="pre">start_macro()</span></code> can be used as input to restart the same processing
+even if the AnyPyProcess have no cached results.</p>
+<div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [6]:
+<span></span>In [8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
+<span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">return_task_info</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
 <span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
@@ -428,9 +465,21 @@ processing even if the AnyPyProcess have no cached results.</p>
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5588609213bf4d278e1482255a40176e"}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "98af5a11bc2d4350901b7da244c84a8c"}</script></div>
+</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [7]:
+<span></span>In [9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
@@ -439,19 +488,31 @@ processing even if the AnyPyProcess have no cached results.</p>
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5e9aa08f5b7141b78f660f5880395751"}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "708e5fa303f649619f1333bf77a86bf1"}</script></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>Out[7]:
+<span></span>Out[9]:
 </pre></div>
 </div>
 <div class="output_area highlight-none"><div class="highlight"><pre>
 <span></span>[{&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;:
     array([ 0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]),
-  &#39;task_macro_hash&#39;: 1616505177408335756,
+  &#39;task_macro_hash&#39;: -6717722978800203534,
   &#39;task_id&#39;: 0,
-  &#39;task_work_dir&#39;: &#39;C:\\Users\\mel\\Documents\\AnyPyTools\\Tutorial&#39;,
-  &#39;task_name&#39;: &#39;AnyPyTools/Tutorial&#39;,
-  &#39;task_processtime&#39;: 0.5628141477758248,
+  &#39;task_work_dir&#39;: &#39;C:\\Users\\mel\\Documents\\AnyPyTools\\docs\\Tutorial&#39;,
+  &#39;task_name&#39;: &#39;docs/Tutorial&#39;,
+  &#39;task_processtime&#39;: 0.43872824788422804,
   &#39;task_macro&#39;:
     [&#39;load &quot;Knee.any&quot; -def N_STEP=&quot;10&quot;&#39;,
      &#39;operation Main.MyStudy.InverseDynamics&#39;,
@@ -474,7 +535,7 @@ later restarted. The next example illustrates this.</p>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">distributions</span>
-<span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span><span class="p">,</span> <span class="n">AnyMacro</span>
+<span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span><span class="p">,</span> <span class="n">AnyMacro</span>
 <span class="kn">from</span> <span class="nn">anypytools.macro_commands</span> <span class="kn">import</span> <span class="n">Load</span><span class="p">,</span> <span class="n">SetValue_random</span><span class="p">,</span> <span class="n">OperationRun</span><span class="p">,</span> <span class="n">Dump</span>
 </pre></div>
 </div>
@@ -533,12 +594,12 @@ Done
 <p>All this stored data can be be reloaded</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
-<span></span>In [10]:
+<span></span>In [11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
 <span></span><span class="n">reloaded_results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">load_results</span><span class="p">(</span><span class="s1">&#39;data.db&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Entries in file: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">reloaded_results</span><span class="p">))</span> <span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Entries in file: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">reloaded_results</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
