@@ -284,7 +284,7 @@ distribution, but any statistical distribution could have been used.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">macro_commands</span> <span class="k">as</span> <span class="n">mc</span><span class="p">,</span> <span class="n">AnyMacro</span>
+<span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">macro_commands</span> <span class="k">as</span> <span class="n">mc</span>
 
 <span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">mc</span><span class="o">.</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyModel.Tibia.Patella2.sRel&#39;</span><span class="p">,</span> <span class="n">patella_tendon_insertion</span><span class="p">),</span>
@@ -399,7 +399,7 @@ need the <code class="docutils literal"><span class="pre">AnyMacro</span></code>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
+<span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
 <span class="n">monte_carlo_results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span> <span class="n">monte_carlo_macros</span> <span class="p">)</span>
@@ -588,7 +588,7 @@ can be parsed to <code class="docutils literal"><span class="pre">create_macros_
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
+<span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
 <span class="n">lhs_results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">LHS_macros</span><span class="p">)</span>

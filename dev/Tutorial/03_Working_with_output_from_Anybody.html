@@ -262,7 +262,107 @@ Another option is to have AnyBody write specific variables to a file by
 adding the ‘AnyOutputFile’ class to the AnyBody model.</p>
 <div class="section" id="Working-with-AnyOutputFiles">
 <h2>Working with AnyOutputFiles<a class="headerlink" href="#Working-with-AnyOutputFiles" title="Permalink to this headline">¶</a></h2>
-<p>To come…</p>
+<p>The <code class="docutils literal"><span class="pre">AnyOutputFile</span></code> class in the AnyBody Modeling System produces text
+files with data. These text files are very similar to comma seperated
+files with some additional header information.</p>
+<p>Here is an example below:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># %load TestOutput.csv</span>
+<span class="o">----</span> <span class="n">AnyBody</span> <span class="n">Output</span> <span class="n">File</span> <span class="o">---------------------------------</span>
+<span class="n">Study</span><span class="p">:</span> <span class="n">Main</span><span class="o">.</span><span class="n">MyStudy</span>
+<span class="n">Operation</span><span class="p">:</span> <span class="n">Main</span><span class="o">.</span><span class="n">MyStudy</span><span class="o">.</span><span class="n">InverseDynamics</span>
+<span class="o">----------------------------------------------------------</span>
+<span class="n">Constants</span> <span class="p">(</span><span class="n">Name</span> <span class="o">=</span> <span class="n">Value</span><span class="p">):</span>
+<span class="n">Main</span><span class="o">.</span><span class="n">MyStudy</span><span class="o">.</span><span class="n">FileOutput</span><span class="o">.</span><span class="n">ConstName</span> <span class="o">=</span> <span class="s2">&quot;HelloWorld&quot;</span>
+<span class="n">Main</span><span class="o">.</span><span class="n">MyStudy</span><span class="o">.</span><span class="n">nStep</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">Main</span><span class="o">.</span><span class="n">MyModel</span><span class="o">.</span><span class="n">Femur</span><span class="o">.</span><span class="n">Knee</span><span class="o">.</span><span class="n">sRel</span> <span class="o">=</span> <span class="p">{</span> <span class="mf">0.000000000000000e+000</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.000000000000000e-001</span><span class="p">,</span>  <span class="mf">0.000000000000000e+000</span><span class="p">}</span>
+<span class="o">----------------------------------------------------------</span>
+<span class="n">Variables</span> <span class="p">(</span><span class="n">Column</span><span class="c1"># Name):</span>
+<span class="n">col0</span>  <span class="n">Main</span><span class="o">.</span><span class="n">MyStudy</span><span class="o">.</span><span class="n">t</span>
+<span class="n">col1</span>  <span class="n">Main</span><span class="o">.</span><span class="n">MyStudy</span><span class="o">.</span><span class="n">MomentArm</span>
+<span class="o">----------------------------------------------------------</span>
+<span class="n">Main</span><span class="o">.</span><span class="n">MyStudy</span><span class="o">.</span><span class="n">t</span><span class="p">,</span><span class="n">Main</span><span class="o">.</span><span class="n">MyStudy</span><span class="o">.</span><span class="n">MomentArm</span>
+ <span class="mf">0.000000000000000e+000</span><span class="p">,</span> <span class="mf">3.517106754087954e-002</span>
+ <span class="mf">6.000000000000000e-001</span><span class="p">,</span> <span class="mf">4.256597756479537e-002</span>
+ <span class="mf">1.200000000000000e+000</span><span class="p">,</span><span class="o">-</span><span class="mf">2.495531558514929e-004</span>
+ <span class="mf">1.800000000000000e+000</span><span class="p">,</span> <span class="mf">4.256603812471121e-002</span>
+ <span class="mf">2.400000000000000e+000</span><span class="p">,</span> <span class="mf">3.517106649790244e-002</span>
+
+</pre></div>
+</div>
+</div>
+<p>It is not particular difficult to read. You could write you own custom
+Python, Matlab code to parse the values. But <strong>``anypytools``</strong> has a
+few convinience functions that makes it very easy to load the files.</p>
+<p>This is especially usefull for the header information which can be
+annoying to parse manually.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">anypytools.datautils</span> <span class="kn">import</span> <span class="n">read_anyoutputfile</span>
+
+<span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">constants</span> <span class="o">=</span> <span class="n">read_anyoutputfile</span><span class="p">(</span><span class="s2">&quot;TestOutput.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The function returns three outputs. An array with the time dependent
+data, and a list of header names:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">header</span><span class="p">,</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[22]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>([&#39;Main.MyStudy.t&#39;, &#39;Main.MyStudy.MomentArm&#39;],
+ array([[  0.00000000e+00,   3.51710675e-02],
+        [  6.00000000e-01,   4.25659776e-02],
+        [  1.20000000e+00,  -2.49553156e-04],
+        [  1.80000000e+00,   4.25660381e-02],
+        [  2.40000000e+00,   3.51710665e-02]]))
+</pre></div>
+</div>
+</div>
+<p>and python dictonary with constant values:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">constants</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[23]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>{&#39;Main.MyModel.Femur.Knee.sRel&#39;: array([ 0. , -0.3,  0. ]),
+ &#39;Main.MyStudy.FileOutput.ConstName&#39;: &#39;HelloWorld&#39;,
+ &#39;Main.MyStudy.nStep&#39;: 5.0}
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="Working-with-HDF5-files">
 <h2>Working with HDF5 files<a class="headerlink" href="#Working-with-HDF5-files" title="Permalink to this headline">¶</a></h2>
@@ -309,7 +409,7 @@ like most things in AnyBody, this can also be done with a macro command.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">anypytools.abcutils</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
+<span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
 
 <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macrolist</span><span class="p">);</span>
@@ -329,11 +429,11 @@ like most things in AnyBody, this can also be done with a macro command.</p>
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "041a7c4a2fd746f2850570e41e54a036"}</script></div>
 </div>
 <p>The data stored in the file <strong>output.anydata.h5</strong> can be re-loaded in
-the AnyBody GUI application. To do this; load the model, and then right
-click the <code class="docutils literal"><span class="pre">Main.MyStudy.Output</span></code> folder and select “Load data”.</p>
-<p>Moreover, since we set <strong>``type=”Deep”``</strong> in the macro we can also load
-the data into external programs, e.g. Matlab or Python. In python this
-is done using the <em>``h5py``</em> module</p>
+the AnyBody GUI application.</p>
+<p>To do this; load the model, and then right click the
+<code class="docutils literal"><span class="pre">Main.MyStudy.Output</span></code> folder and select “Load data”.</p>
+<p>These files can also be loaded into Matlab or Python. In python this is
+done using the <em>``h5py``</em> module</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none"><div class="highlight"><pre>
 <span></span>In [1]:
@@ -469,7 +569,7 @@ and remove the stuff before the Output folder.</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/Tutorial_03_Working_with_output_from_Anybody_17_0.png" src="../_images/Tutorial_03_Working_with_output_from_Anybody_17_0.png" />
+<img alt="../_images/Tutorial_03_Working_with_output_from_Anybody_24_0.png" src="../_images/Tutorial_03_Working_with_output_from_Anybody_24_0.png" />
 </div>
 </div>
 </div>
