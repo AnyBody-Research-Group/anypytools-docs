@@ -7,14 +7,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>anypytools.tools &#8212; AnyPyTools 0.10.0 documentation</title>
+    <title>anypytools.tools &#8212; AnyPyTools 0.10.1 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.10.0',
+        VERSION:     '0.10.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 0.10.0 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 0.10.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -225,7 +225,7 @@
     <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;git config --local remote.origin.url&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">:</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">FileNotFoundError</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;/([^/]*)\.git&#39;</span><span class="p">,</span> <span class="n">output</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -237,7 +237,7 @@
     <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;git rev-parse --abbrev-ref HEAD&#39;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">branch</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">FileNotFoundError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">branch</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">branch</span> <span class="o">==</span> <span class="s1">&#39;HEAD&#39;</span><span class="p">:</span>
@@ -253,7 +253,7 @@
     <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;git describe --dirty --always --long --abbrev=6&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">FileNotFoundError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">pass</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
@@ -785,7 +785,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 0.10.0 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 0.10.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
