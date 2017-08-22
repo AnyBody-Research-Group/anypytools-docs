@@ -230,7 +230,7 @@
     <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;git config --local remote.origin.url&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">FileNotFoundError</span><span class="p">):</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;/([^/]*)\.git&#39;</span><span class="p">,</span> <span class="n">output</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -242,7 +242,7 @@
     <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;git rev-parse --abbrev-ref HEAD&#39;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">branch</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">FileNotFoundError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">branch</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">branch</span> <span class="o">==</span> <span class="s1">&#39;HEAD&#39;</span><span class="p">:</span>
@@ -258,7 +258,7 @@
     <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;git describe --dirty --always --long --abbrev=6&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">FileNotFoundError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">pass</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
