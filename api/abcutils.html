@@ -101,7 +101,7 @@ div.admonition.inline-title p.admonition-title {
 &#64;author: Morten</p>
 <dl class="class">
 <dt>
-<em class="property">class </em><code class="descclassname">anypytools.abcutils.</code><code class="descname">AnyPyProcess</code><span class="sig-paren">(</span><em>num_processes=32</em>, <em>anybodycon_path=None</em>, <em>timeout=3600</em>, <em>silent=False</em>, <em>ignore_errors=None</em>, <em>warnings_to_include=None</em>, <em>return_task_info=False</em>, <em>keep_logfiles=False</em>, <em>logfile_prefix=None</em>, <em>python_env=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property">class </em><code class="descclassname">anypytools.abcutils.</code><code class="descname">AnyPyProcess</code><span class="sig-paren">(</span><em>num_processes=32</em>, <em>anybodycon_path=None</em>, <em>timeout=3600</em>, <em>silent=False</em>, <em>ignore_errors=None</em>, <em>warnings_to_include=None</em>, <em>return_task_info=False</em>, <em>keep_logfiles=False</em>, <em>logfile_prefix=None</em>, <em>python_env=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Class for configuring batch process jobs of AnyBody models.</p>
 <p>This is the main interface to control the AnyBody console application from
 python. The class stores all the configuration about how AnyBody is run.
@@ -118,14 +118,24 @@ This defaults to the number of logical CPU cores in the computer.</li>
 use in batch processing. Defaults to what is found in the windows
 registry.</li>
 <li><strong>timeout</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum time (i seconds) a model can run until it is terminated.
-Defaults to 1 hour (3600 sec)-</li>
-<li><strong>ignore_errors</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of AnyBody Errors substrings to ignore when running the models.</li>
-<li><strong>return_task_info</strong> (<em>bool</em><em>, </em><em>optional</em>) – Return the task status information when running macros. Defaults to False</li>
-<li><strong>disp</strong> – Set to False to suppress output (deprecated)</li>
-<li><strong>silent</strong> (<em>bool</em><em>, </em><em>optional</em>) – Set to True to suppres any output (progress bar and error messages).</li>
+Defaults to 3600 sec (1 hour).</li>
+<li><strong>silent</strong> (<em>bool</em><em>, </em><em>optional</em>) – Set to True to suppress any output such as progress bar and error
+messages. (Defaults to False).</li>
+<li><strong>ignore_errors</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of AnyBody Errors substrings to ignore when running the models.
+(Defaults to None)</li>
 <li><strong>warnings_to_include</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of strings that are matched to warnings in the model
 output. If a warning with that string is found the warning
-is returned in the output.</li>
+is returned in the output. (Defaults to None)</li>
+<li><strong>return_task_info</strong> (<em>bool</em><em>, </em><em>optional</em>) – Return the task status information when running macros. Defaults to False.</li>
+<li><strong>keep_logfiles</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True logfile will never be removed. Even if a simulations successeds
+without error. (Defautls to False)</li>
+<li><strong>logfile_prefix</strong> (<em>str</em><em>, </em><em>option</em>) – String which will be prefixed to the generated log files. This can be used
+to assign a more meaningfull name to a batch of logfiles.
+(Defaults to None)</li>
+<li><strong>python_env</strong> (<em>pathlike</em><em>, </em><em>optional</em>) – Path to a python environment/installation that the AnyBody Modeling System
+should use for Python Hooks. This will added the <code class="docutils literal"><span class="pre">PYTHONHOME</span></code> environment variable and
+prepended to the <code class="docutils literal"><span class="pre">PATH</span></code> before starting the AnyBody Console application.
+(Defaults to None, which will use the default Python installation on the computer.)</li>
 </ul>
 </td>
 </tr>
@@ -140,8 +150,12 @@ parameter studies and pertubation jobs.</p>
 </table>
 <div class="admonition-example admonition">
 <p class="first admonition-title">Example</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">num_processes</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">return_task_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load &quot;MyModel.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.MyStudy.Kinematics&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]</span>
+<p>The following example shows how to instantiate a AnyPyProcess object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">num_processes</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">return_task_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <cite>app</cite> object has methods for launching macros, saving results etc.</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load &quot;MyModel.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.MyStudy.Kinematics&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
 </pre></div>
 </div>
