@@ -76,6 +76,7 @@
                       <span class="nb">str</span><span class="p">,</span> <span class="nb">super</span><span class="p">,</span> <span class="nb">zip</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">io</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">copy</span>
@@ -187,18 +188,54 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_execute_anybodycon</span><span class="p">(</span><span class="n">macro</span><span class="p">,</span>
-                        <span class="n">logfile</span><span class="p">,</span>
-                        <span class="n">anybodycon_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                        <span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span>
-                        <span class="n">keep_macrofile</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                        <span class="n">env</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Launch the AnyBodyConsole applicaiton.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="execute_anybodycon"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.execute_anybodycon">[docs]</a><span class="k">def</span> <span class="nf">execute_anybodycon</span><span class="p">(</span><span class="n">macro</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">anybodycon_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span>
+                       <span class="n">keep_macrofile</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Launch a single AnyBodyConsole applicaiton.</span>
+
+<span class="sd">    This is a low level function to start a AnyBody Console process</span>
+<span class="sd">    with a given list macros.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    macro : list of str</span>
+<span class="sd">        List of macros strings to pass to the AnyBody Console Application</span>
+<span class="sd">    logfile : file like object, optional</span>
+<span class="sd">        An open file like object to write to pipe the output of AnyBody</span>
+<span class="sd">        into. (Defaults to None, in which case it will use sys.stdout)</span>
+<span class="sd">    anybodycon_path : str, optional</span>
+<span class="sd">        Path to the AnyBodyConsole application. Default to None, in which</span>
+<span class="sd">        case the default installed AnyBody installation will be looked up</span>
+<span class="sd">        in the Windows registry.</span>
+<span class="sd">    timeout : int, optional</span>
+<span class="sd">        Timeout before the process is killed autmotically. Defaults to</span>
+<span class="sd">        3600 seconds (1 hour).</span>
+<span class="sd">    keep_macrofile : bool, optional</span>
+<span class="sd">        Set to True to prevent the temporary macro file from beeing deleted.</span>
+<span class="sd">        (Defaults to False)</span>
+<span class="sd">    env: dict</span>
+<span class="sd">        Environment varaibles which are passed to the started AnyBody console</span>
+<span class="sd">        application.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        The return code from the AnyBody Console application.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">logfile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">logfile</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">macro_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">logfile</span><span class="o">.</span><span class="n">name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.anymcr&#39;</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">macro_filename</span> <span class="o">=</span> <span class="s1">&#39;macrofile.anymcr&#39;</span>
+
     <span class="k">if</span> <span class="n">anybodycon_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">anybodycon_path</span> <span class="o">=</span> <span class="n">get_anybodycon_path</span><span class="p">()</span>
+
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">anybodycon_path</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Can not find anybodycon.exe: &quot;</span> <span class="o">+</span> <span class="n">anybodycon_path</span><span class="p">)</span>
-    <span class="n">macro_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">logfile</span><span class="o">.</span><span class="n">name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.anymcr&#39;</span>
+
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">macro_filename</span><span class="p">,</span> <span class="s1">&#39;w+b&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">macro_file</span><span class="p">:</span>
         <span class="n">macro_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">))</span>
         <span class="n">macro_file</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
@@ -214,43 +251,43 @@
         <span class="n">subprocess_flags</span> <span class="o">=</span> <span class="mh">0x8000000</span>  <span class="c1"># win32con.CREATE_NO_WINDOW?</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">subprocess_flags</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># Check global module flag to avoid starting processes after</span>
-        <span class="c1"># the user cancelled the processes</span>
-        <span class="n">timeout_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span>
-        <span class="n">proc</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">anybodycmd</span><span class="p">,</span>
-                     <span class="n">stdout</span><span class="o">=</span><span class="n">logfile</span><span class="p">,</span>
-                     <span class="n">stderr</span><span class="o">=</span><span class="n">logfile</span><span class="p">,</span>
-                     <span class="n">creationflags</span><span class="o">=</span><span class="n">subprocess_flags</span><span class="p">,</span>
-                     <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
-        <span class="n">_subprocess_container</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
-        <span class="k">while</span> <span class="n">proc</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">timeout_time</span><span class="p">:</span>
-                <span class="n">proc</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
-                <span class="n">proc</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-                <span class="n">logfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-                <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
-                    <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ERROR: AnyPyTools : Timeout after </span><span class="si">{:d}</span><span class="s1"> sec.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">timeout</span><span class="p">)))</span>
-                <span class="n">proc</span><span class="o">.</span><span class="n">returncode</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="k">break</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
-        <span class="n">_subprocess_container</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
-        <span class="n">retcode</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">returncode</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
-        <span class="k">if</span> <span class="n">retcode</span> <span class="o">==</span> <span class="n">_KILLED_BY_ANYPYTOOLS</span><span class="p">:</span>
-            <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Anybodycon.exe was interrupted by AnyPyTools&#39;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">retcode</span> <span class="o">==</span> <span class="n">_NO_LICENSES_AVAILABLE</span><span class="p">:</span>
-            <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ERROR: anybodycon.exe existed unexpectedly. &#39;</span>
-                          <span class="s1">&#39;Return code: &#39;</span>
-                          <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">_NO_LICENSES_AVAILABLE</span><span class="p">)</span>
-                          <span class="o">+</span> <span class="s1">&#39; : No license available.&#39;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">retcode</span><span class="p">:</span>
-            <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ERROR: AnyPyTools : anybodycon.exe exited unexpectedly.&#39;</span>
-                          <span class="s1">&#39; Return code: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">returncode</span><span class="p">))</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_macrofile</span><span class="p">:</span>
-            <span class="n">silentremove</span><span class="p">(</span><span class="n">macro_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="k">finally</span><span class="p">:</span>
-        <span class="n">logfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">retcode</span>
+    <span class="c1"># Check global module flag to avoid starting processes after</span>
+    <span class="c1"># the user cancelled the processes</span>
+    <span class="n">timeout_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span>
+    <span class="n">proc</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">anybodycmd</span><span class="p">,</span>
+                 <span class="n">stdout</span><span class="o">=</span><span class="n">logfile</span><span class="p">,</span>
+                 <span class="n">stderr</span><span class="o">=</span><span class="n">logfile</span><span class="p">,</span>
+                 <span class="n">creationflags</span><span class="o">=</span><span class="n">subprocess_flags</span><span class="p">,</span>
+                 <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
+    <span class="n">_subprocess_container</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">proc</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">timeout_time</span><span class="p">:</span>
+            <span class="n">proc</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+            <span class="n">proc</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">logfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">SEEK_END</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">io</span><span class="o">.</span><span class="n">UnsupportedOperation</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ERROR: AnyPyTools : Timeout after </span><span class="si">{:d}</span><span class="s1"> sec.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">timeout</span><span class="p">)))</span>
+            <span class="n">proc</span><span class="o">.</span><span class="n">returncode</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">break</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="n">_subprocess_container</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
+    <span class="n">retcode</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">returncode</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+    <span class="k">if</span> <span class="n">retcode</span> <span class="o">==</span> <span class="n">_KILLED_BY_ANYPYTOOLS</span><span class="p">:</span>
+        <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Anybodycon.exe was interrupted by AnyPyTools&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">retcode</span> <span class="o">==</span> <span class="n">_NO_LICENSES_AVAILABLE</span><span class="p">:</span>
+        <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ERROR: anybodycon.exe existed unexpectedly. &#39;</span>
+                      <span class="s1">&#39;Return code: &#39;</span>
+                      <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">_NO_LICENSES_AVAILABLE</span><span class="p">)</span>
+                      <span class="o">+</span> <span class="s1">&#39; : No license available.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">retcode</span><span class="p">:</span>
+        <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ERROR: AnyPyTools : anybodycon.exe exited unexpectedly.&#39;</span>
+                      <span class="s1">&#39; Return code: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">retcode</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_macrofile</span><span class="p">:</span>
+        <span class="n">silentremove</span><span class="p">(</span><span class="n">macro_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">retcode</span></div>
 
 
 <span class="k">class</span> <span class="nc">_Task</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -489,7 +526,7 @@
         <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">anybodycon_path</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">anybodycon_path</span> <span class="o">=</span> <span class="n">anybodycon_path</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t find &quot;</span> <span class="o">+</span> <span class="n">anybodycon_path</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t find &quot;</span> <span class="o">+</span> <span class="n">anybodycon_path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_processes</span> <span class="o">=</span> <span class="n">num_processes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">silent</span> <span class="o">=</span> <span class="n">silent</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span>
@@ -506,8 +543,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">python_env</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">python_env</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s1">&#39;Python environment does&#39;</span>
-                                        <span class="s1">&#39; not exist:&#39;</span> <span class="o">+</span> <span class="n">python_env</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;Python environment does not exist:&#39;</span> <span class="o">+</span> <span class="n">python_env</span><span class="p">)</span>
             <span class="n">env</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">)</span>
             <span class="n">env</span><span class="p">[</span><span class="s1">&#39;PYTHONHOME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">python_env</span>
             <span class="n">env</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">env</span><span class="p">[</span><span class="s1">&#39;PYTHONHOME&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span> <span class="o">+</span> <span class="n">env</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">]</span>
@@ -790,13 +826,15 @@
                                     <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
                                     <span class="n">keep_macrofile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keep_logfiles</span><span class="p">,</span>
                                     <span class="n">env</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">)</span>
-                    <span class="n">retcode</span> <span class="o">=</span> <span class="n">_execute_anybodycon</span><span class="p">(</span><span class="o">**</span><span class="n">exe_args</span><span class="p">)</span>
-                    <span class="n">endtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
-                    <span class="n">logfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">retcode</span> <span class="o">=</span> <span class="n">execute_anybodycon</span><span class="p">(</span><span class="o">**</span><span class="n">exe_args</span><span class="p">)</span>
+                    <span class="k">finally</span><span class="p">:</span>
+                        <span class="n">endtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+                        <span class="n">logfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                        <span class="n">task</span><span class="o">.</span><span class="n">processtime</span> <span class="o">=</span> <span class="n">endtime</span> <span class="o">-</span> <span class="n">starttime</span>
                     <span class="k">if</span> <span class="n">retcode</span> <span class="ow">in</span> <span class="p">(</span><span class="n">_KILLED_BY_ANYPYTOOLS</span><span class="p">,</span> <span class="n">_NO_LICENSES_AVAILABLE</span><span class="p">):</span>
                         <span class="n">task</span><span class="o">.</span><span class="n">processtime</span> <span class="o">=</span> <span class="mi">0</span>
                         <span class="k">return</span>
-                    <span class="n">task</span><span class="o">.</span><span class="n">processtime</span> <span class="o">=</span> <span class="n">endtime</span> <span class="o">-</span> <span class="n">starttime</span>
                     <span class="n">task</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">parse_anybodycon_output</span><span class="p">(</span>
                         <span class="n">logfile</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">ignore_errors</span><span class="p">,</span>

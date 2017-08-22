@@ -99,8 +99,8 @@ div.admonition.inline-title p.admonition-title {
 <h1>anypytools.AnyMacro<a class="headerlink" href="#anypytools-anymacro" title="Permalink to this headline">¶</a></h1>
 <p>See <a class="reference internal" href="macro_commands.html"><span class="doc">anypytools.macro_commands</span></a> for a list of classes that generate macro commands.</p>
 <dl class="class">
-<dt id="anypytools.AnyMacro">
-<em class="property">class </em><code class="descclassname">anypytools.</code><code class="descname">AnyMacro</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.AnyMacro" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">class </em><code class="descclassname">anypytools.</code><code class="descname">AnyMacro</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Class to generate multiple macros.</p>
 <p>Use the class to contruct multiple anyscript macros from a single macro.
 E.g. for parameter studies, Monte Carlo, Latin Hyper Cube studies.</p>
@@ -158,8 +158,8 @@ Must be convertable to 32 bit unsigned integers.</li>
 </pre></div>
 </div>
 <dl class="method">
-<dt id="anypytools.AnyMacro.create_macros">
-<code class="descname">create_macros</code><span class="sig-paren">(</span><em>number_of_macros=None</em>, <em>batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.create_macros"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.AnyMacro.create_macros" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">create_macros</code><span class="sig-paren">(</span><em>number_of_macros=None</em>, <em>batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.create_macros"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Generate a given number of macros.</p>
 <p>The function return its output either as list (batch_size = None) or in batches
 as generator object (memory efficient when generating many macros)</p>
@@ -217,8 +217,8 @@ batches.</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="anypytools.AnyMacro.create_macros_LHS">
-<code class="descname">create_macros_LHS</code><span class="sig-paren">(</span><em>number_of_macros=None</em>, <em>criterion=None</em>, <em>iterations=None</em>, <em>batch_size=None</em>, <em>append_default=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.create_macros_LHS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.AnyMacro.create_macros_LHS" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">create_macros_LHS</code><span class="sig-paren">(</span><em>number_of_macros=None</em>, <em>criterion=None</em>, <em>iterations=None</em>, <em>batch_size=None</em>, <em>append_default=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.create_macros_LHS"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Generate AnyScript macros for Latin Hyper Cube Studies studies.</p>
 <p>Generates AnyScript macros for parameter studies using Latin hyper cube
 sampling. The macros added with the <cite>SetValue_random</cite> are created with
@@ -276,8 +276,8 @@ of returned macros</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="anypytools.AnyMacro.create_macros_MonteCarlo">
-<code class="descname">create_macros_MonteCarlo</code><span class="sig-paren">(</span><em>number_of_macros=None</em>, <em>batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.create_macros_MonteCarlo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.AnyMacro.create_macros_MonteCarlo" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">create_macros_MonteCarlo</code><span class="sig-paren">(</span><em>number_of_macros=None</em>, <em>batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.create_macros_MonteCarlo"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Generate AnyScript macros for monte carlos studies.</p>
 <p>The function returns macros for Monte Carlo parameter studies. This methods
 extends the <cite>create_macros</cite> methods with functionality to randomly vary
