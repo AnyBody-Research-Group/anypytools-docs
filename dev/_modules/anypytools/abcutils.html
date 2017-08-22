@@ -84,7 +84,6 @@
 <span class="kn">import</span> <span class="nn">shelve</span>
 <span class="kn">import</span> <span class="nn">atexit</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">from</span> <span class="nn">subprocess</span> <span class="k">import</span> <span class="n">Popen</span>
 <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">NamedTemporaryFile</span>
@@ -422,19 +421,32 @@
 <span class="sd">        registry.</span>
 <span class="sd">    timeout : int, optional</span>
 <span class="sd">        Maximum time (i seconds) a model can run until it is terminated.</span>
-<span class="sd">        Defaults to 1 hour (3600 sec)-</span>
+<span class="sd">        Defaults to 3600 sec (1 hour).</span>
+<span class="sd">    silent : bool, optional</span>
+<span class="sd">        Set to True to suppress any output such as progress bar and error</span>
+<span class="sd">        messages. (Defaults to False).</span>
 <span class="sd">    ignore_errors : list of str, optional</span>
 <span class="sd">        List of AnyBody Errors substrings to ignore when running the models.</span>
-<span class="sd">    return_task_info : bool, optional</span>
-<span class="sd">        Return the task status information when running macros. Defaults to False</span>
-<span class="sd">    disp</span>
-<span class="sd">        Set to False to suppress output (deprecated)</span>
-<span class="sd">    silent : bool, optional</span>
-<span class="sd">        Set to True to suppres any output (progress bar and error messages).</span>
+<span class="sd">        (Defaults to None)</span>
 <span class="sd">    warnings_to_include : list of str, optional</span>
 <span class="sd">        List of strings that are matched to warnings in the model</span>
 <span class="sd">        output. If a warning with that string is found the warning</span>
-<span class="sd">        is returned in the output.</span>
+<span class="sd">        is returned in the output. (Defaults to None)</span>
+<span class="sd">    return_task_info : bool, optional</span>
+<span class="sd">        Return the task status information when running macros. Defaults to False.</span>
+<span class="sd">    keep_logfiles : bool, optional</span>
+<span class="sd">        If True logfile will never be removed. Even if a simulations successeds</span>
+<span class="sd">        without error. (Defautls to False)</span>
+<span class="sd">    logfile_prefix : str, option</span>
+<span class="sd">        String which will be prefixed to the generated log files. This can be used</span>
+<span class="sd">        to assign a more meaningfull name to a batch of logfiles.</span>
+<span class="sd">        (Defaults to None)</span>
+<span class="sd">    python_env : pathlike, optional</span>
+<span class="sd">        Path to a python environment/installation that the AnyBody Modeling System</span>
+<span class="sd">        should use for Python Hooks. This will added the ``PYTHONHOME`` environment variable and</span>
+<span class="sd">        prepended to the ``PATH`` before starting the AnyBody Console application.</span>
+<span class="sd">        (Defaults to None, which will use the default Python installation on the computer.)</span>
+
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -444,7 +456,12 @@
 
 <span class="sd">    Example</span>
 <span class="sd">    -------</span>
+<span class="sd">    The following example shows how to instantiate a AnyPyProcess object.</span>
+
 <span class="sd">    &gt;&gt;&gt; app = AnyPyProcess(num_processes=8, return_task_info=True)</span>
+
+<span class="sd">    The `app` object has methods for launching macros, saving results etc.</span>
+
 <span class="sd">    &gt;&gt;&gt; macro = [&#39;load &quot;MyModel.any&quot;&#39;, &#39;operation Main.MyStudy.Kinematics&#39;, &#39;run&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; app.start_macro(macro)</span>
 
@@ -460,9 +477,7 @@
                  <span class="n">return_task_info</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">keep_logfiles</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">logfile_prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">python_env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-
+                 <span class="n">python_env</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ignore_errors</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;ignore_errors must be a list of strings&#39;</span><span class="p">)</span>
 
@@ -477,14 +492,6 @@
             <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t find &quot;</span> <span class="o">+</span> <span class="n">anybodycon_path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_processes</span> <span class="o">=</span> <span class="n">num_processes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">silent</span> <span class="o">=</span> <span class="n">silent</span>
-        <span class="k">if</span> <span class="s1">&#39;disp&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Using &#39;disp&#39; is deprecated. Use &quot;</span>
-                          <span class="s2">&quot;AnyPyProcess(silent=True) instead.&quot;</span><span class="p">,</span>
-                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;disp&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">silent</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">silent</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">return_task_info</span> <span class="o">=</span> <span class="n">return_task_info</span>
