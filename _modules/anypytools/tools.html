@@ -740,12 +740,18 @@
     <span class="s1">&#39;CONST_SCALING_LENGTHMASSFAT_MULTIDOFS&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span>
 <span class="p">}</span>
 
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">_BM_CONSTANTS</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">&#39;CONST&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">last</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
+        <span class="n">_BM_CONSTANTS</span><span class="p">[</span><span class="n">last</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_BM_CONSTANTS</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
-<span class="k">def</span> <span class="nf">replace_bm_constants</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+
+<div class="viewcode-block" id="replace_bm_constants"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.replace_bm_constants">[docs]</a><span class="k">def</span> <span class="nf">replace_bm_constants</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Replace BM constants with value represenation.&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_BM_CONSTANTS</span><span class="p">:</span>
             <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">_BM_CONSTANTS</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">d</span>
+    <span class="k">return</span> <span class="n">d</span></div>
 </pre></div>
 
           </div>
