@@ -750,7 +750,7 @@
     <span class="sd">&quot;&quot;&quot;Replace BM constants with value represenation.&quot;&quot;&quot;</span>
     <span class="n">bm_const</span> <span class="o">=</span> <span class="n">_BM_CONSTANTS</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">ammr_version</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ammr_version</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">bm_const</span><span class="p">[</span><span class="s1">&#39;_LEG_MODEL_OFF_&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bm_const</span><span class="p">[</span><span class="s1">&#39;CONST_LEG_MODEL_OFF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;OFF&quot;</span>
         <span class="n">bm_const</span><span class="p">[</span><span class="s1">&#39;_LEG_MODEL_Leg_&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bm_const</span><span class="p">[</span><span class="s1">&#39;CONST_LEG_MODEL_Leg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Leg&quot;</span>
         <span class="n">bm_const</span><span class="p">[</span><span class="s1">&#39;_LEG_MODEL_TLEM_&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bm_const</span><span class="p">[</span><span class="s1">&#39;CONST_LEG_MODEL_TLEM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;TLEM&quot;</span>
