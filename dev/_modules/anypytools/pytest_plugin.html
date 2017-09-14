@@ -7,14 +7,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>anypytools.pytest_plugin &#8212; AnyPyTools 0.10.2 documentation</title>
+    <title>anypytools.pytest_plugin &#8212; AnyPyTools 0.10.3 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.10.2',
+        VERSION:     '0.10.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 0.10.2 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 0.10.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -380,7 +380,10 @@
         <span class="n">strheader</span> <span class="o">=</span> <span class="n">_read_header</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">strpath</span><span class="p">)</span>
         <span class="n">header</span> <span class="o">=</span> <span class="n">_parse_header</span><span class="p">(</span><span class="n">strheader</span><span class="p">)</span>
         <span class="n">def_list</span> <span class="o">=</span> <span class="n">_format_switches</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;define&#39;</span><span class="p">,</span> <span class="p">{}))</span>
-        <span class="n">def_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">replace_bm_constants</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">def_list</span><span class="p">]</span>
+        <span class="n">def_list</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">replace_bm_constants</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">ammr_version</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--ammr-version&quot;</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">def_list</span>
+        <span class="p">]</span>
         <span class="n">path_list</span> <span class="o">=</span> <span class="n">_format_switches</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">,</span> <span class="p">{}))</span>
         <span class="n">combinations</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">def_list</span><span class="p">,</span> <span class="n">path_list</span><span class="p">)</span>
         <span class="c1"># Run though the defines an create a test case for each</span>
@@ -547,6 +550,9 @@
                     <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Can be used to specify which AnyBody Managed Model &quot;</span>
                     <span class="s2">&quot;Repository (AMMR) to use. Setting this will pass a &quot;</span>
                     <span class="s2">&quot;&#39;AMMR_PATH&#39; path statement for all models&quot;</span><span class="p">)</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">addoption</span><span class="p">(</span><span class="s2">&quot;--ammr-version&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Specify AMMR version. This affect how AnyPyTools &quot;</span>
+                    <span class="s2">&quot;interprets it BM parameters. Defaults to AMMR version 2.&quot;</span><span class="p">)</span>
     <span class="n">group</span><span class="o">.</span><span class="n">addoption</span><span class="p">(</span><span class="s2">&quot;--only-load&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
                     <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Only run a load test. I.e. do not run the &quot;</span>
                     <span class="s2">&quot;&#39;RunTest&#39; macro&quot;</span><span class="p">)</span>
@@ -627,7 +633,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 0.10.2 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 0.10.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
