@@ -7,14 +7,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>anypytools.tools &#8212; AnyPyTools 0.10.3 documentation</title>
+    <title>anypytools.tools &#8212; AnyPyTools 0.10.4 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.10.3',
+        VERSION:     '0.10.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 0.10.3 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 0.10.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -177,19 +177,35 @@
     <span class="k">return</span> <span class="n">vstring</span>
 
 
-<div class="viewcode-block" id="find_ammr_version"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.find_ammr_version">[docs]</a><span class="k">def</span> <span class="nf">find_ammr_version</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+<div class="viewcode-block" id="find_ammr_path"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.find_ammr_path">[docs]</a><span class="k">def</span> <span class="nf">find_ammr_path</span><span class="p">(</span><span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the root AMMR path if possible .</span>
+
+<span class="sd">    The function will walk up a directory tree looking</span>
+<span class="sd">    for a ammr_verion.any file to parse.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">version_files</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;AMMR.version.any&#39;</span><span class="p">,</span> <span class="s1">&#39;AMMR.version.xml&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">basedir</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">walk_up</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">fn</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">version_files</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">basedir</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="get_ammr_version"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.get_ammr_version">[docs]</a><span class="k">def</span> <span class="nf">get_ammr_version</span><span class="p">(</span><span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the AMMR version if possible.</span>
 
 <span class="sd">    The function will walk up a directory tree looking</span>
 <span class="sd">    for a ammr_verion.any file to parse.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
     <span class="n">any_version_file</span> <span class="o">=</span> <span class="s1">&#39;AMMR.version.any&#39;</span>
     <span class="n">xml_version_file</span> <span class="o">=</span> <span class="s1">&#39;AMMR.version.xml&#39;</span>
-    <span class="k">for</span> <span class="n">basedir</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">walk_up</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">any_version_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ammr_any_version</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="n">any_version_file</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">xml_version_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">amm_xml_version</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="n">xml_version_file</span><span class="p">))</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">any_version_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ammr_any_version</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">any_version_file</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">xml_version_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">amm_xml_version</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">xml_version_file</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
 
@@ -713,7 +729,7 @@
     <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">frozenset</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">new_o</span><span class="o">.</span><span class="n">items</span><span class="p">()))))</span></div>
 
 
-<span class="n">_BM_CONSTANTS</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">_BM_CONSTANTS_AMMR1</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;ON&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
     <span class="s1">&#39;OFF&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
     <span class="s1">&#39;_MUSCLES_NONE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
@@ -721,9 +737,9 @@
     <span class="s1">&#39;_MUSCLES_3E_HILL_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
     <span class="s1">&#39;_HAND_SIMPLE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
     <span class="s1">&#39;_HAND_DETAILED_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_LEG_MODEL_OFF_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_LEG_MODEL_Leg_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_LEG_MODEL_TLEM_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_LEG_MODEL_OFF_&#39;</span><span class="p">:</span> <span class="s1">&#39;&quot;OFF&quot;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_LEG_MODEL_Leg_&#39;</span><span class="p">:</span> <span class="s1">&#39;&quot;Leg&quot;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_LEG_MODEL_TLEM_&#39;</span><span class="p">:</span> <span class="s1">&#39;&quot;TLEM&quot;&#39;</span><span class="p">,</span>
     <span class="s1">&#39;_MORPH_NONE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
     <span class="s1">&#39;_MORPH_TRUNK_TO_LEG_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
     <span class="s1">&#39;_MORPH_LEG_TO_TRUNK_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
@@ -741,23 +757,96 @@
     <span class="s1">&#39;_SCALING_LENGTHMASSFAT_MULTIDOFS_&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">_BM_CONSTANTS</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
-    <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">key</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
-        <span class="n">_BM_CONSTANTS</span><span class="p">[</span><span class="s1">&#39;CONST&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">_BM_CONSTANTS</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+<span class="n">_BM_CONSTANTS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ON&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;OFF&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_MUSCLES_NONE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_MUSCLES_SIMPLE_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_MUSCLES_3E_HILL_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_LEG_MODEL_OFF_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_LEG_MODEL_TLEM_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_LEG_MODEL_TLEM1_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_LEG_MODEL_TLEM2_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_LEG_MODEL_Leg_&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_LEG_MODEL_LEG_&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_MORPH_NONE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_MORPH_TRUNK_TO_LEG_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_MORPH_LEG_TO_TRUNK_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_PELVIS_DISPLAY_NONE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_PELVIS_DISPLAY_LEGPELVIS_ONLY_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_PELVIS_DISPLAY_LEGANDTRUNKPELVIS_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_DISC_STIFFNESS_NONE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_DISC_STIFFNESS_LINEAR_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_DISC_STIFFNESS_NONLINEAR_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_SCALING_CUSTOM_&#39;</span><span class="p">:</span> <span class="s1">&#39;-1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_SCALING_STANDARD_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_SCALING_UNIFORM_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_SCALING_LENGTHMASS_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_SCALING_LENGTHMASSFAT_&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_SCALING_UNIFORM_EXTMEASUREMENTS_&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_SCALING_LENGTHMASS_EXTMEASUREMENTS_&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_SCALING_LENGTHMASSFAT_EXTMEASUREMENTS_&#39;</span><span class="p">:</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;_SCALING_LENGTHMASSFAT_MULTIDOFS_&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_MUSCLES_NONE&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_MUSCLES_SIMPLE&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_MUSCLES_3E_HILL&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_HAND_SIMPLE&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_HAND_DETAILED&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_LEG_MODEL_OFF&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_LEG_MODEL_TLEM&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_LEG_MODEL_TLEM2&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_LEG_MODEL_Leg&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_MORPH_NONE&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_MORPH_TRUNK_TO_LEG&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_MORPH_LEG_TO_TRUNK&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_PELVIS_DISPLAY_NONE&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_PELVIS_DISPLAY_LEGPELVIS_ONLY&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_PELVIS_DISPLAY_LEGANDTRUNKPELVIS&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_DISC_STIFFNESS_NONE&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_DISC_STIFFNESS_LINEAR&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_DISC_STIFFNESS_NONLINEAR &#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_SCALING_CUSTOM&#39;</span><span class="p">:</span> <span class="s1">&#39;-1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_SCALING_STANDARD&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_SCALING_UNIFORM&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_SCALING_LENGTHMASS&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_SCALING_LENGTHMASSFAT&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_SCALING_UNIFORM_EXTMEASUREMENTS&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_SCALING_LENGTHMASS_EXTMEASUREMENTS&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_SCALING_LENGTHMASSFAT_EXTMEASUREMENTS&#39;</span><span class="p">:</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CONST_SCALING_LENGTHMASSFAT_MULTIDOFS&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span>
+<span class="p">}</span>
 
 
-<div class="viewcode-block" id="replace_bm_constants"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.replace_bm_constants">[docs]</a><span class="k">def</span> <span class="nf">replace_bm_constants</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">ammr_version</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="viewcode-block" id="get_bm_constants"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.get_bm_constants">[docs]</a><span class="k">def</span> <span class="nf">get_bm_constants</span><span class="p">(</span><span class="n">ammr_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ammr_version</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the BM_CONSTANT mapping.</span>
+
+<span class="sd">    It will try to locate the mapping in the AMMR:</span>
+<span class="sd">    Body/AAUHuman/Documentation/bm_constants.py</span>
+
+<span class="sd">    If that fails it will use the ammr_version</span>
+<span class="sd">    specification to select a value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bm_constants</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">ammr_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ammr_path</span><span class="p">,</span> <span class="s2">&quot;Body/AAUHuman/Documentation/bm_constants.py&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+                <span class="n">bm_constants</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span><span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bm_constants</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">bm_constants</span> <span class="o">=</span> <span class="n">_BM_CONSTANTS</span> <span class="k">if</span> <span class="n">ammr_version</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">_BM_CONSTANTS_AMMR1</span>
+    <span class="k">return</span> <span class="n">bm_constants</span></div>
+
+
+<div class="viewcode-block" id="replace_bm_constants"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.replace_bm_constants">[docs]</a><span class="k">def</span> <span class="nf">replace_bm_constants</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">bm_constants</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Replace BM constants with value represenation.&quot;&quot;&quot;</span>
-    <span class="n">bm_const</span> <span class="o">=</span> <span class="n">_BM_CONSTANTS</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">ammr_version</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">bm_const</span><span class="p">[</span><span class="s1">&#39;_LEG_MODEL_OFF_&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bm_const</span><span class="p">[</span><span class="s1">&#39;CONST_LEG_MODEL_OFF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&quot;OFF&quot;&#39;</span>
-        <span class="n">bm_const</span><span class="p">[</span><span class="s1">&#39;_LEG_MODEL_Leg_&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bm_const</span><span class="p">[</span><span class="s1">&#39;CONST_LEG_MODEL_Leg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&quot;Leg&quot;&#39;</span>
-        <span class="n">bm_const</span><span class="p">[</span><span class="s1">&#39;_LEG_MODEL_TLEM_&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bm_const</span><span class="p">[</span><span class="s1">&#39;CONST_LEG_MODEL_TLEM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&quot;TLEM&quot;&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">bm_constants</span><span class="p">:</span>
+        <span class="n">bm_constants</span> <span class="o">=</span> <span class="n">_BM_CONSTANTS</span>
 
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">bm_const</span><span class="p">:</span>
-            <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">bm_const</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">bm_constants</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">bm_constants</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">d</span></div>
 </pre></div>
 
@@ -814,7 +903,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 0.10.3 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 0.10.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
