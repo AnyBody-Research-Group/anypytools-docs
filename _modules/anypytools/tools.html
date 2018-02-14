@@ -618,6 +618,12 @@
     <span class="k">return</span> <span class="n">out</span>
 
 
+<span class="n">ABOVE_NORMAL_PRIORITY_CLASS</span> <span class="o">=</span> <span class="mh">0x8000</span>
+<span class="n">BELOW_NORMAL_PRIORITY_CLASS</span> <span class="o">=</span> <span class="mh">0x4000</span>
+<span class="n">IDLE_PRIORITY_CLASS</span> <span class="o">=</span> <span class="mh">0x0040</span>
+<span class="n">NORMAL_PRIORITY_CLASS</span> <span class="o">=</span> <span class="mh">0x0020</span>
+
+
 <span class="n">ERROR_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^((ERROR)|(Model loading skipped)).*$&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
 <span class="n">WARNING_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(WARNING).*$&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
 <span class="n">DUMP_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(Main.*?)\s=\s(.*?(?:\n\s\s.*?)*);&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
