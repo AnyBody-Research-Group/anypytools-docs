@@ -83,27 +83,28 @@ div.admonition.inline-title p.admonition-title {
 </style>
 <div class="section" id="anypytools-change-log">
 <h1>AnyPyTools Change Log<a class="headerlink" href="#anypytools-change-log" title="Permalink to this headline">¶</a></h1>
-<p><strong>New:</strong></p>
-<p><strong>Changed:</strong></p>
-<p><strong>Fixed:</strong></p>
-<p><strong>Removed:</strong></p>
 <div class="section" id="v0-11-0">
 <h2>v0.11.0<a class="headerlink" href="#v0-11-0" title="Permalink to this headline">¶</a></h2>
 <p><strong>New:</strong></p>
 <ul>
-<li><p class="first">Added option to the set the priority of the macro operations.</p>
+<li><p class="first">Added option to the set the priority of the macro operations.
+The option is an argument to <code class="xref py py-class docutils literal notranslate"><span class="pre">AnyPyProcess()</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">IDLE_PRIORITY_CLASS</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">priority</span> <span class="o">=</span> <span class="n">IDLE_PRIORITY_CLASS</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Possible values are <code class="docutils literal notranslate"><span class="pre">IDLE_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">BELOW_NORMAL_PRIORITY_CLASS</span></code>,
-<code class="docutils literal notranslate"><span class="pre">NORMAL_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">ABOVE_NORMAL_PRIORITY_CLASS</span></code>. Default is
-<code class="docutils literal notranslate"><span class="pre">BELOW_NORMAL_PRIORITY_CLASS</span></code>.</p>
+<p>Default is <code class="docutils literal notranslate"><span class="pre">BELOW_NORMAL_PRIORITY_CLASS</span></code>, and possible values are</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">IDLE_PRIORITY_CLASS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">BELOW_NORMAL_PRIORITY_CLASS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">NORMAL_PRIORITY_CLASS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">ABOVE_NORMAL_PRIORITY_CLASS</span></code>.</li>
+</ul>
 </li>
-<li><p class="first">Added argument <code class="docutils literal notranslate"><span class="pre">fatal_warnings</span></code> to treat warnings as errors when running macros.</p>
-<p>..code-block:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProces</span><span class="p">(</span><span class="n">warnings_to_include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;OBJ.MCH.KIN9&#39;</span><span class="p">],</span> <span class="n">fatal_warnings</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<li><p class="first">Added argument <code class="docutils literal notranslate"><span class="pre">fatal_warnings</span></code> to <code class="xref py py-class docutils literal notranslate"><span class="pre">AnyPyProcess()</span></code> which
+treat warnings as errors when running macros.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProces</span><span class="p">(</span><span class="n">warnings_to_include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;OBJ.MCH.KIN9&#39;</span><span class="p">],</span> <span class="n">fatal_warnings</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The argument will only triggers for specific warnings given
@@ -130,28 +131,28 @@ rewritten to fix this.</li>
 </div>
 <div class="section" id="v0-10-10">
 <h2>v0.10.10<a class="headerlink" href="#v0-10-10" title="Permalink to this headline">¶</a></h2>
-<p>** fixed: **</p>
+<p><strong>fixed:</strong></p>
 <ul class="simple">
 <li>Fix crash when <code class="docutils literal notranslate"><span class="pre">--define</span></code> option was not provided.</li>
 </ul>
 </div>
 <div class="section" id="v0-10-9">
 <h2>v0.10.9<a class="headerlink" href="#v0-10-9" title="Permalink to this headline">¶</a></h2>
-<p>** New: **</p>
+<p><strong>New:</strong></p>
 <ul class="simple">
 <li>Add option to the pytest plugin, to set the define statements with an argument to pytest.</li>
 </ul>
 </div>
 <div class="section" id="v0-10-8">
 <h2>v0.10.8<a class="headerlink" href="#v0-10-8" title="Permalink to this headline">¶</a></h2>
-<p>** Fixed: **</p>
+<p><strong>Fixed:</strong></p>
 <ul class="simple">
 <li>Wrong error report when AnyBody exists abnormally during batch processing.</li>
 </ul>
 </div>
 <div class="section" id="v0-10-7">
 <h2>v0.10.7<a class="headerlink" href="#v0-10-7" title="Permalink to this headline">¶</a></h2>
-<p>** Changed: **</p>
+<p><strong>Changed:</strong></p>
 <ul class="simple">
 <li>Always append ‘exit’ command to all macros. Seems to solve problem with AMS not shutting down correctly.</li>
 <li>Only enable pytest plugin on Windows platform</li>
@@ -159,14 +160,14 @@ rewritten to fix this.</li>
 </div>
 <div class="section" id="v0-10-6">
 <h2>v0.10.6<a class="headerlink" href="#v0-10-6" title="Permalink to this headline">¶</a></h2>
-<p>** Fixed: **</p>
+<p><strong>Fixed:</strong></p>
 <ul class="simple">
 <li>Bug where no AMS license was not detected as a failed macro.</li>
 </ul>
 </div>
 <div class="section" id="v0-10-5">
 <h2>v0.10.5<a class="headerlink" href="#v0-10-5" title="Permalink to this headline">¶</a></h2>
-<p>** Fixed: **</p>
+<p><strong>Fixed:</strong></p>
 <ul class="simple">
 <li>Crash when the starting pytest plug-in when no AnyBody licenses are available</li>
 </ul>
@@ -178,7 +179,7 @@ used in the AMS 7.1</li>
 </div>
 <div class="section" id="v0-10-4">
 <h2>v0.10.4<a class="headerlink" href="#v0-10-4" title="Permalink to this headline">¶</a></h2>
-<p>** Changed: **</p>
+<p><strong>Changed:</strong></p>
 <ul class="simple">
 <li>The pytest plugin can now get the BM configurations directly from the
 AMMR if they are availble. The will be for AMMR 2. This will eliminate
@@ -187,7 +188,7 @@ the problem of keeping AnyPyTools in sync with the AMMR.</li>
 </div>
 <div class="section" id="v0-10-3">
 <h2>v0.10.3<a class="headerlink" href="#v0-10-3" title="Permalink to this headline">¶</a></h2>
-<p>** New: **</p>
+<p><strong>New:</strong></p>
 <ul class="simple">
 <li>Update pytest plugin to support AMMR 2.0 Parameters. AMMR 1 parameters
 are still supported using <code class="docutils literal notranslate"><span class="pre">--ammr-version</span></code> argument to pytest.</li>
