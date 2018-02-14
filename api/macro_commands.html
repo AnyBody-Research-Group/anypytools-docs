@@ -6,21 +6,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>anypytools.macro_commands &#8212; AnyPyTools 0.10.10 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.10.10',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
@@ -34,8 +26,7 @@
     <link rel="next" title="anypytools.datautils.read_anyoutputfile" href="read_anyoutputfile.html" />
     <link rel="prev" title="anypytools.AnyMacro" href="AnyMacro.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
+  </head><body>
     <div class="relbar-top">
         
     <div class="related" role="navigation" aria-label="related navigation">
@@ -106,7 +97,7 @@ div.admonition.inline-title p.admonition-title {
 <p>This class also serves as base class for other macro commands.</p>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mc</span> <span class="o">=</span> <span class="n">MacroCommand</span><span class="p">(</span><span class="s1">&#39;operation &quot;Main.MyStudy.InverseDynamics&quot;&#39;</span><span class="p">)</span> <span class="p">)</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mc</span> <span class="o">=</span> <span class="n">MacroCommand</span><span class="p">(</span><span class="s1">&#39;operation &quot;Main.MyStudy.InverseDynamics&quot;&#39;</span><span class="p">)</span> <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mc</span><span class="p">)</span>
 <span class="go">operation &quot;Main.MyStudy.InverseDynamics&quot;</span>
 </pre></div>
@@ -153,17 +144,17 @@ index.</td>
 </table>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;model.main.any&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;model.main.any&#39;</span><span class="p">)</span>
 <span class="go">load &quot;model.main.any&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">paths</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;DATA&#39;</span><span class="p">:</span><span class="s1">&#39;c:/MyModel/Data&#39;</span><span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">paths</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;DATA&#39;</span><span class="p">:</span><span class="s1">&#39;c:/MyModel/Data&#39;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">defines</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;EXCLUDE_ARMS&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;N_STEP&#39;</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;c:/MyModel/model.main.any&#39;</span><span class="p">,</span> <span class="n">defines</span><span class="p">,</span> <span class="n">paths</span><span class="p">)</span>
 <span class="go">load &quot;c:/MyModel/model.main.any&quot; -def EXCLUDE_ARMS=&quot;&quot; -def N_STEP=&quot;20&quot; -p DATA=---&quot;c:/MyModel/Data&quot;</span>
 </pre></div>
 </div>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mcr</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span> <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;model_</span><span class="si">{id}</span><span class="s1">.main.any&#39;</span><span class="p">),</span> <span class="n">counter_token</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{id}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mcr</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span> <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;model_</span><span class="si">{id}</span><span class="s1">.main.any&#39;</span><span class="p">),</span> <span class="n">counter_token</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{id}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mcr</span><span class="o">.</span><span class="n">create_macros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="go">[[u&#39;load &quot;model_0.main.any&quot;&#39;],</span>
 <span class="go"> [u&#39;load &quot;model_1.main.any&quot;&#39;],</span>
@@ -174,7 +165,22 @@ index.</td>
 <dl class="method">
 <dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#Load.get_macro"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
+<dd><p>Create a string representation of the macro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+use the index to generate different macros depending on the
+index.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string with the AnyScript macro</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -197,23 +203,23 @@ index.</td>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
 <p>Set a single values:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SetValue</span><span class="p">(</span><span class="s1">&#39;Main.Study.myvar1&#39;</span><span class="p">,</span> <span class="mf">23.1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SetValue</span><span class="p">(</span><span class="s1">&#39;Main.Study.myvar1&#39;</span><span class="p">,</span> <span class="mf">23.1</span><span class="p">)</span>
 <span class="go">classoperation Main.Study.myvar1 &quot;Set Value&quot; --value=&quot;23.1&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SetValue</span><span class="p">(</span><span class="s1">&#39;Main.Study.myvar2&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SetValue</span><span class="p">(</span><span class="s1">&#39;Main.Study.myvar2&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]))</span>
 <span class="go">classoperation Main.Study.myvar2 &quot;Set Value&quot; --value=&quot;{2,3,4}&quot;</span>
 </pre></div>
 </div>
 <p>Set variable across different macros</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SetValue</span><span class="p">(</span><span class="s1">&#39;Main.Study.myvar1&#39;</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SetValue</span><span class="p">(</span><span class="s1">&#39;Main.Study.myvar1&#39;</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 <span class="go">classoperation Main.Study.myvar1 &quot;Set Value&quot; --value=&quot;1&quot;</span>
 <span class="go">classoperation Main.Study.myvar1 &quot;Set Value&quot; --value=&quot;2&quot;</span>
 <span class="go">classoperation Main.Study.myvar1 &quot;Set Value&quot; --value=&quot;3&quot;</span>
 </pre></div>
 </div>
 <p>Here is a elaborate example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span> <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;MyModel.main.any&#39;</span><span class="p">),</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span> <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;MyModel.main.any&#39;</span><span class="p">),</span>
 <span class="go">                 SetValue(&#39;Main.Study.myvar1&#39;,[1,2]),</span>
 <span class="go">                 OperationRun(&#39;Main.Study.InverseDynamics&#39;) )</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">number_of_macros</span> <span class="o">=</span> <span class="mi">2</span>
@@ -229,7 +235,7 @@ index.</td>
 </div>
 <p>If we generate more macros that there are values then the values are just
 repeated</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">number_of_macros</span> <span class="o">=</span> <span class="mi">4</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">number_of_macros</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span>
 <span class="go">[[&#39;load &quot;MyModel.main.any&quot;&#39;,</span>
 <span class="go">  &#39;classoperation Main.Study.myvar1 &quot;Set Value&quot; --value=&quot;1&quot;&#39;,</span>
@@ -253,7 +259,22 @@ repeated</p>
 <dl class="method">
 <dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SetValue.get_macro"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
+<dd><p>Create a string representation of the macro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+use the index to generate different macros depending on the
+index.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string with the AnyScript macro</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -280,7 +301,7 @@ is the mean value.</li>
 <p class="first admonition-title">Examples</p>
 <p>Creating normal macros will use the default values. Usually the 50 percentile
 (mean values).</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats.distributions</span> <span class="k">import</span> <span class="n">logistic</span><span class="p">,</span> <span class="n">norm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">log_dist</span> <span class="o">=</span> <span class="n">logistic</span><span class="p">(</span> <span class="n">loc</span><span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span><span class="n">scale</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">norm_dist</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span> <span class="n">loc</span><span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">scale</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
@@ -297,7 +318,7 @@ is the mean value.</li>
 </div>
 <p>Values can be sampled randomly in a ‘Monte Carlo’ fashion. Note that the
 first value is still the defaut mean values</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">create_macros_MonteCarlo</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">create_macros_MonteCarlo</span><span class="p">()</span>
 <span class="go">[[&#39;classoperation Main.MyVar1 &quot;Set Value&quot; --value=&quot;{0,0,0}&quot;&#39;,</span>
 <span class="go">  &#39;classoperation Main.MyVar2 &quot;Set Value&quot; --value=&quot;{1,3,4}&quot;&#39;],</span>
 <span class="go"> [&#39;classoperation Main.MyVar1 &quot;Set Value&quot; --value=&quot;{-0.0209517840916,0.291902872134,-3.68494766954}&quot;&#39;,</span>
@@ -307,7 +328,7 @@ first value is still the defaut mean values</p>
 </pre></div>
 </div>
 <p>Values can also be sampled with a Latin Hyper Cube sampler.</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">create_macros_LHS</span><span class="p">()</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">create_macros_LHS</span><span class="p">()</span>
 <span class="go">[[&#39;classoperation Main.MyVar1 &quot;Set Value&quot; --value=&quot;{0.0928967116493,-0.591418725401,-0.484696993931}&quot;&#39;,</span>
 <span class="go">  &#39;classoperation Main.MyVar2 &quot;Set Value&quot; --value=&quot;{1.01049414425,2.46211329129,5.73806916203}&quot;&#39;],</span>
 <span class="go"> [&#39;classoperation Main.MyVar1 &quot;Set Value&quot; --value=&quot;{-0.0166741228961,0.707722119582,-0.294180629253}&quot;&#39;,</span>
@@ -320,7 +341,22 @@ first value is still the defaut mean values</p>
 <dl class="method">
 <dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>lower_tail_probability=None</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SetValue_random.get_macro"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
+<dd><p>Create a string representation of the macro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+use the index to generate different macros depending on the
+index.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string with the AnyScript macro</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -344,12 +380,12 @@ If None, the command is included in all macros.</li>
 </table>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.Study.myvar1&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.Study.myvar1&#39;</span><span class="p">)</span>
 <span class="go">classoperation Main.Study.myvar1 &quot;Dump&quot;</span>
 </pre></div>
 </div>
 <p>Only include the dump command in the two first macro</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">number_of_macros</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">number_of_macros</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;mymodel.main.any&#39;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Dump</span><span class="p">(</span><span class="s1">&#39;Main.Study.myvar1&#39;</span><span class="p">,</span> <span class="n">include_in_macro</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span>
@@ -364,7 +400,22 @@ If None, the command is included in all macros.</li>
 <dl class="method">
 <dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#Dump.get_macro"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
+<dd><p>Create a string representation of the macro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+use the index to generate different macros depending on the
+index.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string with the AnyScript macro</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -386,7 +437,7 @@ If None, the command is included in all macros.</li>
 </table>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SaveDesign</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Kinematics&#39;</span><span class="p">,</span> <span class="s1">&#39;c:/design.txt&#39;</span><span class="p">)</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SaveDesign</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Kinematics&#39;</span><span class="p">,</span> <span class="s1">&#39;c:/design.txt&#39;</span><span class="p">)</span>
 <span class="go">classoperation Main.MyStudy.Kinematics &quot;Save design&quot; --file=&quot;c:/design.txt&quot;</span>
 </pre></div>
 </div>
@@ -394,7 +445,22 @@ If None, the command is included in all macros.</li>
 <dl class="method">
 <dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveDesign.get_macro"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
+<dd><p>Create a string representation of the macro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+use the index to generate different macros depending on the
+index.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string with the AnyScript macro</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -416,7 +482,7 @@ If None, the command is included in all macros.</li>
 </table>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">LoadDesign</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Kinematics&#39;</span><span class="p">,</span> <span class="s1">&#39;c:/design.txt&#39;</span><span class="p">)</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">LoadDesign</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Kinematics&#39;</span><span class="p">,</span> <span class="s1">&#39;c:/design.txt&#39;</span><span class="p">)</span>
 <span class="go">classoperation Main.MyStudy.Kinematics &quot;Load design&quot; --file=&quot;c:/design.txt&quot;</span>
 </pre></div>
 </div>
@@ -424,7 +490,22 @@ If None, the command is included in all macros.</li>
 <dl class="method">
 <dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#LoadDesign.get_macro"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
+<dd><p>Create a string representation of the macro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+use the index to generate different macros depending on the
+index.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string with the AnyScript macro</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -442,7 +523,7 @@ If None, the command is included in all macros.</li>
 </table>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SaveValues</span><span class="p">(</span><span class="s1">&#39;c:/values.anyset&#39;</span><span class="p">)</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SaveValues</span><span class="p">(</span><span class="s1">&#39;c:/values.anyset&#39;</span><span class="p">)</span>
 <span class="go">classoperation Main &quot;Save Values&quot; --file=&quot;c:/values.anyset&quot;</span>
 </pre></div>
 </div>
@@ -450,7 +531,22 @@ If None, the command is included in all macros.</li>
 <dl class="method">
 <dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveValues.get_macro"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
+<dd><p>Create a string representation of the macro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+use the index to generate different macros depending on the
+index.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string with the AnyScript macro</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -468,7 +564,7 @@ If None, the command is included in all macros.</li>
 </table>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">LoadValues</span><span class="p">(</span><span class="s1">&#39;c:/values.anyset&#39;</span><span class="p">)</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">LoadValues</span><span class="p">(</span><span class="s1">&#39;c:/values.anyset&#39;</span><span class="p">)</span>
 <span class="go">classoperation Main &quot;Load Values&quot; --file=&quot;c:/values.anyset&quot;</span>
 </pre></div>
 </div>
@@ -476,7 +572,22 @@ If None, the command is included in all macros.</li>
 <dl class="method">
 <dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#LoadValues.get_macro"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
+<dd><p>Create a string representation of the macro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+use the index to generate different macros depending on the
+index.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string with the AnyScript macro</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -486,7 +597,7 @@ If None, the command is included in all macros.</li>
 <dd><p>Create an ‘Update Values’ classoperation macro command.</p>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">UpdateValues</span><span class="p">()</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">UpdateValues</span><span class="p">()</span>
 <span class="go">classoperation Main &quot;Update Values&quot;</span>
 </pre></div>
 </div>
@@ -494,7 +605,22 @@ If None, the command is included in all macros.</li>
 <dl class="method">
 <dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#UpdateValues.get_macro"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
+<dd><p>Create a string representation of the macro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+use the index to generate different macros depending on the
+index.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string with the AnyScript macro</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -504,13 +630,13 @@ If None, the command is included in all macros.</li>
 <dd><p>Create a macro command to select and run an operation.</p>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Kinematics&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.MyStudy.Kinematics&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span> <span class="n">mg</span><span class="o">.</span><span class="n">generate_macros</span><span class="p">())</span>
 <span class="go">operation Main.MyStudy.Kinematics</span>
 <span class="go">run</span>
 </pre></div>
 </div>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;my_model.main.any&#39;</span><span class="p">),</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;my_model.main.any&#39;</span><span class="p">),</span>
 <span class="go">               OperationRun(&#39;Main.MyStudy.Kinematics&#39;))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">create_macros</span><span class="p">()</span>
 <span class="go">[[u&#39;load &quot;my_model.main.any&quot;&#39;, u&#39;operation Main.MyStudy.Kinematics&#39;, u&#39;run&#39;]]</span>
@@ -520,7 +646,22 @@ If None, the command is included in all macros.</li>
 <dl class="method">
 <dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#OperationRun.get_macro"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
+<dd><p>Create a string representation of the macro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+use the index to generate different macros depending on the
+index.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string with the AnyScript macro</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -544,7 +685,7 @@ HDF5 file.</p>
 </table>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SaveData</span><span class="p">(</span><span class="s1">&#39;Main.Study&#39;</span><span class="p">,</span> <span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SaveData</span><span class="p">(</span><span class="s1">&#39;Main.Study&#39;</span><span class="p">,</span> <span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span>
 <span class="go">classoperation Main.Study.Output &quot;Save data&quot; --type=&quot;Deep&quot; --file=&quot;output.anydata.h5&quot;</span>
 </pre></div>
 </div>
@@ -552,7 +693,22 @@ HDF5 file.</p>
 <dl class="method">
 <dt>
 <code class="descname">get_macro</code><span class="sig-paren">(</span><em>index</em>, <em>**kwarg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveData.get_macro"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
+<dd><p>Create a string representation of the macro.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+use the index to generate different macros depending on the
+index.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string with the AnyScript macro</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -586,12 +742,14 @@ HDF5 file.</p>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -644,7 +802,7 @@ HDF5 file.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

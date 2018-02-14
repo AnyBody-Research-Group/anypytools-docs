@@ -6,21 +6,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Working with data from AnyBody &#8212; AnyPyTools 0.10.10 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.10.10',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
@@ -34,8 +26,7 @@
     <link rel="next" title="Batch processing" href="04_Batch_processing_multiple_models.html" />
     <link rel="prev" title="Creating AnyScript Macros" href="02_Generating_macros.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
+  </head><body>
     <div class="relbar-top">
         
     <div class="related" role="navigation" aria-label="related navigation">
@@ -228,7 +219,11 @@ div.nboutput div.output_area.stderr {
 .ansi-white-intense-fg { color: #A1A6B2; }
 .ansi-white-intense-bg { background-color: #A1A6B2; }
 
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
 .ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
 
 /* CSS overrides for cloud theme */
 
@@ -262,16 +257,16 @@ Another option is to have AnyBody write specific variables to a file by
 adding the ‘AnyOutputFile’ class to the AnyBody model.</p>
 <div class="section" id="Working-with-AnyOutputFiles">
 <h2>Working with AnyOutputFiles<a class="headerlink" href="#Working-with-AnyOutputFiles" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal"><span class="pre">AnyOutputFile</span></code> class in the AnyBody Modeling System produces text
+<p>The <code class="docutils literal notranslate"><span class="pre">AnyOutputFile</span></code> class in the AnyBody Modeling System produces text
 files with data. These text files are very similar to comma seperated
 files with some additional header information.</p>
 <p>Here is an example below:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># %load TestOutput.csv</span>
 <span class="o">----</span> <span class="n">AnyBody</span> <span class="n">Output</span> <span class="n">File</span> <span class="o">---------------------------------</span>
 <span class="n">Study</span><span class="p">:</span> <span class="n">Main</span><span class="o">.</span><span class="n">MyStudy</span>
@@ -302,11 +297,11 @@ few convinience functions that makes it very easy to load the files.</p>
 <p>This is especially usefull for the header information which can be
 annoying to parse manually.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [24]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">anypytools.datautils</span> <span class="kn">import</span> <span class="n">read_anyoutputfile</span>
 
 <span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">constants</span> <span class="o">=</span> <span class="n">read_anyoutputfile</span><span class="p">(</span><span class="s2">&quot;TestOutput.csv&quot;</span><span class="p">)</span>
@@ -316,21 +311,21 @@ annoying to parse manually.</p>
 <p>The function returns three outputs. An array with the time dependent
 data, and a list of header names:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">header</span><span class="p">,</span> <span class="n">data</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>Out[22]:
 </pre></div>
 </div>
-<div class="output_area highlight-none"><div class="highlight"><pre>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
 <span></span>([&#39;Main.MyStudy.t&#39;, &#39;Main.MyStudy.MomentArm&#39;],
  array([[  0.00000000e+00,   3.51710675e-02],
         [  6.00000000e-01,   4.25659776e-02],
@@ -342,21 +337,21 @@ data, and a list of header names:</p>
 </div>
 <p>and python dictonary with constant values:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [23]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">constants</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>Out[23]:
 </pre></div>
 </div>
-<div class="output_area highlight-none"><div class="highlight"><pre>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
 <span></span>{&#39;Main.MyModel.Femur.Knee.sRel&#39;: array([ 0. , -0.3,  0. ]),
  &#39;Main.MyStudy.FileOutput.ConstName&#39;: &#39;HelloWorld&#39;,
  &#39;Main.MyStudy.nStep&#39;: 5.0}
@@ -375,11 +370,11 @@ user application and replay the result.</p>
 like most things in AnyBody, this can also be done with a macro command.</p>
 <p>Let us try this with the model from the previous tutorials.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">anypytools.macro_commands</span> <span class="kn">import</span> <span class="n">Load</span><span class="p">,</span> <span class="n">OperationRun</span><span class="p">,</span> <span class="n">SaveData</span>
 
 <span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span>
@@ -392,23 +387,23 @@ like most things in AnyBody, this can also be done with a macro command.</p>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>Out[9]:
 </pre></div>
 </div>
-<div class="output_area highlight-none"><div class="highlight"><pre>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
 <span></span>[load &quot;Knee.any&quot;, operation Main.MyStudy.Kinematics
  run, classoperation Main.MyStudy.Output &quot;Save data&quot; --type=&quot;Deep&quot; --file=&quot;output.anydata.h5&quot;]
 </pre></div>
 </div>
 </div>
-<p>Here we have added a “<code class="docutils literal"><span class="pre">Save</span> <span class="pre">data</span></code>” classoperation to the macro.</p>
+<p>Here we have added a “<code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code>” classoperation to the macro.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
 
@@ -431,15 +426,15 @@ like most things in AnyBody, this can also be done with a macro command.</p>
 <p>The data stored in the file <strong>output.anydata.h5</strong> can be re-loaded in
 the AnyBody GUI application.</p>
 <p>To do this; load the model, and then right click the
-<code class="docutils literal"><span class="pre">Main.MyStudy.Output</span></code> folder and select “Load data”.</p>
+<code class="docutils literal notranslate"><span class="pre">Main.MyStudy.Output</span></code> folder and select “Load data”.</p>
 <p>These files can also be loaded into Matlab or Python. In python this is
 done using the <em>``h5py``</em> module</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">h5py</span>
 
@@ -477,18 +472,18 @@ done using the <em>``h5py``</em> module</p>
 <p>The data structure of the HDF5 files can, unfortunately, be very
 confusing. AnyBody does not save duplicate copies of the same data. If
 there are multiple references to the same folder, only one will be
-present in the HDF5 file. In our model <code class="docutils literal"><span class="pre">Knee.any</span></code> we have a reference
+present in the HDF5 file. In our model <code class="docutils literal notranslate"><span class="pre">Knee.any</span></code> we have a reference
 to the <strong>``Knee``</strong> joint folder just before the <strong>``Model``</strong> folder in
 the study section. Thus, all variables inside the <strong>``Knee``</strong> folder
 cannot be accessed with the path ‘/Output/Model/Knee/…’, but only
 through the path of the reference ‘/Output/kneeref/…’.</p>
 <p>We can see the problem in the following code snippet:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;/Output/Model/Knee/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;/Output/kneeref/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)</span>
@@ -510,11 +505,11 @@ many references. AnyPyTools contains a wrapper for the h5py module,
 which automatically locates the right data, no matter what path is used.
 Using this module, we can easily locate the data.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">anypytools.h5py_wrapper</span> <span class="kn">as</span> <span class="nn">h5py2</span>
 <span class="k">with</span> <span class="n">h5py2</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;/Output/Model/Knee/Pos&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">)</span>
@@ -535,11 +530,11 @@ True
 directly, so we don’t have to replace every . (dot) with a / (slash),
 and remove the stuff before the Output folder.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [33]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="k">with</span> <span class="n">h5py2</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;output.anydata.h5&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">momentarm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;/Output/MomentArm&#39;</span><span class="p">])</span> <span class="c1"># Standard h5py notation</span>
     <span class="n">momentarm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Output.MomentArm&#39;</span><span class="p">])</span>  <span class="c1"># dot notation</span>
@@ -548,11 +543,11 @@ and remove the stuff before the Output folder.</p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [34]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">degrees</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -613,12 +608,14 @@ and remove the stuff before the Output folder.</p>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -670,7 +667,7 @@ and remove the stuff before the Output folder.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

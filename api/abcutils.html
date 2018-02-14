@@ -6,21 +6,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>anypytools.abcutils &#8212; AnyPyTools 0.10.10 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.10.10',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
@@ -34,8 +26,7 @@
     <link rel="next" title="anypytools.datautils" href="datautils.html" />
     <link rel="prev" title="anypytools.datautils.anydatah5_generator" href="anydatah5_generator.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
+  </head><body>
     <div class="relbar-top">
         
     <div class="related" role="navigation" aria-label="related navigation">
@@ -133,8 +124,8 @@ without error. (Defautls to False)</li>
 to assign a more meaningfull name to a batch of logfiles.
 (Defaults to None)</li>
 <li><strong>python_env</strong> (<em>pathlike</em><em>, </em><em>optional</em>) – Path to a python environment/installation that the AnyBody Modeling System
-should use for Python Hooks. This will added the <code class="docutils literal"><span class="pre">PYTHONHOME</span></code> environment variable and
-prepended to the <code class="docutils literal"><span class="pre">PATH</span></code> before starting the AnyBody Console application.
+should use for Python Hooks. This will added the <code class="docutils literal notranslate"><span class="pre">PYTHONHOME</span></code> environment variable and
+prepended to the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> before starting the AnyBody Console application.
 (Defaults to None, which will use the default Python installation on the computer.)</li>
 </ul>
 </td>
@@ -151,11 +142,11 @@ parameter studies and pertubation jobs.</p>
 <div class="admonition-example admonition">
 <p class="first admonition-title">Example</p>
 <p>The following example shows how to instantiate a AnyPyProcess object.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">num_processes</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">return_task_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">num_processes</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">return_task_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <cite>app</cite> object has methods for launching macros, saving results etc.</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load &quot;MyModel.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.MyStudy.Kinematics&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load &quot;MyModel.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.MyStudy.Kinematics&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -187,12 +178,12 @@ the macros did not output any data.</td>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
 <p>Results are easily reloaded:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">load_results</span><span class="p">(</span><span class="s1">&#39;saved_results.db&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Continue processing unfinished batches:</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">load_results</span><span class="p">(</span><span class="s1">&#39;unfinished_results.db&#39;</span><span class="p">)</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">load_results</span><span class="p">(</span><span class="s1">&#39;unfinished_results.db&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">()</span> <span class="c1"># rerun unfinished</span>
 </pre></div>
 </div>
@@ -226,7 +217,7 @@ for saving data in batches.</li>
 </table>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load &quot;model1.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.RunApplication&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load &quot;model1.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.RunApplication&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">save_results</span><span class="p">(</span><span class="s1">&#39;saved_data.db&#39;</span><span class="p">)</span>
 </pre></div>
@@ -296,7 +287,7 @@ the macros did not output any data.</p>
 </table>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;load &quot;model1.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.RunApplication&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;load &quot;model1.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.RunApplication&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
 <span class="go">             [&#39;load &quot;model2.any&quot;&#39;, &#39;operation Main.RunApplication&#39;, &#39;run&#39;],</span>
 <span class="go">             [&#39;load &quot;model3.any&quot;&#39;, &#39;operation Main.RunApplication&#39;, &#39;run&#39;]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">folderlist</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;path1/&#39;</span><span class="p">,</span> <span class="s1">&#39;name1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;path2/&#39;</span><span class="p">,</span> <span class="s1">&#39;name2&#39;</span><span class="p">)]</span>
@@ -374,12 +365,14 @@ application.</li>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -432,7 +425,7 @@ application.</li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

@@ -6,21 +6,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Install guide &#8212; AnyPyTools 0.10.10 documentation</title>
     <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.10.10',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -34,8 +26,7 @@
     <link rel="next" title="Getting Started with AnyPyTools" href="Tutorial/01_Getting_started_with_anypytools.html" />
     <link rel="prev" title="Dependencies" href="dependencies.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
+  </head><body>
     <div class="relbar-top">
         
     <div class="related" role="navigation" aria-label="related navigation">
@@ -103,13 +94,13 @@ div.admonition.inline-title p.admonition-title {
 <p>The easiest way to install AnyPyTools on windows is through the Anaconda Python
 Distribution and the conda package manager.</p>
 <p>Install AnyPyTools with the following command:</p>
-<div class="highlight-bat"><div class="highlight"><pre><span></span><span class="p">&gt;</span> conda config --add channels conda-forge
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="p">&gt;</span> conda config --add channels conda-forge
 <span class="p">&gt;</span> conda install anypytools
 </pre></div>
 </div>
 <p>This will install xonsh and all the recommended dependencies. Next, try to launch the
 interactive AnyPyTools notebook tutorial :</p>
-<div class="highlight-bat"><div class="highlight"><pre><span></span><span class="p">&gt;</span> AnyPyToolsTutorial.bat
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="p">&gt;</span> AnyPyToolsTutorial.bat
 </pre></div>
 </div>
 </div>
@@ -117,9 +108,9 @@ interactive AnyPyTools notebook tutorial :</p>
 <h3>Install from source<a class="headerlink" href="#install-from-source" title="Permalink to this headline">¶</a></h3>
 <p>To install xonsh from source on Windows, first install <a class="reference external" href="https://www.python.org/downloads/windows/">Python</a>. Remember to select “Add python to PATH” during installation.</p>
 <p>Download the latest <a class="reference external" href="https://github.com/anybody-research-group/anypytools/archive/master.zip">anypytools-master.zip</a> from github and unzip it
-to <code class="docutils literal"><span class="pre">anypytools-master</span></code>.</p>
+to <code class="docutils literal notranslate"><span class="pre">anypytools-master</span></code>.</p>
 <p>Now install anypytools:</p>
-<div class="highlight-bat"><div class="highlight"><pre><span></span><span class="p">&gt;</span> cd anypytools-master
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="p">&gt;</span> cd anypytools-master
 <span class="p">&gt;</span> pip install -e
 </pre></div>
 </div>
@@ -168,12 +159,14 @@ to <code class="docutils literal"><span class="pre">anypytools-master</span></co
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -225,7 +218,7 @@ to <code class="docutils literal"><span class="pre">anypytools-master</span></co
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
