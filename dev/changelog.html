@@ -83,10 +83,6 @@ div.admonition.inline-title p.admonition-title {
 </style>
 <div class="section" id="anypytools-change-log">
 <h1>AnyPyTools Change Log<a class="headerlink" href="#anypytools-change-log" title="Permalink to this headline">¶</a></h1>
-<p><strong>New:</strong></p>
-<p><strong>Changed:</strong></p>
-<p><strong>Fixed:</strong></p>
-<p><strong>Removed:</strong></p>
 <div class="section" id="v0-11-0">
 <h2>v0.11.0<a class="headerlink" href="#v0-11-0" title="Permalink to this headline">¶</a></h2>
 <p><strong>New:</strong></p>
@@ -97,13 +93,16 @@ div.admonition.inline-title p.admonition-title {
 <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">priority</span> <span class="o">=</span> <span class="n">IDLE_PRIORITY_CLASS</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Possible values are <code class="docutils literal notranslate"><span class="pre">IDLE_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">BELOW_NORMAL_PRIORITY_CLASS</span></code>,
-<code class="docutils literal notranslate"><span class="pre">NORMAL_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">ABOVE_NORMAL_PRIORITY_CLASS</span></code>. Default is
-<code class="docutils literal notranslate"><span class="pre">BELOW_NORMAL_PRIORITY_CLASS</span></code>.</p>
+<p>Default is <code class="docutils literal notranslate"><span class="pre">BELOW_NORMAL_PRIORITY_CLASS</span></code>, and possible values are</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">IDLE_PRIORITY_CLASS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">BELOW_NORMAL_PRIORITY_CLASS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">NORMAL_PRIORITY_CLASS</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">ABOVE_NORMAL_PRIORITY_CLASS</span></code>.</li>
+</ul>
 </li>
 <li><p class="first">Added argument <code class="docutils literal notranslate"><span class="pre">fatal_warnings</span></code> to treat warnings as errors when running macros.</p>
-<p>..code-block:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProces</span><span class="p">(</span><span class="n">warnings_to_include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;OBJ.MCH.KIN9&#39;</span><span class="p">],</span> <span class="n">fatal_warnings</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProces</span><span class="p">(</span><span class="n">warnings_to_include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;OBJ.MCH.KIN9&#39;</span><span class="p">],</span> <span class="n">fatal_warnings</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The argument will only triggers for specific warnings given
