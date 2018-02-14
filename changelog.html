@@ -8,7 +8,7 @@
   <head>
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>AnyPyTools Change Log &#8212; AnyPyTools 0.10.10 documentation</title>
+    <title>AnyPyTools Change Log &#8212; AnyPyTools 0.11.0 documentation</title>
     <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="devguide.html" title="Developer’s Guide"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 0.10.10 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 0.11.0 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -87,6 +87,47 @@ div.admonition.inline-title p.admonition-title {
 <p><strong>Changed:</strong></p>
 <p><strong>Fixed:</strong></p>
 <p><strong>Removed:</strong></p>
+<div class="section" id="v0-11-0">
+<h2>v0.11.0<a class="headerlink" href="#v0-11-0" title="Permalink to this headline">¶</a></h2>
+<p><strong>New:</strong></p>
+<ul>
+<li><p class="first">Added option to the set the priority of the macro operations.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">IDLE_PRIORITY_CLASS</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">priority</span> <span class="o">=</span> <span class="n">IDLE_PRIORITY_CLASS</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Possible values are <code class="docutils literal notranslate"><span class="pre">IDLE_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">BELOW_NORMAL_PRIORITY_CLASS</span></code>,
+<code class="docutils literal notranslate"><span class="pre">NORMAL_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">ABOVE_NORMAL_PRIORITY_CLASS</span></code>. Default is
+<code class="docutils literal notranslate"><span class="pre">BELOW_NORMAL_PRIORITY_CLASS</span></code>.</p>
+</li>
+<li><p class="first">Added argument <code class="docutils literal notranslate"><span class="pre">fatal_warnings</span></code> to treat warnings as errors when running macros.</p>
+<p>..code-block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProces</span><span class="p">(</span><span class="n">warnings_to_include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;OBJ.MCH.KIN9&#39;</span><span class="p">],</span> <span class="n">fatal_warnings</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The argument will only triggers for specific warnings given
+by <code class="docutils literal notranslate"><span class="pre">warnings_to_include</span></code> argument.</p>
+</li>
+</ul>
+<p><strong>Changed:</strong></p>
+<ul class="simple">
+<li>Macro operation now run with slightly lower priority (BELOW_NORMAL_PRIORITY_CLASS) to prevent
+Windows to become unusable when running many processes.</li>
+</ul>
+<p><strong>Fixed:</strong></p>
+<ul class="simple">
+<li>Fixed a bug preventing really large variables to be read by AnyPyTools. The AnyBody Modeling System
+could split really large data matrixes across several lines in the log files which meant they
+were not picked up. The function <a class="reference internal" href="api/tools.html#anypytools.tools.parse_anybodycon_output" title="anypytools.tools.parse_anybodycon_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">anypytools.tools.parse_anybodycon_output()</span></code></a> has been
+rewritten to fix this.</li>
+</ul>
+<p><strong>Removed:</strong></p>
+<ul class="simple">
+<li>The AnyScript Pygments plugin is no longer part of AnyPyTools. It now has its own library
+<a class="reference external" href="https://pypi.python.org/pypi/pygments-anyscript">pygments_anyscript</a>.</li>
+</ul>
+</div>
 <div class="section" id="v0-10-10">
 <h2>v0.10.10<a class="headerlink" href="#v0-10-10" title="Permalink to this headline">¶</a></h2>
 <p>** fixed: **</p>
@@ -281,6 +322,7 @@ that in the log files.</li>
     <h3><a href="index.html">Page contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">AnyPyTools Change Log</a><ul>
+<li><a class="reference internal" href="#v0-11-0">v0.11.0</a></li>
 <li><a class="reference internal" href="#v0-10-10">v0.10.10</a></li>
 <li><a class="reference internal" href="#v0-10-9">v0.10.9</a></li>
 <li><a class="reference internal" href="#v0-10-8">v0.10.8</a></li>
@@ -372,7 +414,7 @@ that in the log files.</li>
         <li class="right" >
           <a href="devguide.html" title="Developer’s Guide"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 0.10.10 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 0.11.0 documentation</a> &#187;</li>
  
       </ul>
     </div>
