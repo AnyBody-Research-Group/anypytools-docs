@@ -595,84 +595,70 @@
             <span class="k">del</span> <span class="n">_repr_running</span><span class="p">[</span><span class="n">call_key</span><span class="p">]</span>
 
 
-<span class="n">dump_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Main.*=.*;$&#39;</span><span class="p">)</span>
+<span class="n">TRIPEL_QUOTE_WRAP</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([^\[\]&quot;,\s]+)&#39;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">parse_anybodycon_output</span><span class="p">(</span><span class="n">strvar</span><span class="p">,</span> <span class="n">errors_to_ignore</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                            <span class="n">warnings_to_include</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">errors_to_ignore</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">errors_to_ignore</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="n">warnings_to_include</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">warnings_to_include</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="n">out</span> <span class="o">=</span> <span class="n">AnyPyProcessOutput</span><span class="p">()</span>
-    <span class="n">out</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">out</span><span class="p">[</span><span class="s1">&#39;WARNING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="n">dump_path</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">strvar</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
-        <span class="k">if</span> <span class="s1">&#39;#### Macro command&#39;</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">and</span> <span class="s2">&quot;Dump&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
-            <span class="n">me</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;Main[^ </span><span class="se">\&quot;</span><span class="s1">]*&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">me</span><span class="p">:</span>
-                <span class="n">dump_path</span> <span class="o">=</span> <span class="n">me</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">dump_pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
-            <span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="n">last</span> <span class="o">=</span> <span class="n">last</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39; ;&#39;</span><span class="p">)</span>
-            <span class="n">var_name</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-            <span class="n">value_str</span> <span class="o">=</span> <span class="n">last</span>
-            <span class="k">if</span> <span class="n">value_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">value_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">):</span>
-                <span class="n">value_str</span> <span class="o">=</span> <span class="n">value_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="s1">&#39;[&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">,</span> <span class="s1">&#39;]&#39;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">dump_path</span><span class="p">:</span>
-                <span class="n">var_name</span> <span class="o">=</span> <span class="n">dump_path</span>
-                <span class="n">dump_path</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">out</span><span class="p">[</span><span class="n">var_name</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span><span class="n">value_str</span><span class="p">)</span>
-            <span class="k">except</span> <span class="p">(</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">value_str</span> <span class="o">==</span> <span class="s1">&#39;[...]&#39;</span><span class="p">:</span>
-                    <span class="n">value_str</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span>
-                <span class="n">value_str</span><span class="p">,</span> <span class="n">nrep</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">subn</span><span class="p">(</span>
-                    <span class="sa">r</span><span class="s1">&#39;([^\[\]&quot;,\s]+)&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;&#39;&#39;&#39;\1&#39;&#39;&#39;&quot;</span><span class="p">,</span> <span class="n">value_str</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">value_str</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-                    <span class="n">value_str</span> <span class="o">=</span> <span class="s1">&#39;None&#39;</span>
-                <span class="k">if</span> <span class="n">value_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">value_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">):</span>
-                    <span class="n">value_str</span> <span class="o">=</span> <span class="s2">&quot;&#39;&#39;&#39;&quot;</span> <span class="o">+</span> <span class="n">value_str</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&#39;&#39;&#39;&quot;</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">out</span><span class="p">[</span><span class="n">var_name</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span><span class="n">value_str</span><span class="p">)</span>
-                <span class="k">except</span> <span class="p">(</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-                    <span class="n">out</span><span class="p">[</span><span class="n">var_name</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="n">last</span>
-                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                        <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Could not parse console output:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">line</span><span class="p">)</span>
-        <span class="n">line_has_errors</span> <span class="o">=</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;ERROR&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span> <span class="ow">or</span>
-                           <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Model loading skipped&#39;</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">line_has_errors</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">err_str</span> <span class="ow">in</span> <span class="n">errors_to_ignore</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">err_str</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
-                    <span class="k">break</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># This is run if we never break,</span>
-                <span class="c1"># i.e. err was not in the list of errors_to_ignore</span>
-                <span class="n">out</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-        <span class="n">line_has_warning</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s1">&#39;WARNING&#39;</span><span class="p">,</span> <span class="s1">&#39;Failed&#39;</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">line_has_warning</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">warn_str</span> <span class="ow">in</span> <span class="n">warnings_to_include</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">warn_str</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
-                    <span class="n">out</span><span class="p">[</span><span class="s1">&#39;WARNING&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
-                    <span class="k">break</span>
-    <span class="c1"># Convert all list object to numpy arrays</span>
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">out</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-
-    <span class="c1"># Move &#39;ERROR&#39; and &#39;WARNING&#39; entry to the last position in the ordered dict</span>
-    <span class="n">out</span><span class="p">[</span><span class="s1">&#39;WARNING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;WARNING&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-    <span class="n">out</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ERROR&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-
-    <span class="c1"># Remove the ERROR/WARNING key if it does not have any entries</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">del</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;WARNING&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">del</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;WARNING&#39;</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">_parse_data</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a str AnyBody data repr into Numpy array.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">val</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">):</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="s1">&#39;[&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">,</span> <span class="s1">&#39;]&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;[...]&#39;</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span>
+        <span class="n">val</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">TRIPEL_QUOTE_WRAP</span><span class="o">.</span><span class="n">subn</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&#39;&#39;&#39;\1&#39;&#39;&#39;&quot;</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="s1">&#39;None&#39;</span>
+        <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">val</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">):</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="s2">&quot;&#39;&#39;&#39;&quot;</span> <span class="o">+</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&#39;&#39;&#39;&quot;</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">out</span>
+
+
+<span class="n">ERROR_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^((ERROR)|(Model loading skipped)).*$&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+<span class="n">WARNING_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(WARNING).*$&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+<span class="n">DUMP_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(Main.*?)\s=\s(.*?(?:\n\s\s.*?)*);&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="parse_anybodycon_output"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.parse_anybodycon_output">[docs]</a><span class="k">def</span> <span class="nf">parse_anybodycon_output</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">errors_to_ignore</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                            <span class="n">warnings_to_include</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Parse the output log file from AnyBodyConsole to</span>
+<span class="sd">        for data, errors and warnings</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings_to_include</span> <span class="o">=</span> <span class="n">warnings_to_include</span> <span class="ow">or</span> <span class="p">[]</span>
+    <span class="n">errors_to_ignore</span> <span class="o">=</span> <span class="n">errors_to_ignore</span> <span class="ow">or</span> <span class="p">[]</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">AnyPyProcessOutput</span><span class="p">()</span>
+    <span class="c1"># Find all data in logfile</span>
+    <span class="k">for</span> <span class="n">dump</span> <span class="ow">in</span> <span class="n">DUMP_PATTERN</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">dump</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">dump</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">_parse_data</span><span class="p">(</span><span class="n">dump</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Could not parse console output:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">output</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="n">error_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Find all errors in logfile</span>
+    <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">ERROR_PATTERN</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">errors_to_ignore</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">error_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">error_list</span><span class="p">:</span>
+        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_list</span>
+    <span class="c1"># Find all warnings in logfile</span>
+    <span class="n">warning_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">WARNING_PATTERN</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">warnings_to_include</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+                <span class="n">warning_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+                <span class="k">break</span>
+    <span class="k">if</span> <span class="n">warning_list</span><span class="p">:</span>
+        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;WARNING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">warning_list</span></div>
+    <span class="k">return</span> <span class="n">output</span>
 
 
 <div class="viewcode-block" id="get_ncpu"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.get_ncpu">[docs]</a><span class="k">def</span> <span class="nf">get_ncpu</span><span class="p">():</span>

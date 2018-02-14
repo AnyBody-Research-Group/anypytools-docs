@@ -84,8 +84,24 @@ div.admonition.inline-title p.admonition-title {
 <div class="section" id="anypytools-change-log">
 <h1>AnyPyTools Change Log<a class="headerlink" href="#anypytools-change-log" title="Permalink to this headline">¶</a></h1>
 <p><strong>New:</strong></p>
+<ul>
+<li><p class="first">Added argument <code class="docutils literal notranslate"><span class="pre">fatal_warnings</span></code> to treat warnings as errors when running macros.</p>
+<p>..code-block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProces</span><span class="p">(</span><span class="n">warnings_to_include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;OBJ.MCH.KIN9&#39;</span><span class="p">],</span> <span class="n">fatal_warnings</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The argument will only triggers for specific warnings given
+by <code class="docutils literal notranslate"><span class="pre">warnings_to_include</span></code> argument.</p>
+</li>
+</ul>
 <p><strong>Changed:</strong></p>
 <p><strong>Fixed:</strong></p>
+<ul class="simple">
+<li>Fixed a bug preventing really large variables to be read by AnyPyTools. The AnyBody Modeling System
+could split really large data matrixes across several lines in the log files which meant they
+were not picked up. The function <a class="reference internal" href="api/tools.html#anypytools.tools.parse_anybodycon_output" title="anypytools.tools.parse_anybodycon_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">anypytools.tools.parse_anybodycon_output()</span></code></a> has been
+rewritten to fix this.</li>
+</ul>
 <p><strong>Removed:</strong></p>
 <ul class="simple">
 <li>The AnyScript Pygments plugin is no longer part of AnyPyTools. It now has its own library

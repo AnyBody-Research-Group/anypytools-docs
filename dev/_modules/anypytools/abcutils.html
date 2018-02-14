@@ -325,6 +325,13 @@
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">error_msg</span><span class="p">]</span>
 
+    <span class="k">def</span> <span class="nf">add_warnings_to_error_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;WARNING&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_error</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;WARNING&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;WARNING&#39;</span><span class="p">]</span>
+
     <span class="k">def</span> <span class="nf">get_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_task_info</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span>
         <span class="k">if</span> <span class="n">include_task_info</span><span class="p">:</span>
@@ -463,6 +470,9 @@
 <span class="sd">        List of strings that are matched to warnings in the model</span>
 <span class="sd">        output. If a warning with that string is found the warning</span>
 <span class="sd">        is returned in the output. (Defaults to None)</span>
+<span class="sd">    fatal_warnings: bool, optional</span>
+<span class="sd">        Treat warnings as errors. This only triggers for specific warnings given</span>
+<span class="sd">        by ``warnings_to_include`` argument.</span>
 <span class="sd">    return_task_info : bool, optional</span>
 <span class="sd">        Return the task status information when running macros. Defaults to False.</span>
 <span class="sd">    keep_logfiles : bool, optional</span>
@@ -505,6 +515,7 @@
                  <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">warnings_to_include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">fatal_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">return_task_info</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">keep_logfiles</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">logfile_prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -525,6 +536,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">silent</span> <span class="o">=</span> <span class="n">silent</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fatal_warnings</span> <span class="o">=</span> <span class="n">fatal_warnings</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">return_task_info</span> <span class="o">=</span> <span class="n">return_task_info</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ignore_errors</span> <span class="o">=</span> <span class="n">ignore_errors</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">warnings_to_include</span> <span class="o">=</span> <span class="n">warnings_to_include</span>
@@ -841,6 +853,8 @@
                            <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc_tb</span><span class="o">.</span><span class="n">tb_lineno</span><span class="p">))</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
         <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fatal_warnings</span><span class="p">:</span>
+                <span class="n">task</span><span class="o">.</span><span class="n">add_warnings_to_error_list</span><span class="p">()</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep_logfiles</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">task</span><span class="o">.</span><span class="n">has_error</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">silentremove</span><span class="p">(</span><span class="n">logfile</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
