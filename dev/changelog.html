@@ -85,6 +85,16 @@ div.admonition.inline-title p.admonition-title {
 <h1>AnyPyTools Change Log<a class="headerlink" href="#anypytools-change-log" title="Permalink to this headline">¶</a></h1>
 <p><strong>New:</strong></p>
 <ul>
+<li><p class="first">Added option to the set the priority of the macro operations.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">IDLE_PRIORITY_CLASS</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">priority</span> <span class="o">=</span> <span class="n">IDLE_PRIORITY_CLASS</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Possible values are <code class="docutils literal notranslate"><span class="pre">IDLE_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">BELOW_NORMAL_PRIORITY_CLASS</span></code>,
+<code class="docutils literal notranslate"><span class="pre">NORMAL_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">ABOVE_NORMAL_PRIORITY_CLASS</span></code>.
+Previously, the priority was set to normal the new default is <code class="docutils literal notranslate"><span class="pre">BELOW_NORMAL_PRIORITY_CLASS</span></code>.</p>
+</li>
 <li><p class="first">Added argument <code class="docutils literal notranslate"><span class="pre">fatal_warnings</span></code> to treat warnings as errors when running macros.</p>
 <p>..code-block:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProces</span><span class="p">(</span><span class="n">warnings_to_include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;OBJ.MCH.KIN9&#39;</span><span class="p">],</span> <span class="n">fatal_warnings</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

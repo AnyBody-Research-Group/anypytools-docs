@@ -90,7 +90,7 @@ div.admonition.inline-title p.admonition-title {
 <h1>anypytools.AnyPyProcess<a class="headerlink" href="#anypytools-anypyprocess" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt>
-<em class="property">class </em><code class="descclassname">anypytools.</code><code class="descname">AnyPyProcess</code><span class="sig-paren">(</span><em>num_processes=32</em>, <em>anybodycon_path=None</em>, <em>timeout=3600</em>, <em>silent=False</em>, <em>ignore_errors=None</em>, <em>warnings_to_include=None</em>, <em>fatal_warnings=False</em>, <em>return_task_info=False</em>, <em>keep_logfiles=False</em>, <em>logfile_prefix=None</em>, <em>python_env=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property">class </em><code class="descclassname">anypytools.</code><code class="descname">AnyPyProcess</code><span class="sig-paren">(</span><em>num_processes=32</em>, <em>anybodycon_path=None</em>, <em>timeout=3600</em>, <em>silent=False</em>, <em>ignore_errors=None</em>, <em>warnings_to_include=None</em>, <em>fatal_warnings=False</em>, <em>return_task_info=False</em>, <em>keep_logfiles=False</em>, <em>logfile_prefix=None</em>, <em>python_env=None</em>, <em>priority=16384</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Class for configuring batch process jobs of AnyBody models.</p>
 <p>This is the main interface to control the AnyBody console application from
 python. The class stores all the configuration about how AnyBody is run.
@@ -120,13 +120,17 @@ by <code class="docutils literal notranslate"><span class="pre">warnings_to_incl
 <li><strong>return_task_info</strong> (<em>bool</em><em>, </em><em>optional</em>) – Return the task status information when running macros. Defaults to False.</li>
 <li><strong>keep_logfiles</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True logfile will never be removed. Even if a simulations successeds
 without error. (Defautls to False)</li>
-<li><strong>logfile_prefix</strong> (<em>str</em><em>, </em><em>option</em>) – String which will be prefixed to the generated log files. This can be used
+<li><strong>logfile_prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – String which will be prefixed to the generated log files. This can be used
 to assign a more meaningfull name to a batch of logfiles.
 (Defaults to None)</li>
 <li><strong>python_env</strong> (<em>pathlike</em><em>, </em><em>optional</em>) – Path to a python environment/installation that the AnyBody Modeling System
 should use for Python Hooks. This will added the <code class="docutils literal notranslate"><span class="pre">PYTHONHOME</span></code> environment variable and
 prepended to the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> before starting the AnyBody Console application.
 (Defaults to None, which will use the default Python installation on the computer.)</li>
+<li><strong>priority</strong> (<em>int</em><em>, </em><em>optional</em>) – The priority of the subprocesses. This can be on of the following:
+<code class="docutils literal notranslate"><span class="pre">anypytools.IDLE_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">anypytools.BELOW_NORMAL_PRIORITY_CLASS</span></code>,
+<code class="docutils literal notranslate"><span class="pre">anypytools.NORMAL_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">anypytools.HIGH_PRIORITY_CLASS</span></code>
+Default is BELOW_NORMAL_PRIORITY_CLASS.</li>
 </ul>
 </td>
 </tr>
