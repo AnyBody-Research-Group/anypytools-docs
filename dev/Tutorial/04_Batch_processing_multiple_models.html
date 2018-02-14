@@ -6,21 +6,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Batch processing &#8212; AnyPyTools 0.10.10 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.10.10',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
@@ -34,8 +26,7 @@
     <link rel="next" title="Advanced Examples" href="05_Monte_Carlo_studies_etc.html" />
     <link rel="prev" title="Working with data from AnyBody" href="03_Working_with_output_from_Anybody.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
+  </head><body>
     <div class="relbar-top">
         
     <div class="related" role="navigation" aria-label="related navigation">
@@ -228,7 +219,11 @@ div.nboutput div.output_area.stderr {
 .ansi-white-intense-fg { color: #A1A6B2; }
 .ansi-white-intense-bg { background-color: #A1A6B2; }
 
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
 .ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
 
 /* CSS overrides for cloud theme */
 
@@ -274,13 +269,13 @@ own main file.</p>
 <p>This <a class="reference external" href="Tutorial%20files/BatchProcessExample.zip">(zip)</a> illustrates
 the concept of a single model with many main files. The model is based
 on the Arm2D demo from the AnyBody tutorials. The main files are located
-in subfolders (<code class="docutils literal"><span class="pre">model1</span></code>-<code class="docutils literal"><span class="pre">model9</span></code>).</p>
+in subfolders (<code class="docutils literal notranslate"><span class="pre">model1</span></code>-<code class="docutils literal notranslate"><span class="pre">model9</span></code>).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="o">!</span>dir /d  <span class="s2">&quot;Tutorial files/BatchProcess&quot;</span>
 </pre></div>
 </div>
@@ -304,11 +299,11 @@ Demo.Arm2D.any    [model4]          [model8]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="o">!</span>dir /s /b <span class="s2">&quot;main.any&quot;</span>
 </pre></div>
 </div>
@@ -329,14 +324,14 @@ C:\Users\mel\Documents\AnyPyTools\Tutorial\Tutorial files\BatchProcess\model8\ma
 C:\Users\mel\Documents\AnyPyTools\Tutorial\Tutorial files\BatchProcess\model9\main.any
 </pre></div></div>
 </div>
-<p>Each of main files <code class="docutils literal"><span class="pre">main.any</span></code> has it own set of parameters, and they
-all include the same common fiile <code class="docutils literal"><span class="pre">Demo.Arm2D.any</span></code>.</p>
+<p>Each of main files <code class="docutils literal notranslate"><span class="pre">main.any</span></code> has it own set of parameters, and they
+all include the same common fiile <code class="docutils literal notranslate"><span class="pre">Demo.Arm2D.any</span></code>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none"><div class="highlight"><pre>
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span>
 
 <span class="n">folderlist</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Tutorial files/BatchProcess&quot;</span><span class="p">]</span>
@@ -403,12 +398,14 @@ all include the same common fiile <code class="docutils literal"><span class="pr
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -460,7 +457,7 @@ all include the same common fiile <code class="docutils literal"><span class="pr
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

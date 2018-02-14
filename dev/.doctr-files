@@ -56,6 +56,7 @@ dev/_static/comment-bright.png
 dev/_static/comment-close.png
 dev/_static/comment.png
 dev/_static/doctools.js
+dev/_static/documentation_options.js
 dev/_static/down-pressed.png
 dev/_static/down.png
 dev/_static/file.png
@@ -66,7 +67,7 @@ dev/_static/icon-note.png
 dev/_static/icon-seealso.png
 dev/_static/icon-todo.png
 dev/_static/icon-warning.png
-dev/_static/jquery-3.1.0.js
+dev/_static/jquery-3.2.1.js
 dev/_static/jquery.cookie.js
 dev/_static/jquery.js
 dev/_static/minus.png
