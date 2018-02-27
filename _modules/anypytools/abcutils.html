@@ -330,13 +330,6 @@
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">error_msg</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">add_warnings_to_error_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="s1">&#39;WARNING&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_error</span><span class="p">():</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;WARNING&#39;</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;WARNING&#39;</span><span class="p">]</span>
-
     <span class="k">def</span> <span class="nf">get_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_task_info</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span>
         <span class="k">if</span> <span class="n">include_task_info</span><span class="p">:</span>
@@ -858,7 +851,8 @@
                     <span class="n">task</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">parse_anybodycon_output</span><span class="p">(</span>
                         <span class="n">logfile</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">ignore_errors</span><span class="p">,</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">warnings_to_include</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">warnings_to_include</span><span class="p">,</span>
+                        <span class="n">fatal_warnings</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fatal_warnings</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_obj</span><span class="p">,</span> <span class="n">exc_tb</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span>
             <span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">exc_tb</span><span class="o">.</span><span class="n">tb_frame</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_filename</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
@@ -866,8 +860,6 @@
                            <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc_tb</span><span class="o">.</span><span class="n">tb_lineno</span><span class="p">))</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
         <span class="k">finally</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fatal_warnings</span><span class="p">:</span>
-                <span class="n">task</span><span class="o">.</span><span class="n">add_warnings_to_error_list</span><span class="p">()</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep_logfiles</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">task</span><span class="o">.</span><span class="n">has_error</span><span class="p">():</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">silentremove</span><span class="p">(</span><span class="n">logfile</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
