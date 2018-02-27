@@ -165,7 +165,7 @@
     <span class="sd">&quot;&quot;&quot;Wraps text to fit the terminal window.&quot;&quot;&quot;</span>
     <span class="n">width</span> <span class="o">=</span> <span class="mi">120</span>
     <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="o">.</span><span class="n">major</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="n">width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">shutil</span><span class="o">.</span><span class="n">get_terminal_size</span><span class="p">()</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">shutil</span><span class="o">.</span><span class="n">get_terminal_size</span><span class="p">()</span><span class="o">.</span><span class="n">columns</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">subsequent_indent</span> <span class="o">=</span> <span class="n">subsequent_indent</span> <span class="ow">or</span> <span class="n">initial_indent</span>
     <span class="k">return</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span>
                          <span class="n">initial_indent</span><span class="o">=</span><span class="n">initial_indent</span><span class="p">,</span></div>
@@ -643,9 +643,11 @@
 
 
 <div class="viewcode-block" id="parse_anybodycon_output"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.parse_anybodycon_output">[docs]</a><span class="k">def</span> <span class="nf">parse_anybodycon_output</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">errors_to_ignore</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                            <span class="n">warnings_to_include</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                            <span class="n">warnings_to_include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                            <span class="n">fatal_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Parse the output log file from AnyBodyConsole to</span>
-<span class="sd">        for data, errors and warnings</span>
+<span class="sd">        for data, errors and warnings. If fatal_warnins is</span>
+<span class="sd">        True, then warnings are also added to the error list.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">warnings_to_include</span> <span class="o">=</span> <span class="n">warnings_to_include</span> <span class="ow">or</span> <span class="p">[]</span>
     <span class="n">errors_to_ignore</span> <span class="o">=</span> <span class="n">errors_to_ignore</span> <span class="ow">or</span> <span class="p">[]</span>
@@ -659,22 +661,28 @@
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Could not parse console output:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
         <span class="n">output</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
     <span class="n">error_list</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="c1"># Find all errors in logfile</span>
-    <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">ERROR_PATTERN</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">errors_to_ignore</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">_add_non_ignored_errors</span><span class="p">(</span><span class="n">error_line</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">ignored_err</span> <span class="ow">in</span> <span class="n">errors_to_ignore</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ignored_err</span> <span class="ow">in</span> <span class="n">error_line</span><span class="p">:</span>
                 <span class="k">break</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">error_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">error_list</span><span class="p">:</span>
-        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_list</span>
+            <span class="n">error_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error_line</span><span class="p">)</span>
+
+    <span class="c1"># Find all errors in logfile</span>
+    <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">ERROR_PATTERN</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+        <span class="n">_add_non_ignored_errors</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
     <span class="c1"># Find all warnings in logfile</span>
     <span class="n">warning_list</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">WARNING_PATTERN</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">warnings_to_include</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">fatal_warnings</span><span class="p">:</span>
+                    <span class="n">_add_non_ignored_errors</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
                 <span class="n">warning_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
                 <span class="k">break</span>
+    <span class="k">if</span> <span class="n">error_list</span><span class="p">:</span>
+        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_list</span>
     <span class="k">if</span> <span class="n">warning_list</span><span class="p">:</span>
         <span class="n">output</span><span class="p">[</span><span class="s1">&#39;WARNING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">warning_list</span></div>
     <span class="k">return</span> <span class="n">output</span>
