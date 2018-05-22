@@ -6,9 +6,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>anypytools.pytest_plugin &#8212; AnyPyTools 0.11.1 documentation</title>
+    <title>anypytools.pytest_plugin &#8212; AnyPyTools 0.12.0 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 0.11.1 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 0.12.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -90,8 +90,8 @@
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">yield</span>
-    <span class="k">finally</span><span class="p">:</span></div>
-        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">oldpwd</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">oldpwd</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="AnyTestSession"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestSession">[docs]</a><span class="k">class</span> <span class="nc">AnyTestSession</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -127,8 +127,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ams_version</span> <span class="o">=</span> <span class="n">anybodycon_version</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ams_path</span><span class="p">)</span>
         <span class="n">major_ammr_ver</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ammr_version</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="mi">2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bm_constants_map</span> <span class="o">=</span> <span class="n">get_bm_constants</span><span class="p">(</span><span class="n">ammr_path</span><span class="o">=</span><span class="n">ammr_path</span><span class="p">,</span> <span class="n">ammr_version</span><span class="o">=</span><span class="n">major_ammr_ver</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">compare_session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_compare_session</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></div>
-        <span class="bp">self</span><span class="o">.</span><span class="n">run_compare_test</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">compare_session</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compare_session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_compare_session</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_compare_test</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">compare_session</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AnyTestSession.get_compare_session"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestSession.get_compare_session">[docs]</a>    <span class="k">def</span> <span class="nf">get_compare_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the session to compare against.&quot;&quot;&quot;</span>
@@ -141,15 +141,15 @@
             <span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_storage_folder</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">session</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s1">&#39;Could not find any stored test runs to compare against&#39;</span><span class="p">)</span></div>
-        <span class="k">return</span> <span class="n">session</span>
+                <span class="s1">&#39;Could not find any stored test runs to compare against&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">session</span></div>
 
 <div class="viewcode-block" id="AnyTestSession.finalize"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestSession.finalize">[docs]</a>    <span class="k">def</span> <span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Finalize a session.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">:</span>
             <span class="n">storage_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basefolder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_run_folder</span><span class="p">):</span></div>
-                <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_run_folder</span><span class="p">,</span> <span class="n">storage_folder</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_run_folder</span><span class="p">):</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_run_folder</span><span class="p">,</span> <span class="n">storage_folder</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">session_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -162,8 +162,8 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">compare_session</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[]</span>
         <span class="k">with</span> <span class="n">cwd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">compare_session</span><span class="p">):</span>
-            <span class="n">stored_h5files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;**/*.anydata.h5&#39;</span><span class="p">)</span></div>
-        <span class="k">return</span> <span class="nb">zip</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">compare_session</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">stored_h5files</span><span class="p">),</span> <span class="n">stored_h5files</span><span class="p">)</span>
+            <span class="n">stored_h5files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;**/*.anydata.h5&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">zip</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">compare_session</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">stored_h5files</span><span class="p">),</span> <span class="n">stored_h5files</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_get_largest_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the heights prefix number for folders in the self.basedir.&quot;&quot;&quot;</span>
@@ -201,8 +201,8 @@
             <span class="n">compare_test_name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="n">compare_test_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">current_run_folder</span><span class="p">,</span> <span class="n">compare_test_name</span><span class="p">)</span>
-        <span class="n">studyname</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.anydata.h5&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">study</span><span class="p">)</span></div></div>
-        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">compare_test_folder</span><span class="p">,</span> <span class="n">studyname</span><span class="p">)</span>
+        <span class="n">studyname</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.anydata.h5&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">study</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">compare_test_folder</span><span class="p">,</span> <span class="n">studyname</span><span class="p">)</span></div></div>
 
 
 <span class="k">def</span> <span class="nf">_limited_traceback</span><span class="p">(</span><span class="n">excinfo</span><span class="p">):</span>
@@ -242,15 +242,15 @@
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">yield</span>
-    <span class="k">finally</span><span class="p">:</span></div>
-        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">prev_cwd</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">prev_cwd</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="pytest_generate_tests"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.pytest_generate_tests">[docs]</a><span class="k">def</span> <span class="nf">pytest_generate_tests</span><span class="p">(</span><span class="n">metafunc</span><span class="p">):</span>
     <span class="k">if</span> <span class="s1">&#39;anytest_compare&#39;</span> <span class="ow">in</span> <span class="n">metafunc</span><span class="o">.</span><span class="n">fixturenames</span><span class="p">:</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">get_compare_params</span><span class="p">()</span>
-        <span class="n">metafunc</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;anytest_compare&quot;</span><span class="p">,</span></div>
-                             <span class="n">params</span><span class="p">,</span> <span class="n">indirect</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">metafunc</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;anytest_compare&quot;</span><span class="p">,</span>
+                             <span class="n">params</span><span class="p">,</span> <span class="n">indirect</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="anytest_compare"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.anytest_compare">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
@@ -263,14 +263,14 @@
         <span class="n">stored_h5</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">storage_folder</span><span class="p">,</span> <span class="n">h5file</span><span class="p">))</span>
         <span class="k">yield</span> <span class="n">current_h5</span><span class="p">,</span> <span class="n">stored_h5</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">pytest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="s1">&#39;No matching h5 file found&#39;</span><span class="p">)</span></div>
-        <span class="k">yield</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">pytest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="s1">&#39;No matching h5 file found&#39;</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="pytest_collect_file"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_collect_file">[docs]</a><span class="k">def</span> <span class="nf">pytest_collect_file</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Collect AnyScript test files.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;.any&quot;</span> <span class="ow">and</span> <span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;test_&quot;</span><span class="p">):</span></div>
-        <span class="k">return</span> <span class="n">AnyFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;.any&quot;</span> <span class="ow">and</span> <span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;test_&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">AnyFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">_format_switches</span><span class="p">(</span><span class="n">defs</span><span class="p">):</span>
@@ -337,36 +337,36 @@
         <span class="k">elif</span> <span class="n">item</span><span class="o">.</span><span class="n">get_marker</span><span class="p">(</span><span class="s1">&#39;stores_h5&#39;</span><span class="p">):</span>
             <span class="n">first</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">other</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></div>
-    <span class="n">items</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="n">other</span> <span class="o">+</span> <span class="n">last</span>
+            <span class="n">other</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="n">items</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="n">other</span> <span class="o">+</span> <span class="n">last</span></div>
 
 
 <div class="viewcode-block" id="pytest_collection_finish"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_collection_finish">[docs]</a><span class="k">def</span> <span class="nf">pytest_collection_finish</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Print the AnyBodyCon executable used in the test.&quot;&quot;&quot;</span></div>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Using AnyBodyCon: &#39;</span><span class="p">,</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">ams_path</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Print the AnyBodyCon executable used in the test.&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Using AnyBodyCon: &#39;</span><span class="p">,</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">ams_path</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="pytest_namespace"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_namespace">[docs]</a><span class="k">def</span> <span class="nf">pytest_namespace</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Add an instance of the AnyTestSession class to the pytest name space.&quot;&quot;&quot;</span></div>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;anytest&#39;</span><span class="p">:</span> <span class="n">AnyTestSession</span><span class="p">()}</span>
+    <span class="sd">&quot;&quot;&quot;Add an instance of the AnyTestSession class to the pytest name space.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;anytest&#39;</span><span class="p">:</span> <span class="n">AnyTestSession</span><span class="p">()}</span></div>
 
 
 <div class="viewcode-block" id="pytest_configure"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_configure">[docs]</a><span class="k">def</span> <span class="nf">pytest_configure</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Configure the AnyTest framework.&quot;&quot;&quot;</span></div>
-    <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Configure the AnyTest framework.&quot;&quot;&quot;</span>
+    <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="pytest_unconfigure"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_unconfigure">[docs]</a><span class="k">def</span> <span class="nf">pytest_unconfigure</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Finialize the test session.&quot;&quot;&quot;</span></div>
-    <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Finialize the test session.&quot;&quot;&quot;</span>
+    <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="write_macro_file"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.write_macro_file">[docs]</a><span class="k">def</span> <span class="nf">write_macro_file</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">macro</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Write list of macros to a file.&quot;&quot;&quot;</span>
     <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.anymcr&#39;</span><span class="p">)</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">mcr</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">mcr</span> <span class="ow">in</span> <span class="n">macro</span><span class="p">])</span></div>
-    <span class="k">return</span> <span class="n">filename</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">mcr</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">mcr</span> <span class="ow">in</span> <span class="n">macro</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">filename</span></div>
 
 
 <div class="viewcode-block" id="AnyFile"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyFile">[docs]</a><span class="k">class</span> <span class="nc">AnyFile</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">File</span><span class="p">):</span>
@@ -389,8 +389,8 @@
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">defs</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                 <span class="k">yield</span> <span class="n">AnyItem</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">basename</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
                               <span class="n">defs</span><span class="o">=</span><span class="n">defs</span><span class="p">,</span> <span class="n">paths</span><span class="o">=</span><span class="n">paths</span><span class="p">,</span> <span class="o">**</span><span class="n">header</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span></div></div>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Malformed input: &#39;</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Malformed input: &#39;</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="AnyItem"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyItem">[docs]</a><span class="k">class</span> <span class="nc">AnyItem</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">Item</span><span class="p">):</span>
@@ -494,8 +494,8 @@
                 <span class="n">macro_name</span> <span class="o">=</span> <span class="n">write_macro_file</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">dirname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">macro</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">macro_file</span> <span class="o">=</span> <span class="n">macro_name</span>
-            <span class="k">raise</span> <span class="n">AnyException</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
-        <span class="k">return</span>
+            <span class="k">raise</span> <span class="n">AnyException</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span></div>
 
 <div class="viewcode-block" id="AnyItem.repr_failure"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyItem.repr_failure">[docs]</a>    <span class="k">def</span> <span class="nf">repr_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">excinfo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Print a representation when a test failes.&quot;&quot;&quot;</span>
@@ -516,15 +516,15 @@
                 <span class="n">rtn</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
                 <span class="n">rtn</span> <span class="o">+=</span> <span class="n">wraptext</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">initial_indent</span><span class="o">=</span><span class="s1">&#39;&gt; &#39;</span><span class="p">,</span> <span class="n">subsequent_indent</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">rtn</span>
-        <span class="k">else</span><span class="p">:</span></div>
-            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">excinfo</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">excinfo</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AnyItem.reportinfo"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.AnyItem.reportinfo">[docs]</a>    <span class="k">def</span> <span class="nf">reportinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div></div>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;AnyBody Simulation: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+<div class="viewcode-block" id="AnyItem.reportinfo"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.AnyItem.reportinfo">[docs]</a>    <span class="k">def</span> <span class="nf">reportinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;AnyBody Simulation: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div></div>
 
 
-<div class="viewcode-block" id="AnyException"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyException">[docs]</a><span class="k">class</span> <span class="nc">AnyException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span></div>
-    <span class="sd">&quot;&quot;&quot;Custom exception for error reporting.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="AnyException"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyException">[docs]</a><span class="k">class</span> <span class="nc">AnyException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Custom exception for error reporting.&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="parse_save_name"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.parse_save_name">[docs]</a><span class="k">def</span> <span class="nf">parse_save_name</span><span class="p">(</span><span class="n">stringval</span><span class="p">):</span>
@@ -534,8 +534,8 @@
     <span class="n">not_allowed</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="sa">r</span><span class="s2">&quot;\/:*?&lt;&gt;|&quot;</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">stringval</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">not_allowed</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentTypeError</span><span class="p">(</span><span class="s2">&quot;Characters are not allowed: &quot;</span>
-                                         <span class="s2">&quot;/:*?&lt;&gt;|</span><span class="se">\\</span><span class="s2"> (it has </span><span class="si">%r</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">not_allowed</span><span class="p">)</span></div>
-    <span class="k">return</span> <span class="n">stringval</span>
+                                         <span class="s2">&quot;/:*?&lt;&gt;|</span><span class="se">\\</span><span class="s2"> (it has </span><span class="si">%r</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">not_allowed</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">stringval</span></div>
 
 
 <div class="viewcode-block" id="pytest_addoption"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.pytest_addoption">[docs]</a><span class="k">def</span> <span class="nf">pytest_addoption</span><span class="p">(</span><span class="n">parser</span><span class="p">):</span>
@@ -575,8 +575,8 @@
     <span class="n">group</span><span class="o">.</span><span class="n">addoption</span><span class="p">(</span><span class="s2">&quot;--anytest-storage&quot;</span><span class="p">,</span>
                     <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.anytest&quot;</span><span class="p">),</span>
                     <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Specify a path to store the runs (when --anytest-save &quot;</span>
-                    <span class="s2">&quot;or --benchmark-autosave are used). Default: </span><span class="si">%(default)r</span><span class="s2">.&quot;</span></div>
-                    <span class="p">)</span>
+                    <span class="s2">&quot;or --benchmark-autosave are used). Default: </span><span class="si">%(default)r</span><span class="s2">.&quot;</span>
+                    <span class="p">)</span></div>
 </pre></div>
 
           </div>
@@ -634,7 +634,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 0.11.1 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 0.12.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
@@ -643,7 +643,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
