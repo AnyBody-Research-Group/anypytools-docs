@@ -637,6 +637,20 @@
 <span class="n">NORMAL_PRIORITY_CLASS</span> <span class="o">=</span> <span class="mh">0x0020</span>
 
 
+<span class="n">NAME_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Main\.[\w\.]*&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="correct_dump_prefix"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.correct_dump_prefix">[docs]</a><span class="k">def</span> <span class="nf">correct_dump_prefix</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Find the correct prefix to use in the output &quot;&quot;&quot;</span>
+    <span class="c1"># The -1000 hack is to avoid coping large strings in memory,</span>
+    <span class="c1"># since we really only need to access the previous line.</span>
+    <span class="n">dumpline</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span> <span class="o">-</span> <span class="mi">1000</span><span class="p">):</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">dumpline</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#### Macro command&#39;</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">NAME_PATTERN</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">dumpline</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+
 <span class="n">ERROR_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^((ERROR)|(Model loading skipped)).*$&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
 <span class="n">WARNING_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(WARNING).*$&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
 <span class="n">DUMP_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(Main.*?)\s=\s(.*?(?:\n\s\s.*?)*);&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
@@ -653,8 +667,13 @@
     <span class="n">errors_to_ignore</span> <span class="o">=</span> <span class="n">errors_to_ignore</span> <span class="ow">or</span> <span class="p">[]</span>
     <span class="n">output</span> <span class="o">=</span> <span class="n">AnyPyProcessOutput</span><span class="p">()</span>
     <span class="c1"># Find all data in logfile</span>
+    <span class="n">prefix_replacement</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">dump</span> <span class="ow">in</span> <span class="n">DUMP_PATTERN</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
         <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">dump</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">dump</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">new_prefix</span> <span class="o">=</span> <span class="n">correct_dump_prefix</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">dump</span><span class="o">.</span><span class="n">start</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">new_prefix</span><span class="p">:</span>
+            <span class="n">prefix_replacement</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">new_prefix</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">*</span><span class="n">prefix_replacement</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">val</span> <span class="o">=</span> <span class="n">_parse_data</span><span class="p">(</span><span class="n">dump</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
