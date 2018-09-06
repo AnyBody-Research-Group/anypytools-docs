@@ -152,26 +152,8 @@ early in the pytest startup.</p>
 
 <dl class="method">
 <dt>
-<code class="descname">get_compare_fname</code><span class="sig-paren">(</span><em>name</em>, <em>id</em>, <em>study</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyTestSession.get_compare_fname"><span class="viewcode-link">[source]</span></a></dt>
+<code class="descname">get_save_fname</code><span class="sig-paren">(</span><em>name</em>, <em>id</em>, <em>study</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyTestSession.get_save_fname"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Return the name of the compare h5file, and ensure the parent folder exists.</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">get_compare_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyTestSession.get_compare_params"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Return (base, h5) for every file compare store.</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">get_compare_session</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyTestSession.get_compare_session"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Get the session to compare against.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="descname">session_name</code></dt>
-<dd><p>Return the session name if class configured to save data.</p>
 </dd></dl>
 
 </dd></dl>
@@ -198,12 +180,6 @@ early in the pytest startup.</p>
 <dt>
 <code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">pytest_collection_finish</code><span class="sig-paren">(</span><em>session</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#pytest_collection_finish"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Print the AnyBodyCon executable used in the test.</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">pytest_collection_modifyitems</code><span class="sig-paren">(</span><em>session</em>, <em>config</em>, <em>items</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#pytest_collection_modifyitems"><span class="viewcode-link">[source]</span></a></dt>
-<dd><p>Order test so compare tests are executed last.</p>
 </dd></dl>
 
 <dl class="function">
