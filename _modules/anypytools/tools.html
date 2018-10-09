@@ -59,17 +59,6 @@
 
 <span class="sd">@author: Morten</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="c1"># Python 2/3 compatibility imports</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span>
-                        <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="p">(</span><span class="n">ascii</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">chr</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="nb">hex</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span>  <span class="c1"># noqa</span>
-                      <span class="nb">int</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="nb">next</span><span class="p">,</span> <span class="nb">oct</span><span class="p">,</span> <span class="nb">open</span><span class="p">,</span> <span class="nb">pow</span><span class="p">,</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">round</span><span class="p">,</span>
-                      <span class="nb">str</span><span class="p">,</span> <span class="nb">super</span><span class="p">,</span> <span class="nb">zip</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">past.builtins</span> <span class="k">import</span> <span class="n">basestring</span> <span class="k">as</span> <span class="n">string_types</span>  <span class="c1"># noqa</span>
-
-
-<span class="c1"># Standard lib imports</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -77,7 +66,6 @@
 <span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">import</span> <span class="nn">errno</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">import</span> <span class="nn">pprint</span> <span class="k">as</span> <span class="nn">_pprint</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">textwrap</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
@@ -85,38 +73,14 @@
 <span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
 <span class="kn">from</span> <span class="nn">ast</span> <span class="k">import</span> <span class="n">literal_eval</span>
 <span class="kn">from</span> <span class="nn">_thread</span> <span class="k">import</span> <span class="n">get_ident</span> <span class="k">as</span> <span class="n">_get_ident</span>
 
 <span class="c1"># external imports</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">future.utils</span> <span class="k">import</span> <span class="n">raise_from</span>
 
-
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;abt.anypytools&#39;</span><span class="p">)</span>
-
-
-<span class="c1"># This hacks pprint to always return strings witout u&#39; prefix</span>
-<span class="c1"># important when running doctest in both python 2 og python 3</span>
-<div class="viewcode-block" id="Py3kPrettyPrinter"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.Py3kPrettyPrinter">[docs]</a><span class="k">class</span> <span class="nc">Py3kPrettyPrinter</span><span class="p">(</span><span class="n">_pprint</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Pretty printer which creates strings without the u&#39; prefix.&quot;&quot;&quot;</span>
-
-<div class="viewcode-block" id="Py3kPrettyPrinter.format"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.Py3kPrettyPrinter.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">object</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">maxlevels</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">unicode</span><span class="p">):</span>
-                <span class="n">rep</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="nb">object</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;&#39;&quot;</span>
-                <span class="k">return</span> <span class="p">(</span><span class="n">rep</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
-            <span class="k">pass</span>
-        <span class="k">return</span> <span class="n">_pprint</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">object</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">maxlevels</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span></div></div>
-
-
-<span class="k">def</span> <span class="nf">py3k_pprint</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="n">printer</span> <span class="o">=</span> <span class="n">Py3kPrettyPrinter</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">110</span><span class="p">)</span>
-    <span class="n">printer</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-
-
-<span class="n">pprint</span> <span class="o">=</span> <span class="n">py3k_pprint</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;abt.anypytools&quot;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">run_from_ipython</span><span class="p">():</span>
@@ -127,25 +91,26 @@
         <span class="k">return</span> <span class="kc">False</span>
 
 
-<span class="n">ANYBODYCON_VERSION_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;.*version\s:\s(?P&lt;version&gt;(?P&lt;v1&gt;\d)\.\s(?P&lt;v2&gt;\d)&#39;</span>
-                                   <span class="sa">r</span><span class="s1">&#39;\.\s(?P&lt;v3&gt;\d)\.\s(?P&lt;build&gt;\d+)\s\((?P&lt;arc&gt;.*)\))&#39;</span><span class="p">)</span>
+<span class="n">ANYBODYCON_VERSION_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">&quot;.*version\s:\s(?P&lt;version&gt;(?P&lt;v1&gt;\d)\.\s(?P&lt;v2&gt;\d)&quot;</span>
+    <span class="sa">r</span><span class="s2">&quot;\.\s(?P&lt;v3&gt;\d)\.\s(?P&lt;build&gt;\d+)\s\((?P&lt;arc&gt;.*)\))&quot;</span>
+<span class="p">)</span>
 
-<span class="n">ON_WINDOWS</span> <span class="o">=</span> <span class="p">(</span><span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Windows&#39;</span><span class="p">)</span>
+<span class="n">ON_WINDOWS</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Windows&quot;</span>
 
 
 <div class="viewcode-block" id="anybodycon_version"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.anybodycon_version">[docs]</a><span class="k">def</span> <span class="nf">anybodycon_version</span><span class="p">(</span><span class="n">anybodyconpath</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the AnyBodyCon version.&quot;&quot;&quot;</span>
     <span class="n">anybodyconpath</span> <span class="o">=</span> <span class="n">anybodyconpath</span> <span class="ow">or</span> <span class="n">get_anybodycon_path</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">anybodyconpath</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">&#39;0.0.0&#39;</span>
+        <span class="k">return</span> <span class="s2">&quot;0.0.0&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">anybodyconpath</span><span class="p">,</span> <span class="s1">&#39;-ni&#39;</span><span class="p">],</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="n">anybodyconpath</span><span class="p">,</span> <span class="s2">&quot;-ni&quot;</span><span class="p">],</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">FileNotFoundError</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">ANYBODYCON_VERSION_RE</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span></div>
 
 
 <span class="n">AMMR_VERSION_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;.*AMMR_VERSION\s&quot;(?P&lt;version&gt;.*)&quot;&#39;</span><span class="p">)</span>
@@ -156,28 +121,31 @@
         <span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
     <span class="n">match</span> <span class="o">=</span> <span class="n">AMMR_VERSION_RE</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">match</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">match</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;Unknown AMMR version&quot;</span>
 
 
-<div class="viewcode-block" id="wraptext"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.wraptext">[docs]</a><span class="k">def</span> <span class="nf">wraptext</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">initial_indent</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">subsequent_indent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="wraptext"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.wraptext">[docs]</a><span class="k">def</span> <span class="nf">wraptext</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">initial_indent</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">subsequent_indent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Wraps text to fit the terminal window.&quot;&quot;&quot;</span>
     <span class="n">width</span> <span class="o">=</span> <span class="mi">120</span>
     <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="o">.</span><span class="n">major</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="n">width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">shutil</span><span class="o">.</span><span class="n">get_terminal_size</span><span class="p">()</span><span class="o">.</span><span class="n">columns</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">subsequent_indent</span> <span class="o">=</span> <span class="n">subsequent_indent</span> <span class="ow">or</span> <span class="n">initial_indent</span>
-    <span class="k">return</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span>
-                         <span class="n">initial_indent</span><span class="o">=</span><span class="n">initial_indent</span><span class="p">,</span>
-                         <span class="n">subsequent_indent</span><span class="o">=</span><span class="n">subsequent_indent</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span>
+        <span class="n">elem</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">initial_indent</span><span class="o">=</span><span class="n">initial_indent</span><span class="p">,</span> <span class="n">subsequent_indent</span><span class="o">=</span><span class="n">subsequent_indent</span>
+    <span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">amm_xml_version</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">tree</span> <span class="o">=</span> <span class="n">xml</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">ElementTree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
         <span class="n">version</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
-        <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">v3</span> <span class="o">=</span> <span class="n">version</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;v1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">version</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
-            <span class="s1">&#39;v2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">version</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;v3&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">v3</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">version</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;v1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+            <span class="n">version</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;v2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+            <span class="n">version</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;v3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">.</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">v3</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="n">vstring</span> <span class="o">=</span> <span class="s2">&quot;Unknown AMMR version&quot;</span>
@@ -191,8 +159,8 @@
 <span class="sd">    for a ammr_verion.any file to parse.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-    <span class="n">version_files</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;AMMR.version.any&#39;</span><span class="p">,</span> <span class="s1">&#39;AMMR.version.xml&#39;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">basedir</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">walk_up</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+    <span class="n">version_files</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;AMMR.version.any&quot;</span><span class="p">,</span> <span class="s2">&quot;AMMR.version.xml&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">basedir</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">walk_up</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">fn</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">version_files</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">basedir</span>
     <span class="k">else</span><span class="p">:</span>
@@ -206,8 +174,8 @@
 <span class="sd">    for a ammr_verion.any file to parse.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-    <span class="n">any_version_file</span> <span class="o">=</span> <span class="s1">&#39;AMMR.version.any&#39;</span>
-    <span class="n">xml_version_file</span> <span class="o">=</span> <span class="s1">&#39;AMMR.version.xml&#39;</span>
+    <span class="n">any_version_file</span> <span class="o">=</span> <span class="s2">&quot;AMMR.version.any&quot;</span>
+    <span class="n">xml_version_file</span> <span class="o">=</span> <span class="s2">&quot;AMMR.version.xml&quot;</span>
     <span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">any_version_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">ammr_any_version</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">any_version_file</span><span class="p">))</span>
@@ -229,7 +197,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">nondirs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">nondirs</span>
-    <span class="n">new_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+    <span class="n">new_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="s2">&quot;..&quot;</span><span class="p">))</span>
     <span class="c1"># see if we are at the top</span>
     <span class="k">if</span> <span class="n">new_path</span> <span class="o">==</span> <span class="n">bottom</span><span class="p">:</span>
         <span class="k">return</span>
@@ -243,55 +211,55 @@
 
 <span class="k">def</span> <span class="nf">get_tag</span><span class="p">(</span><span class="n">project_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">info</span> <span class="o">=</span> <span class="n">get_git_commit_info</span><span class="p">(</span><span class="n">project_name</span><span class="p">)</span>
-    <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">get_current_time</span><span class="p">()]</span>
-    <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;dirty&#39;</span><span class="p">]:</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="p">[</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="n">get_current_time</span><span class="p">()]</span>
+    <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;dirty&quot;</span><span class="p">]:</span>
         <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;uncommited-changes&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">get_git_project_name</span><span class="p">():</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;git config --local remote.origin.url&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;git config --local remote.origin.url&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">):</span>
         <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;/([^/]*)\.git&#39;</span><span class="p">,</span> <span class="n">output</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/([^/]*)\.git&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">name</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
 
 
 <div class="viewcode-block" id="get_git_branch_info"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.get_git_branch_info">[docs]</a><span class="k">def</span> <span class="nf">get_git_branch_info</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Return the branch name for git repository.&quot;&quot;&quot;</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;git rev-parse --abbrev-ref HEAD&#39;</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;git rev-parse --abbrev-ref HEAD&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">branch</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">branch</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">):</span>
+        <span class="n">branch</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">branch</span> <span class="o">==</span> <span class="s1">&#39;HEAD&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;(detached head)&#39;</span>
+        <span class="k">if</span> <span class="n">branch</span> <span class="o">==</span> <span class="s2">&quot;HEAD&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;(detached head)&quot;</span>
     <span class="k">return</span> <span class="n">branch</span></div>
 
 
 <span class="k">def</span> <span class="nf">get_git_commit_info</span><span class="p">(</span><span class="n">project_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">dirty</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">commit</span> <span class="o">=</span> <span class="s1">&#39;unversioned&#39;</span>
+    <span class="n">commit</span> <span class="o">=</span> <span class="s2">&quot;unversioned&quot;</span>
     <span class="n">project_name</span> <span class="o">=</span> <span class="n">project_name</span> <span class="ow">or</span> <span class="n">get_git_project_name</span><span class="p">()</span>
     <span class="n">branch</span> <span class="o">=</span> <span class="n">get_git_branch_info</span><span class="p">()</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;git describe --dirty --always --long --abbrev=6&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;git describe --dirty --always --long --abbrev=6&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">):</span>
         <span class="k">pass</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;dirty&#39;</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;dirty&quot;</span><span class="p">:</span>
                 <span class="n">dirty</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="n">output</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-            <span class="n">commit</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">commit</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span>
+            <span class="n">commit</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;g&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">commit</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
     <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">commit</span><span class="p">,</span> <span class="n">dirty</span><span class="o">=</span><span class="n">dirty</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="n">project_name</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="n">branch</span><span class="p">)</span>
 
 
@@ -308,11 +276,13 @@
         <span class="k">return</span> <span class="n">key</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matching</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;WARNING: &quot;</span><span class="si">{}</span><span class="s1">&quot; key is not unique.&#39;</span>
-              <span class="s1">&#39; Using the first match&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&gt; &#39;</span> <span class="o">+</span> <span class="n">matching</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s1">&#39;WARNING: &quot;</span><span class="si">{}</span><span class="s1">&quot; key is not unique.&#39;</span> <span class="s2">&quot; Using the first match&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">),</span>
+            <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&gt; &quot;</span> <span class="o">+</span> <span class="n">matching</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">matching</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; * &#39;</span> <span class="o">+</span> <span class="n">match</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; * &quot;</span> <span class="o">+</span> <span class="n">match</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">matching</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -334,30 +304,34 @@
             <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">):</span>
-                <span class="k">raise</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                <span class="k">raise</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="c1"># Find the entries where i matches the keys</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">_get_first_key_match</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-                    <span class="p">[</span><span class="nb">super</span><span class="p">(</span><span class="n">AnyPyProcessOutput</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-                     <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">]</span>
+                    <span class="p">[</span>
+                        <span class="nb">super</span><span class="p">(</span><span class="n">AnyPyProcessOutputList</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span>
+                    <span class="p">]</span>
                 <span class="p">)</span>
-            <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                 <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot; The key: &#39;</span><span class="si">{}</span><span class="s2">&#39; is not present in all elements of the output.&quot;</span>
-                <span class="n">raise_from</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">)),</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="kn">from</span> <span class="nn">None</span>
+            <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s2">&quot;O&quot;</span><span class="p">):</span>
                 <span class="c1"># Data will be stacked as an array of objects, if the length of the</span>
                 <span class="c1"># time dimension is not consistant across simulations. Warn that some numpy</span>
                 <span class="c1"># featurs will not be avaiable.</span>
-                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">\The length of the time variable varies across macros. &#39;</span>
-                              <span class="s1">&#39;Numpy does not support ragged arrays. Data is returned  &#39;</span>
-                              <span class="s1">&#39;as an array of array objects&#39;</span><span class="p">)</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The length of the time variable varies across macros. &quot;</span>
+                    <span class="s2">&quot;Numpy does not support ragged arrays. Data is returned  &quot;</span>
+                    <span class="s2">&quot;as an array of array objects&quot;</span>
+                <span class="p">)</span>
             <span class="k">return</span> <span class="n">data</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
@@ -384,28 +358,28 @@
             <span class="n">repr_list</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">AnyPyProcessOutput</span><span class="p">):</span>
-                    <span class="n">repr_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;  &#39;</span> <span class="o">+</span> <span class="n">_pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">elem</span><span class="p">))</span>
+                    <span class="n">repr_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;  &quot;</span> <span class="o">+</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">elem</span><span class="p">))</span>
                     <span class="k">continue</span>
-                <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">elem</span><span class="o">.</span><span class="n">_repr_gen</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">elem</span><span class="o">.</span><span class="n">_repr_gen</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">):</span>
                     <span class="n">repr_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">maxlength</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">repr_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">maxlength</span><span class="p">:</span>
-                        <span class="n">repr_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;  ...&#39;</span><span class="p">)</span>
+                        <span class="n">repr_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;  ...&quot;</span><span class="p">)</span>
                         <span class="k">return</span> <span class="n">repr_list</span>
-                <span class="k">if</span> <span class="n">repr_list</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
-                    <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span>
+                <span class="k">if</span> <span class="n">repr_list</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">):</span>
+                    <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span>
 
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">repr_list</span><span class="p">):</span>
-                <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
-                <span class="n">repr_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;[&#39;</span> <span class="o">+</span> <span class="n">repr_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
-                <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span>
+                <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+                <span class="n">repr_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;[&quot;</span> <span class="o">+</span> <span class="n">repr_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+                <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">repr_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">repr_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;[]&#39;</span><span class="p">)</span>
+                <span class="n">repr_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[]&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">repr_list</span>
 
-        <span class="n">repr_str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">create_repr</span><span class="p">(</span><span class="mi">500</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">repr_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">):</span>
+        <span class="n">repr_str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">create_repr</span><span class="p">(</span><span class="mi">500</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">repr_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">):</span>
             <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-            <span class="n">repr_str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">create_repr</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+            <span class="n">repr_str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">create_repr</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
             <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">repr_str</span>
 
@@ -413,24 +387,17 @@
         <span class="sd">&quot;&quot;&quot;Filter elements for whichfunction returns true.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">AnyPyProcessOutputList</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div>
 
-    <span class="k">def</span> <span class="nf">to_dynd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">anypytools.blaze_converter</span> <span class="k">import</span> <span class="n">convert</span>
-            <span class="k">return</span> <span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;The packages libdynd, dynd-python, datashape, &#39;</span>
-                   <span class="s1">&#39;odo/into must be installed to convert data&#39;</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">raise_from</span><span class="p">(</span><span class="ne">ImportError</span><span class="p">(</span><span class="n">msg</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">shelve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;results&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">shelve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;results&quot;</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">shelve</span>
+
         <span class="n">db</span> <span class="o">=</span> <span class="n">shelve</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="n">db</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
         <span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_shelve</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;results&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">from_shelve</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;results&quot;</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">shelve</span>
+
         <span class="n">db</span> <span class="o">=</span> <span class="n">shelve</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
         <span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -439,16 +406,14 @@
 <div class="viewcode-block" id="AnyPyProcessOutputList.tolist"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.AnyPyProcessOutputList.tolist">[docs]</a>    <span class="k">def</span> <span class="nf">tolist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return as native python types (list of dicts).&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">else</span> <span class="n">v</span>
-                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">elem</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-            <span class="p">}</span>
+            <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">elem</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
             <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span>
         <span class="p">]</span></div></div>
 
 
 <span class="k">def</span> <span class="nf">_expand_short_path_name</span><span class="p">(</span><span class="n">short_path_name</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">ctypes</span> <span class="k">import</span> <span class="n">create_unicode_buffer</span><span class="p">,</span> <span class="n">windll</span>
+
     <span class="n">BUFFER_SIZE</span> <span class="o">=</span> <span class="mi">500</span>
     <span class="n">buffer</span> <span class="o">=</span> <span class="n">create_unicode_buffer</span><span class="p">(</span><span class="n">BUFFER_SIZE</span><span class="p">)</span>
     <span class="n">get_long_path_name</span> <span class="o">=</span> <span class="n">windll</span><span class="o">.</span><span class="n">kernel32</span><span class="o">.</span><span class="n">GetLongPathNameW</span>
@@ -466,22 +431,22 @@
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">_winreg</span> <span class="k">as</span> <span class="nn">winreg</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">abpath</span> <span class="o">=</span> <span class="n">winreg</span><span class="o">.</span><span class="n">QueryValue</span><span class="p">(</span><span class="n">winreg</span><span class="o">.</span><span class="n">HKEY_CLASSES_ROOT</span><span class="p">,</span>
-                                   <span class="s1">&#39;AnyBody.AnyScript\shell\open\command&#39;</span><span class="p">)</span>
+        <span class="n">abpath</span> <span class="o">=</span> <span class="n">winreg</span><span class="o">.</span><span class="n">QueryValue</span><span class="p">(</span>
+            <span class="n">winreg</span><span class="o">.</span><span class="n">HKEY_CLASSES_ROOT</span><span class="p">,</span> <span class="s2">&quot;AnyBody.AnyScript</span><span class="se">\\</span><span class="s2">shell</span><span class="se">\\</span><span class="s2">open</span><span class="se">\\</span><span class="s2">command&quot;</span>
+        <span class="p">)</span>
     <span class="k">except</span> <span class="ne">WindowsError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">WindowsError</span><span class="p">(</span><span class="s1">&#39;Could not locate AnyBody in registry&#39;</span><span class="p">)</span>
-    <span class="n">abpath</span> <span class="o">=</span> <span class="n">abpath</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
-    <span class="n">abpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">abpath</span><span class="p">),</span> <span class="s1">&#39;AnyBodyCon.exe&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="s1">&#39;~&#39;</span> <span class="ow">in</span> <span class="n">abpath</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">WindowsError</span><span class="p">(</span><span class="s2">&quot;Could not locate AnyBody in registry&quot;</span><span class="p">)</span>
+    <span class="n">abpath</span> <span class="o">=</span> <span class="n">abpath</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+    <span class="n">abpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">abpath</span><span class="p">),</span> <span class="s2">&quot;AnyBodyCon.exe&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;~&quot;</span> <span class="ow">in</span> <span class="n">abpath</span><span class="p">:</span>
         <span class="n">abpath</span> <span class="o">=</span> <span class="n">_expand_short_path_name</span><span class="p">(</span><span class="n">abpath</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">abpath</span></div>
 
 
 <span class="k">def</span> <span class="nf">define2str</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">):</span>
-            <span class="n">defstr</span> <span class="o">=</span> <span class="s1">&#39;-def </span><span class="si">%s</span><span class="s1">=---&quot;</span><span class="se">\\</span><span class="s1">&quot;</span><span class="si">%s</span><span class="se">\\</span><span class="s1">&quot;&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span>
-                                                <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\\\</span><span class="s1">&#39;</span><span class="p">))</span>
+            <span class="n">defstr</span> <span class="o">=</span> <span class="s1">&#39;-def </span><span class="si">%s</span><span class="s1">=---&quot;</span><span class="se">\\</span><span class="s1">&quot;</span><span class="si">%s</span><span class="se">\\</span><span class="s1">&quot;&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\\\</span><span class="s2">&quot;</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">defstr</span> <span class="o">=</span> <span class="s1">&#39;-def </span><span class="si">%s</span><span class="s1">=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -493,8 +458,8 @@
     <span class="k">return</span> <span class="n">defstr</span>
 
 
-<span class="k">def</span> <span class="nf">path2str</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s1">&#39;-p </span><span class="si">%s</span><span class="s1">=---&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\\\</span><span class="s1">&#39;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">path2str</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39;-p </span><span class="si">%s</span><span class="s1">=---&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\\\</span><span class="s2">&quot;</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="getsubdirs"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.getsubdirs">[docs]</a><span class="k">def</span> <span class="nf">getsubdirs</span><span class="p">(</span><span class="n">toppath</span><span class="p">,</span> <span class="n">search_string</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
@@ -512,7 +477,7 @@
     <span class="n">dirlist</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">search_string</span> <span class="o">==</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
         <span class="n">dirlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">toppath</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">toppath</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">toppath</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">reg_prog</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">fname</span><span class="p">)):</span>
                 <span class="n">dirlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
@@ -526,29 +491,31 @@
 
 <div class="viewcode-block" id="array2anyscript"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.array2anyscript">[docs]</a><span class="k">def</span> <span class="nf">array2anyscript</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Format a numpy array as an anyscript variable.&quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">tostr</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+        <span class="c1"># pylint: disable=no-member</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isreal</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
-            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{:.12g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="n">string_types</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{:.12g}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">)):</span>
             <span class="k">return</span> <span class="s1">&#39;&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">createsubarr</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
         <span class="n">outstr</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-                <span class="k">return</span> <span class="s1">&#39;{&#39;</span> <span class="o">+</span> <span class="n">tostr</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;},&#39;</span>
-            <span class="n">outstr</span> <span class="o">+=</span> <span class="s1">&#39;{&#39;</span>
+                <span class="k">return</span> <span class="s2">&quot;{&quot;</span> <span class="o">+</span> <span class="n">tostr</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;},&quot;</span>
+            <span class="n">outstr</span> <span class="o">+=</span> <span class="s2">&quot;{&quot;</span>
             <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
                 <span class="n">outstr</span> <span class="o">+=</span> <span class="n">createsubarr</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-            <span class="n">outstr</span> <span class="o">=</span> <span class="n">outstr</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;},&#39;</span>
+            <span class="n">outstr</span> <span class="o">=</span> <span class="n">outstr</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;},&quot;</span>
             <span class="k">return</span> <span class="n">outstr</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">outstr</span> <span class="o">+</span> <span class="n">tostr</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span>
+            <span class="k">return</span> <span class="n">outstr</span> <span class="o">+</span> <span class="n">tostr</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">tostr</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">createsubarr</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">createsubarr</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">tostr</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -561,49 +528,49 @@
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">AnyPyProcessOutput</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">_get_first_key_match</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">super</span><span class="p">(</span><span class="n">AnyPyProcessOutput</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">AnyPyProcessOutput</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;The key </span><span class="si">{}</span><span class="s1"> could not be found in the data&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">raise_from</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">(</span><span class="n">msg</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The key </span><span class="si">{}</span><span class="s2"> could not be found in the data&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">None</span>
 
     <span class="k">def</span> <span class="nf">_repr_gen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
         <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">items</span><span class="p">:</span>
-            <span class="k">yield</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span>
+            <span class="k">yield</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span>
             <span class="k">return</span>
 
-        <span class="n">indent</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s1">&#39;{&#39;</span>
+        <span class="n">indent</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;{&quot;</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;}&#39;</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="s2">&quot;}&quot;</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span>
-            <span class="n">key_str</span> <span class="o">=</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span>
-            <span class="n">val_str</span> <span class="o">=</span> <span class="n">_pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span>
+            <span class="n">key_str</span> <span class="o">=</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span>
+            <span class="n">val_str</span> <span class="o">=</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">key_str</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">val_str</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">:</span>
                 <span class="k">yield</span> <span class="n">indent</span> <span class="o">+</span> <span class="n">key_str</span> <span class="o">+</span> <span class="n">val_str</span> <span class="o">+</span> <span class="n">end</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">yield</span> <span class="n">indent</span> <span class="o">+</span> <span class="n">key_str</span>
-                <span class="n">indent</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s1">&#39;   &#39;</span>
-                <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">val_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
-                    <span class="k">yield</span> <span class="n">indent</span> <span class="o">+</span> <span class="n">l</span> <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">indent</span> <span class="o">+</span> <span class="n">l</span> <span class="o">+</span> <span class="n">end</span>
-            <span class="n">indent</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+                <span class="n">indent</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;   &quot;</span>
+                <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">val_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                    <span class="k">yield</span> <span class="n">indent</span> <span class="o">+</span> <span class="n">l</span> <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">indent</span> <span class="o">+</span> <span class="n">l</span> <span class="o">+</span> <span class="n">end</span>
+            <span class="n">indent</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
 
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_repr_running</span><span class="o">=</span><span class="p">{},</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_repr_running</span><span class="o">=</span><span class="p">{},</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="n">call_key</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">_get_ident</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">_repr_running</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">_repr_running</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="n">call_key</span> <span class="ow">in</span> <span class="n">_repr_running</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;...&#39;</span>
+            <span class="k">return</span> <span class="s2">&quot;...&quot;</span>
         <span class="n">_repr_running</span><span class="p">[</span><span class="n">call_key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">()&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,)</span>
-            <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_repr_gen</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+                <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">()&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,)</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_repr_gen</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="k">del</span> <span class="n">_repr_running</span><span class="p">[</span><span class="n">call_key</span><span class="p">]</span></div>
 
@@ -613,16 +580,16 @@
 
 <span class="k">def</span> <span class="nf">_parse_data</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Convert a str AnyBody data repr into Numpy array.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">val</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">):</span>
-        <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="s1">&#39;[&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">,</span> <span class="s1">&#39;]&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;{&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">val</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;}&quot;</span><span class="p">):</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{&quot;</span><span class="p">,</span> <span class="s2">&quot;[&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;}&quot;</span><span class="p">,</span> <span class="s2">&quot;]&quot;</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
     <span class="k">except</span> <span class="p">(</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;[...]&#39;</span><span class="p">:</span>
-            <span class="n">val</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s2">&quot;[...]&quot;</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="s2">&quot;...&quot;</span>
         <span class="n">val</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">TRIPEL_QUOTE_WRAP</span><span class="o">.</span><span class="n">subn</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&#39;&#39;&#39;\1&#39;&#39;&#39;&quot;</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-            <span class="n">val</span> <span class="o">=</span> <span class="s1">&#39;None&#39;</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
         <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">val</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">):</span>
             <span class="n">val</span> <span class="o">=</span> <span class="s2">&quot;&#39;&#39;&#39;&quot;</span> <span class="o">+</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;&#39;&#39;&#39;&quot;</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
@@ -644,21 +611,23 @@
     <span class="sd">&quot;&quot;&quot; Find the correct prefix to use in the output &quot;&quot;&quot;</span>
     <span class="c1"># The -1000 hack is to avoid coping large strings in memory,</span>
     <span class="c1"># since we really only need to access the previous line.</span>
-    <span class="n">dumpline</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span> <span class="o">-</span> <span class="mi">1000</span><span class="p">):</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">dumpline</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#### Macro command&#39;</span><span class="p">):</span>
+    <span class="n">dumpline</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span> <span class="o">-</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">:</span> <span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">dumpline</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#### Macro command&quot;</span><span class="p">):</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">NAME_PATTERN</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">dumpline</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
 
 
-<span class="n">ERROR_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^((ERROR)|(Model loading skipped)).*$&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
-<span class="n">WARNING_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(WARNING).*$&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
-<span class="n">DUMP_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(Main.*?)\s=\s(.*?(?:\n\s\s.*?)*);&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+<span class="n">ERROR_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">&quot;^((ERROR)|(Model loading skipped)).*$&quot;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span>
+<span class="p">)</span>
+<span class="n">WARNING_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(WARNING).*$&quot;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+<span class="n">DUMP_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(Main.*?)\s=\s(.*?(?:\n\s\s.*?)*);&quot;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="parse_anybodycon_output"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.parse_anybodycon_output">[docs]</a><span class="k">def</span> <span class="nf">parse_anybodycon_output</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">errors_to_ignore</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                            <span class="n">warnings_to_include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                            <span class="n">fatal_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="parse_anybodycon_output"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.parse_anybodycon_output">[docs]</a><span class="k">def</span> <span class="nf">parse_anybodycon_output</span><span class="p">(</span>
+    <span class="n">raw</span><span class="p">,</span> <span class="n">errors_to_ignore</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">warnings_to_include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fatal_warnings</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Parse the output log file from AnyBodyConsole to</span>
 <span class="sd">        for data, errors and warnings. If fatal_warnins is</span>
 <span class="sd">        True, then warnings are also added to the error list.</span>
@@ -667,7 +636,7 @@
     <span class="n">errors_to_ignore</span> <span class="o">=</span> <span class="n">errors_to_ignore</span> <span class="ow">or</span> <span class="p">[]</span>
     <span class="n">output</span> <span class="o">=</span> <span class="n">AnyPyProcessOutput</span><span class="p">()</span>
     <span class="c1"># Find all data in logfile</span>
-    <span class="n">prefix_replacement</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">prefix_replacement</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">dump</span> <span class="ow">in</span> <span class="n">DUMP_PATTERN</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
         <span class="n">name</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">dump</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">dump</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">new_prefix</span> <span class="o">=</span> <span class="n">correct_dump_prefix</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">dump</span><span class="o">.</span><span class="n">start</span><span class="p">())</span>
@@ -677,7 +646,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">val</span> <span class="o">=</span> <span class="n">_parse_data</span><span class="p">(</span><span class="n">dump</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">SyntaxError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Could not parse console output:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Could not parse console output:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
         <span class="n">output</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
     <span class="n">error_list</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -701,15 +670,16 @@
                 <span class="n">warning_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
                 <span class="k">break</span>
     <span class="k">if</span> <span class="n">error_list</span><span class="p">:</span>
-        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_list</span>
+        <span class="n">output</span><span class="p">[</span><span class="s2">&quot;ERROR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_list</span>
     <span class="k">if</span> <span class="n">warning_list</span><span class="p">:</span>
-        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;WARNING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">warning_list</span>
+        <span class="n">output</span><span class="p">[</span><span class="s2">&quot;WARNING&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">warning_list</span>
     <span class="k">return</span> <span class="n">output</span></div>
 
 
 <div class="viewcode-block" id="get_ncpu"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.get_ncpu">[docs]</a><span class="k">def</span> <span class="nf">get_ncpu</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Return the number of CPUs in the computer.&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">cpu_count</span>
+
     <span class="k">return</span> <span class="n">cpu_count</span><span class="p">()</span></div>
 
 
@@ -721,7 +691,7 @@
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">errno</span> <span class="o">!=</span> <span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">:</span>  <span class="c1"># errno.ENOENT : no such file or directory</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Error removing file: &#39;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Error removing file: &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
             <span class="k">raise</span>  <span class="c1"># re-raise exception if a different error occured</span></div>
 
 
@@ -758,90 +728,90 @@
 
 
 <span class="n">_BM_CONSTANTS_AMMR1</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;ON&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;OFF&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_MUSCLES_NONE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_MUSCLES_SIMPLE_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_MUSCLES_3E_HILL_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_HAND_SIMPLE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_HAND_DETAILED_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_LEG_MODEL_OFF_&#39;</span><span class="p">:</span> <span class="s1">&#39;&quot;OFF&quot;&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_LEG_MODEL_Leg_&#39;</span><span class="p">:</span> <span class="s1">&#39;&quot;Leg&quot;&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_LEG_MODEL_TLEM_&#39;</span><span class="p">:</span> <span class="s1">&#39;&quot;TLEM&quot;&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_MORPH_NONE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_MORPH_TRUNK_TO_LEG_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_MORPH_LEG_TO_TRUNK_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_PELVIS_DISPLAY_NONE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_PELVIS_DISPLAY_LEGPELVIS_ONLY_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_PELVIS_DISPLAY_LEGANDTRUNKPELVIS_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_CUSTOM_&#39;</span><span class="p">:</span> <span class="s1">&#39;-1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_STANDARD_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_UNIFORM_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_LENGTHMASS_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_LENGTHMASSFAT_&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_UNIFORM_EXTMEASUREMENTS_&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_LENGTHMASS_EXTMEASUREMENTS_&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_LENGTHMASSFAT_EXTMEASUREMENTS_&#39;</span><span class="p">:</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_LENGTHMASSFAT_MULTIDOFS_&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;ON&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OFF&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_MUSCLES_NONE_&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_MUSCLES_SIMPLE_&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_MUSCLES_3E_HILL_&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_HAND_SIMPLE_&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_HAND_DETAILED_&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_LEG_MODEL_OFF_&quot;</span><span class="p">:</span> <span class="s1">&#39;&quot;OFF&quot;&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;_LEG_MODEL_Leg_&quot;</span><span class="p">:</span> <span class="s1">&#39;&quot;Leg&quot;&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;_LEG_MODEL_TLEM_&quot;</span><span class="p">:</span> <span class="s1">&#39;&quot;TLEM&quot;&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;_MORPH_NONE_&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_MORPH_TRUNK_TO_LEG_&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_MORPH_LEG_TO_TRUNK_&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_PELVIS_DISPLAY_NONE_&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_PELVIS_DISPLAY_LEGPELVIS_ONLY_&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_PELVIS_DISPLAY_LEGANDTRUNKPELVIS_&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_CUSTOM_&quot;</span><span class="p">:</span> <span class="s2">&quot;-1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_STANDARD_&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_UNIFORM_&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_LENGTHMASS_&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_LENGTHMASSFAT_&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_UNIFORM_EXTMEASUREMENTS_&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_LENGTHMASS_EXTMEASUREMENTS_&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_LENGTHMASSFAT_EXTMEASUREMENTS_&quot;</span><span class="p">:</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_LENGTHMASSFAT_MULTIDOFS_&quot;</span><span class="p">:</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">_BM_CONSTANTS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;ON&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;OFF&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_MUSCLES_NONE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_MUSCLES_SIMPLE_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_MUSCLES_3E_HILL_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_LEG_MODEL_OFF_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_LEG_MODEL_TLEM_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_LEG_MODEL_TLEM1_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_LEG_MODEL_TLEM2_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_LEG_MODEL_Leg_&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_LEG_MODEL_LEG_&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_MORPH_NONE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_MORPH_TRUNK_TO_LEG_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_MORPH_LEG_TO_TRUNK_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_PELVIS_DISPLAY_NONE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_PELVIS_DISPLAY_LEGPELVIS_ONLY_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_PELVIS_DISPLAY_LEGANDTRUNKPELVIS_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_DISC_STIFFNESS_NONE_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_DISC_STIFFNESS_LINEAR_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_DISC_STIFFNESS_NONLINEAR_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_CUSTOM_&#39;</span><span class="p">:</span> <span class="s1">&#39;-1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_STANDARD_&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_UNIFORM_&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_LENGTHMASS_&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_LENGTHMASSFAT_&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_UNIFORM_EXTMEASUREMENTS_&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_LENGTHMASS_EXTMEASUREMENTS_&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_LENGTHMASSFAT_EXTMEASUREMENTS_&#39;</span><span class="p">:</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_SCALING_LENGTHMASSFAT_MULTIDOFS_&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_MUSCLES_NONE&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_MUSCLES_SIMPLE&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_MUSCLES_3E_HILL&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_HAND_SIMPLE&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_HAND_DETAILED&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_LEG_MODEL_OFF&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_LEG_MODEL_TLEM&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_LEG_MODEL_TLEM2&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_LEG_MODEL_Leg&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_MORPH_NONE&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_MORPH_TRUNK_TO_LEG&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_MORPH_LEG_TO_TRUNK&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_PELVIS_DISPLAY_NONE&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_PELVIS_DISPLAY_LEGPELVIS_ONLY&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_PELVIS_DISPLAY_LEGANDTRUNKPELVIS&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_DISC_STIFFNESS_NONE&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_DISC_STIFFNESS_LINEAR&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_DISC_STIFFNESS_NONLINEAR &#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_SCALING_CUSTOM&#39;</span><span class="p">:</span> <span class="s1">&#39;-1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_SCALING_STANDARD&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_SCALING_UNIFORM&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_SCALING_LENGTHMASS&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_SCALING_LENGTHMASSFAT&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_SCALING_UNIFORM_EXTMEASUREMENTS&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_SCALING_LENGTHMASS_EXTMEASUREMENTS&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_SCALING_LENGTHMASSFAT_EXTMEASUREMENTS&#39;</span><span class="p">:</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CONST_SCALING_LENGTHMASSFAT_MULTIDOFS&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;ON&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OFF&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_MUSCLES_NONE_&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_MUSCLES_SIMPLE_&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_MUSCLES_3E_HILL_&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_LEG_MODEL_OFF_&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_LEG_MODEL_TLEM_&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_LEG_MODEL_TLEM1_&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_LEG_MODEL_TLEM2_&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_LEG_MODEL_Leg_&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_LEG_MODEL_LEG_&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_MORPH_NONE_&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_MORPH_TRUNK_TO_LEG_&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_MORPH_LEG_TO_TRUNK_&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_PELVIS_DISPLAY_NONE_&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_PELVIS_DISPLAY_LEGPELVIS_ONLY_&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_PELVIS_DISPLAY_LEGANDTRUNKPELVIS_&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_DISC_STIFFNESS_NONE_&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_DISC_STIFFNESS_LINEAR_&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_DISC_STIFFNESS_NONLINEAR_&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_CUSTOM_&quot;</span><span class="p">:</span> <span class="s2">&quot;-1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_STANDARD_&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_UNIFORM_&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_LENGTHMASS_&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_LENGTHMASSFAT_&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_UNIFORM_EXTMEASUREMENTS_&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_LENGTHMASS_EXTMEASUREMENTS_&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_LENGTHMASSFAT_EXTMEASUREMENTS_&quot;</span><span class="p">:</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;_SCALING_LENGTHMASSFAT_MULTIDOFS_&quot;</span><span class="p">:</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_MUSCLES_NONE&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_MUSCLES_SIMPLE&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_MUSCLES_3E_HILL&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_HAND_SIMPLE&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_HAND_DETAILED&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_LEG_MODEL_OFF&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_LEG_MODEL_TLEM&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_LEG_MODEL_TLEM2&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_LEG_MODEL_Leg&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_MORPH_NONE&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_MORPH_TRUNK_TO_LEG&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_MORPH_LEG_TO_TRUNK&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_PELVIS_DISPLAY_NONE&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_PELVIS_DISPLAY_LEGPELVIS_ONLY&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_PELVIS_DISPLAY_LEGANDTRUNKPELVIS&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_DISC_STIFFNESS_NONE&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_DISC_STIFFNESS_LINEAR&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_DISC_STIFFNESS_NONLINEAR &quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_SCALING_CUSTOM&quot;</span><span class="p">:</span> <span class="s2">&quot;-1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_SCALING_STANDARD&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_SCALING_UNIFORM&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_SCALING_LENGTHMASS&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_SCALING_LENGTHMASSFAT&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_SCALING_UNIFORM_EXTMEASUREMENTS&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_SCALING_LENGTHMASS_EXTMEASUREMENTS&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_SCALING_LENGTHMASSFAT_EXTMEASUREMENTS&quot;</span><span class="p">:</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CONST_SCALING_LENGTHMASSFAT_MULTIDOFS&quot;</span><span class="p">:</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
 
@@ -856,7 +826,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">bm_constants</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="n">ammr_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ammr_path</span><span class="p">,</span> <span class="s2">&quot;Body/AAUHuman/Documentation/bm_constants.py&quot;</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">ammr_path</span><span class="p">,</span> <span class="s2">&quot;Body/AAUHuman/Documentation/bm_constants.py&quot;</span>
+        <span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
                 <span class="n">bm_constants</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span><span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
@@ -942,7 +914,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
