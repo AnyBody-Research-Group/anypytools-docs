@@ -60,11 +60,6 @@
 <span class="sd">Created on Fri Oct 19 21:14:59 2012</span>
 <span class="sd">@author: Morten</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span>
-                        <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="p">(</span><span class="n">ascii</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">chr</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="nb">hex</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span>  <span class="c1"># noqa</span>
-                      <span class="nb">int</span><span class="p">,</span> <span class="nb">map</span><span class="p">,</span> <span class="nb">next</span><span class="p">,</span> <span class="nb">oct</span><span class="p">,</span> <span class="nb">open</span><span class="p">,</span> <span class="nb">pow</span><span class="p">,</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">round</span><span class="p">,</span>
-                      <span class="nb">str</span><span class="p">,</span> <span class="nb">super</span><span class="p">,</span> <span class="nb">zip</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">io</span>
@@ -83,12 +78,19 @@
 <span class="kn">from</span> <span class="nn">queue</span> <span class="k">import</span> <span class="n">Queue</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">future.utils</span> <span class="k">import</span> <span class="n">text_to_native_str</span>
-<span class="kn">from</span> <span class="nn">past.builtins</span> <span class="k">import</span> <span class="n">basestring</span> <span class="k">as</span> <span class="n">string_types</span>
 
-<span class="kn">from</span> <span class="nn">.tools</span> <span class="k">import</span> <span class="p">(</span><span class="n">make_hash</span><span class="p">,</span> <span class="n">AnyPyProcessOutputList</span><span class="p">,</span> <span class="n">parse_anybodycon_output</span><span class="p">,</span>
-                    <span class="n">getsubdirs</span><span class="p">,</span> <span class="n">get_anybodycon_path</span><span class="p">,</span> <span class="n">BELOW_NORMAL_PRIORITY_CLASS</span><span class="p">,</span>
-                    <span class="n">AnyPyProcessOutput</span><span class="p">,</span> <span class="n">run_from_ipython</span><span class="p">,</span> <span class="n">get_ncpu</span><span class="p">,</span> <span class="n">silentremove</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.tools</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">make_hash</span><span class="p">,</span>
+    <span class="n">AnyPyProcessOutputList</span><span class="p">,</span>
+    <span class="n">parse_anybodycon_output</span><span class="p">,</span>
+    <span class="n">getsubdirs</span><span class="p">,</span>
+    <span class="n">get_anybodycon_path</span><span class="p">,</span>
+    <span class="n">BELOW_NORMAL_PRIORITY_CLASS</span><span class="p">,</span>
+    <span class="n">AnyPyProcessOutput</span><span class="p">,</span>
+    <span class="n">run_from_ipython</span><span class="p">,</span>
+    <span class="n">get_ncpu</span><span class="p">,</span>
+    <span class="n">silentremove</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.macroutils</span> <span class="k">import</span> <span class="n">AnyMacro</span><span class="p">,</span> <span class="n">MacroCommand</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -102,7 +104,7 @@
     <span class="n">ipywidgets</span> <span class="o">=</span> <span class="kc">None</span>
 
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;abt.anypytools&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;abt.anypytools&quot;</span><span class="p">)</span>
 
 <span class="n">_thread_lock</span> <span class="o">=</span> <span class="n">RLock</span><span class="p">()</span>
 <span class="n">_KILLED_BY_ANYPYTOOLS</span> <span class="o">=</span> <span class="mi">10</span>
@@ -183,8 +185,15 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="execute_anybodycon"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.execute_anybodycon">[docs]</a><span class="k">def</span> <span class="nf">execute_anybodycon</span><span class="p">(</span><span class="n">macro</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">anybodycon_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span>
-                       <span class="n">keep_macrofile</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="n">BELOW_NORMAL_PRIORITY_CLASS</span><span class="p">):</span>
+<div class="viewcode-block" id="execute_anybodycon"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.execute_anybodycon">[docs]</a><span class="k">def</span> <span class="nf">execute_anybodycon</span><span class="p">(</span>
+    <span class="n">macro</span><span class="p">,</span>
+    <span class="n">logfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">anybodycon_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span>
+    <span class="n">keep_macrofile</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">BELOW_NORMAL_PRIORITY_CLASS</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Launch a single AnyBodyConsole applicaiton.</span>
 
 <span class="sd">    This is a low level function to start a AnyBody Console process</span>
@@ -226,24 +235,23 @@
         <span class="n">logfile</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">macro_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">logfile</span><span class="o">.</span><span class="n">name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.anymcr&#39;</span>
+        <span class="n">macro_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">logfile</span><span class="o">.</span><span class="n">name</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.anymcr&quot;</span>
     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-        <span class="n">macro_filename</span> <span class="o">=</span> <span class="s1">&#39;macrofile.anymcr&#39;</span>
+        <span class="n">macro_filename</span> <span class="o">=</span> <span class="s2">&quot;macrofile.anymcr&quot;</span>
 
     <span class="k">if</span> <span class="n">anybodycon_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">anybodycon_path</span> <span class="o">=</span> <span class="n">get_anybodycon_path</span><span class="p">()</span>
 
-    <span class="k">if</span> <span class="n">macro</span> <span class="ow">and</span> <span class="n">macro</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;exit&#39;</span><span class="p">:</span>
-        <span class="n">macro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;exit&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">macro</span> <span class="ow">and</span> <span class="n">macro</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;exit&quot;</span><span class="p">:</span>
+        <span class="n">macro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;exit&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">anybodycon_path</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Can not find anybodycon.exe: &quot;</span> <span class="o">+</span> <span class="n">anybodycon_path</span><span class="p">)</span>
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">macro_filename</span><span class="p">,</span> <span class="s1">&#39;w+b&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">macro_file</span><span class="p">:</span>
-        <span class="n">macro_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">))</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">macro_filename</span><span class="p">,</span> <span class="s2">&quot;w+b&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">macro_file</span><span class="p">:</span>
+        <span class="n">macro_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">))</span>
         <span class="n">macro_file</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-    <span class="n">anybodycmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">anybodycon_path</span><span class="p">),</span>
-                  <span class="s1">&#39;--macro=&#39;</span><span class="p">,</span> <span class="n">macro_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;/ni&#39;</span><span class="p">]</span>
+    <span class="n">anybodycmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">anybodycon_path</span><span class="p">),</span> <span class="s2">&quot;--macro=&quot;</span><span class="p">,</span> <span class="n">macro_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;/ni&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;win&quot;</span><span class="p">):</span>
         <span class="c1"># Don&#39;t display the Windows GPF dialog if the invoked program dies.</span>
         <span class="c1"># See comp.os.ms-windows.programmer.win32</span>
@@ -258,11 +266,13 @@
     <span class="c1"># Check global module flag to avoid starting processes after</span>
     <span class="c1"># the user cancelled the processes</span>
     <span class="n">timeout_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span>
-    <span class="n">proc</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">anybodycmd</span><span class="p">,</span>
-                 <span class="n">stdout</span><span class="o">=</span><span class="n">logfile</span><span class="p">,</span>
-                 <span class="n">stderr</span><span class="o">=</span><span class="n">logfile</span><span class="p">,</span>
-                 <span class="n">creationflags</span><span class="o">=</span><span class="n">subprocess_flags</span><span class="p">,</span>
-                 <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
+    <span class="n">proc</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span>
+        <span class="n">anybodycmd</span><span class="p">,</span>
+        <span class="n">stdout</span><span class="o">=</span><span class="n">logfile</span><span class="p">,</span>
+        <span class="n">stderr</span><span class="o">=</span><span class="n">logfile</span><span class="p">,</span>
+        <span class="n">creationflags</span><span class="o">=</span><span class="n">subprocess_flags</span><span class="p">,</span>
+        <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">_subprocess_container</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
     <span class="k">while</span> <span class="n">proc</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">timeout_time</span><span class="p">:</span>
@@ -273,22 +283,25 @@
             <span class="k">except</span> <span class="n">io</span><span class="o">.</span><span class="n">UnsupportedOperation</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
-                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ERROR: AnyPyTools : Timeout after </span><span class="si">{:d}</span><span class="s1"> sec.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">timeout</span><span class="p">)))</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ERROR: AnyPyTools : Timeout after </span><span class="si">{:d}</span><span class="s2"> sec.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">timeout</span><span class="p">))</span>
+            <span class="p">)</span>
             <span class="n">proc</span><span class="o">.</span><span class="n">returncode</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">break</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
     <span class="n">_subprocess_container</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
     <span class="n">retcode</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">returncode</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
     <span class="k">if</span> <span class="n">retcode</span> <span class="o">==</span> <span class="n">_KILLED_BY_ANYPYTOOLS</span><span class="p">:</span>
-        <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Anybodycon.exe was interrupted by AnyPyTools&#39;</span><span class="p">)</span>
+        <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Anybodycon.exe was interrupted by AnyPyTools&quot;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">retcode</span> <span class="o">==</span> <span class="n">_NO_LICENSES_AVAILABLE</span><span class="p">:</span>
-        <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ERROR: anybodycon.exe existed unexpectedly. &#39;</span>
-                      <span class="s1">&#39;Return code: &#39;</span>
-                      <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">_NO_LICENSES_AVAILABLE</span><span class="p">)</span>
-                      <span class="o">+</span> <span class="s1">&#39; : No license available.&#39;</span><span class="p">)</span>
+        <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ERROR: anybodycon.exe existed unexpectedly. &quot;</span>
+            <span class="s2">&quot;Return code: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">_NO_LICENSES_AVAILABLE</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; : No license available.&quot;</span>
+        <span class="p">)</span>
     <span class="k">elif</span> <span class="n">retcode</span><span class="p">:</span>
-        <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ERROR: AnyPyTools : anybodycon.exe exited unexpectedly.&#39;</span>
-                      <span class="s1">&#39; Return code: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">retcode</span><span class="p">))</span>
+        <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ERROR: AnyPyTools : anybodycon.exe exited unexpectedly.&quot;</span>
+            <span class="s2">&quot; Return code: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">retcode</span><span class="p">)</span>
+        <span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_macrofile</span><span class="p">:</span>
         <span class="n">silentremove</span><span class="p">(</span><span class="n">macro_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">retcode</span></div>
@@ -305,8 +318,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">macro</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">taskname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">macro</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">taskname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Init the Task class with the class attributes.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">folder</span><span class="p">:</span>
@@ -324,39 +336,43 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">taskname</span><span class="p">:</span>
             <span class="n">head</span><span class="p">,</span> <span class="n">folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
             <span class="n">parentfolder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">parentfolder</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">folder</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">parentfolder</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">folder</span>
 
     <span class="k">def</span> <span class="nf">has_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;ERROR&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span>
+        <span class="k">return</span> <span class="s2">&quot;ERROR&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span>
 
     <span class="k">def</span> <span class="nf">add_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error_msg</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;ERROR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;ERROR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">error_msg</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;ERROR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">error_msg</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">get_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_task_info</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span>
         <span class="k">if</span> <span class="n">include_task_info</span><span class="p">:</span>
-            <span class="n">out</span><span class="p">[</span><span class="s1">&#39;task_macro_hash&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">macro</span><span class="p">)</span>
-            <span class="n">out</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number</span>
-            <span class="n">out</span><span class="p">[</span><span class="s1">&#39;task_work_dir&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">folder</span>
-            <span class="n">out</span><span class="p">[</span><span class="s1">&#39;task_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-            <span class="n">out</span><span class="p">[</span><span class="s1">&#39;task_processtime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processtime</span>
-            <span class="n">out</span><span class="p">[</span><span class="s1">&#39;task_macro&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">macro</span>
-            <span class="n">out</span><span class="p">[</span><span class="s1">&#39;task_logfile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span>
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;task_macro_hash&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">macro</span><span class="p">)</span>
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number</span>
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;task_work_dir&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">folder</span>
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;task_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;task_processtime&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processtime</span>
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;task_macro&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">macro</span>
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;task_logfile&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span>
         <span class="k">return</span> <span class="n">out</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_output_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">task_output</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">task_output</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Output can only be reprocessed, if &quot;Task info&quot;&#39;</span>
-                             <span class="s1">&#39;is included in the output.&#39;</span><span class="p">)</span>
-        <span class="n">task</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">folder</span><span class="o">=</span><span class="n">task_output</span><span class="p">[</span><span class="s1">&#39;task_work_dir&#39;</span><span class="p">],</span>
-                   <span class="n">macro</span><span class="o">=</span><span class="n">task_output</span><span class="p">[</span><span class="s1">&#39;task_macro&#39;</span><span class="p">],</span>
-                   <span class="n">taskname</span><span class="o">=</span><span class="n">task_output</span><span class="p">[</span><span class="s1">&#39;task_name&#39;</span><span class="p">],</span>
-                   <span class="n">number</span><span class="o">=</span><span class="n">task_output</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">])</span>
-        <span class="n">task</span><span class="o">.</span><span class="n">processtime</span> <span class="o">=</span> <span class="n">task_output</span><span class="p">[</span><span class="s1">&#39;task_processtime&#39;</span><span class="p">]</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;Output can only be reprocessed, if &quot;Task info&quot;&#39;</span>
+                <span class="s2">&quot;is included in the output.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">folder</span><span class="o">=</span><span class="n">task_output</span><span class="p">[</span><span class="s2">&quot;task_work_dir&quot;</span><span class="p">],</span>
+            <span class="n">macro</span><span class="o">=</span><span class="n">task_output</span><span class="p">[</span><span class="s2">&quot;task_macro&quot;</span><span class="p">],</span>
+            <span class="n">taskname</span><span class="o">=</span><span class="n">task_output</span><span class="p">[</span><span class="s2">&quot;task_name&quot;</span><span class="p">],</span>
+            <span class="n">number</span><span class="o">=</span><span class="n">task_output</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">task</span><span class="o">.</span><span class="n">processtime</span> <span class="o">=</span> <span class="n">task_output</span><span class="p">[</span><span class="s2">&quot;task_processtime&quot;</span><span class="p">]</span>
         <span class="n">task</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">task_output</span>
         <span class="k">return</span> <span class="n">task</span>
 
@@ -375,8 +391,15 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="n">output_elem</span><span class="p">):</span>
-        <span class="n">keys</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;task_macro_hash&#39;</span><span class="p">,</span> <span class="s1">&#39;task_id&#39;</span><span class="p">,</span> <span class="s1">&#39;task_work_dir&#39;</span><span class="p">,</span> <span class="s1">&#39;task_name&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;task_processtime&#39;</span><span class="p">,</span> <span class="s1">&#39;task_macro&#39;</span><span class="p">,</span> <span class="s1">&#39;task_logfile&#39;</span><span class="p">)</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;task_macro_hash&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;task_id&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;task_work_dir&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;task_name&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;task_processtime&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;task_macro&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;task_logfile&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">k</span> <span class="ow">in</span> <span class="n">output_elem</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">)</span>
 
 
@@ -403,43 +426,41 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipywidget</span><span class="o">.</span><span class="n">initialized</span><span class="p">:</span>
                 <span class="n">display</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ipywidget</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">ipywidget</span><span class="o">.</span><span class="n">initialized</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ipywidget</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="n">s</span> <span class="o">+</span> <span class="s1">&#39;&lt;br&gt;&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ipywidget</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="n">s</span> <span class="o">+</span> <span class="s2">&quot;&lt;br&gt;&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">format_summery</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
-        <span class="n">entry</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">if</span> <span class="n">task</span><span class="o">.</span><span class="n">has_error</span><span class="p">():</span>
-            <span class="n">entry</span> <span class="o">+=</span> <span class="s1">&#39;Failed :&#39;</span>
+            <span class="n">entry</span> <span class="o">+=</span> <span class="s2">&quot;Failed :&quot;</span>
         <span class="k">elif</span> <span class="n">task</span><span class="o">.</span><span class="n">processtime</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">entry</span> <span class="o">+=</span> <span class="s1">&#39;Not completed :&#39;</span>
+            <span class="n">entry</span> <span class="o">+=</span> <span class="s2">&quot;Not completed :&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">entry</span> <span class="o">+=</span> <span class="s1">&#39;Completed :&#39;</span>
-        <span class="n">entry</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">{1!s}</span><span class="s1"> : </span><span class="si">{2:5.0f}</span><span class="s1"> sec : </span><span class="si">{0}</span><span class="s1"> : &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                                                        <span class="n">task</span><span class="o">.</span><span class="n">number</span><span class="p">,</span>
-                                                        <span class="n">task</span><span class="o">.</span><span class="n">processtime</span><span class="p">)</span>
+            <span class="n">entry</span> <span class="o">+=</span> <span class="s2">&quot;Completed :&quot;</span>
+        <span class="n">entry</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{1!s}</span><span class="s2"> : </span><span class="si">{2:5.0f}</span><span class="s2"> sec : </span><span class="si">{0}</span><span class="s2"> : &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">task</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">processtime</span>
+        <span class="p">)</span>
         <span class="k">if</span> <span class="n">task</span><span class="o">.</span><span class="n">logfile</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">run_from_ipython</span><span class="p">():</span>
                 <span class="n">tmpl</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=&quot;file:///</span><span class="si">{0}</span><span class="s1">&quot; target=&quot;_blank&quot;&gt;</span><span class="si">{1}</span><span class="s1">&lt;/a&gt;&#39;</span>
-                <span class="n">entry</span> <span class="o">+=</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">logfile</span><span class="p">,</span>
-                                     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">logfile</span><span class="p">))</span>
+                <span class="n">entry</span> <span class="o">+=</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">logfile</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">logfile</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">entry</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">logfile</span><span class="p">))</span>
+                <span class="n">entry</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">logfile</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">entry</span>
 
     <span class="k">def</span> <span class="nf">final_summery</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">total_process_time</span><span class="p">,</span> <span class="n">tasklist</span><span class="p">):</span>
         <span class="n">unfinished_tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tasklist</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">processtime</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span>
-        <span class="n">failed_tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tasklist</span>
-                        <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">has_error</span><span class="p">()</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">processtime</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">failed_tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tasklist</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">has_error</span><span class="p">()</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">processtime</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">failed_tasks</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_display</span><span class="p">(</span><span class="s1">&#39;Tasks with errors: </span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">failed_tasks</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_display</span><span class="p">(</span><span class="s2">&quot;Tasks with errors: </span><span class="si">{:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">failed_tasks</span><span class="p">)))</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipywidget</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_display</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">format_summery</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-                                         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">failed_tasks</span><span class="p">]))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_display</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">format_summery</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">failed_tasks</span><span class="p">]))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unfinished_tasks</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_display</span><span class="p">(</span><span class="s1">&#39;Tasks that did not complete: &#39;</span>
-                          <span class="s1">&#39;</span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unfinished_tasks</span><span class="p">)))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_display</span><span class="p">(</span><span class="s1">&#39;Total time: </span><span class="si">{:.1f}</span><span class="s1"> seconds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_process_time</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_display</span><span class="p">(</span>
+                <span class="s2">&quot;Tasks that did not complete: &quot;</span> <span class="s2">&quot;</span><span class="si">{:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unfinished_tasks</span><span class="p">))</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_display</span><span class="p">(</span><span class="s2">&quot;Total time: </span><span class="si">{:.1f}</span><span class="s2"> seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_process_time</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="AnyPyProcess"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess">[docs]</a><span class="k">class</span> <span class="nc">AnyPyProcess</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -516,24 +537,26 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                 <span class="n">num_processes</span><span class="o">=</span><span class="n">get_ncpu</span><span class="p">(),</span>
-                 <span class="n">anybodycon_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span>
-                 <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">warnings_to_include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">fatal_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">return_task_info</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">keep_logfiles</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">logfile_prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">python_env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">priority</span><span class="o">=</span><span class="n">BELOW_NORMAL_PRIORITY_CLASS</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">num_processes</span><span class="o">=</span><span class="n">get_ncpu</span><span class="p">(),</span>
+        <span class="n">anybodycon_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span>
+        <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">warnings_to_include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">fatal_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">return_task_info</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">keep_logfiles</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">logfile_prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">python_env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">priority</span><span class="o">=</span><span class="n">BELOW_NORMAL_PRIORITY_CLASS</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ignore_errors</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;ignore_errors must be a list of strings&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ignore_errors must be a list of strings&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">warnings_to_include</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;warnings_to_include must be a list of strings&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;warnings_to_include must be a list of strings&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">anybodycon_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">anybodycon_path</span> <span class="o">=</span> <span class="n">get_anybodycon_path</span><span class="p">()</span>
@@ -552,21 +575,21 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">warnings_to_include</span> <span class="o">=</span> <span class="n">warnings_to_include</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">keep_logfiles</span> <span class="o">=</span> <span class="n">keep_logfiles</span>
         <span class="k">if</span> <span class="n">logfile_prefix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">logfile_prefix</span> <span class="o">=</span> <span class="n">logfile_prefix</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logfile_prefix</span> <span class="o">=</span> <span class="n">logfile_prefix</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logfile_prefix</span> <span class="o">=</span> <span class="n">logfile_prefix</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cached_arg_hash</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">python_env</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">python_env</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;Python environment does not exist:&#39;</span> <span class="o">+</span> <span class="n">python_env</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Python environment does not exist:&quot;</span> <span class="o">+</span> <span class="n">python_env</span><span class="p">)</span>
             <span class="n">env</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">)</span>
-            <span class="n">env</span><span class="p">[</span><span class="s1">&#39;PYTHONHOME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">python_env</span>
-            <span class="n">env</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">env</span><span class="p">[</span><span class="s1">&#39;PYTHONHOME&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span> <span class="o">+</span> <span class="n">env</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">]</span>
+            <span class="n">env</span><span class="p">[</span><span class="s2">&quot;PYTHONHOME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">python_env</span>
+            <span class="n">env</span><span class="p">[</span><span class="s2">&quot;PATH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">env</span><span class="p">[</span><span class="s2">&quot;PYTHONHOME&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;;&quot;</span> <span class="o">+</span> <span class="n">env</span><span class="p">[</span><span class="s2">&quot;PATH&quot;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">env</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">AnyPyProcess initialized&#39;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">AnyPyProcess initialized&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AnyPyProcess.save_results"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.save_results">[docs]</a>    <span class="k">def</span> <span class="nf">save_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Save resently processed results.</span>
@@ -594,15 +617,15 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span><span class="p">:</span>
-            <span class="n">savekey</span> <span class="o">=</span> <span class="n">text_to_native_str</span><span class="p">(</span><span class="s1">&#39;processed_tasks&#39;</span><span class="p">)</span>
-            <span class="n">db</span> <span class="o">=</span> <span class="n">shelve</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">text_to_native_str</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span> <span class="n">writeback</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">savekey</span> <span class="o">=</span> <span class="s2">&quot;processed_tasks&quot;</span>
+            <span class="n">db</span> <span class="o">=</span> <span class="n">shelve</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">writeback</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">append</span> <span class="ow">or</span> <span class="n">savekey</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">db</span><span class="p">:</span>
                 <span class="n">db</span><span class="p">[</span><span class="n">savekey</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">db</span><span class="p">[</span><span class="n">savekey</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span><span class="p">)</span>
             <span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Noting to save&#39;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Noting to save&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AnyPyProcess.save_to_hdf5"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.save_to_hdf5">[docs]</a>    <span class="k">def</span> <span class="nf">save_to_hdf5</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">batch_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Save cached results to hdf5 file.</span>
@@ -626,38 +649,30 @@
         <span class="kn">import</span> <span class="nn">h5py</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;No data available for saving&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No data available for saving&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">batch_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">batch_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cached_arg_hash</span><span class="p">)</span>
 
-        <span class="n">filename</span> <span class="o">=</span> <span class="n">text_to_native_str</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="n">batch_name</span> <span class="o">=</span> <span class="n">text_to_native_str</span><span class="p">(</span><span class="n">batch_name</span><span class="p">)</span>
-
-        <span class="n">any_output</span> <span class="o">=</span> <span class="n">AnyPyProcessOutputList</span><span class="p">([</span>
-            <span class="n">task</span><span class="o">.</span><span class="n">get_output</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span>
-        <span class="p">])</span>
-        <span class="n">task_names</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">elem</span><span class="p">[</span><span class="s1">&#39;task_name&#39;</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">any_output</span>
-        <span class="p">]</span>
+        <span class="n">any_output</span> <span class="o">=</span> <span class="n">AnyPyProcessOutputList</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">get_output</span><span class="p">()</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">task_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">elem</span><span class="p">[</span><span class="s2">&quot;task_name&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">any_output</span><span class="p">]</span>
         <span class="n">unique_names</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">task_names</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">task_names</span><span class="p">))</span>
         <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5file</span><span class="p">:</span>
             <span class="n">h5_batch_group</span> <span class="o">=</span> <span class="n">h5file</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">batch_name</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">any_output</span><span class="p">:</span>
-                <span class="n">task_name</span> <span class="o">=</span> <span class="n">run</span><span class="p">[</span><span class="s1">&#39;task_name&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">unique_names</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span>
-                    <span class="n">run</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">])</span>
-                <span class="n">task_name</span> <span class="o">=</span> <span class="n">task_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">)</span>
+                <span class="n">task_name</span> <span class="o">=</span> <span class="n">run</span><span class="p">[</span><span class="s2">&quot;task_name&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">unique_names</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">run</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">])</span>
+                <span class="n">task_name</span> <span class="o">=</span> <span class="n">task_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;|&quot;</span><span class="p">)</span>
                 <span class="n">h5_task_group</span> <span class="o">=</span> <span class="n">h5_batch_group</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">task_name</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
                         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-                            <span class="n">h5_task_group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">text_to_native_str</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="n">text_to_native_str</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+                            <span class="n">h5_task_group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
-                            <span class="n">h5_task_group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">text_to_native_str</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span>
+                            <span class="n">h5_task_group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
                     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-                        <span class="n">h5_task_group</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">text_to_native_str</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">v</span><span class="p">)</span></div>
+                        <span class="n">h5_task_group</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">v</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AnyPyProcess.load_results"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.load_results">[docs]</a>    <span class="k">def</span> <span class="nf">load_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Load previously saved results.</span>
@@ -689,8 +704,8 @@
 <span class="sd">        &gt;&gt;&gt; results = app.start_macro() # rerun unfinished</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">loadkey</span> <span class="o">=</span> <span class="n">text_to_native_str</span><span class="p">(</span><span class="s1">&#39;processed_tasks&#39;</span><span class="p">)</span>
-        <span class="n">db</span> <span class="o">=</span> <span class="n">shelve</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">text_to_native_str</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+        <span class="n">loadkey</span> <span class="o">=</span> <span class="s2">&quot;processed_tasks&quot;</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">shelve</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="n">loaded_data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="n">loadkey</span><span class="p">]</span>
         <span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="c1"># Hack to help Enrico convert data to the new structured</span>
@@ -701,8 +716,9 @@
         <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">get_output</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">loaded_data</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">AnyPyProcessOutputList</span><span class="p">(</span><span class="n">results</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AnyPyProcess.start_macro"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.start_macro">[docs]</a>    <span class="k">def</span> <span class="nf">start_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">macrolist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">folderlist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">search_subdirs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                    <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyPyProcess.start_macro"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.start_macro">[docs]</a>    <span class="k">def</span> <span class="nf">start_macro</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">macrolist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">folderlist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">search_subdirs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Start a batch processing job.</span>
 
 <span class="sd">        Runs a list of AnyBody Macro commands in</span>
@@ -746,42 +762,43 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">,</span> <span class="n">AnyMacro</span><span class="p">):</span>
             <span class="n">macrolist</span> <span class="o">=</span> <span class="n">macrolist</span><span class="o">.</span><span class="n">create_macros</span><span class="p">()</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">macrolist</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">string_types</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span><span class="n">macrolist</span><span class="p">]</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">MacroCommand</span><span class="p">):</span>
                 <span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span><span class="n">macrolist</span><span class="p">]</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">macrolist</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">MacroCommand</span><span class="p">):</span>
-                    <span class="n">macrolist</span> <span class="o">=</span> <span class="p">[[</span><span class="n">mc</span><span class="o">.</span><span class="n">get_macro</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">mc</span> <span class="ow">in</span> <span class="n">elem</span><span class="p">]</span>
-                                 <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">macrolist</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">macrolist</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">macrolist</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">):</span>
-                <span class="n">macrolist</span> <span class="o">=</span> <span class="n">macrolist</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
-                <span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span><span class="n">macrolist</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)]</span>
+                    <span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="p">[</span><span class="n">mc</span><span class="o">.</span><span class="n">get_macro</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">mc</span> <span class="ow">in</span> <span class="n">elem</span><span class="p">]</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">macrolist</span>
+                    <span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">macrolist</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;[&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">macrolist</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;]&quot;</span><span class="p">):</span>
+                <span class="n">macrolist</span> <span class="o">=</span> <span class="n">macrolist</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;[&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;]&quot;</span><span class="p">)</span>
+                <span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span><span class="n">macrolist</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">macrolist</span> <span class="o">=</span> <span class="p">[[</span><span class="n">macrolist</span><span class="p">]]</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">,</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="n">AnyPyProcessOutputList</span><span class="p">)):</span>
             <span class="k">pass</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Wrong input argument for macrolist&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Wrong input argument for macrolist&quot;</span><span class="p">)</span>
         <span class="c1"># Check folderlist input argument</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">folderlist</span><span class="p">:</span>
             <span class="n">folderlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">folderlist</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;folderlist must be a list of folders&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;folderlist must be a list of folders&quot;</span><span class="p">)</span>
         <span class="c1"># Extend the folderlist if search_subdir is given</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">search_subdirs</span><span class="p">,</span> <span class="n">string_types</span><span class="p">)</span> <span class="ow">and</span>
-                <span class="nb">isinstance</span><span class="p">(</span><span class="n">folderlist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">string_types</span><span class="p">)):</span>
-            <span class="n">folderlist</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">getsubdirs</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">search_subdirs</span><span class="p">)</span>
-                              <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">folderlist</span><span class="p">],</span> <span class="p">[])</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_subdirs</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">folderlist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">folderlist</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">getsubdirs</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">search_subdirs</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">folderlist</span><span class="p">],</span> <span class="p">[])</span>
         <span class="c1"># Check the input arguments and generate the tasklist</span>
         <span class="k">if</span> <span class="n">macrolist</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span><span class="p">:</span>
                 <span class="n">tasklist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;macrolist argument can only be ommitted if &#39;</span>
-                                 <span class="s1">&#39;the AnyPyProcess object has cached output &#39;</span>
-                                 <span class="s1">&#39;to process&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;macrolist argument can only be ommitted if &quot;</span>
+                    <span class="s2">&quot;the AnyPyProcess object has cached output &quot;</span>
+                    <span class="s2">&quot;to process&quot;</span>
+                <span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">collections</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span>
             <span class="n">tasklist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">_Task</span><span class="o">.</span><span class="n">from_output_list</span><span class="p">(</span><span class="n">macrolist</span><span class="p">))</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
@@ -790,16 +807,14 @@
                 <span class="n">tasklist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">cached_arg_hash</span> <span class="o">=</span> <span class="n">arg_hash</span>
-                <span class="n">tasklist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">_Task</span><span class="o">.</span><span class="n">from_macrofolderlist</span><span class="p">(</span><span class="n">macrolist</span><span class="p">,</span>
-                                                           <span class="n">folderlist</span><span class="p">))</span>
+                <span class="n">tasklist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">_Task</span><span class="o">.</span><span class="n">from_macrofolderlist</span><span class="p">(</span><span class="n">macrolist</span><span class="p">,</span> <span class="n">folderlist</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Nothing to process for &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">macrolist</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Nothing to process for &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">macrolist</span><span class="p">))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">summery</span> <span class="o">=</span> <span class="n">_Summery</span><span class="p">(</span><span class="n">have_ipython</span><span class="o">=</span><span class="n">run_from_ipython</span><span class="p">(),</span>
-                                <span class="n">silent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">silent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">summery</span> <span class="o">=</span> <span class="n">_Summery</span><span class="p">(</span><span class="n">have_ipython</span><span class="o">=</span><span class="n">run_from_ipython</span><span class="p">(),</span> <span class="n">silent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">silent</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logfile_prefix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">logfile_prefix</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cached_arg_hash</span><span class="p">)[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logfile_prefix</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cached_arg_hash</span><span class="p">)[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span>
 
         <span class="c1"># Start the scheduler</span>
         <span class="n">process_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schedule_processes</span><span class="p">(</span><span class="n">tasklist</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_worker</span><span class="p">)</span>
@@ -807,8 +822,10 @@
         <span class="c1"># Cache the processed tasklist for restarting later</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span> <span class="o">=</span> <span class="n">tasklist</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">summery</span><span class="o">.</span><span class="n">final_summery</span><span class="p">(</span><span class="n">process_time</span><span class="p">,</span> <span class="n">tasklist</span><span class="p">)</span>
-        <span class="n">task_output</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">get_output</span><span class="p">(</span><span class="n">include_task_info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">return_task_info</span><span class="p">)</span>
-                       <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasklist</span><span class="p">]</span>
+        <span class="n">task_output</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">task</span><span class="o">.</span><span class="n">get_output</span><span class="p">(</span><span class="n">include_task_info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">return_task_info</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasklist</span>
+        <span class="p">]</span>
         <span class="k">return</span> <span class="n">AnyPyProcessOutputList</span><span class="p">(</span><span class="n">task_output</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_worker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">task_queue</span><span class="p">):</span>
@@ -824,25 +841,32 @@
                 <span class="k">return</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">folder</span><span class="p">):</span>
-                <span class="n">task</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="s1">&#39;Could not find folder: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">folder</span><span class="p">))</span>
+                <span class="n">task</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="s2">&quot;Could not find folder: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">folder</span><span class="p">))</span>
                 <span class="n">task</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">tmp_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a+&#39;</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logfile_prefix</span><span class="p">,</span>
-                                  <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.log&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">folder</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">tmp_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;a+&quot;</span><span class="p">,</span>
+                    <span class="n">prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logfile_prefix</span><span class="p">,</span>
+                    <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;.log&quot;</span><span class="p">,</span>
+                    <span class="nb">dir</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">folder</span><span class="p">,</span>
+                    <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="p">)</span>
                 <span class="k">with</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="o">**</span><span class="n">tmp_kwargs</span><span class="p">)</span> <span class="k">as</span> <span class="n">logfile</span><span class="p">:</span>
-                    <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;########### MACRO #############</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;########### MACRO #############</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
                     <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">macro</span><span class="p">))</span>
-                    <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">######### OUTPUT LOG ##########&#39;</span><span class="p">)</span>
+                    <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">######### OUTPUT LOG ##########&quot;</span><span class="p">)</span>
                     <span class="n">logfile</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
                     <span class="n">task</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="n">logfile</span><span class="o">.</span><span class="n">name</span>
                     <span class="n">starttime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
-                    <span class="n">exe_args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">macro</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">macro</span><span class="p">,</span>
-                                    <span class="n">logfile</span><span class="o">=</span><span class="n">logfile</span><span class="p">,</span>
-                                    <span class="n">anybodycon_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">anybodycon_path</span><span class="p">,</span>
-                                    <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
-                                    <span class="n">keep_macrofile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keep_logfiles</span><span class="p">,</span>
-                                    <span class="n">env</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">,</span>
-                                    <span class="n">priority</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">priority</span><span class="p">)</span>
+                    <span class="n">exe_args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                        <span class="n">macro</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">macro</span><span class="p">,</span>
+                        <span class="n">logfile</span><span class="o">=</span><span class="n">logfile</span><span class="p">,</span>
+                        <span class="n">anybodycon_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">anybodycon_path</span><span class="p">,</span>
+                        <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
+                        <span class="n">keep_macrofile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">keep_logfiles</span><span class="p">,</span>
+                        <span class="n">env</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">,</span>
+                        <span class="n">priority</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">priority</span><span class="p">,</span>
+                    <span class="p">)</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="n">task</span><span class="o">.</span><span class="n">retcode</span> <span class="o">=</span> <span class="n">execute_anybodycon</span><span class="p">(</span><span class="o">**</span><span class="n">exe_args</span><span class="p">)</span>
                     <span class="k">finally</span><span class="p">:</span>
@@ -853,12 +877,14 @@
                         <span class="n">logfile</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">ignore_errors</span><span class="p">,</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">warnings_to_include</span><span class="p">,</span>
-                        <span class="n">fatal_warnings</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fatal_warnings</span><span class="p">)</span>
+                        <span class="n">fatal_warnings</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fatal_warnings</span><span class="p">,</span>
+                    <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_obj</span><span class="p">,</span> <span class="n">exc_tb</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span>
             <span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">exc_tb</span><span class="o">.</span><span class="n">tb_frame</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_filename</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">task</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">exc_type</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="o">+</span>
-                           <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc_tb</span><span class="o">.</span><span class="n">tb_lineno</span><span class="p">))</span>
+            <span class="n">task</span><span class="o">.</span><span class="n">add_error</span><span class="p">(</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">exc_type</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc_tb</span><span class="o">.</span><span class="n">tb_lineno</span><span class="p">)</span>
+            <span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
         <span class="k">finally</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep_logfiles</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">task</span><span class="o">.</span><span class="n">has_error</span><span class="p">():</span>
@@ -880,7 +906,7 @@
         <span class="k">if</span> <span class="n">number_tasks</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">totaltime</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">return</span> <span class="n">totaltime</span>
-        <span class="n">use_threading</span> <span class="o">=</span> <span class="p">(</span><span class="n">number_tasks</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_processes</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">use_threading</span> <span class="o">=</span> <span class="n">number_tasks</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_processes</span> <span class="o">&gt;</span> <span class="mi">1</span>
         <span class="n">starttime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
         <span class="n">task_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
         <span class="n">pbar</span> <span class="o">=</span> <span class="n">_ProgressBar</span><span class="p">(</span><span class="n">number_tasks</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">silent</span><span class="p">)</span>
@@ -896,8 +922,9 @@
                 <span class="c1"># data left to compute, then spawn another thread</span>
                 <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">threads</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_processes</span><span class="p">)</span> <span class="ow">and</span> <span class="n">tasklist</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">use_threading</span><span class="p">:</span>
-                        <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">_worker</span><span class="p">,</span>
-                                   <span class="n">args</span><span class="o">=</span><span class="nb">tuple</span><span class="p">([</span><span class="n">tasklist</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">task_queue</span><span class="p">]))</span>
+                        <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span>
+                            <span class="n">target</span><span class="o">=</span><span class="n">_worker</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="nb">tuple</span><span class="p">([</span><span class="n">tasklist</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">task_queue</span><span class="p">])</span>
+                        <span class="p">)</span>
                         <span class="n">t</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
                         <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
                         <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
@@ -920,7 +947,7 @@
 
                 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-            <span class="n">_display</span><span class="p">(</span><span class="s1">&#39;Processing interrupted&#39;</span><span class="p">)</span>
+            <span class="n">_display</span><span class="p">(</span><span class="s2">&quot;Processing interrupted&quot;</span><span class="p">)</span>
             <span class="n">_subprocess_container</span><span class="o">.</span><span class="n">stop_all</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="c1"># Add a small delay here. It allows the user to press ctrl-c twice</span>
             <span class="c1"># to escape this try-catch. This is usefull when if the code is</span>
@@ -937,30 +964,31 @@
                         <span class="n">silentremove</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">logfile</span><span class="p">)</span>
                         <span class="n">task</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
             <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Could not remove &#39;</span>
-                             <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">logfile</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Could not remove &quot;</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">logfile</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">keep_logfiles</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="n">macrofile</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">logfile</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.log&#39;</span><span class="p">,</span> <span class="s1">&#39;.anymcr&#39;</span><span class="p">)</span>
+                    <span class="n">macrofile</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">logfile</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.log&quot;</span><span class="p">,</span> <span class="s2">&quot;.anymcr&quot;</span><span class="p">)</span>
                     <span class="n">silentremove</span><span class="p">(</span><span class="n">macrofile</span><span class="p">)</span>
                 <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Could not removing &#39;</span>
-                                 <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">macrofile</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span></div></div>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                        <span class="s2">&quot;Could not removing &quot;</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">macrofile</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                    <span class="p">)</span></div></div>
 
 
 <span class="k">class</span> <span class="nc">_ProgressBar</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">silent</span> <span class="o">=</span> <span class="n">silent</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iterations</span> <span class="o">=</span> <span class="n">iterations</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">=</span> <span class="s1">&#39;[]&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fill_char</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">=</span> <span class="s2">&quot;[]&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fill_char</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">40</span>
         <span class="k">if</span> <span class="n">run_from_ipython</span><span class="p">()</span> <span class="ow">and</span> <span class="n">ipywidgets</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">silent</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bar_widget</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">IntProgress</span><span class="p">(</span>
-                <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">iterations</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bar_style</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bar_description</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">iterations</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bar_style</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bar_description</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
             <span class="n">box</span> <span class="o">=</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">bar_description</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bar_widget</span><span class="p">])</span>
-            <span class="n">box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">align_items</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span>
+            <span class="n">box</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">align_items</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span>
             <span class="n">display</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">animate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">failed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
@@ -973,20 +1001,20 @@
 
     <span class="k">def</span> <span class="nf">_widget_animate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">failed</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bar_widget</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">val</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bar_description</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> of </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterations</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bar_description</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> of </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterations</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">failed</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bar_widget</span><span class="o">.</span><span class="n">bar_style</span> <span class="o">=</span> <span class="s1">&#39;danger&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bar_widget</span><span class="o">.</span><span class="n">bar_style</span> <span class="o">=</span> <span class="s2">&quot;danger&quot;</span>
         <span class="k">elif</span> <span class="n">val</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterations</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bar_widget</span><span class="o">.</span><span class="n">bar_style</span> <span class="o">=</span> <span class="s1">&#39;success&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bar_widget</span><span class="o">.</span><span class="n">bar_style</span> <span class="o">=</span> <span class="s2">&quot;success&quot;</span>
 
     <span class="k">def</span> <span class="nf">_ascii_animate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">failed</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__update_amount</span><span class="p">((</span><span class="n">val</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iterations</span><span class="p">))</span> <span class="o">*</span> <span class="mf">100.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">+=</span> <span class="s1">&#39;  </span><span class="si">%d</span><span class="s1"> of </span><span class="si">%s</span><span class="s1"> complete&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterations</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">+=</span> <span class="s2">&quot;  </span><span class="si">%d</span><span class="s2"> of </span><span class="si">%s</span><span class="s2"> complete&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterations</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">failed</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">+=</span> <span class="s1">&#39; (</span><span class="si">{0}</span><span class="s1"> Error)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">failed</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">+=</span> <span class="s2">&quot; (</span><span class="si">{0}</span><span class="s2"> Error)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">failed</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">failed</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">+=</span> <span class="s1">&#39; (</span><span class="si">{0}</span><span class="s1"> Errors)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">failed</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">+=</span> <span class="s2">&quot; (</span><span class="si">{0}</span><span class="s2"> Errors)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">failed</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 
@@ -994,15 +1022,15 @@
         <span class="n">percent_done</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">new_amount</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">100.0</span><span class="p">))</span>
         <span class="n">all_full</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">2</span>
         <span class="n">num_hashes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">percent_done</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">all_full</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">=</span> <span class="s1">&#39;[</span><span class="si">{}{}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fill_char</span> <span class="o">*</span> <span class="n">num_hashes</span><span class="p">,</span>
-            <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">all_full</span> <span class="o">-</span> <span class="n">num_hashes</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">=</span> <span class="s2">&quot;[</span><span class="si">{}{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_char</span> <span class="o">*</span> <span class="n">num_hashes</span><span class="p">,</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="p">(</span><span class="n">all_full</span> <span class="o">-</span> <span class="n">num_hashes</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="n">pct_place</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">percent_done</span><span class="p">))</span>
-        <span class="n">pct_string</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%d%%</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">percent_done</span>
+        <span class="n">pct_string</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%d%%</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">percent_done</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">pct_place</span><span class="p">]</span> <span class="o">+</span> \
-            <span class="p">(</span><span class="n">pct_string</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span><span class="p">[</span><span class="n">pct_place</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">pct_string</span><span class="p">):])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">pct_place</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span>
+            <span class="n">pct_string</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">prog_bar</span><span class="p">[</span><span class="n">pct_place</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">pct_string</span><span class="p">)</span> <span class="p">:]</span>
+        <span class="p">)</span>
 </pre></div>
 
           </div>
@@ -1069,7 +1097,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
