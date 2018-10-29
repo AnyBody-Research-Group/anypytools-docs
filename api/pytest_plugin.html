@@ -145,15 +145,9 @@ early in the pytest startup.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="anypytools.pytest_plugin.AnyTestSession.finalize">
-<code class="descname">finalize</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestSession.finalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestSession.finalize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finalize a session.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="anypytools.pytest_plugin.AnyTestSession.get_save_fname">
 <code class="descname">get_save_fname</code><span class="sig-paren">(</span><em>name</em>, <em>id</em>, <em>study</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestSession.get_save_fname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestSession.get_save_fname" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the name of the compare h5file, and ensure the parent folder exists.</p>
+<dd><p>Return the name of the compare h5file</p>
 </dd></dl>
 
 </dd></dl>
@@ -168,12 +162,6 @@ early in the pytest startup.</p>
 <dt id="anypytools.pytest_plugin.cwd">
 <code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">cwd</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#cwd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.cwd" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-<dl class="function">
-<dt id="anypytools.pytest_plugin.parse_save_name">
-<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">parse_save_name</code><span class="sig-paren">(</span><em>stringval</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#parse_save_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.parse_save_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse function.</p>
-</dd></dl>
 
 <dl class="function">
 <dt id="anypytools.pytest_plugin.pytest_addoption">
@@ -199,21 +187,15 @@ early in the pytest startup.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="anypytools.pytest_plugin.pytest_namespace">
-<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">pytest_namespace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_namespace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add an instance of the AnyTestSession class to the pytest name space.</p>
-</dd></dl>
-
-<dl class="function">
 <dt id="anypytools.pytest_plugin.pytest_unconfigure">
 <code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">pytest_unconfigure</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_unconfigure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_unconfigure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finialize the test session.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="anypytools.pytest_plugin.write_macro_file">
-<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">write_macro_file</code><span class="sig-paren">(</span><em>path</em>, <em>name</em>, <em>macro</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#write_macro_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.write_macro_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write list of macros to a file.</p>
+<dt id="anypytools.pytest_plugin.pytest_xdist_setupnodes">
+<code class="descclassname">anypytools.pytest_plugin.</code><code class="descname">pytest_xdist_setupnodes</code><span class="sig-paren">(</span><em>config</em>, <em>specs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_xdist_setupnodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_xdist_setupnodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>called before any remote node is set up.</p>
 </dd></dl>
 
 </div>
