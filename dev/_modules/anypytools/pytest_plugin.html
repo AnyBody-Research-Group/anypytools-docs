@@ -94,6 +94,14 @@
         <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">oldpwd</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="pytest_xdist_setupnodes"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_xdist_setupnodes">[docs]</a><span class="k">def</span> <span class="nf">pytest_xdist_setupnodes</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">specs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; called before any remote node is set up. &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Using AnyBodyCon: &quot;</span><span class="p">,</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anybodycon&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">get_anybodycon_path</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="AnyTestSession"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestSession">[docs]</a><span class="k">class</span> <span class="nc">AnyTestSession</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class for storing configuation of the AnyTest plugin to pytest.&quot;&quot;&quot;</span>
 
@@ -102,8 +110,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ams_version</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">save_basefolder</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">anytest_compare_dir</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_run_folder</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">save_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hdf5_save_folder</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_hdf5_files</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_number</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_session</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -114,13 +122,11 @@
 <span class="sd">        since it is instantiated and added to the pytest namespace very</span>
 <span class="sd">        early in the pytest startup.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">save_basefolder</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-storage&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_basefolder</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_basefolder</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">save_name</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-save&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_name</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">save_name</span> <span class="o">==</span> <span class="n">get_tag</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">save_name_study</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-save-study&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hdf5_save_folder</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-output&quot;</span><span class="p">)</span>
+        <span class="c1"># if os.path.exists(self.hdf5_save_folder):</span>
+        <span class="c1">#     shutil.rmtree(self.hdf5_save_folder, ignore_errors=True)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_hdf5_files</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-save&quot;</span><span class="p">)</span>
+
         <span class="n">ammr_path</span> <span class="o">=</span> <span class="n">find_ammr_path</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--ammr&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">config</span><span class="o">.</span><span class="n">rootdir</span><span class="o">.</span><span class="n">strpath</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ammr_version</span> <span class="o">=</span> <span class="n">get_ammr_version</span><span class="p">(</span><span class="n">ammr_path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ams_path</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anybodycon&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">get_anybodycon_path</span><span class="p">()</span>
@@ -131,26 +137,14 @@
             <span class="n">ammr_path</span><span class="o">=</span><span class="n">ammr_path</span><span class="p">,</span> <span class="n">ammr_version</span><span class="o">=</span><span class="n">major_ammr_ver</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AnyTestSession.finalize"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestSession.finalize">[docs]</a>    <span class="k">def</span> <span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Finalize a session.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_name</span><span class="p">:</span>
-            <span class="n">storage_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_basefolder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_name</span><span class="p">)</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">storage_folder</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_run_folder</span><span class="p">):</span>
-                <span class="n">shutil</span><span class="o">.</span><span class="n">copytree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_run_folder</span><span class="p">,</span> <span class="n">storage_folder</span><span class="p">)</span></div>
-
 <div class="viewcode-block" id="AnyTestSession.get_save_fname"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestSession.get_save_fname">[docs]</a>    <span class="k">def</span> <span class="nf">get_save_fname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">study</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the name of the compare h5file, and ensure the parent folder exists.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return the name of the compare h5file&quot;&quot;&quot;</span>
         <span class="c1"># Initialize and empty the current_run folder.</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_run_folder</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">current_run_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_basefolder</span><span class="p">,</span> <span class="s2">&quot;current_run&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_run_folder</span><span class="p">):</span>
-                <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_run_folder</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">id</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">compare_test_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">compare_test_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">compare_test_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_run_folder</span><span class="p">,</span> <span class="n">compare_test_name</span><span class="p">)</span>
+        <span class="n">compare_test_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hdf5_save_folder</span><span class="p">,</span> <span class="n">compare_test_name</span><span class="p">)</span>
         <span class="n">studyname</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.anydata.h5&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">study</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">compare_test_folder</span><span class="p">,</span> <span class="n">studyname</span><span class="p">)</span></div></div>
 
@@ -213,9 +207,9 @@
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">defs</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="k">pass</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">defs</span> <span class="o">=</span> <span class="p">[{}]</span>
+        <span class="n">defs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">()]</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">defs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">defs</span> <span class="o">=</span> <span class="p">[{}]</span>
+        <span class="n">defs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">()]</span>
     <span class="k">return</span> <span class="n">defs</span>
 
 
@@ -232,11 +226,12 @@
     <span class="p">(</span><span class="s2">&quot;keep_logfiles&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,)),</span>
     <span class="p">(</span><span class="s2">&quot;logfile_prefix&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,)),</span>
     <span class="p">(</span><span class="s2">&quot;expect_errors&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,)),</span>
+    <span class="p">(</span><span class="s2">&quot;save_study&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))),</span>
 <span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_parse_header</span><span class="p">(</span><span class="n">header</span><span class="p">):</span>
-    <span class="n">ns</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">ns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">exec</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">ns</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">SyntaxError</span><span class="p">:</span>
@@ -259,27 +254,15 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Using AnyBodyCon: &quot;</span><span class="p">,</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">ams_path</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="pytest_namespace"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_namespace">[docs]</a><span class="k">def</span> <span class="nf">pytest_namespace</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Add an instance of the AnyTestSession class to the pytest name space.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;anytest&quot;</span><span class="p">:</span> <span class="n">AnyTestSession</span><span class="p">()}</span></div>
-
-
 <div class="viewcode-block" id="pytest_configure"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_configure">[docs]</a><span class="k">def</span> <span class="nf">pytest_configure</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Configure the AnyTest framework.&quot;&quot;&quot;</span>
+    <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span> <span class="o">=</span> <span class="n">AnyTestSession</span><span class="p">()</span>
     <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="pytest_unconfigure"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_unconfigure">[docs]</a><span class="k">def</span> <span class="nf">pytest_unconfigure</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Finialize the test session.&quot;&quot;&quot;</span>
-    <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="write_macro_file"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.write_macro_file">[docs]</a><span class="k">def</span> <span class="nf">write_macro_file</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">macro</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Write list of macros to a file.&quot;&quot;&quot;</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.anymcr&quot;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">mcr</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">mcr</span> <span class="ow">in</span> <span class="n">macro</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">filename</span></div>
+    <span class="k">pass</span>  <span class="c1"># pytest.anytest.finalize(config)</span></div>
 
 
 <div class="viewcode-block" id="AnyFile"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyFile">[docs]</a><span class="k">class</span> <span class="nc">AnyFile</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">File</span><span class="p">):</span>
@@ -290,11 +273,11 @@
         <span class="c1"># Collect define statements from the header</span>
         <span class="n">strheader</span> <span class="o">=</span> <span class="n">_read_header</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">strpath</span><span class="p">)</span>
         <span class="n">header</span> <span class="o">=</span> <span class="n">_parse_header</span><span class="p">(</span><span class="n">strheader</span><span class="p">)</span>
-        <span class="n">def_list</span> <span class="o">=</span> <span class="n">_format_switches</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;define&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+        <span class="n">def_list</span> <span class="o">=</span> <span class="n">_format_switches</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;define&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
         <span class="n">def_list</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">replace_bm_constants</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">bm_constants_map</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">def_list</span>
         <span class="p">]</span>
-        <span class="n">path_list</span> <span class="o">=</span> <span class="n">_format_switches</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+        <span class="n">path_list</span> <span class="o">=</span> <span class="n">_format_switches</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
         <span class="n">combinations</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">def_list</span><span class="p">,</span> <span class="n">path_list</span><span class="p">)</span>
         <span class="c1"># Run though the defines an create a test case for each</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">defs</span><span class="p">,</span> <span class="n">paths</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">combinations</span><span class="p">):</span>
@@ -327,9 +310,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="o">=</span> <span class="n">_as_absolute_paths</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">rootdir</span><span class="o">.</span><span class="n">strpath</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">test_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">expect_errors</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;expect_errors&quot;</span><span class="p">,</span> <span class="p">[])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">save_study</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">save_name_study</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_study</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">save_study</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;save_study&quot;</span><span class="p">,</span> <span class="s2">&quot;Main.Study&quot;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--timeout&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="n">macro_commands</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">strpath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="p">)]</span>
@@ -344,12 +325,14 @@
             <span class="s2">&quot;ignore_errors&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ignore_errors&quot;</span><span class="p">,</span> <span class="p">[]),</span>
             <span class="s2">&quot;warnings_to_include&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;warnings_to_include&quot;</span><span class="p">,</span> <span class="p">[]),</span>
             <span class="s2">&quot;fatal_warnings&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fatal_warnings&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-            <span class="s2">&quot;keep_logfiles&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;keep_logfiles&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+            <span class="s2">&quot;keep_logfiles&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;keep_logfiles&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
             <span class="s2">&quot;logfile_prefix&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;logfile_prefix&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--only-load&quot;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">macro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">macro_commands</span><span class="o">.</span><span class="n">OperationRun</span><span class="p">(</span><span class="s2">&quot;Main.RunTest&quot;</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">save_name</span><span class="p">:</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_study</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;save_study&quot;</span><span class="p">,</span> <span class="s2">&quot;Main.Study&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">save_hdf5_files</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_study</span><span class="p">:</span>
             <span class="c1"># Add save operation to the test macro</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">save_filename</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">get_save_fname</span><span class="p">(</span>
                 <span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_study</span>
@@ -362,7 +345,10 @@
         <span class="sd">&quot;&quot;&quot;Run an AnyScript test item.&quot;&quot;&quot;</span>
         <span class="n">tmpdir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">_tmpdirhandler</span><span class="o">.</span><span class="n">mktemp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_filename</span><span class="p">:</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_filename</span><span class="p">))</span>
+            <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_filename</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dirname</span><span class="p">):</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dirname</span><span class="p">)</span>
         <span class="k">with</span> <span class="n">change_dir</span><span class="p">(</span><span class="n">tmpdir</span><span class="o">.</span><span class="n">strpath</span><span class="p">):</span>
             <span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">app_opts</span><span class="p">)</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">macro</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -397,6 +383,10 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">h5py</span>
 
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_filename</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="s2">&quot;TEST ERROR: No HDF5 data were save from: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_study</span>
+                <span class="p">)</span>
             <span class="n">f</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_filename</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
             <span class="n">f</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;anytest_processtime&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;task_processtime&quot;</span><span class="p">]</span>
             <span class="n">f</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;anytest_macro&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;task_macro&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
@@ -404,12 +394,17 @@
             <span class="n">f</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;anytest_ams_version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">ams_version</span>
             <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="n">basedir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">save_filename</span><span class="p">)</span>
-            <span class="n">macrofile</span> <span class="o">=</span> <span class="n">write_macro_file</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_study</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">macro</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_study</span> <span class="o">+</span> <span class="s2">&quot;.bat&quot;</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+
+            <span class="n">logfile</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;task_logfile&quot;</span><span class="p">]</span>
+            <span class="n">macrofile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">logfile</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.anymcr&quot;</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">logfile</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="s2">&quot;logfile.txt&quot;</span><span class="p">))</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">macrofile</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="s2">&quot;macro.anymcr&quot;</span><span class="p">))</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="s2">&quot;run.bat&quot;</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">anybodygui</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
-                    <span class="sa">r</span><span class="s2">&quot;(?i)anybodycon\.exe&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;anybody\.exe&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">anybodycon_path</span>
+                    <span class="sa">r</span><span class="s2">&quot;(?i)anybodycon\.exe&quot;</span><span class="p">,</span> <span class="s2">&quot;anybody.exe&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">anybodycon_path</span>
                 <span class="p">)</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;</span><span class="si">{}</span><span class="s1">&quot; -m &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">anybodygui</span><span class="p">,</span> <span class="n">macrofile</span><span class="p">))</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;</span><span class="si">{}</span><span class="s1">&quot; -m &quot;macro.anymcr&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">anybodygui</span><span class="p">,</span> <span class="n">macrofile</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--create-macros&quot;</span><span class="p">):</span>
@@ -418,6 +413,9 @@
                 <span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">macro_file</span> <span class="o">=</span> <span class="n">macro_name</span>
             <span class="k">raise</span> <span class="n">AnyException</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">tmpdir</span><span class="o">.</span><span class="n">strpath</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="AnyItem.repr_failure"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyItem.repr_failure">[docs]</a>    <span class="k">def</span> <span class="nf">repr_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">excinfo</span><span class="p">):</span>
@@ -450,18 +448,6 @@
 
 <div class="viewcode-block" id="AnyException"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyException">[docs]</a><span class="k">class</span> <span class="nc">AnyException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Custom exception for error reporting.&quot;&quot;&quot;</span></div>
-
-
-<div class="viewcode-block" id="parse_save_name"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.parse_save_name">[docs]</a><span class="k">def</span> <span class="nf">parse_save_name</span><span class="p">(</span><span class="n">stringval</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Parse function.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">stringval</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentTypeError</span><span class="p">(</span><span class="s2">&quot;Argument can&#39;t be empty.&quot;</span><span class="p">)</span>
-    <span class="n">not_allowed</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="sa">r</span><span class="s2">&quot;\/:*?&lt;&gt;|&quot;</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">stringval</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">not_allowed</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentTypeError</span><span class="p">(</span>
-            <span class="s2">&quot;Characters are not allowed: &quot;</span> <span class="s2">&quot;/:*?&lt;&gt;|</span><span class="se">\\</span><span class="s2"> (it has </span><span class="si">%r</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">not_allowed</span>
-        <span class="p">)</span>
-    <span class="k">return</span> <span class="n">stringval</span></div>
 
 
 <div class="viewcode-block" id="pytest_addoption"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.pytest_addoption">[docs]</a><span class="k">def</span> <span class="nf">pytest_addoption</span><span class="p">(</span><span class="n">parser</span><span class="p">):</span>
@@ -501,17 +487,14 @@
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;terminate tests after a certain timeout period&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">group</span><span class="o">.</span><span class="n">addoption</span><span class="p">(</span>
-        <span class="s2">&quot;--anytest-save&quot;</span><span class="p">,</span>
-        <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;NAME&quot;</span><span class="p">,</span>
-        <span class="nb">type</span><span class="o">=</span><span class="n">parse_save_name</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Save the current run into folder &quot;</span> <span class="s2">&quot;`~/.anytest/counter-NAME/`.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--anytest-save&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Save hdf5 files from tests.&quot;</span>
     <span class="p">)</span>
-    <span class="n">group</span><span class="o">.</span><span class="n">addoption</span><span class="p">(</span>
-        <span class="s2">&quot;--anytest-save-study&quot;</span><span class="p">,</span>
-        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Used to specify the study saved by the --anytest-save option. &quot;</span>
-        <span class="s1">&#39;Defaults to: &quot;Main.Study&quot; or what is set in the &quot;test_*.any&quot; file&#39;</span><span class="p">,</span>
-    <span class="p">)</span>
+    <span class="c1"># group.addoption(</span>
+    <span class="c1">#     &quot;--anytest-save-study&quot;,</span>
+    <span class="c1">#     type=str,</span>
+    <span class="c1">#     help=&quot;Used to specify the study saved by the --anytest-save option. &quot;</span>
+    <span class="c1">#     &#39;Defaults to: &quot;Main.Study&quot; or what is set in the &quot;test_*.any&quot; file&#39;,</span>
+    <span class="c1"># )</span>
     <span class="n">group</span><span class="o">.</span><span class="n">addoption</span><span class="p">(</span>
         <span class="s2">&quot;--create-macros&quot;</span><span class="p">,</span>
         <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
@@ -519,9 +502,9 @@
         <span class="s2">&quot;easy to re-run the failed test in the gui application.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">group</span><span class="o">.</span><span class="n">addoption</span><span class="p">(</span>
-        <span class="s2">&quot;--anytest-storage&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--anytest-output&quot;</span><span class="p">,</span>
         <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;path&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.anytest&quot;</span><span class="p">),</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;anytest-output&quot;</span><span class="p">),</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Specify a path to store the runs (when --anytest-save &quot;</span>
         <span class="s2">&quot;are used). Default: </span><span class="si">%(default)r</span><span class="s2">.&quot;</span><span class="p">,</span>
     <span class="p">)</span></div>
