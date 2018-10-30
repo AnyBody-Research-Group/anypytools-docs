@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>AnyPyTools Change Log &#8212; AnyPyTools 0.14.1 documentation</title>
+    <title>AnyPyTools Change Log &#8212; AnyPyTools 1.0.0 documentation</title>
     <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="devguide.html" title="Developer’s Guide"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 0.14.1 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 1.0.0 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -83,14 +83,28 @@ div.admonition.inline-title p.admonition-title {
 </style>
 <div class="section" id="anypytools-change-log">
 <h1>AnyPyTools Change Log<a class="headerlink" href="#anypytools-change-log" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v1-0-0">
+<h2>v1.0.0<a class="headerlink" href="#v1-0-0" title="Permalink to this headline">¶</a></h2>
 <p><strong>Changed:</strong></p>
 <ul class="simple">
 <li>Source code now formatted with <a class="reference external" href="https://black.readthedocs.io/en/stable/">black</a> formatter.</li>
 </ul>
+<p><strong>Added:</strong></p>
+<ul class="simple">
+<li>Added a feature to the pytest plugin to save HDF5 files when running AnyScript tests. The purpose
+of this feature is to easily generated data for comparing the simulation of two different models
+or the same model with a different version of AMS.</li>
+</ul>
 <p><strong>Removed:</strong></p>
 <ul class="simple">
-<li>Support for Python 2 was dropped. This also removes the dependency on the <code class="docutils literal notranslate"><span class="pre">future</span></code> package.</li>
+<li>Support for legacy Python (2) was dropped. This also removes the dependency on the <code class="docutils literal notranslate"><span class="pre">future</span></code> package.</li>
 </ul>
+<p><strong>Fixed:</strong></p>
+<ul class="simple">
+<li>Fixed a regression when accessing the output of the <code class="docutils literal notranslate"><span class="pre">start_macro</span></code> command
+(<code class="docutils literal notranslate"><span class="pre">AnyPyProcessOutputList</span></code>) for aggregated results across multiple macros.</li>
+</ul>
+</div>
 <div class="section" id="v0-14-1">
 <h2>v0.14.1<a class="headerlink" href="#v0-14-1" title="Permalink to this headline">¶</a></h2>
 <p><strong>Fixed:</strong></p>
@@ -386,6 +400,7 @@ that in the log files.</li>
     <h3><a href="index.html">Page contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">AnyPyTools Change Log</a><ul>
+<li><a class="reference internal" href="#v1-0-0">v1.0.0</a></li>
 <li><a class="reference internal" href="#v0-14-1">v0.14.1</a></li>
 <li><a class="reference internal" href="#v0-14">v0.14</a></li>
 <li><a class="reference internal" href="#v0-13">v0.13</a></li>
@@ -483,7 +498,7 @@ that in the log files.</li>
         <li class="right" >
           <a href="devguide.html" title="Developer’s Guide"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 0.14.1 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 1.0.0 documentation</a> &#187;</li>
  
       </ul>
     </div>
