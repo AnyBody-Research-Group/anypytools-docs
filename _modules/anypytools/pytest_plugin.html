@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.0.0 documentation</title>
+    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.0.1 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.0.0 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.0.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -91,15 +91,6 @@
         <span class="k">yield</span>
     <span class="k">finally</span><span class="p">:</span>
         <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">oldpwd</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="pytest_xdist_setupnodes"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_xdist_setupnodes">[docs]</a><span class="k">def</span> <span class="nf">pytest_xdist_setupnodes</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">specs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; called before any remote node is set up. &quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span>
-        <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Using AnyBodyCon: &quot;</span><span class="p">,</span>
-        <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anybodycon&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">get_anybodycon_path</span><span class="p">(),</span>
-        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="AnyTestSession"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestSession">[docs]</a><span class="k">class</span> <span class="nc">AnyTestSession</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -254,10 +245,25 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Using AnyBodyCon: &quot;</span><span class="p">,</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">ams_path</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="DeferPlugin"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.DeferPlugin">[docs]</a><span class="k">class</span> <span class="nc">DeferPlugin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Simple plugin to defer pytest-xdist hook functions.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DeferPlugin.pytest_xdist_setupnodes"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.DeferPlugin.pytest_xdist_setupnodes">[docs]</a>    <span class="k">def</span> <span class="nf">pytest_xdist_setupnodes</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">specs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; called before any remote node is set up. &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Using AnyBodyCon: &quot;</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anybodycon&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">get_anybodycon_path</span><span class="p">(),</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
 <div class="viewcode-block" id="pytest_configure"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_configure">[docs]</a><span class="k">def</span> <span class="nf">pytest_configure</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Configure the AnyTest framework.&quot;&quot;&quot;</span>
     <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span> <span class="o">=</span> <span class="n">AnyTestSession</span><span class="p">()</span>
-    <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></div>
+    <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">pluginmanager</span><span class="o">.</span><span class="n">hasplugin</span><span class="p">(</span><span class="s2">&quot;xdist&quot;</span><span class="p">):</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">pluginmanager</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">DeferPlugin</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="pytest_unconfigure"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_unconfigure">[docs]</a><span class="k">def</span> <span class="nf">pytest_unconfigure</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
@@ -565,7 +571,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.0.0 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.0.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Tips &amp; Trics for anypytools &#8212; AnyPyTools 1.0.0 documentation</title>
+    <title>Tips &amp; Trics for anypytools &#8212; AnyPyTools 1.0.1 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="05_Monte_Carlo_studies_etc.html" title="Advanced Examples"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.0.0 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.0.1 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -113,18 +113,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -164,9 +164,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -174,7 +174,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -224,6 +224,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for cloud theme */
 
 /* nicer titles and more space for info and warning logos */
@@ -252,11 +286,9 @@ div.admonition.inline-title p.admonition-title {
 <h1>Tips &amp; Trics for anypytools<a class="headerlink" href="#Tips-&-Trics-for-anypytools" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Stopping-and-restarting-simulations">
 <h2>Stopping and restarting simulations<a class="headerlink" href="#Stopping-and-restarting-simulations" title="Permalink to this headline">¶</a></h2>
-<p>AnyPyProcess caches the simulation results. This allows us to stop the
-simulations, and then later restart them again.</p>
+<p>AnyPyProcess caches the simulation results. This allows us to stop the simulations, and then later restart them again.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -273,8 +305,7 @@ simulations, and then later restart them again.</p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -291,7 +322,7 @@ simulations, and then later restart them again.</p>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area docutils container">
+<div class="output_area rendered_html docutils container">
 Processing interrupted</div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -300,13 +331,9 @@ Processing interrupted</div>
 <div class="output_area docutils container">
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "91f2d7d49df94be6a2ec88593d7e95de"}</script></div>
 </div>
-<p>Here we stopped the simulation using the Notebook interrupt button.
-Calling the <code class="docutils literal notranslate"><span class="pre">start_macro()</span></code> function again continues the processing
-and re-run any task that wasn’t completed in the first run and any task
-that exited with errors.</p>
+<p>Here we stopped the simulation using the Notebook interrupt button. Calling the <code class="docutils literal notranslate"><span class="pre">start_macro()</span></code> function again continues the processing and re-run any task that wasn’t completed in the first run and any task that exited with errors.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -326,17 +353,13 @@ that exited with errors.</p>
 <div class="output_area docutils container">
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "42b99c71060e45baa214744d2195d023"}</script></div>
 </div>
-<p>Note: That changing the input arguments <code class="docutils literal notranslate"><span class="pre">start_macro</span></code> or
-re-instanciating the <code class="docutils literal notranslate"><span class="pre">app</span></code> object will erase the cache and re-run all
-processes.</p>
+<p>Note: That changing the input arguments <code class="docutils literal notranslate"><span class="pre">start_macro</span></code> or re-instanciating the <code class="docutils literal notranslate"><span class="pre">app</span></code> object will erase the cache and re-run all processes.</p>
 </div>
 <div class="section" id="Including-meta-information-in-the-output">
 <h2>Including meta-information in the output<a class="headerlink" href="#Including-meta-information-in-the-output" title="Permalink to this headline">¶</a></h2>
-<p>The typical behavior of <code class="docutils literal notranslate"><span class="pre">start_macro()</span></code> is only to return variables
-’dump’ed by the macro commands.</p>
+<p>The typical behavior of <code class="docutils literal notranslate"><span class="pre">start_macro()</span></code> is only to return variables ’dump’ed by the macro commands.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -366,8 +389,7 @@ processes.</p>
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "dc9d8008840240c9aadef229daaf2a37"}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -377,11 +399,9 @@ processes.</p>
 </pre></div>
 </div>
 </div>
-<p>To get more information about the tasks, we can set <code class="docutils literal notranslate"><span class="pre">return_task_info</span></code>
-flag.</p>
+<p>To get more information about the tasks, we can set <code class="docutils literal notranslate"><span class="pre">return_task_info</span></code> flag.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -411,8 +431,7 @@ flag.</p>
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "b6c8dbb1a1a64e34b7aee03c53bbd2be"}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -436,13 +455,9 @@ flag.</p>
 </div>
 <div class="section" id="Saving-output-to-re-process-at-a-later-time">
 <h2>Saving output to re-process at a later time<a class="headerlink" href="#Saving-output-to-re-process-at-a-later-time" title="Permalink to this headline">¶</a></h2>
-<p>Saving data with ‘extra’ task information, gives some other
-posibilities. The results from running batch processin (i.e.&nbsp;output f
-<code class="docutils literal notranslate"><span class="pre">start_macro()</span></code> can be used as input to restart the same processing
-even if the AnyPyProcess have no cached results.</p>
+<p>Saving data with ‘extra’ task information, gives some other posibilities. The results from running batch processin (i.e.&nbsp;output f <code class="docutils literal notranslate"><span class="pre">start_macro()</span></code> can be used as input to restart the same processing even if the AnyPyProcess have no cached results.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -472,8 +487,7 @@ even if the AnyPyProcess have no cached results.</p>
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "98af5a11bc2d4350901b7da244c84a8c"}</script></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -495,8 +509,7 @@ even if the AnyPyProcess have no cached results.</p>
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "708e5fa303f649619f1333bf77a86bf1"}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -516,14 +529,12 @@ even if the AnyPyProcess have no cached results.</p>
 </pre></div>
 </div>
 </div>
-<p>The effect is that the result of an analysis can be saved to files and
-later restarted. The next example illustrates this.</p>
+<p>The effect is that the result of an analysis can be saved to files and later restarted. The next example illustrates this.</p>
 </div>
 <div class="section" id="Example:-Saving-data-to-disk-while-running">
 <h2>Example: Saving data to disk while running<a class="headerlink" href="#Example:-Saving-data-to-disk-while-running" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -535,8 +546,7 @@ later restarted. The next example illustrates this.</p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -587,8 +597,7 @@ Done
 </div>
 <p>All this stored data can be be reloaded</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -606,8 +615,7 @@ Entries in file: 500
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -616,8 +624,7 @@ Entries in file: 500
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -643,8 +650,7 @@ Entries in file: 500
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -756,7 +762,7 @@ Entries in file: 500
         <li class="right" >
           <a href="05_Monte_Carlo_studies_etc.html" title="Advanced Examples"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.0.0 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.0.1 documentation</a> &#187;</li>
  
       </ul>
     </div>
