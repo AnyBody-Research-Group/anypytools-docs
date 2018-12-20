@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Getting Started with AnyPyTools &#8212; AnyPyTools 1.0.0 documentation</title>
+    <title>Getting Started with AnyPyTools &#8212; AnyPyTools 1.0.1 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../install_guide.html" title="Install guide"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.0.0 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.0.1 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -113,18 +113,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -164,9 +164,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -174,7 +174,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -224,6 +224,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for cloud theme */
 
 /* nicer titles and more space for info and warning logos */
@@ -252,15 +286,10 @@ div.admonition.inline-title p.admonition-title {
 <h1>Getting Started with AnyPyTools<a class="headerlink" href="#Getting-Started-with-AnyPyTools" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Running-a-simple-macro">
 <h2>Running a simple macro<a class="headerlink" href="#Running-a-simple-macro" title="Permalink to this headline">¶</a></h2>
-<p>For the sake of the tutorial we will use a small ‘toy’ model of a
-simplified knee joint (see the figure.) The model is defined in the file
-<a class="reference external" href="Knee.any">Knee.any</a>, which is placed in the current working
-directory.</p>
-<p>Next, let us run the model from python. First, we import the
-<code class="docutils literal notranslate"><span class="pre">AnyPyProcess</span></code> class and create an instance of the class.</p>
+<p>For the sake of the tutorial we will use a small ‘toy’ model of a simplified knee joint (see the figure.) The model is defined in the file <a class="reference external" href="Knee.any">Knee.any</a>, which is placed in the current working directory.</p>
+<p>Next, let us run the model from python. First, we import the <code class="docutils literal notranslate"><span class="pre">AnyPyProcess</span></code> class and create an instance of the class.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -269,26 +298,18 @@ directory.</p>
 </pre></div>
 </div>
 </div>
-<p>Next, we need to instruct the AnyBody Modelling System to load the and
-run the model. We do this using <em>AnyScript</em> macro commands. These are
-short commands that can automate operations in the AnyBody Modeling
-System (AMS). Operation that are normally done by pointing and clicking
-in the AMS graphical user interface.</p>
-<p>You can read more on <em>AnyScript</em> macros in the “User Interface Features”
-tutorial that accompanies the AnyBody Modeling System.</p>
+<p>Next, we need to instruct the AnyBody Modelling System to load the and run the model. We do this using <em>AnyScript</em> macro commands. These are short commands that can automate operations in the AnyBody Modeling System (AMS). Operation that are normally done by pointing and clicking in the AMS graphical user interface.</p>
+<p>You can read more on <em>AnyScript</em> macros in the “User Interface Features” tutorial that accompanies the AnyBody Modeling System.</p>
 <p>Now we define an <em>AnyScript</em> macro that we want to run on the model.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">load</span> <span class="s2">&quot;Knee.any&quot;</span>
 <span class="n">operation</span> <span class="n">Main</span><span class="o">.</span><span class="n">MyStudy</span><span class="o">.</span><span class="n">Kinematics</span>
 <span class="n">run</span>
 </pre></div>
 </div>
-<p>The macro will command AnyBody to load the model and run the Kinematics
-operation.</p>
-<p>The macro is executed by parsing it to the <code class="docutils literal notranslate"><span class="pre">start_macro()</span></code> method of
-the <code class="docutils literal notranslate"><span class="pre">AnyPyProcess</span></code> object.</p>
+<p>The macro will command AnyBody to load the model and run the Kinematics operation.</p>
+<p>The macro is executed by parsing it to the <code class="docutils literal notranslate"><span class="pre">start_macro()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">AnyPyProcess</span></code> object.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -317,11 +338,9 @@ the <code class="docutils literal notranslate"><span class="pre">AnyPyProcess</s
 </div>
 <div class="section" id="Running-multiple-macros">
 <h2>Running multiple macros<a class="headerlink" href="#Running-multiple-macros" title="Permalink to this headline">¶</a></h2>
-<p>It is easy to run multiple macros by adding an extra set of macro
-commands to the macro list.</p>
+<p>It is easy to run multiple macros by adding an extra set of macro commands to the macro list.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -352,14 +371,10 @@ commands to the macro list.</p>
 </div>
 <div class="section" id="Parallel-execution">
 <h2>Parallel execution<a class="headerlink" href="#Parallel-execution" title="Permalink to this headline">¶</a></h2>
-<p>Notice that AnyPyProcess will run the anyscript macros in parallel.
-Modern computers have multiple cores, but a single AnyBody instance can
-only utilize a single core, leaving us with a great potential for
-speeding things up through parallelization.</p>
+<p>Notice that AnyPyProcess will run the anyscript macros in parallel. Modern computers have multiple cores, but a single AnyBody instance can only utilize a single core, leaving us with a great potential for speeding things up through parallelization.</p>
 <p>To test this, let us create ten macros in a for-loop.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -374,12 +389,9 @@ speeding things up through parallelization.</p>
 </pre></div>
 </div>
 </div>
-<p>AnyPyProcess has a parameter ‘num_processes’ that controls the number of
-parallel processes. Let us try a small example to see the difference in
-speed:</p>
+<p>AnyPyProcess has a parameter ‘num_processes’ that controls the number of parallel processes. Let us try a small example to see the difference in speed:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -390,8 +402,7 @@ speed:</p>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -401,17 +412,13 @@ speed:</p>
 </pre></div>
 </div>
 </div>
-<p><em>Note</em>: In general you should not user a <code class="docutils literal notranslate"><span class="pre">num_processes</span></code> larger than
-the number of cores in your computer.</p>
+<p><em>Note</em>: In general you should not user a <code class="docutils literal notranslate"><span class="pre">num_processes</span></code> larger than the number of cores in your computer.</p>
 </div>
 <div class="section" id="Getting-data-from-the-AnyBody-Model">
 <h2>Getting data from the AnyBody Model<a class="headerlink" href="#Getting-data-from-the-AnyBody-Model" title="Permalink to this headline">¶</a></h2>
-<p>In the following macro, we have added a new class operation to ‘Dump’
-the result of the maximum muscle activity. The <code class="docutils literal notranslate"><span class="pre">start_macro</span></code> method
-will return all the dumped variables:</p>
+<p>In the following macro, we have added a new class operation to ‘Dump’ the result of the maximum muscle activity. The <code class="docutils literal notranslate"><span class="pre">start_macro</span></code> method will return all the dumped variables:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -440,8 +447,7 @@ will return all the dumped variables:</p>
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "2048280c4bf0462f9f6eb6abb3abbaf5"}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>Out[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -469,14 +475,10 @@ will return all the dumped variables:</p>
 </pre></div>
 </div>
 </div>
-<p>We can export more variables by adding more <code class="docutils literal notranslate"><span class="pre">classoperation</span></code>. But
-there is a better way of doing this, as we shall see in the next
-tutorials.</p>
-<p>Finally, to make a plot we import the <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library, and enable
-inline figures.</p>
+<p>We can export more variables by adding more <code class="docutils literal notranslate"><span class="pre">classoperation</span></code>. But there is a better way of doing this, as we shall see in the next tutorials.</p>
+<p>Finally, to make a plot we import the <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library, and enable inline figures.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -485,8 +487,7 @@ inline figures.</p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -599,7 +600,7 @@ inline figures.</p>
         <li class="right" >
           <a href="../install_guide.html" title="Install guide"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.0.0 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.0.1 documentation</a> &#187;</li>
  
       </ul>
     </div>

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Batch processing &#8212; AnyPyTools 1.0.0 documentation</title>
+    <title>Batch processing &#8212; AnyPyTools 1.0.1 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="03_Working_with_output_from_Anybody.html" title="Working with data from AnyBody"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.0.0 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.0.1 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -113,18 +113,18 @@ div.nblast {
 
 /* input prompt */
 div.nbinput div.prompt pre {
-    color: #303F9F;
+    color: #307FC1;
 }
 
 /* output prompt */
 div.nboutput div.prompt pre {
-    color: #D84315;
+    color: #BF5B3D;
 }
 
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 8ex;
+    min-width: 5ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -164,9 +164,9 @@ div.nboutput div.output_area {
 
 /* input area */
 div.nbinput div.input_area {
-    border: 1px solid #cfcfcf;
+    border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f7f7f7;
+    background: #f5f5f5;
 }
 
 /* override MathJax center alignment in output cells */
@@ -174,7 +174,7 @@ div.nboutput div[class*=MathJax] {
     text-align: left !important;
 }
 
-/* override sphinx.ext.pngmath center alignment in output cells */
+/* override sphinx.ext.imgmath center alignment in output cells */
 div.nboutput div.math p {
     text-align: left;
 }
@@ -224,6 +224,40 @@ div.nboutput div.output_area.stderr {
 .ansi-bold { font-weight: bold; }
 .ansi-underline { text-decoration: underline; }
 
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
 /* CSS overrides for cloud theme */
 
 /* nicer titles and more space for info and warning logos */
@@ -250,28 +284,14 @@ div.admonition.inline-title p.admonition-title {
 </style>
 <div class="section" id="Batch-processing">
 <h1>Batch processing<a class="headerlink" href="#Batch-processing" title="Permalink to this headline">¶</a></h1>
-<p>The approach to batch processing depends on the structure of the anybody
-model. A commonly used strategy is a single anyscript main file. The
-main file is then loaded with different define statements to set the
-trial name, subject id or other parameters. This strategy for batch
-processing is outlined on the <a class="reference external" href="http://wiki.anyscript.org/index.php/Running_several_files_as_batch">anyscript.org wiki
-page</a>.</p>
-<p>Another strategy is to have a separate main file for each trial. These
-individual main-files hold all trial-specific data and include a base
-model that is common to all trials and subjects. The approach makes it
-much easier to work with mocap models that have many subject or hundreds
-of trials.</p>
-<p>The following shows how to batch process models where each trials is its
-own main file.</p>
+<p>The approach to batch processing depends on the structure of the anybody model. A commonly used strategy is a single anyscript main file. The main file is then loaded with different define statements to set the trial name, subject id or other parameters. This strategy for batch processing is outlined on the <a class="reference external" href="http://wiki.anyscript.org/index.php/Running_several_files_as_batch">anyscript.org wiki page</a>.</p>
+<p>Another strategy is to have a separate main file for each trial. These individual main-files hold all trial-specific data and include a base model that is common to all trials and subjects. The approach makes it much easier to work with mocap models that have many subject or hundreds of trials.</p>
+<p>The following shows how to batch process models where each trials is its own main file.</p>
 <div class="section" id="Model-with-many-main-files">
 <h2>Model with many main files<a class="headerlink" href="#Model-with-many-main-files" title="Permalink to this headline">¶</a></h2>
-<p>This <a class="reference external" href="Tutorial%20files/BatchProcessExample.zip">(zip)</a> illustrates
-the concept of a single model with many main files. The model is based
-on the Arm2D demo from the AnyBody tutorials. The main files are located
-in subfolders (<code class="docutils literal notranslate"><span class="pre">model1</span></code>-<code class="docutils literal notranslate"><span class="pre">model9</span></code>).</p>
+<p>This <a class="reference external" href="Tutorial%20files/BatchProcessExample.zip">(zip)</a> illustrates the concept of a single model with many main files. The model is based on the Arm2D demo from the AnyBody tutorials. The main files are located in subfolders (<code class="docutils literal notranslate"><span class="pre">model1</span></code>-<code class="docutils literal notranslate"><span class="pre">model9</span></code>).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -298,8 +318,7 @@ Demo.Arm2D.any    [model4]          [model8]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -323,11 +342,9 @@ C:\Users\mel\Documents\AnyPyTools\Tutorial\Tutorial files\BatchProcess\model8\ma
 C:\Users\mel\Documents\AnyPyTools\Tutorial\Tutorial files\BatchProcess\model9\main.any
 </pre></div></div>
 </div>
-<p>Each of main files <code class="docutils literal notranslate"><span class="pre">main.any</span></code> has it own set of parameters, and they
-all include the same common fiile <code class="docutils literal notranslate"><span class="pre">Demo.Arm2D.any</span></code>.</p>
+<p>Each of main files <code class="docutils literal notranslate"><span class="pre">main.any</span></code> has it own set of parameters, and they all include the same common fiile <code class="docutils literal notranslate"><span class="pre">Demo.Arm2D.any</span></code>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -358,8 +375,7 @@ all include the same common fiile <code class="docutils literal notranslate"><sp
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "ba1e48db10524e7e925627c9671f967c"}</script></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
-<span></span>In [ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -458,7 +474,7 @@ all include the same common fiile <code class="docutils literal notranslate"><sp
         <li class="right" >
           <a href="03_Working_with_output_from_Anybody.html" title="Working with data from AnyBody"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.0.0 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.0.1 documentation</a> &#187;</li>
  
       </ul>
     </div>
