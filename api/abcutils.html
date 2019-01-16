@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>anypytools.abcutils &#8212; AnyPyTools 1.0.1 documentation</title>
+    <title>anypytools.abcutils &#8212; AnyPyTools 1.1.0 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
@@ -47,7 +47,7 @@
         <li class="right" >
           <a href="anydatah5_generator.html" title="anypytools.datautils.anydatah5_generator"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.0.1 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.1.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -92,7 +92,7 @@ div.admonition.inline-title p.admonition-title {
 &#64;author: Morten</p>
 <dl class="class">
 <dt id="anypytools.abcutils.AnyPyProcess">
-<em class="property">class </em><code class="descclassname">anypytools.abcutils.</code><code class="descname">AnyPyProcess</code><span class="sig-paren">(</span><em>num_processes=2</em>, <em>anybodycon_path=None</em>, <em>timeout=3600</em>, <em>silent=False</em>, <em>ignore_errors=None</em>, <em>warnings_to_include=None</em>, <em>fatal_warnings=False</em>, <em>return_task_info=False</em>, <em>keep_logfiles=False</em>, <em>logfile_prefix=None</em>, <em>python_env=None</em>, <em>priority=16384</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">anypytools.abcutils.</code><code class="descname">AnyPyProcess</code><span class="sig-paren">(</span><em>num_processes=2</em>, <em>anybodycon_path=None</em>, <em>timeout=3600</em>, <em>silent=False</em>, <em>ignore_errors=None</em>, <em>warnings_to_include=None</em>, <em>fatal_warnings=False</em>, <em>return_task_info=False</em>, <em>keep_logfiles=False</em>, <em>logfile_prefix=None</em>, <em>python_env=None</em>, <em>debug_mode=0</em>, <em>priority=16384</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for configuring batch process jobs of AnyBody models.</p>
 <p>This is the main interface to control the AnyBody console application from
 python. The class stores all the configuration about how AnyBody is run.
@@ -129,6 +129,7 @@ to assign a more meaningfull name to a batch of logfiles.
 should use for Python Hooks. This will added the <code class="docutils literal notranslate"><span class="pre">PYTHONHOME</span></code> environment variable and
 prepended to the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> before starting the AnyBody Console application.
 (Defaults to None, which will use the default Python installation on the computer.)</li>
+<li><strong>debug_mode</strong> (<em>int</em><em>, </em><em>optional</em>) – Sets the debug mode flag for the AnyBodyConsole appplication (e.g. the /deb &lt;number&gt; flag)</li>
 <li><strong>priority</strong> (<em>int</em><em>, </em><em>optional</em>) – The priority of the subprocesses. This can be on of the following:
 <code class="docutils literal notranslate"><span class="pre">anypytools.IDLE_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">anypytools.BELOW_NORMAL_PRIORITY_CLASS</span></code>,
 <code class="docutils literal notranslate"><span class="pre">anypytools.NORMAL_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">anypytools.HIGH_PRIORITY_CLASS</span></code>
@@ -260,7 +261,7 @@ be used.</li>
 
 <dl class="method">
 <dt id="anypytools.abcutils.AnyPyProcess.start_macro">
-<code class="descname">start_macro</code><span class="sig-paren">(</span><em>macrolist=None</em>, <em>folderlist=None</em>, <em>search_subdirs=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.start_macro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess.start_macro" title="Permalink to this definition">¶</a></dt>
+<code class="descname">start_macro</code><span class="sig-paren">(</span><em>macrolist=None</em>, <em>folderlist=None</em>, <em>search_subdirs=None</em>, <em>logfile=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.start_macro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess.start_macro" title="Permalink to this definition">¶</a></dt>
 <dd><p>Start a batch processing job.</p>
 <p>Runs a list of AnyBody Macro commands in
 the current directory, or in the folders specified by <cite>folderlist</cite>. If
@@ -279,6 +280,8 @@ tuples to specify a name to appear in the output</li>
 <li><strong>search_subdirs</strong> (<em>str</em><em>, </em><em>optional</em>) – Regular expression used to extend the folderlist with all the
 subdirectories that match the regular expression.
 Defaults to None: No subdirectories are included.</li>
+<li><strong>logfile</strong> (<em>str</em><em>, </em><em>optional</em>) – If specified an explicit name will be used for the log files generated.
+Otherwise, random names are used for logfiles</li>
 </ul>
 </td>
 </tr>
@@ -307,7 +310,7 @@ the macros did not output any data.</p>
 
 <dl class="function">
 <dt id="anypytools.abcutils.execute_anybodycon">
-<code class="descclassname">anypytools.abcutils.</code><code class="descname">execute_anybodycon</code><span class="sig-paren">(</span><em>macro</em>, <em>logfile=None</em>, <em>anybodycon_path=None</em>, <em>timeout=3600</em>, <em>keep_macrofile=False</em>, <em>env=None</em>, <em>priority=16384</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#execute_anybodycon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.execute_anybodycon" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">anypytools.abcutils.</code><code class="descname">execute_anybodycon</code><span class="sig-paren">(</span><em>macro</em>, <em>logfile=None</em>, <em>anybodycon_path=None</em>, <em>timeout=3600</em>, <em>keep_macrofile=False</em>, <em>env=None</em>, <em>priority=16384</em>, <em>debug_mode=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#execute_anybodycon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.execute_anybodycon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Launch a single AnyBodyConsole applicaiton.</p>
 <p>This is a low level function to start a AnyBody Console process
 with a given list macros.</p>
@@ -332,6 +335,8 @@ application.</li>
 <code class="docutils literal notranslate"><span class="pre">anypytools.IDLE_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">anypytools.BELOW_NORMAL_PRIORITY_CLASS</span></code>,
 <code class="docutils literal notranslate"><span class="pre">anypytools.NORMAL_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">anypytools.HIGH_PRIORITY_CLASS</span></code>
 Default is BELOW_NORMAL_PRIORITY_CLASS.</li>
+<li><strong>debug_mode</strong> (<em>int</em>) – The AMS debug mode to use. Defaults to 0 which is disabled. 1 correspond to
+crashdump enabled</li>
 </ul>
 </td>
 </tr>
@@ -426,7 +431,7 @@ Default is BELOW_NORMAL_PRIORITY_CLASS.</li>
         <li class="right" >
           <a href="anydatah5_generator.html" title="anypytools.datautils.anydatah5_generator"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.0.1 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.1.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li> 
       </ul>
