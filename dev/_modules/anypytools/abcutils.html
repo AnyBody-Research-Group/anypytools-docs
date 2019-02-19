@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>anypytools.abcutils &#8212; AnyPyTools 1.1.1 documentation</title>
+    <title>anypytools.abcutils &#8212; AnyPyTools 1.1.2 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.1.1 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.1.2 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -72,6 +72,7 @@
 <span class="kn">import</span> <span class="nn">atexit</span>
 <span class="kn">import</span> <span class="nn">pathlib</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">from</span> <span class="nn">subprocess</span> <span class="k">import</span> <span class="n">Popen</span>
 <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">NamedTemporaryFile</span>
@@ -277,7 +278,7 @@
     <span class="n">subprocess_flags</span> <span class="o">|=</span> <span class="n">priority</span>
     <span class="c1"># Check global module flag to avoid starting processes after</span>
     <span class="c1"># the user cancelled the processes</span>
-    <span class="n">timeout_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span>
+    <span class="n">timeout_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span>
     <span class="n">proc</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span>
         <span class="n">anybodycmd</span><span class="p">,</span>
         <span class="n">stdout</span><span class="o">=</span><span class="n">logfile</span><span class="p">,</span>
@@ -287,7 +288,7 @@
     <span class="p">)</span>
     <span class="n">_subprocess_container</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
     <span class="k">while</span> <span class="n">proc</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">timeout_time</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">timeout_time</span><span class="p">:</span>
             <span class="n">proc</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
             <span class="n">proc</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
@@ -572,7 +573,13 @@
         <span class="n">python_env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">debug_mode</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
         <span class="n">priority</span><span class="o">=</span><span class="n">BELOW_NORMAL_PRIORITY_CLASS</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;The following input arguments are not supported/understood:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ignore_errors</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ignore_errors must be a list of strings&quot;</span><span class="p">)</span>
 
@@ -829,7 +836,7 @@
                     <span class="s2">&quot;the AnyPyProcess object has cached output &quot;</span>
                     <span class="s2">&quot;to process&quot;</span>
                 <span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">collections</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span>
             <span class="n">tasklist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">_Task</span><span class="o">.</span><span class="n">from_output_list</span><span class="p">(</span><span class="n">macrolist</span><span class="p">))</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">macrolist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">arg_hash</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span>
@@ -892,7 +899,7 @@
                 <span class="n">logfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">######### OUTPUT LOG ##########&quot;</span><span class="p">)</span>
                 <span class="n">logfile</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
                 <span class="n">task</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="n">logfile</span><span class="o">.</span><span class="n">name</span>
-                <span class="n">starttime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+                <span class="n">starttime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span>
                 <span class="n">exe_args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
                     <span class="n">macro</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">macro</span><span class="p">,</span>
                     <span class="n">logfile</span><span class="o">=</span><span class="n">logfile</span><span class="p">,</span>
@@ -906,7 +913,7 @@
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">task</span><span class="o">.</span><span class="n">retcode</span> <span class="o">=</span> <span class="n">execute_anybodycon</span><span class="p">(</span><span class="o">**</span><span class="n">exe_args</span><span class="p">)</span>
                 <span class="k">finally</span><span class="p">:</span>
-                    <span class="n">endtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+                    <span class="n">endtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span>
                     <span class="n">logfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
                     <span class="n">task</span><span class="o">.</span><span class="n">processtime</span> <span class="o">=</span> <span class="n">endtime</span> <span class="o">-</span> <span class="n">starttime</span>
                 <span class="n">task</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">parse_anybodycon_output</span><span class="p">(</span>
@@ -943,7 +950,7 @@
             <span class="n">totaltime</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">return</span> <span class="n">totaltime</span>
         <span class="n">use_threading</span> <span class="o">=</span> <span class="n">number_tasks</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_processes</span> <span class="o">&gt;</span> <span class="mi">1</span>
-        <span class="n">starttime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+        <span class="n">starttime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span>
         <span class="n">task_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
         <span class="n">pbar</span> <span class="o">=</span> <span class="n">_ProgressBar</span><span class="p">(</span><span class="n">number_tasks</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">silent</span><span class="p">)</span>
         <span class="n">pbar</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -989,7 +996,7 @@
             <span class="c1"># to escape this try-catch. This is usefull when if the code is</span>
             <span class="c1"># run in an outer loop which we want to excape as well.</span>
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">totaltime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span> <span class="o">-</span> <span class="n">starttime</span>
+        <span class="n">totaltime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">()</span> <span class="o">-</span> <span class="n">starttime</span>
         <span class="k">return</span> <span class="n">totaltime</span>
 
 <div class="viewcode-block" id="AnyPyProcess.cleanup_logfiles"><a class="viewcode-back" href="../../api/abcutils.html#anypytools.AnyPyProcess.cleanup_logfiles">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup_logfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasklist</span><span class="p">):</span>
@@ -1124,7 +1131,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.1.1 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.1.2 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
@@ -1133,7 +1140,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
