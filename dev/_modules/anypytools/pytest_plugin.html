@@ -364,17 +364,16 @@
         <span class="c1"># Ignore error due to missing Main.RunTest</span>
         <span class="k">if</span> <span class="s2">&quot;ERROR&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
             <span class="n">runtest_missing</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span>
-                <span class="s2">&quot;Error : Main.RunTest : Unresolved object&quot;</span> <span class="ow">in</span> <span class="n">err</span> 
-                <span class="k">for</span> <span class="n">err</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;ERROR&quot;</span><span class="p">]</span>
+                <span class="s2">&quot;Error : Main.RunTest :&quot;</span> <span class="ow">in</span> <span class="n">err</span> <span class="k">for</span> <span class="n">err</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;ERROR&quot;</span><span class="p">]</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">runtest_missing</span><span class="p">:</span>
                 <span class="n">runtest_errros</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="s2">&quot;Error : Main.RunTest : Unresolved object&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;Main.RunTest : Select Operation is not expected&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Error : Main.RunTest : Unresolved&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Main.RunTest : Select Operation&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;Error : run : command unexpected while&quot;</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="n">result</span><span class="p">[</span><span class="s2">&quot;ERROR&quot;</span><span class="p">][:]</span> <span class="o">=</span> <span class="p">[</span>
-                    <span class="n">err</span> 
+                    <span class="n">err</span>
                     <span class="k">for</span> <span class="n">err</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;ERROR&quot;</span><span class="p">]</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">s</span> <span class="ow">in</span> <span class="n">err</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">runtest_errros</span><span class="p">)</span>
                 <span class="p">]</span>
@@ -478,7 +477,7 @@
         <span class="s2">&quot;--anybody_debug_mode&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
         <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Sets the debug mode for the anybody console application. This can be used to enable crash dumps.&quot;</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Sets the debug mode for the anybody console application. This can be used to enable crash dumps.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">group</span><span class="o">.</span><span class="n">addoption</span><span class="p">(</span>
         <span class="s2">&quot;--only-load&quot;</span><span class="p">,</span>
