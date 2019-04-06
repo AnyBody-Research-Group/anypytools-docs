@@ -1,17 +1,15 @@
 
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>anypytools.AnyPyProcess &#8212; AnyPyTools 1.1.2 documentation</title>
+    <meta charset="utf-8" />
+    <title>anypytools.AnyPyProcess &#8212; AnyPyTools 1.1.3 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
@@ -47,7 +45,7 @@
         <li class="right" >
           <a href="index.html" title="AnyPyTools API"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.1.2 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.1.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -96,62 +94,58 @@ div.admonition.inline-title p.admonition-title {
 python. The class stores all the configuration about how AnyBody is run.
 It has one important method <cite>start_macro</cite> which launches the AnyBody with
 a given anyscript macro.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>num_processes</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of anybody models to start in parallel.
-This defaults to the number of logical CPU cores in the computer.</li>
-<li><strong>anybodycon_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Overwrite the default anybodycon.exe file to
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_processes</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of anybody models to start in parallel.
+This defaults to the number of logical CPU cores in the computer.</p></li>
+<li><p><strong>anybodycon_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Overwrite the default anybodycon.exe file to
 use in batch processing. Defaults to what is found in the windows
-registry.</li>
-<li><strong>timeout</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum time (i seconds) a model can run until it is terminated.
-Defaults to 3600 sec (1 hour).</li>
-<li><strong>silent</strong> (<em>bool</em><em>, </em><em>optional</em>) – Set to True to suppress any output such as progress bar and error
-messages. (Defaults to False).</li>
-<li><strong>ignore_errors</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of AnyBody Errors substrings to ignore when running the models.
-(Defaults to None)</li>
-<li><strong>warnings_to_include</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of strings that are matched to warnings in the model
+registry.</p></li>
+<li><p><strong>timeout</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum time (i seconds) a model can run until it is terminated.
+Defaults to 3600 sec (1 hour).</p></li>
+<li><p><strong>silent</strong> (<em>bool</em><em>, </em><em>optional</em>) – Set to True to suppress any output such as progress bar and error
+messages. (Defaults to False).</p></li>
+<li><p><strong>ignore_errors</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of AnyBody Errors substrings to ignore when running the models.
+(Defaults to None)</p></li>
+<li><p><strong>warnings_to_include</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of strings that are matched to warnings in the model
 output. If a warning with that string is found the warning
-is returned in the output. (Defaults to None)</li>
-<li><strong>fatal_warnings</strong> (<em>bool</em><em>, </em><em>optional</em>) – Treat warnings as errors. This only triggers for specific warnings given
-by <code class="docutils literal notranslate"><span class="pre">warnings_to_include</span></code> argument.</li>
-<li><strong>return_task_info</strong> (<em>bool</em><em>, </em><em>optional</em>) – Return the task status information when running macros. Defaults to False.</li>
-<li><strong>keep_logfiles</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True logfile will never be removed. Even if a simulations successeds
-without error. (Defautls to False)</li>
-<li><strong>logfile_prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – String which will be prefixed to the generated log files. This can be used
+is returned in the output. (Defaults to None)</p></li>
+<li><p><strong>fatal_warnings</strong> (<em>bool</em><em>, </em><em>optional</em>) – Treat warnings as errors. This only triggers for specific warnings given
+by <code class="docutils literal notranslate"><span class="pre">warnings_to_include</span></code> argument.</p></li>
+<li><p><strong>return_task_info</strong> (<em>bool</em><em>, </em><em>optional</em>) – Return the task status information when running macros. Defaults to False.</p></li>
+<li><p><strong>keep_logfiles</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True logfile will never be removed. Even if a simulations successeds
+without error. (Defautls to False)</p></li>
+<li><p><strong>logfile_prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – String which will be prefixed to the generated log files. This can be used
 to assign a more meaningfull name to a batch of logfiles.
-(Defaults to None)</li>
-<li><strong>python_env</strong> (<em>pathlike</em><em>, </em><em>optional</em>) – Path to a python environment/installation that the AnyBody Modeling System
+(Defaults to None)</p></li>
+<li><p><strong>python_env</strong> (<em>pathlike</em><em>, </em><em>optional</em>) – Path to a python environment/installation that the AnyBody Modeling System
 should use for Python Hooks. This will added the <code class="docutils literal notranslate"><span class="pre">PYTHONHOME</span></code> environment variable and
 prepended to the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> before starting the AnyBody Console application.
-(Defaults to None, which will use the default Python installation on the computer.)</li>
-<li><strong>debug_mode</strong> (<em>int</em><em>, </em><em>optional</em>) – Sets the debug mode flag for the AnyBodyConsole appplication (e.g. the /deb &lt;number&gt; flag)</li>
-<li><strong>priority</strong> (<em>int</em><em>, </em><em>optional</em>) – The priority of the subprocesses. This can be on of the following:
+(Defaults to None, which will use the default Python installation on the computer.)</p></li>
+<li><p><strong>debug_mode</strong> (<em>int</em><em>, </em><em>optional</em>) – Sets the debug mode flag for the AnyBodyConsole appplication (e.g. the /deb &lt;number&gt; flag)</p></li>
+<li><p><strong>priority</strong> (<em>int</em><em>, </em><em>optional</em>) – The priority of the subprocesses. This can be on of the following:
 <code class="docutils literal notranslate"><span class="pre">anypytools.IDLE_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">anypytools.BELOW_NORMAL_PRIORITY_CLASS</span></code>,
 <code class="docutils literal notranslate"><span class="pre">anypytools.NORMAL_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">anypytools.HIGH_PRIORITY_CLASS</span></code>
-Default is BELOW_NORMAL_PRIORITY_CLASS.</li>
+Default is BELOW_NORMAL_PRIORITY_CLASS.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">An instance of the AnyPyProcess object for running batch processing,
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An instance of the AnyPyProcess object for running batch processing,
 parameter studies and pertubation jobs.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="abcutils.html#anypytools.abcutils.AnyPyProcess" title="anypytools.abcutils.AnyPyProcess">AnyPyProcess</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="abcutils.html#anypytools.abcutils.AnyPyProcess" title="anypytools.abcutils.AnyPyProcess">AnyPyProcess</a></p>
+</dd>
+</dl>
 <div class="admonition-example admonition">
-<p class="first admonition-title">Example</p>
+<p class="admonition-title">Example</p>
 <p>The following example shows how to instantiate a AnyPyProcess object.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">num_processes</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">return_task_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <cite>app</cite> object has methods for launching macros, saving results etc.</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load &quot;MyModel.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.MyStudy.Kinematics&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load &quot;MyModel.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.MyStudy.Kinematics&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -162,28 +156,27 @@ parameter studies and pertubation jobs.</p>
 <dd><p>Load previously saved results.</p>
 <p>Besides reloading results the function can be used to continue
 a partial finished processing process.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – filename of the file where processing was stored.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A list with the output from each macro executed. This maybe empty
-the macros did not output any data.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – filename of the file where processing was stored.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list with the output from each macro executed. This maybe empty
+the macros did not output any data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
 <div class="admonition-examples admonition">
-<p class="first admonition-title">Examples</p>
+<p class="admonition-title">Examples</p>
 <p>Results are easily reloaded:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">load_results</span><span class="p">(</span><span class="s1">&#39;saved_results.db&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Continue processing unfinished batches:</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">load_results</span><span class="p">(</span><span class="s1">&#39;unfinished_results.db&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">load_results</span><span class="p">(</span><span class="s1">&#39;unfinished_results.db&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">()</span> <span class="c1"># rerun unfinished</span>
 </pre></div>
 </div>
@@ -196,28 +189,24 @@ the macros did not output any data.</td>
 <dd><p>Save resently processed results.</p>
 <p>Save results for later reloading or to continue processing unfished
 results at a later time.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>filename</strong> (<em>str</em>) – filename of the file where processing was stored.</li>
-<li><strong>append</strong> (<em>bool</em>) – If true append data to what ever is already saved. This allows
-for saving data in batches.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – filename of the file where processing was stored.</p></li>
+<li><p><strong>append</strong> (<em>bool</em>) – If true append data to what ever is already saved. This allows
+for saving data in batches.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
 <div class="admonition-examples admonition">
-<p class="first admonition-title">Examples</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load &quot;model1.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.RunApplication&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]</span>
+<p class="admonition-title">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;load &quot;model1.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.RunApplication&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macro</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">app</span><span class="o">.</span><span class="n">save_results</span><span class="p">(</span><span class="s1">&#39;saved_data.db&#39;</span><span class="p">)</span>
 </pre></div>
@@ -229,27 +218,23 @@ for saving data in batches.</li>
 <dt>
 <code class="descname">save_to_hdf5</code><span class="sig-paren">(</span><em>filename</em>, <em>batch_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.save_to_hdf5"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Save cached results to hdf5 file.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>filename</strong> (<em>str</em>) – filename where data should be stored</li>
-<li><strong>batch_name</strong> (<em>str</em>) – Name of the group in the HDF5 file to
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – filename where data should be stored</p></li>
+<li><p><strong>batch_name</strong> (<em>str</em>) – Name of the group in the HDF5 file to
 save the data within. If not specified
 the group hash value of the macro will
-be used.</li>
+be used.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -260,36 +245,32 @@ be used.</li>
 the current directory, or in the folders specified by <cite>folderlist</cite>. If
 <cite>search_subdirs</cite> is a regular expression the folderlist will be expanded
 to include all subdirectories that match the regular expression</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>macrolist</strong> (<em>list of macrocommands</em><em>, </em><em>optional</em>) – List of anyscript macro commands. This may also be obmitted in
-which case the previous macros will be re-run.</li>
-<li><strong>folderlist</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of folders in which to excute the macro commands. If <cite>None</cite> the
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>macrolist</strong> (<em>list of macrocommands</em><em>, </em><em>optional</em>) – List of anyscript macro commands. This may also be obmitted in
+which case the previous macros will be re-run.</p></li>
+<li><p><strong>folderlist</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of folders in which to excute the macro commands. If <cite>None</cite> the
 current working directory is used. This may also be a list of
-tuples to specify a name to appear in the output</li>
-<li><strong>search_subdirs</strong> (<em>str</em><em>, </em><em>optional</em>) – Regular expression used to extend the folderlist with all the
+tuples to specify a name to appear in the output</p></li>
+<li><p><strong>search_subdirs</strong> (<em>str</em><em>, </em><em>optional</em>) – Regular expression used to extend the folderlist with all the
 subdirectories that match the regular expression.
-Defaults to None: No subdirectories are included.</li>
-<li><strong>logfile</strong> (<em>str</em><em>, </em><em>optional</em>) – If specified an explicit name will be used for the log files generated.
-Otherwise, random names are used for logfiles</li>
+Defaults to None: No subdirectories are included.</p></li>
+<li><p><strong>logfile</strong> (<em>str</em><em>, </em><em>optional</em>) – If specified an explicit name will be used for the log files generated.
+Otherwise, random names are used for logfiles</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list with the output from each macro executed. This maybe empty
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list with the output from each macro executed. This maybe empty
 the macros did not output any data.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
 <div class="admonition-examples admonition">
-<p class="first admonition-title">Examples</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;load &quot;model1.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.RunApplication&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
+<p class="admonition-title">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;load &quot;model1.any&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;operation Main.RunApplication&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">],</span>
 <span class="go">             [&#39;load &quot;model2.any&quot;&#39;, &#39;operation Main.RunApplication&#39;, &#39;run&#39;],</span>
 <span class="go">             [&#39;load &quot;model3.any&quot;&#39;, &#39;operation Main.RunApplication&#39;, &#39;run&#39;]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">folderlist</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;path1/&#39;</span><span class="p">,</span> <span class="s1">&#39;name1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;path2/&#39;</span><span class="p">,</span> <span class="s1">&#39;name2&#39;</span><span class="p">)]</span>
@@ -335,8 +316,6 @@ the macros did not output any data.</p>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
@@ -382,7 +361,7 @@ the macros did not output any data.</p>
         <li class="right" >
           <a href="index.html" title="AnyPyTools API"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.1.2 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.1.3 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -391,7 +370,7 @@ the macros did not output any data.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
