@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>anypytools.h5py_wrapper &#8212; AnyPyTools 1.1.3 documentation</title>
+    <title>anypytools.h5py_wrapper &#8212; AnyPyTools 1.1.4 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="anyoutputfile_generator.html" title="anypytools.datautils.anyoutputfile_generator"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.1.3 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.1.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -90,17 +90,17 @@ div.admonition.inline-title p.admonition-title {
 <p>&#64;author: mel</p>
 <dl class="class">
 <dt id="anypytools.h5py_wrapper.File">
-<em class="property">class </em><code class="descclassname">anypytools.h5py_wrapper.</code><code class="descname">File</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#File"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.h5py_wrapper.File" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">anypytools.h5py_wrapper.</code><code class="sig-name descname">File</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#File"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.h5py_wrapper.File" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an HDF5 file.</p>
-<dl class="attribute">
+<dl class="method">
 <dt id="anypytools.h5py_wrapper.File.file">
-<code class="descname">file</code><a class="headerlink" href="#anypytools.h5py_wrapper.File.file" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">file</code><a class="headerlink" href="#anypytools.h5py_wrapper.File.file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a File instance associated with this object</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="anypytools.h5py_wrapper.File.parent">
-<code class="descname">parent</code><a class="headerlink" href="#anypytools.h5py_wrapper.File.parent" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">parent</code><a class="headerlink" href="#anypytools.h5py_wrapper.File.parent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the parent group of this object.</p>
 <p>This is always equivalent to obj.file[posixpath.dirname(obj.name)].
 ValueError if this object is anonymous.</p>
@@ -110,17 +110,17 @@ ValueError if this object is anonymous.</p>
 
 <dl class="class">
 <dt id="anypytools.h5py_wrapper.Group">
-<em class="property">class </em><code class="descclassname">anypytools.h5py_wrapper.</code><code class="descname">Group</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#Group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.h5py_wrapper.Group" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">anypytools.h5py_wrapper.</code><code class="sig-name descname">Group</code><span class="sig-paren">(</span><em class="sig-param">arg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#Group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.h5py_wrapper.Group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an HDF5 group.</p>
-<dl class="attribute">
+<dl class="method">
 <dt id="anypytools.h5py_wrapper.Group.file">
-<code class="descname">file</code><a class="headerlink" href="#anypytools.h5py_wrapper.Group.file" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">file</code><a class="headerlink" href="#anypytools.h5py_wrapper.Group.file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a File instance associated with this object</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="anypytools.h5py_wrapper.Group.parent">
-<code class="descname">parent</code><a class="headerlink" href="#anypytools.h5py_wrapper.Group.parent" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">parent</code><a class="headerlink" href="#anypytools.h5py_wrapper.Group.parent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the parent group of this object.</p>
 <p>This is always equivalent to obj.file[posixpath.dirname(obj.name)].
 ValueError if this object is anonymous.</p>
@@ -157,10 +157,10 @@ ValueError if this object is anonymous.</p>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -207,7 +207,7 @@ ValueError if this object is anonymous.</p>
         <li class="right" >
           <a href="anyoutputfile_generator.html" title="anypytools.datautils.anyoutputfile_generator"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.1.3 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.1.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -216,7 +216,7 @@ ValueError if this object is anonymous.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

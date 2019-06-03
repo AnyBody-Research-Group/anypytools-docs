@@ -13,6 +13,7 @@
 ./_images/Tutorial_05_Monte_Carlo_studies_etc_28_1.png
 ./_images/Tutorial_06_Tips&Tricks_25_0.png
 ./_images/relax.png
+./_modules/IPython/core/display.html
 ./_modules/anypytools/abcutils.html
 ./_modules/anypytools/datautils.html
 ./_modules/anypytools/h5py_wrapper.html
@@ -20,6 +21,7 @@
 ./_modules/anypytools/pytest_plugin.html
 ./_modules/anypytools/tools.html
 ./_modules/index.html
+./_modules/logging.html
 ./_sources/Tutorial/01_Getting_started_with_anypytools.ipynb.txt
 ./_sources/Tutorial/02_Generating_macros.ipynb.txt
 ./_sources/Tutorial/03_Working_with_output_from_Anybody.ipynb.txt
