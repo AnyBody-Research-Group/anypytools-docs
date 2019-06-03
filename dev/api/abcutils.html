@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>anypytools.abcutils &#8212; AnyPyTools 1.1.3 documentation</title>
+    <title>anypytools.abcutils &#8212; AnyPyTools 1.1.4 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="anydatah5_generator.html" title="anypytools.datautils.anydatah5_generator"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.1.3 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.1.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -90,7 +90,7 @@ div.admonition.inline-title p.admonition-title {
 &#64;author: Morten</p>
 <dl class="class">
 <dt id="anypytools.abcutils.AnyPyProcess">
-<em class="property">class </em><code class="descclassname">anypytools.abcutils.</code><code class="descname">AnyPyProcess</code><span class="sig-paren">(</span><em>num_processes=2</em>, <em>anybodycon_path=None</em>, <em>timeout=3600</em>, <em>silent=False</em>, <em>ignore_errors=None</em>, <em>warnings_to_include=None</em>, <em>fatal_warnings=False</em>, <em>return_task_info=False</em>, <em>keep_logfiles=False</em>, <em>logfile_prefix=None</em>, <em>python_env=None</em>, <em>debug_mode=0</em>, <em>priority=16384</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">anypytools.abcutils.</code><code class="sig-name descname">AnyPyProcess</code><span class="sig-paren">(</span><em class="sig-param">num_processes=2</em>, <em class="sig-param">anybodycon_path=None</em>, <em class="sig-param">timeout=3600</em>, <em class="sig-param">silent=False</em>, <em class="sig-param">ignore_errors=None</em>, <em class="sig-param">warnings_to_include=None</em>, <em class="sig-param">fatal_warnings=False</em>, <em class="sig-param">return_task_info=False</em>, <em class="sig-param">keep_logfiles=False</em>, <em class="sig-param">logfile_prefix=None</em>, <em class="sig-param">python_env=None</em>, <em class="sig-param">debug_mode=0</em>, <em class="sig-param">priority=16384</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for configuring batch process jobs of AnyBody models.</p>
 <p>This is the main interface to control the AnyBody console application from
 python. The class stores all the configuration about how AnyBody is run.
@@ -154,12 +154,12 @@ parameter studies and pertubation jobs.</p>
 </div>
 <dl class="method">
 <dt id="anypytools.abcutils.AnyPyProcess.cleanup_logfiles">
-<code class="descname">cleanup_logfiles</code><span class="sig-paren">(</span><em>tasklist</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.cleanup_logfiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess.cleanup_logfiles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cleanup_logfiles</code><span class="sig-paren">(</span><em class="sig-param">tasklist</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.cleanup_logfiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess.cleanup_logfiles" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="anypytools.abcutils.AnyPyProcess.load_results">
-<code class="descname">load_results</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.load_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess.load_results" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">load_results</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.load_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess.load_results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load previously saved results.</p>
 <p>Besides reloading results the function can be used to continue
 a partial finished processing process.</p>
@@ -192,7 +192,7 @@ the macros did not output any data.</p>
 
 <dl class="method">
 <dt id="anypytools.abcutils.AnyPyProcess.save_results">
-<code class="descname">save_results</code><span class="sig-paren">(</span><em>filename</em>, <em>append=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.save_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess.save_results" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save_results</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">append=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.save_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess.save_results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save resently processed results.</p>
 <p>Save results for later reloading or to continue processing unfished
 results at a later time.</p>
@@ -223,7 +223,7 @@ for saving data in batches.</p></li>
 
 <dl class="method">
 <dt id="anypytools.abcutils.AnyPyProcess.save_to_hdf5">
-<code class="descname">save_to_hdf5</code><span class="sig-paren">(</span><em>filename</em>, <em>batch_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.save_to_hdf5"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess.save_to_hdf5" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save_to_hdf5</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">batch_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.save_to_hdf5"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess.save_to_hdf5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save cached results to hdf5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -246,7 +246,7 @@ be used.</p></li>
 
 <dl class="method">
 <dt id="anypytools.abcutils.AnyPyProcess.start_macro">
-<code class="descname">start_macro</code><span class="sig-paren">(</span><em>macrolist=None</em>, <em>folderlist=None</em>, <em>search_subdirs=None</em>, <em>logfile=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.start_macro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess.start_macro" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">start_macro</code><span class="sig-paren">(</span><em class="sig-param">macrolist=None</em>, <em class="sig-param">folderlist=None</em>, <em class="sig-param">search_subdirs=None</em>, <em class="sig-param">logfile=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess.start_macro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.AnyPyProcess.start_macro" title="Permalink to this definition">¶</a></dt>
 <dd><p>Start a batch processing job.</p>
 <p>Runs a list of AnyBody Macro commands in
 the current directory, or in the folders specified by <cite>folderlist</cite>. If
@@ -289,9 +289,171 @@ the macros did not output any data.</p>
 
 </dd></dl>
 
+<dl class="class">
+<dt id="anypytools.abcutils.HTML">
+<em class="property">class </em><code class="sig-prename descclassname">anypytools.abcutils.</code><code class="sig-name descname">HTML</code><span class="sig-paren">(</span><em class="sig-param">data=None</em>, <em class="sig-param">url=None</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">metadata=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/IPython/core/display.html#HTML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.HTML" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="anypytools.abcutils.display">
+<code class="sig-prename descclassname">anypytools.abcutils.</code><code class="sig-name descname">display</code><span class="sig-paren">(</span><em class="sig-param">*objs</em>, <em class="sig-param">include=None</em>, <em class="sig-param">exclude=None</em>, <em class="sig-param">metadata=None</em>, <em class="sig-param">transient=None</em>, <em class="sig-param">display_id=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/IPython/core/display.html#display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a Python object in all frontends.</p>
+<p>By default all representations will be computed and sent to the frontends.
+Frontends can decide which representation is used and how.</p>
+<p>In terminal IPython this will be similar to using <code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code>, for use in richer
+frontends see Jupyter notebook examples with rich display logic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>objs</strong> (<em>tuple of objects</em>) – The Python objects to display.</p></li>
+<li><p><strong>raw</strong> (<em>bool</em><em>, </em><em>optional</em>) – Are the objects to be displayed already mimetype-keyed dicts of raw display data,
+or Python objects that need to be formatted before display? [default: False]</p></li>
+<li><p><strong>include</strong> (<em>list</em><em>, </em><em>tuple</em><em> or </em><em>set</em><em>, </em><em>optional</em>) – A list of format type strings (MIME types) to include in the
+format data dict. If this is set <em>only</em> the format types included
+in this list will be computed.</p></li>
+<li><p><strong>exclude</strong> (<em>list</em><em>, </em><em>tuple</em><em> or </em><em>set</em><em>, </em><em>optional</em>) – A list of format type strings (MIME types) to exclude in the format
+data dict. If this is set all format types will be computed,
+except for those included in this argument.</p></li>
+<li><p><strong>metadata</strong> (<em>dict</em><em>, </em><em>optional</em>) – A dictionary of metadata to associate with the output.
+mime-type keys in this dictionary will be associated with the individual
+representation formats, if they exist.</p></li>
+<li><p><strong>transient</strong> (<em>dict</em><em>, </em><em>optional</em>) – A dictionary of transient data to associate with the output.
+Data in this dict should not be persisted to files (e.g. notebooks).</p></li>
+<li><p><strong>display_id</strong> (<em>str</em><em>, </em><em>bool optional</em>) – Set an id for the display.
+This id can be used for updating this display area later via update_display.
+If given as <cite>True</cite>, generate a new <cite>display_id</cite></p></li>
+<li><p><strong>kwargs</strong> (<em>additional keyword-args</em><em>, </em><em>optional</em>) – Additional keyword-arguments are passed through to the display publisher.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>handle</strong> – Returns a handle on updatable displays for use with <code class="xref py py-func docutils literal notranslate"><span class="pre">update_display()</span></code>,
+if <cite>display_id</cite> is given. Returns <code class="xref any docutils literal notranslate"><span class="pre">None</span></code> if no <cite>display_id</cite> is given
+(default).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>DisplayHandle</p>
+</dd>
+</dl>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Json</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">json</span> <span class="o">=</span> <span class="n">json</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">_repr_pretty_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">cycle</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="kn">import</span> <span class="nn">json</span>
+<span class="gp">... </span>        <span class="n">pp</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">json</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">json</span><span class="p">)</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">Json</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="p">{</span><span class="mi">4</span><span class="p">:</span><span class="mi">5</span><span class="p">}})</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="go">{1: 2, 3: {4: 5}}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">display</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">  &quot;1&quot;: 2,</span>
+<span class="go">  &quot;3&quot;: {</span>
+<span class="go">    &quot;4&quot;: 5</span>
+<span class="go">  }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">int_formatter</span><span class="p">(</span><span class="n">integer</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">cycle</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">pp</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="o">*</span><span class="n">integer</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plain</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">display_formatter</span><span class="o">.</span><span class="n">formatters</span><span class="p">[</span><span class="s1">&#39;text/plain&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plain</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">int_formatter</span><span class="p">)</span>
+<span class="go">&lt;function _repr_pprint at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">display</span><span class="p">(</span><span class="mi">7</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">II</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">plain</span><span class="o">.</span><span class="n">type_printers</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">display</span><span class="p">(</span><span class="mi">7</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">update_display()</span></code></p>
+</div>
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
+<p>In Python, objects can declare their textual representation using the
+<cite>__repr__</cite> method. IPython expands on this idea and allows objects to declare
+other, rich representations including:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>HTML</p></li>
+<li><p>JSON</p></li>
+<li><p>PNG</p></li>
+<li><p>JPEG</p></li>
+<li><p>SVG</p></li>
+<li><p>LaTeX</p></li>
+</ul>
+</div></blockquote>
+<p>A single object can declare some or all of these representations; all are
+handled by IPython’s display system.</p>
+<p>The main idea of the first approach is that you have to implement special
+display methods when you define your class, one for each representation you
+want to use. Here is a list of the names of the special methods and the
+values they must return:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>_repr_html_</cite>: return raw HTML as a string, or a tuple (see below).</p></li>
+<li><p><cite>_repr_json_</cite>: return a JSONable dict, or a tuple (see below).</p></li>
+<li><p><cite>_repr_jpeg_</cite>: return raw JPEG data, or a tuple (see below).</p></li>
+<li><p><cite>_repr_png_</cite>: return raw PNG data, or a tuple (see below).</p></li>
+<li><p><cite>_repr_svg_</cite>: return raw SVG data as a string, or a tuple (see below).</p></li>
+<li><dl class="simple">
+<dt><cite>_repr_latex_</cite>: return LaTeX commands in a string surrounded by “$”,</dt><dd><p>or a tuple (see below).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>_repr_mimebundle_</cite>: return a full mimebundle containing the mapping</dt><dd><p>from all mimetypes to data.
+Use this for any mime-type not listed above.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>The above functions may also return the object’s metadata alonside the
+data.  If the metadata is available, the functions will return a tuple
+containing the data and metadata, in that order.  If there is no metadata
+available, then the functions will return the data only.</p>
+<p>When you are directly writing your own classes, you can adapt them for
+display in IPython by following the above approach. But in practice, you
+often need to work with existing classes that you can’t easily modify.</p>
+<p>You can refer to the documentation on integrating with the display system in
+order to register custom formatters for already existing types
+(<span class="xref std std-ref">integrating_rich_display</span>).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 5.4: </span>display available without import</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 6.1: </span>display available without import</p>
+</div>
+<p>Since IPython 5.4 and 6.1 <a class="reference internal" href="#anypytools.abcutils.display" title="anypytools.abcutils.display"><code class="xref py py-func docutils literal notranslate"><span class="pre">display()</span></code></a> is automatically made available to
+the user without import. If you are using display in a document that might
+be used in a pure python context or with older version of IPython, use the
+following import at the top of your file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
 <dl class="function">
 <dt id="anypytools.abcutils.execute_anybodycon">
-<code class="descclassname">anypytools.abcutils.</code><code class="descname">execute_anybodycon</code><span class="sig-paren">(</span><em>macro</em>, <em>logfile=None</em>, <em>anybodycon_path=None</em>, <em>timeout=3600</em>, <em>keep_macrofile=False</em>, <em>env=None</em>, <em>priority=16384</em>, <em>debug_mode=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#execute_anybodycon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.execute_anybodycon" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">anypytools.abcutils.</code><code class="sig-name descname">execute_anybodycon</code><span class="sig-paren">(</span><em class="sig-param">macro</em>, <em class="sig-param">logfile=None</em>, <em class="sig-param">anybodycon_path=None</em>, <em class="sig-param">timeout=3600</em>, <em class="sig-param">keep_macrofile=False</em>, <em class="sig-param">env=None</em>, <em class="sig-param">priority=16384</em>, <em class="sig-param">debug_mode=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#execute_anybodycon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.abcutils.execute_anybodycon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Launch a single AnyBodyConsole applicaiton.</p>
 <p>This is a low level function to start a AnyBody Console process
 with a given list macros.</p>
@@ -327,6 +489,16 @@ crashdump enabled</p></li>
 </dl>
 </dd></dl>
 
+<dl class="data">
+<dt id="anypytools.abcutils.ipywidgets">
+<code class="sig-prename descclassname">anypytools.abcutils.</code><code class="sig-name descname">ipywidgets</code><em class="property"> = None</em><a class="headerlink" href="#anypytools.abcutils.ipywidgets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="anypytools.abcutils.logger">
+<code class="sig-prename descclassname">anypytools.abcutils.</code><code class="sig-name descname">logger</code><em class="property"> = &lt;Logger abt.anypytools (WARNING)&gt;</em><a class="headerlink" href="#anypytools.abcutils.logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 
 
@@ -356,10 +528,10 @@ crashdump enabled</p></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -406,7 +578,7 @@ crashdump enabled</p></li>
         <li class="right" >
           <a href="anydatah5_generator.html" title="anypytools.datautils.anydatah5_generator"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.1.3 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.1.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -415,7 +587,7 @@ crashdump enabled</p></li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

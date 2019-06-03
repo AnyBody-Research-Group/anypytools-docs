@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>anypytools.AnyMacro &#8212; AnyPyTools 1.1.3 documentation</title>
+    <title>anypytools.AnyMacro &#8212; AnyPyTools 1.1.4 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="AnyPyProcess.html" title="anypytools.AnyPyProcess"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.1.3 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.1.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -89,7 +89,7 @@ div.admonition.inline-title p.admonition-title {
 <p>See <a class="reference internal" href="macro_commands.html"><span class="doc">anypytools.macro_commands</span></a> for a list of classes that generate macro commands.</p>
 <dl class="class">
 <dt>
-<em class="property">class </em><code class="descclassname">anypytools.</code><code class="descname">AnyMacro</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">anypytools.</code><code class="sig-name descname">AnyMacro</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Class to generate multiple macros.</p>
 <p>Use the class to contruct multiple anyscript macros from a single macro.
 E.g. for parameter studies, Monte Carlo, Latin Hyper Cube studies.</p>
@@ -144,13 +144,13 @@ Must be convertable to 32 bit unsigned integers.</p></li>
 </div>
 <dl class="method">
 <dt>
-<code class="descname">append</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.append"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param">val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.append"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>S.append(value) – append value to the end of the sequence</p>
 </dd></dl>
 
 <dl class="method">
 <dt>
-<code class="descname">create_macros</code><span class="sig-paren">(</span><em>number_of_macros=None</em>, <em>batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.create_macros"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname">create_macros</code><span class="sig-paren">(</span><em class="sig-param">number_of_macros=None</em>, <em class="sig-param">batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.create_macros"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Generate a given number of macros.</p>
 <p>The function return its output either as list (batch_size = None) or in batches
 as generator object (memory efficient when generating many macros)</p>
@@ -205,7 +205,7 @@ batches.</p></li>
 
 <dl class="method">
 <dt>
-<code class="descname">create_macros_LHS</code><span class="sig-paren">(</span><em>number_of_macros=None</em>, <em>criterion=None</em>, <em>iterations=None</em>, <em>batch_size=None</em>, <em>append_default=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.create_macros_LHS"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname">create_macros_LHS</code><span class="sig-paren">(</span><em class="sig-param">number_of_macros=None</em>, <em class="sig-param">criterion=None</em>, <em class="sig-param">iterations=None</em>, <em class="sig-param">batch_size=None</em>, <em class="sig-param">append_default=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.create_macros_LHS"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Generate AnyScript macros for Latin Hyper Cube Studies studies.</p>
 <p>Generates AnyScript macros for parameter studies using Latin hyper cube
 sampling. The macros added with the <cite>SetValue_random</cite> are created with
@@ -260,7 +260,7 @@ of returned macros</p></li>
 
 <dl class="method">
 <dt>
-<code class="descname">create_macros_MonteCarlo</code><span class="sig-paren">(</span><em>number_of_macros=None</em>, <em>batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.create_macros_MonteCarlo"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname">create_macros_MonteCarlo</code><span class="sig-paren">(</span><em class="sig-param">number_of_macros=None</em>, <em class="sig-param">batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.create_macros_MonteCarlo"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Generate AnyScript macros for monte carlos studies.</p>
 <p>The function returns macros for Monte Carlo parameter studies. This methods
 extends the <cite>create_macros</cite> methods with functionality to randomly vary
@@ -305,7 +305,7 @@ batches.</p></li>
 
 <dl class="method">
 <dt>
-<code class="descname">insert</code><span class="sig-paren">(</span><em>ii</em>, <em>val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.insert"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname">insert</code><span class="sig-paren">(</span><em class="sig-param">ii</em>, <em class="sig-param">val</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#AnyMacro.insert"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>S.insert(index, value) – insert value before index</p>
 </dd></dl>
 
@@ -340,10 +340,10 @@ batches.</p></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -390,7 +390,7 @@ batches.</p></li>
         <li class="right" >
           <a href="AnyPyProcess.html" title="anypytools.AnyPyProcess"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.1.3 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.1.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -399,7 +399,7 @@ batches.</p></li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
