@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.1.4 documentation</title>
+    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.1.5 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.1.4 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.1.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -380,8 +380,8 @@
                     <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">s</span> <span class="ow">in</span> <span class="n">err</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">runtest_errros</span><span class="p">)</span>
                 <span class="p">]</span>
         <span class="c1"># Check that the expected errors are present</span>
+        <span class="n">error_list</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ERROR&quot;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">expect_errors</span><span class="p">:</span>
-            <span class="n">error_list</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ERROR&quot;</span><span class="p">,</span> <span class="p">[])</span>
             <span class="k">for</span> <span class="n">xerr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">expect_errors</span><span class="p">:</span>
                 <span class="n">xerr_found</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">error</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">error_list</span><span class="p">):</span>
@@ -393,8 +393,8 @@
                         <span class="s2">&quot;TEST ERROR: Expected error not &quot;</span> <span class="s1">&#39;found: &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">xerr</span><span class="p">)</span>
                     <span class="p">)</span>
         <span class="c1"># Add remaining errors to item&#39;s error list</span>
-        <span class="k">if</span> <span class="s2">&quot;ERROR&quot;</span> <span class="ow">in</span> <span class="n">result</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;ERROR&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;ERROR&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">error_list</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">error_list</span><span class="p">)</span>
         <span class="c1"># Add info to the hdf5 file if compare output was set</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">h5py</span>
@@ -585,7 +585,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.1.4 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.1.5 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
