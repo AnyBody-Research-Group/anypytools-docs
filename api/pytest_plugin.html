@@ -6,19 +6,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.2.2 documentation</title>
+    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.3.0 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
-    <script type="text/javascript" src="../_static/cloud.base.js"></script>
-    <script type="text/javascript" src="../_static/cloud.js"></script>
+
+    
+    
+     
+        <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.js"></script>
+    
+
     <link rel="shortcut icon" href="../_static/anypytools.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -46,7 +62,7 @@
         <li class="right" >
           <a href="macroutils.html" title="anypytools.macroutils"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.2.2 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.3.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -97,7 +113,7 @@ div.admonition.inline-title p.admonition-title {
 
 <dl class="class">
 <dt id="anypytools.pytest_plugin.AnyFile">
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">AnyFile</code><span class="sig-paren">(</span><em class="sig-param">fspath</em>, <em class="sig-param">parent=None</em>, <em class="sig-param">config=None</em>, <em class="sig-param">session=None</em>, <em class="sig-param">nodeid=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyFile" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">AnyFile</code><span class="sig-paren">(</span><em class="sig-param">fspath: py._path.local.LocalPath</em>, <em class="sig-param">parent=None</em>, <em class="sig-param">config=None</em>, <em class="sig-param">session=None</em>, <em class="sig-param">nodeid=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>pytest.File subclass for AnyScript files.</p>
 <dl class="method">
 <dt id="anypytools.pytest_plugin.AnyFile.collect">
@@ -128,6 +144,13 @@ div.admonition.inline-title p.admonition-title {
 <dd><p>Run an AnyScript test item.</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="anypytools.pytest_plugin.AnyItem.save_output_files">
+<code class="sig-name descname">save_output_files</code><span class="sig-paren">(</span><em class="sig-param">src_folder</em>, <em class="sig-param">target_folder</em>, <em class="sig-param">result</em>, <em class="sig-param">hdf5files</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyItem.save_output_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyItem.save_output_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves hdf5, macro, and log files from a test run
+and copy it to the target_folder</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -141,12 +164,6 @@ div.admonition.inline-title p.admonition-title {
 <p>This can’t be in __init__()
 since it is instantiated and added to the pytest namespace very
 early in the pytest startup.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="anypytools.pytest_plugin.AnyTestSession.get_save_fname">
-<code class="sig-name descname">get_save_fname</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">id</em>, <em class="sig-param">study</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestSession.get_save_fname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestSession.get_save_fname" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the name of the compare h5file</p>
 </dd></dl>
 
 </dd></dl>
@@ -190,6 +207,11 @@ early in the pytest startup.</p>
 <code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">pytest_collection_finish</code><span class="sig-paren">(</span><em class="sig-param">session</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_collection_finish"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_collection_finish" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the AnyBodyCon executable used in the test.</p>
 </dd></dl>
+
+<dl class="function">
+<dt id="anypytools.pytest_plugin.pytest_collection_modifyitems">
+<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">pytest_collection_modifyitems</code><span class="sig-paren">(</span><em class="sig-param">items</em>, <em class="sig-param">config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_collection_modifyitems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_collection_modifyitems" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="function">
 <dt id="anypytools.pytest_plugin.pytest_configure">
@@ -282,7 +304,7 @@ early in the pytest startup.</p>
         <li class="right" >
           <a href="macroutils.html" title="anypytools.macroutils"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.2.2 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.3.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -291,7 +313,7 @@ early in the pytest startup.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

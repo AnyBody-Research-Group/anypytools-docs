@@ -6,19 +6,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>anypytools.AnyMacro &#8212; AnyPyTools 1.2.2 documentation</title>
+    <title>anypytools.AnyMacro &#8212; AnyPyTools 1.3.0 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
-    <script type="text/javascript" src="../_static/cloud.base.js"></script>
-    <script type="text/javascript" src="../_static/cloud.js"></script>
+
+    
+    
+     
+        <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="../_static/cloud.js"></script>
+    
+
     <link rel="shortcut icon" href="../_static/anypytools.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -46,7 +62,7 @@
         <li class="right" >
           <a href="AnyPyProcess.html" title="anypytools.AnyPyProcess"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.2.2 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.3.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -116,7 +132,7 @@ Must be convertable to 32 bit unsigned integers.</p></li>
 </dl>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">number_of_macros</span> <span class="o">=</span> <span class="mi">22</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span><span class="n">number_of_macros</span> <span class="o">=</span> <span class="mi">22</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;c:/MyModel/model.main.any&#39;</span><span class="p">,</span> <span class="n">defs</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">paths</span> <span class="o">=</span> <span class="p">{}</span> <span class="p">)</span> <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">SetValue</span><span class="p">(</span><span class="s1">&#39;Main.myvar&#39;</span><span class="p">,</span> <span class="mf">12.3</span><span class="p">)</span>  <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span> <span class="p">[</span><span class="n">RunOperation</span><span class="p">(</span><span class="s1">&#39;Main.Study.Kinematics&#39;</span><span class="p">),</span>
@@ -135,7 +151,7 @@ Must be convertable to 32 bit unsigned integers.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span> <span class="n">number_of_macros</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">counter_token</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{COUNTER}</span><span class="s1">&#39;</span> <span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">(</span> <span class="n">number_of_macros</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">counter_token</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{COUNTER}</span><span class="s1">&#39;</span> <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;c:/MyModel/model_</span><span class="si">{COUNTER}</span><span class="s1">_.main.any&#39;</span><span class="p">)</span> <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">mg</span><span class="o">.</span><span class="n">create_macros</span><span class="p">())</span>
 <span class="go">[[&#39;load &quot;c:/MyModel/model_0_.main.any&quot;&#39;],</span>
@@ -172,8 +188,8 @@ batches.</p></li>
 </dl>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="k">import</span> <span class="n">AnyMacro</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">anypytools.macro_commands</span> <span class="k">import</span> <span class="o">*</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyMacro</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">anypytools.macro_commands</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span>
 <span class="gp">... </span>    <span class="n">Load</span><span class="p">(</span><span class="s1">&#39;c:/Model.main.any&#39;</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="n">OperationRun</span><span class="p">(</span><span class="s1">&#39;Main.study.Kinematics&#39;</span><span class="p">),</span>
@@ -189,7 +205,7 @@ batches.</p></li>
 </div>
 </div>
 <p>Generate macros in batches</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">([</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;c:/Model.main.any&#39;</span><span class="p">)],</span> <span class="n">number_of_macros</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mg</span> <span class="o">=</span> <span class="n">AnyMacro</span><span class="p">([</span><span class="n">Load</span><span class="p">(</span><span class="s1">&#39;c:/Model.main.any&#39;</span><span class="p">)],</span> <span class="n">number_of_macros</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">macro_gen</span> <span class="o">=</span>  <span class="n">mg</span><span class="o">.</span><span class="n">create_macros</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">macros</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span> <span class="n">macro_gen</span> <span class="p">):</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Batch &#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
@@ -241,8 +257,8 @@ of returned macros</p></li>
 </dl>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats.distributions</span> <span class="k">import</span> <span class="n">logistic</span><span class="p">,</span> <span class="n">norm</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats.distributions</span> <span class="kn">import</span> <span class="n">logistic</span><span class="p">,</span> <span class="n">norm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">log_dist</span> <span class="o">=</span> <span class="n">logistic</span><span class="p">(</span> <span class="n">loc</span><span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span><span class="n">scale</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">norm_dist</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span> <span class="n">loc</span><span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">scale</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyVar1&#39;</span><span class="p">,</span> <span class="n">log_dist</span><span class="p">),</span> <span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyVar2&#39;</span><span class="p">,</span> <span class="n">norm_dist</span><span class="p">)</span> <span class="p">]</span>
@@ -286,8 +302,8 @@ batches.</p></li>
 </dl>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats.distributions</span> <span class="k">import</span> <span class="n">logistic</span><span class="p">,</span> <span class="n">norm</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats.distributions</span> <span class="kn">import</span> <span class="n">logistic</span><span class="p">,</span> <span class="n">norm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">log_dist</span> <span class="o">=</span> <span class="n">logistic</span><span class="p">(</span> <span class="n">loc</span><span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span><span class="n">scale</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">norm_dist</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span> <span class="n">loc</span><span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">scale</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyVar1&#39;</span><span class="p">,</span> <span class="n">log_dist</span><span class="p">),</span> <span class="n">SetValue_random</span><span class="p">(</span><span class="s1">&#39;Main.MyVar2&#39;</span><span class="p">,</span> <span class="n">norm_dist</span><span class="p">)</span> <span class="p">]</span>
@@ -391,7 +407,7 @@ batches.</p></li>
         <li class="right" >
           <a href="AnyPyProcess.html" title="anypytools.AnyPyProcess"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.2.2 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.3.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -400,7 +416,7 @@ batches.</p></li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
