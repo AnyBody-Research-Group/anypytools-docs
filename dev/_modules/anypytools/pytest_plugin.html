@@ -278,6 +278,23 @@
         <span class="n">config</span><span class="o">.</span><span class="n">pluginmanager</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">DeferPlugin</span><span class="p">())</span></div>
 
 
+<div class="viewcode-block" id="pytest_collection_modifyitems"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.pytest_collection_modifyitems">[docs]</a><span class="k">def</span> <span class="nf">pytest_collection_modifyitems</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="n">selected_items</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">deselected_items</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-output&quot;</span><span class="p">):</span>
+    <span class="c1"># Deselect all test items which doesn&#39;t save data.</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">&quot;hdf5_outputs&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="n">selected_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">deselected_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">hook</span><span class="o">.</span><span class="n">pytest_deselected</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="n">deselected_items</span><span class="p">)</span>
+        <span class="n">items</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">selected_items</span></div>
+
+
+
+
+
 <div class="viewcode-block" id="pytest_unconfigure"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_unconfigure">[docs]</a><span class="k">def</span> <span class="nf">pytest_unconfigure</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Finialize the test session.&quot;&quot;&quot;</span>
     <span class="k">pass</span>  <span class="c1"># pytest.anytest.finalize(config)</span></div>
