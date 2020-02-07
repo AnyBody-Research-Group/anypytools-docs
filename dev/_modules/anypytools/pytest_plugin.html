@@ -223,6 +223,7 @@
     <span class="p">(</span><span class="s2">&quot;expect_errors&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Sequence</span><span class="p">,)),</span>
     <span class="p">(</span><span class="s2">&quot;save_study&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Sequence</span><span class="p">)),</span>
     <span class="p">(</span><span class="s2">&quot;pytest_markers&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Sequence</span><span class="p">,)),</span>
+    <span class="p">(</span><span class="s2">&quot;use_gui&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,)),</span>
 <span class="p">)</span>
 
 
@@ -278,6 +279,7 @@
         <span class="n">config</span><span class="o">.</span><span class="n">pluginmanager</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">DeferPlugin</span><span class="p">())</span></div>
 
 
+
 <div class="viewcode-block" id="pytest_collection_modifyitems"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.pytest_collection_modifyitems">[docs]</a><span class="k">def</span> <span class="nf">pytest_collection_modifyitems</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
     <span class="n">selected_items</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">deselected_items</span> <span class="o">=</span> <span class="p">[]</span>
@@ -293,11 +295,6 @@
 
 
 
-
-
-<div class="viewcode-block" id="pytest_unconfigure"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_unconfigure">[docs]</a><span class="k">def</span> <span class="nf">pytest_unconfigure</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Finialize the test session.&quot;&quot;&quot;</span>
-    <span class="k">pass</span>  <span class="c1"># pytest.anytest.finalize(config)</span></div>
 
 
 <div class="viewcode-block" id="AnyFile"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyFile">[docs]</a><span class="k">class</span> <span class="nc">AnyFile</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">File</span><span class="p">):</span>
@@ -378,6 +375,7 @@
             <span class="s2">&quot;fatal_warnings&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">fatal_warnings</span><span class="p">),</span>
             <span class="s2">&quot;keep_logfiles&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;keep_logfiles&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
             <span class="s2">&quot;logfile_prefix&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;logfile_prefix&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="s2">&quot;use_gui&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;use_gui&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--only-load&quot;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">macro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">macro_commands</span><span class="o">.</span><span class="n">OperationRun</span><span class="p">(</span><span class="s2">&quot;Main.RunTest&quot;</span><span class="p">))</span>
