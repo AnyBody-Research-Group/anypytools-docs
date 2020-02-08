@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>anypytools.AnyPyProcess &#8212; AnyPyTools 1.3.0 documentation</title>
+    <title>anypytools.AnyPyProcess &#8212; AnyPyTools 1.4.0 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
@@ -62,7 +62,7 @@
         <li class="right" >
           <a href="index.html" title="AnyPyTools API"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.3.0 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li> 
       </ul>
@@ -105,7 +105,7 @@ div.admonition.inline-title p.admonition-title {
 <h1>anypytools.AnyPyProcess<a class="headerlink" href="#anypytools-anypyprocess" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.</code><code class="sig-name descname">AnyPyProcess</code><span class="sig-paren">(</span><em class="sig-param">num_processes=2</em>, <em class="sig-param">anybodycon_path=None</em>, <em class="sig-param">timeout=3600</em>, <em class="sig-param">silent=False</em>, <em class="sig-param">ignore_errors=None</em>, <em class="sig-param">warnings_to_include=None</em>, <em class="sig-param">fatal_warnings=False</em>, <em class="sig-param">return_task_info=True</em>, <em class="sig-param">keep_logfiles=False</em>, <em class="sig-param">logfile_prefix=None</em>, <em class="sig-param">python_env=None</em>, <em class="sig-param">debug_mode=0</em>, <em class="sig-param">use_gui=False</em>, <em class="sig-param">priority=16384</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">anypytools.</code><code class="sig-name descname">AnyPyProcess</code><span class="sig-paren">(</span><em class="sig-param">num_processes=2</em>, <em class="sig-param">anybodycon_path=None</em>, <em class="sig-param">timeout=3600</em>, <em class="sig-param">silent=False</em>, <em class="sig-param">ignore_errors=None</em>, <em class="sig-param">warnings_to_include=None</em>, <em class="sig-param">fatal_warnings=False</em>, <em class="sig-param">return_task_info=None</em>, <em class="sig-param">keep_logfiles=False</em>, <em class="sig-param">logfile_prefix=None</em>, <em class="sig-param">python_env=None</em>, <em class="sig-param">debug_mode=0</em>, <em class="sig-param">use_gui=False</em>, <em class="sig-param">priority=16384</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/abcutils.html#AnyPyProcess"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Class for configuring batch process jobs of AnyBody models.</p>
 <p>This is the main interface to control the AnyBody console application from
 python. The class stores all the configuration about how AnyBody is run.
@@ -130,7 +130,6 @@ output. If a warning with that string is found the warning
 is returned in the output. (Defaults to None)</p></li>
 <li><p><strong>fatal_warnings</strong> (<em>bool</em><em>, </em><em>optional</em>) – Treat warnings as errors. This only triggers for specific warnings given
 by <code class="docutils literal notranslate"><span class="pre">warnings_to_include</span></code> argument.</p></li>
-<li><p><strong>return_task_info</strong> (<em>bool</em><em>, </em><em>optional</em>) – Return the task status information when running macros. Defaults to False.</p></li>
 <li><p><strong>keep_logfiles</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True logfile will never be removed. Even if a simulations successeds
 without error. (Defautls to False)</p></li>
 <li><p><strong>logfile_prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – String which will be prefixed to the generated log files. This can be used
@@ -160,7 +159,7 @@ parameter studies and pertubation jobs.</p>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
 <p>The following example shows how to instantiate a AnyPyProcess object.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">num_processes</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">return_task_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="n">num_processes</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <cite>app</cite> object has methods for launching macros, saving results etc.</p>
@@ -380,7 +379,7 @@ the macros did not output any data.</p>
         <li class="right" >
           <a href="index.html" title="AnyPyTools API"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.3.0 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li> 
       </ul>

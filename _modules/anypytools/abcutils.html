@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>anypytools.abcutils &#8212; AnyPyTools 1.3.0 documentation</title>
+    <title>anypytools.abcutils &#8212; AnyPyTools 1.4.0 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.3.0 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -482,8 +482,6 @@
 <span class="sd">    fatal_warnings: bool, optional</span>
 <span class="sd">        Treat warnings as errors. This only triggers for specific warnings given</span>
 <span class="sd">        by ``warnings_to_include`` argument.</span>
-<span class="sd">    return_task_info : bool, optional</span>
-<span class="sd">        Return the task status information when running macros. Defaults to False.</span>
 <span class="sd">    keep_logfiles : bool, optional</span>
 <span class="sd">        If True logfile will never be removed. Even if a simulations successeds</span>
 <span class="sd">        without error. (Defautls to False)</span>
@@ -518,7 +516,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    The following example shows how to instantiate a AnyPyProcess object.</span>
 
-<span class="sd">    &gt;&gt;&gt; app = AnyPyProcess(num_processes=8, return_task_info=True)</span>
+<span class="sd">    &gt;&gt;&gt; app = AnyPyProcess(num_processes=8)</span>
 
 <span class="sd">    The `app` object has methods for launching macros, saving results etc.</span>
 
@@ -536,7 +534,7 @@
         <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">warnings_to_include</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">fatal_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">return_task_info</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">return_task_info</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">keep_logfiles</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">logfile_prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">python_env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -545,6 +543,13 @@
         <span class="n">priority</span><span class="o">=</span><span class="n">BELOW_NORMAL_PRIORITY_CLASS</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">return_task_info</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;return_task_info is deprecated, and task meta information is always included in the output.&quot;</span><span class="p">,</span>
+                <span class="ne">DeprecationWarning</span><span class="p">,</span>
+                <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
                 <span class="s2">&quot;The following input arguments are not supported/understood:</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -575,7 +580,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">debug_mode</span> <span class="o">=</span> <span class="n">debug_mode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fatal_warnings</span> <span class="o">=</span> <span class="n">fatal_warnings</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">return_task_info</span> <span class="o">=</span> <span class="n">return_task_info</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ignore_errors</span> <span class="o">=</span> <span class="n">ignore_errors</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">warnings_to_include</span> <span class="o">=</span> <span class="n">warnings_to_include</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">keep_logfiles</span> <span class="o">=</span> <span class="n">keep_logfiles</span>
@@ -844,10 +848,7 @@
         <span class="c1"># Cache the processed tasklist for restarting later</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cached_tasklist</span> <span class="o">=</span> <span class="n">tasklist</span>
         <span class="c1"># self.summery.final_summery(process_time, tasklist)</span>
-        <span class="n">task_output</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">task</span><span class="o">.</span><span class="n">get_output</span><span class="p">(</span><span class="n">include_task_info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">return_task_info</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasklist</span>
-        <span class="p">]</span>
+        <span class="n">task_output</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">get_output</span><span class="p">()</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasklist</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">AnyPyProcessOutputList</span><span class="p">(</span><span class="n">task_output</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_worker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">task_queue</span><span class="p">):</span>
@@ -1026,7 +1027,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.3.0 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.4.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
       </ul>
