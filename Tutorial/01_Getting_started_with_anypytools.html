@@ -6,33 +6,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Getting Started with AnyPyTools &#8212; AnyPyTools 1.4.0 documentation</title>
+    <title>Getting Started with AnyPyTools &#8212; AnyPyTools 1.4.1 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 
     
     
      
-        <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+        <script src="../_static/jquery.cookie.js"></script>
     
 
     
      
-        <script type="text/javascript" src="../_static/cloud.base.js"></script>
+        <script src="../_static/cloud.base.js"></script>
     
 
     
      
-        <script type="text/javascript" src="../_static/cloud.js"></script>
+        <script src="../_static/cloud.js"></script>
     
 
     <link rel="shortcut icon" href="../_static/anypytools.ico"/>
@@ -62,7 +62,7 @@
         <li class="right" >
           <a href="../install_guide.html" title="Install guide"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.0 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.4.1 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -363,20 +363,23 @@ div.admonition.inline-title p.admonition-title {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "c46070d879c84de89e24876f44bb6f5f"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "80cf6d94fd3f4c6fb140500c4897212d", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "6e99fc898d914f0395ddc0f413791c31"}</script></div>
+<div class="highlight"><pre>
+
+Completed: 1
+</pre></div></div>
 </div>
 </div>
 <div class="section" id="Running-multiple-macros">
 <h2>Running multiple macros<a class="headerlink" href="#Running-multiple-macros" title="Permalink to this headline">¶</a></h2>
 <p>It is easy to run multiple macros by adding an extra set of macro commands to the macro list.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -396,13 +399,16 @@ div.admonition.inline-title p.admonition-title {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3da4471285534226be9adb769baf6913"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3ae2b6c918b04effafba4b068957f58a", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "0125a2762960479097f50f88e94dd875"}</script></div>
+<div class="highlight"><pre>
+
+Completed: 2
+</pre></div></div>
 </div>
 </div>
 <div class="section" id="Parallel-execution">
@@ -410,7 +416,7 @@ div.admonition.inline-title p.admonition-title {
 <p>Notice that AnyPyProcess will run the anyscript macros in parallel. Modern computers have multiple cores, but a single AnyBody instance can only utilize a single core, leaving us with a great potential for speeding things up through parallelization.</p>
 <p>To test this, let us create ten macros in a for-loop.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -426,7 +432,7 @@ div.admonition.inline-title p.admonition-title {
 </div>
 </div>
 <p>AnyPyProcess has a parameter ‘num_processes’ that controls the number of parallel processes. Let us try a small example to see the difference in speed:</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
@@ -437,7 +443,22 @@ div.admonition.inline-title p.admonition-title {
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "6cc9a9b3566240bba2008101d5a1dbcc", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Completed: 40
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
@@ -448,13 +469,28 @@ div.admonition.inline-title p.admonition-title {
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b373fb6fac094cdeb71c8b7756e70eb3", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Completed: 40
+</pre></div></div>
+</div>
 <p><em>Note</em>: In general you should not user a <code class="docutils literal notranslate"><span class="pre">num_processes</span></code> larger than the number of cores in your computer.</p>
 </div>
 <div class="section" id="Getting-data-from-the-AnyBody-Model">
 <h2>Getting data from the AnyBody Model<a class="headerlink" href="#Getting-data-from-the-AnyBody-Model" title="Permalink to this headline">¶</a></h2>
 <p>In the following macro, we have added a new class operation to ‘Dump’ the result of the maximum muscle activity. The <code class="docutils literal notranslate"><span class="pre">start_macro</span></code> method will return all the dumped variables:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -474,41 +510,44 @@ div.admonition.inline-title p.admonition-title {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b29bd748490a4a49a7c1cb3d03364025"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "e1872ca142374757b35640f72863c4f5", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "2048280c4bf0462f9f6eb6abb3abbaf5"}</script></div>
+<div class="highlight"><pre>
+
+Completed: 1
+</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 [{&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;:
-    array([ 0.00890538,  0.00927552,  0.00986515,  0.01067729,  0.01171374,
-            0.01297502,  0.01446022,  0.0161669 ,  0.01809102,  0.02022675,
-            0.02256637,  0.02510015,  0.0278161 ,  0.03069982,  0.03373426,
-            0.0368995 ,  0.0401725 ,  0.04352691,  0.04693299,  0.05035756,
-            0.05376422,  0.05711384,  0.06036528,  0.06347664,  0.06640681,
-            0.0691175 ,  0.07157552,  0.07375524,  0.07564093,  0.07722862,
-            0.07852727,  0.0795589 ,  0.08035747,  0.08096676,  0.0814373 ,
-            0.08182288,  0.0821771 ,  0.08255065,  0.08298457,  0.08333915,
-            0.08355467,  0.08365939,  0.08367977,  0.08364023,  0.08356287,
-            0.08346721,  0.08336996,  0.08328478,  0.08322211,  0.083189  ,
-            0.083189  ,  0.08322211,  0.08328478,  0.08336996,  0.08346721,
-            0.08356287,  0.08364023,  0.08367977,  0.08365939,  0.08355467,
-            0.08333915,  0.08298458,  0.08255065,  0.0821771 ,  0.08182288,
-            0.0814373 ,  0.08096676,  0.08035746,  0.07955889,  0.07852727,
-            0.07722861,  0.07564092,  0.07375524,  0.07157551,  0.06911749,
-            0.06640681,  0.06347664,  0.06036528,  0.05711384,  0.05376422,
-            0.05035756,  0.04693299,  0.04352691,  0.0401725 ,  0.0368995 ,
-            0.03373426,  0.03069982,  0.0278161 ,  0.02510015,  0.02256637,
-            0.02022675,  0.01809102,  0.0161669 ,  0.01446022,  0.01297502,
-            0.01171374,  0.01067729,  0.00986515,  0.00927552,  0.00890538])}]
+    array([0.00890538, 0.00927552, 0.00986515, 0.01067729, 0.01171374,
+           0.01297502, 0.01446022, 0.0161669 , 0.01809102, 0.02022675,
+           0.02256637, 0.02510015, 0.0278161 , 0.03069982, 0.03373426,
+           0.0368995 , 0.0401725 , 0.04352691, 0.04693299, 0.05035756,
+           0.05376422, 0.05711384, 0.06036528, 0.06347664, 0.06640681,
+           0.0691175 , 0.07157552, 0.07375524, 0.07564093, 0.07722862,
+           0.07852727, 0.0795589 , 0.08035747, 0.08096676, 0.0814373 ,
+           0.08182288, 0.0821771 , 0.08255065, 0.08298457, 0.08333915,
+           0.08355467, 0.08365939, 0.08367977, 0.08364023, 0.08356287,
+           0.08346721, 0.08336996, 0.08328478, 0.08322211, 0.083189  ,
+           0.083189  , 0.08322211, 0.08328478, 0.08336996, 0.08346721,
+           0.08356287, 0.08364023, 0.08367977, 0.08365939, 0.08355467,
+           0.08333915, 0.08298458, 0.08255065, 0.0821771 , 0.08182288,
+           0.0814373 , 0.08096676, 0.08035746, 0.07955889, 0.07852727,
+           0.07722861, 0.07564092, 0.07375524, 0.07157551, 0.06911749,
+           0.06640681, 0.06347663, 0.06036528, 0.05711384, 0.05376422,
+           0.05035756, 0.04693299, 0.04352691, 0.0401725 , 0.0368995 ,
+           0.03373426, 0.03069982, 0.0278161 , 0.02510015, 0.02256637,
+           0.02022675, 0.01809102, 0.0161669 , 0.01446022, 0.01297502,
+           0.01171374, 0.01067729, 0.00986515, 0.00927552, 0.00890538])]
 </pre></div></div>
 </div>
 <p>We can export more variables by adding more <code class="docutils literal notranslate"><span class="pre">classoperation</span></code>. But there is a better way of doing this, as we shall see in the next tutorials.</p>
@@ -540,6 +579,15 @@ div.admonition.inline-title p.admonition-title {
 </div>
 <div class="output_area docutils container">
 <img alt="../_images/Tutorial_01_Getting_started_with_anypytools_21_0.png" src="../_images/Tutorial_01_Getting_started_with_anypytools_21_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -592,7 +640,7 @@ div.admonition.inline-title p.admonition-title {
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
     
@@ -634,7 +682,7 @@ div.admonition.inline-title p.admonition-title {
         <li class="right" >
           <a href="../install_guide.html" title="Install guide"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.0 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.4.1 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -642,7 +690,7 @@ div.admonition.inline-title p.admonition-title {
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.2.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

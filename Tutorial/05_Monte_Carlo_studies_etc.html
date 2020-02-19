@@ -6,33 +6,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Advanced Examples &#8212; AnyPyTools 1.4.0 documentation</title>
+    <title>Advanced Examples &#8212; AnyPyTools 1.4.1 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 
     
     
      
-        <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+        <script src="../_static/jquery.cookie.js"></script>
     
 
     
      
-        <script type="text/javascript" src="../_static/cloud.base.js"></script>
+        <script src="../_static/cloud.base.js"></script>
     
 
     
      
-        <script type="text/javascript" src="../_static/cloud.js"></script>
+        <script src="../_static/cloud.js"></script>
     
 
     <link rel="shortcut icon" href="../_static/anypytools.ico"/>
@@ -62,7 +62,7 @@
         <li class="right" >
           <a href="04_Batch_processing_multiple_models.html" title="Batch processing"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.0 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.4.1 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -411,12 +411,12 @@ div.admonition.inline-title p.admonition-title {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[[&#39;classoperation Main.MyModel.Tibia.Patella2.sRel &#34;Set Value&#34; --value=&#34;{0.0251238155152,0.112107091459,0.00548031183851}&#34;&#39;,
-  &#39;classoperation Main.MyModel.Patella.Lig.sRel &#34;Set Value&#34; --value=&#34;{-0.0114569787512,-0.0368999821558,-0.00254405335386}&#34;&#39;],
- [&#39;classoperation Main.MyModel.Tibia.Patella2.sRel &#34;Set Value&#34; --value=&#34;{0.0129454733312,0.106424061907,0.0170348541996}&#34;&#39;,
-  &#39;classoperation Main.MyModel.Patella.Lig.sRel &#34;Set Value&#34; --value=&#34;{0.00277155454459,-0.0354332404611,-0.0102456356228}&#34;&#39;],
- [&#39;classoperation Main.MyModel.Tibia.Patella2.sRel &#34;Set Value&#34; --value=&#34;{0.0371134534867,0.113808508294,-0.00947518717711}&#34;&#39;,
-  &#39;classoperation Main.MyModel.Patella.Lig.sRel &#34;Set Value&#34; --value=&#34;{-0.00205721456904,-0.0283615479116,0.000319013630475}&#34;&#39;]]
+[[&#39;classoperation Main.MyModel.Tibia.Patella2.sRel &#34;Set Value&#34; --value=&#34;{0.0349370118042,0.117548588273,0.000665700208441}&#34;&#39;,
+  &#39;classoperation Main.MyModel.Patella.Lig.sRel &#34;Set Value&#34; --value=&#34;{0.00420981441473,-0.0166200345869,-0.000899680353891}&#34;&#39;],
+ [&#39;classoperation Main.MyModel.Tibia.Patella2.sRel &#34;Set Value&#34; --value=&#34;{0.00300991216006,0.110408952879,-0.00162074219545}&#34;&#39;,
+  &#39;classoperation Main.MyModel.Patella.Lig.sRel &#34;Set Value&#34; --value=&#34;{0.0116820435986,-0.044804438113,0.0063170238737}&#34;&#39;],
+ [&#39;classoperation Main.MyModel.Tibia.Patella2.sRel &#34;Set Value&#34; --value=&#34;{0.022266645204,0.11401744759,0.0078265828213}&#34;&#39;,
+  &#39;classoperation Main.MyModel.Patella.Lig.sRel &#34;Set Value&#34; --value=&#34;{-0.00816721013142,-0.0346727506743,-0.0153437146327}&#34;&#39;]]
 </pre></div></div>
 </div>
 <p>Now let us expand the macro to also load and run the model.</p>
@@ -441,7 +441,7 @@ div.admonition.inline-title p.admonition-title {
 <div class="section" id="Running-the-Monte-Carlo-macro">
 <h3>Running the Monte Carlo macro<a class="headerlink" href="#Running-the-Monte-Carlo-macro" title="Permalink to this headline">¶</a></h3>
 <p>The macro is passed to the AnyPyProcess object which excutes the macros</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
@@ -452,6 +452,21 @@ div.admonition.inline-title p.admonition-title {
 <span class="n">monte_carlo_results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span> <span class="n">monte_carlo_macros</span> <span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "012eb0e14fab4134b8d3277c476d6969", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Completed: 100
+</pre></div></div>
 </div>
 <p>The output object (<code class="docutils literal notranslate"><span class="pre">monte_carlo_result</span></code>) is a list-like object where each element is a dictionary with the output of the corresponding simulation.</p>
 <div class="nbinput docutils container">
@@ -470,7 +485,7 @@ div.admonition.inline-title p.admonition-title {
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Length : 100
-Data keys in first element:  [&#39;Main.MyStudy.Output.Abscissa.t&#39;, &#39;Main.MyStudy.Output.MaxMuscleActivity&#39;]
+Data keys in first element:  [&#39;Main.MyStudy.Output.Abscissa.t&#39;, &#39;Main.MyStudy.Output.MaxMuscleActivity&#39;, &#39;task_macro_hash&#39;, &#39;task_id&#39;, &#39;task_work_dir&#39;, &#39;task_name&#39;, &#39;task_processtime&#39;, &#39;task_macro&#39;, &#39;task_logfile&#39;]
 </pre></div></div>
 </div>
 </div>
@@ -510,19 +525,19 @@ Data keys in first element:  [&#39;Main.MyStudy.Output.Abscissa.t&#39;, &#39;Mai
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-array([[ 0.00890538,  0.00927552,  0.00986515, ...,  0.00986515,
-         0.00927552,  0.00890538],
-       [ 0.00761831,  0.00793615,  0.00844398, ...,  0.00844398,
-         0.00793614,  0.00761831],
-       [ 0.00965061,  0.01004897,  0.0106812 , ...,  0.0106812 ,
-         0.01004897,  0.00965062],
+array([[0.00890538, 0.00927552, 0.00986515, ..., 0.00986515, 0.00927552,
+        0.00890538],
+       [0.00761831, 0.00793615, 0.00844398, ..., 0.00844398, 0.00793614,
+        0.00761831],
+       [0.00965061, 0.01004897, 0.0106812 , ..., 0.0106812 , 0.01004897,
+        0.00965062],
        ...,
-       [ 0.01007754,  0.0104962 ,  0.01116247, ...,  0.01116247,
-         0.01049619,  0.01007754],
-       [ 0.01026166,  0.01068757,  0.01136452, ...,  0.01136452,
-         0.01068757,  0.01026167],
-       [ 0.00981378,  0.01021894,  0.01086207, ...,  0.01086207,
-         0.01021893,  0.00981379]])
+       [0.01007754, 0.0104962 , 0.01116247, ..., 0.01116247, 0.01049619,
+        0.01007754],
+       [0.01026166, 0.01068757, 0.01136452, ..., 0.01136452, 0.01068757,
+        0.01026167],
+       [0.00981378, 0.01021894, 0.01086207, ..., 0.01086207, 0.01021893,
+        0.00981379]])
 </pre></div></div>
 </div>
 <p>In fact, we don’t even have to use the full name of the variable. As long as the string uniquely defines the variable in the data set.</p>
@@ -563,7 +578,7 @@ array([[ 0.00890538,  0.00927552,  0.00986515, ...,  0.00986515,
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&lt;matplotlib.lines.Line2D at 0x224e0f36b70&gt;]
+[&lt;matplotlib.lines.Line2D at 0x23b11e2d648&gt;]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -602,7 +617,7 @@ array([[ 0.00890538,  0.00927552,  0.00986515, ...,  0.00986515,
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
@@ -613,6 +628,21 @@ array([[ 0.00890538,  0.00927552,  0.00986515, ...,  0.00986515,
 <span class="n">lhs_results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">LHS_macros</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "e874cae8c2f945d48a609a7a4ce84be6", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Completed: 25
+</pre></div></div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
@@ -638,7 +668,7 @@ array([[ 0.00890538,  0.00927552,  0.00986515, ...,  0.00986515,
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&lt;matplotlib.lines.Line2D at 0x224e28f0b38&gt;]
+[&lt;matplotlib.lines.Line2D at 0x23b12067948&gt;]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -702,7 +732,7 @@ array([[ 0.00890538,  0.00927552,  0.00986515, ...,  0.00986515,
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
     
@@ -744,7 +774,7 @@ array([[ 0.00890538,  0.00927552,  0.00986515, ...,  0.00986515,
         <li class="right" >
           <a href="04_Batch_processing_multiple_models.html" title="Batch processing"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.0 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.4.1 documentation</a> &#187;</li>
  
       </ul>
     </div>
@@ -752,7 +782,7 @@ array([[ 0.00890538,  0.00927552,  0.00986515, ...,  0.00986515,
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.2.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
