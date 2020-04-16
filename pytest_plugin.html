@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>PyTest plugin. &#8212; AnyPyTools 1.4.1 documentation</title>
@@ -110,17 +110,17 @@ collect and run AnyScript files with a <code class="docutils literal notranslate
 loading and running, the framework considers it a failed test.</p>
 <p>Created on Mon Sep  1 12:44:36 2014.</p>
 <p>&#64;author: Morten</p>
-<dl class="exception">
+<dl class="py exception">
 <dt>
 <em class="property">exception </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">AnyException</code><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyException"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Custom exception for error reporting.</p>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">AnyFile</code><span class="sig-paren">(</span><em class="sig-param">fspath: py._path.local.LocalPath</em>, <em class="sig-param">parent=None</em>, <em class="sig-param">config=None</em>, <em class="sig-param">session=None</em>, <em class="sig-param">nodeid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyFile"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">AnyFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fspath</span><span class="p">:</span> <span class="n">py._path.local.LocalPath</span></em>, <em class="sig-param"><span class="n">parent</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">config</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">session</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nodeid</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyFile"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>pytest.File subclass for AnyScript files.</p>
-<dl class="method">
+<dl class="py method">
 <dt>
 <code class="sig-name descname">collect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyFile.collect"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Yield test cases from a AnyScript test file.</p>
@@ -128,38 +128,38 @@ loading and running, the framework considers it a failed test.</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">AnyItem</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">id</em>, <em class="sig-param">parent</em>, <em class="sig-param">defs</em>, <em class="sig-param">paths</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyItem"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">AnyItem</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">parent</span></em>, <em class="sig-param"><span class="n">defs</span></em>, <em class="sig-param"><span class="n">paths</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyItem"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>pytest.Item subclass representing individual collected tests.</p>
-<dl class="method">
+<dl class="py method">
 <dt>
-<code class="sig-name descname">repr_failure</code><span class="sig-paren">(</span><em class="sig-param">excinfo</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyItem.repr_failure"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname">repr_failure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">excinfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyItem.repr_failure"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Print a representation when a test failes.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt>
 <code class="sig-name descname">runtest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyItem.runtest"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Run an AnyScript test item.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt>
-<code class="sig-name descname">save_output_files</code><span class="sig-paren">(</span><em class="sig-param">src_folder</em>, <em class="sig-param">target_folder</em>, <em class="sig-param">result</em>, <em class="sig-param">hdf5files</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyItem.save_output_files"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname">save_output_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src_folder</span></em>, <em class="sig-param"><span class="n">target_folder</span></em>, <em class="sig-param"><span class="n">result</span></em>, <em class="sig-param"><span class="n">hdf5files</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyItem.save_output_files"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Saves hdf5, macro, and log files from a test run
 and copy it to the target_folder</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt>
 <em class="property">class </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">AnyTestSession</code><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyTestSession"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Class for storing configuation of the AnyTest plugin to pytest.</p>
-<dl class="method">
+<dl class="py method">
 <dt>
-<code class="sig-name descname">configure</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyTestSession.configure"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname">configure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyTestSession.configure"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Configure the AnyTestSession object.</p>
 <p>This can’t be in __init__()
 since it is instantiated and added to the pytest namespace very
@@ -168,39 +168,39 @@ early in the pytest startup.</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt>
 <em class="property">class </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">DeferPlugin</code><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#DeferPlugin"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Simple plugin to defer pytest-xdist hook functions.</p>
-<dl class="method">
+<dl class="py method">
 <dt>
-<code class="sig-name descname">pytest_xdist_setupnodes</code><span class="sig-paren">(</span><em class="sig-param">config</em>, <em class="sig-param">specs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#DeferPlugin.pytest_xdist_setupnodes"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname">pytest_xdist_setupnodes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">specs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#DeferPlugin.pytest_xdist_setupnodes"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>called before any remote node is set up.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt>
-<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">change_dir</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#change_dir"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">change_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#change_dir"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Context manager for changing directories.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt>
-<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">pytest_collect_file</code><span class="sig-paren">(</span><em class="sig-param">parent</em>, <em class="sig-param">path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#pytest_collect_file"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">pytest_collect_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parent</span></em>, <em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#pytest_collect_file"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Collect AnyScript test files.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt>
-<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">pytest_collection_finish</code><span class="sig-paren">(</span><em class="sig-param">session</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#pytest_collection_finish"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">pytest_collection_finish</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#pytest_collection_finish"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Print the AnyBodyCon executable used in the test.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt>
-<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">pytest_configure</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#pytest_configure"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">pytest_configure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#pytest_configure"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Configure the AnyTest framework.</p>
 </dd></dl>
 
@@ -291,7 +291,7 @@ early in the pytest startup.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
