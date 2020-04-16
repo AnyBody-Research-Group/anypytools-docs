@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>anypytools.h5py_wrapper &#8212; AnyPyTools 1.4.1 documentation</title>
@@ -105,9 +105,9 @@ div.admonition.inline-title p.admonition-title {
 <span id="anypytools-h5py-wrapper"></span><h1>anypytools.h5py_wrapper<a class="headerlink" href="#module-anypytools.h5py_wrapper" title="Permalink to this headline">¶</a></h1>
 <p>Created on Mon Jan 16 11:40:42 2012.</p>
 <p>&#64;author: mel</p>
-<dl class="class">
+<dl class="py class">
 <dt id="anypytools.h5py_wrapper.File">
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.h5py_wrapper.</code><code class="sig-name descname">File</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#File"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.h5py_wrapper.File" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">anypytools.h5py_wrapper.</code><code class="sig-name descname">File</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#File"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.h5py_wrapper.File" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an HDF5 file.</p>
 <p>Create a new file object.</p>
 <p>See the h5py user guide for a detailed explanation of the options.</p>
@@ -164,13 +164,13 @@ if True. If None use global default h5.get_config().track_order.</p>
 <dt>Additional keywords</dt><dd><p>Passed on to the selected file driver.</p>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="anypytools.h5py_wrapper.File.file">
 <em class="property">property </em><code class="sig-name descname">file</code><a class="headerlink" href="#anypytools.h5py_wrapper.File.file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a File instance associated with this object</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="anypytools.h5py_wrapper.File.parent">
 <em class="property">property </em><code class="sig-name descname">parent</code><a class="headerlink" href="#anypytools.h5py_wrapper.File.parent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the parent group of this object.</p>
@@ -180,18 +180,18 @@ ValueError if this object is anonymous.</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="anypytools.h5py_wrapper.Group">
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.h5py_wrapper.</code><code class="sig-name descname">Group</code><span class="sig-paren">(</span><em class="sig-param">arg</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#Group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.h5py_wrapper.Group" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">anypytools.h5py_wrapper.</code><code class="sig-name descname">Group</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#Group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.h5py_wrapper.Group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an HDF5 group.</p>
 <p>Create a new Group object by binding to a low-level GroupID.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="anypytools.h5py_wrapper.Group.file">
 <em class="property">property </em><code class="sig-name descname">file</code><a class="headerlink" href="#anypytools.h5py_wrapper.Group.file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a File instance associated with this object</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="anypytools.h5py_wrapper.Group.parent">
 <em class="property">property </em><code class="sig-name descname">parent</code><a class="headerlink" href="#anypytools.h5py_wrapper.Group.parent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the parent group of this object.</p>
@@ -289,7 +289,7 @@ ValueError if this object is anonymous.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

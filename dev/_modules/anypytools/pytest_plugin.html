@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.4.1 documentation</title>
@@ -354,7 +354,7 @@
         <span class="n">warnings_to_include</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;warnings_to_include&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">warnings_to_include</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{name}</span><span class="s2">:`warnings_to_include` is deprecated. </span><span class="se">\n</span><span class="s2">Specify the `fatal_warnings` variable as &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:`warnings_to_include` is deprecated. </span><span class="se">\n</span><span class="s2">Specify the `fatal_warnings` variable as &quot;</span>
                 <span class="s2">&quot;a list to select specific warnings&quot;</span><span class="p">,</span>
                 <span class="ne">DeprecationWarning</span><span class="p">,</span>
             <span class="p">)</span>
@@ -384,9 +384,9 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-output&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">save_study</span><span class="p">:</span>
             <span class="n">save_study</span> <span class="o">=</span> <span class="p">[</span><span class="n">save_study</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">save_study</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">save_study</span>
             <span class="k">for</span> <span class="n">study</span> <span class="ow">in</span> <span class="n">save_study</span><span class="p">:</span>
-                <span class="n">fname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{study}</span><span class="s2">.anydata.h5&quot;</span>
+                <span class="n">fname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">study</span><span class="si">}</span><span class="s2">.anydata.h5&quot;</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">macro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s1">&#39;classoperation </span><span class="si">{study}</span><span class="s1">.Output &quot;Save data&quot; --type=&quot;Deep&quot; --file=&quot;</span><span class="si">{fname}</span><span class="s1">&quot;&#39;</span>
+                    <span class="sa">f</span><span class="s1">&#39;classoperation </span><span class="si">{</span><span class="n">study</span><span class="si">}</span><span class="s1">.Output &quot;Save data&quot; --type=&quot;Deep&quot; --file=&quot;</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
                 <span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">hdf5_outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
         <span class="k">return</span>
@@ -420,10 +420,10 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">expect_errors</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">xerr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">expect_errors</span><span class="p">:</span>
                 <span class="n">xerr_found</span> <span class="o">=</span> <span class="kc">False</span>
-                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">error</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">error_list</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">error_list</span><span class="p">[:]:</span>
                     <span class="k">if</span> <span class="n">xerr</span> <span class="ow">in</span> <span class="n">error</span><span class="p">:</span>
                         <span class="n">xerr_found</span> <span class="o">=</span> <span class="kc">True</span>
-                        <span class="k">del</span> <span class="n">error_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                        <span class="n">error_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">xerr_found</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                         <span class="s2">&quot;TEST ERROR: Expected error not &quot;</span> <span class="s1">&#39;found: &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">xerr</span><span class="p">)</span>
@@ -479,7 +479,7 @@
                 <span class="n">f</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;anytest_ams_version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">ams_version</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR: No HDF5 data were saved: </span><span class="si">{fn}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR: No HDF5 data were saved: </span><span class="si">{</span><span class="n">fn</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="n">target_log</span> <span class="o">=</span> <span class="n">target_folder</span> <span class="o">/</span> <span class="s2">&quot;logfile.txt&quot;</span>
         <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">src_log</span><span class="p">,</span> <span class="n">target_log</span><span class="p">)</span>
@@ -491,7 +491,7 @@
             <span class="n">anybodygui</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
                 <span class="sa">r</span><span class="s2">&quot;(?i)anybodycon\.exe&quot;</span><span class="p">,</span> <span class="s2">&quot;anybody.exe&quot;</span><span class="p">,</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">ams_path</span>
             <span class="p">)</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{anybodygui}</span><span class="s1">&quot; -m &quot;%~dp0</span><span class="si">{target_macro.name}</span><span class="s1">&quot;&#39;</span><span class="p">)</span></div>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">anybodygui</span><span class="si">}</span><span class="s1">&quot; -m &quot;%~dp0</span><span class="si">{</span><span class="n">target_macro</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AnyItem.repr_failure"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyItem.repr_failure">[docs]</a>    <span class="k">def</span> <span class="nf">repr_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">excinfo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Print a representation when a test failes.&quot;&quot;&quot;</span>
@@ -649,7 +649,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
