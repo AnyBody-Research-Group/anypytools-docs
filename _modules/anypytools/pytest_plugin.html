@@ -6,7 +6,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.4.3 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.4.4 documentation</title>
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
@@ -54,9 +55,10 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.4.3 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.4.4 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 
       </ul>
     </div>
     </div>
@@ -90,6 +92,7 @@
 
 <span class="kn">import</span> <span class="nn">pytest</span>
 
+
 <span class="kn">from</span> <span class="nn">_pytest.tmpdir</span> <span class="kn">import</span> <span class="n">TempdirFactory</span><span class="p">,</span> <span class="n">TempPathFactory</span>
 
 <span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span><span class="p">,</span> <span class="n">macro_commands</span>
@@ -103,6 +106,8 @@
     <span class="n">get_ammr_version</span><span class="p">,</span>
     <span class="n">wraptext</span><span class="p">,</span>
 <span class="p">)</span>
+
+<span class="n">PYTEST_PRE_54</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">pytest</span><span class="o">.</span><span class="n">__version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)))</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="cwd"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.cwd">[docs]</a><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
@@ -190,7 +195,10 @@
 <div class="viewcode-block" id="pytest_collect_file"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_collect_file">[docs]</a><span class="k">def</span> <span class="nf">pytest_collect_file</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Collect AnyScript test files.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;.any&quot;</span> <span class="ow">and</span> <span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;test_&quot;</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">AnyFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">PYTEST_PRE_54</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">AnyTestFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">AnyTestFile</span><span class="o">.</span><span class="n">from_parent</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">fspath</span><span class="o">=</span><span class="n">path</span><span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">_format_switches</span><span class="p">(</span><span class="n">defs</span><span class="p">):</span>
@@ -295,10 +303,10 @@
         <span class="n">items</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">selected_items</span></div>
 
 
-<div class="viewcode-block" id="AnyFile"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyFile">[docs]</a><span class="k">class</span> <span class="nc">AnyFile</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">File</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyTestFile"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestFile">[docs]</a><span class="k">class</span> <span class="nc">AnyTestFile</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">File</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;pytest.File subclass for AnyScript files.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="AnyFile.collect"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyFile.collect">[docs]</a>    <span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyTestFile.collect"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestFile.collect">[docs]</a>    <span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Yield test cases from a AnyScript test file.&quot;&quot;&quot;</span>
         <span class="c1"># Collect define statements from the header</span>
         <span class="n">strheader</span> <span class="o">=</span> <span class="n">_read_header</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">strpath</span><span class="p">)</span>
@@ -312,19 +320,29 @@
         <span class="c1"># Run though the defines an create a test case for each</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">defs</span><span class="p">,</span> <span class="n">paths</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">combinations</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">defs</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">yield</span> <span class="n">AnyItem</span><span class="p">(</span>
-                    <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">basename</span><span class="p">,</span>
-                    <span class="nb">id</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
-                    <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
-                    <span class="n">defs</span><span class="o">=</span><span class="n">defs</span><span class="p">,</span>
-                    <span class="n">paths</span><span class="o">=</span><span class="n">paths</span><span class="p">,</span>
-                    <span class="o">**</span><span class="n">header</span><span class="p">,</span>
-                <span class="p">)</span>
+                <span class="k">if</span> <span class="n">PYTEST_PRE_54</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">AnyTestItem</span><span class="p">(</span>
+                        <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">basename</span><span class="p">,</span>
+                        <span class="nb">id</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+                        <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="n">defs</span><span class="o">=</span><span class="n">defs</span><span class="p">,</span>
+                        <span class="n">paths</span><span class="o">=</span><span class="n">paths</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">header</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">AnyTestItem</span><span class="o">.</span><span class="n">from_parent</span><span class="p">(</span>
+                        <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">basename</span><span class="p">,</span>
+                        <span class="nb">id</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+                        <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="n">defs</span><span class="o">=</span><span class="n">defs</span><span class="p">,</span>
+                        <span class="n">paths</span><span class="o">=</span><span class="n">paths</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">header</span><span class="p">,</span>
+                    <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Malformed input: &quot;</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="AnyItem"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyItem">[docs]</a><span class="k">class</span> <span class="nc">AnyItem</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">Item</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyTestItem"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestItem">[docs]</a><span class="k">class</span> <span class="nc">AnyTestItem</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">Item</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;pytest.Item subclass representing individual collected tests.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">defs</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -389,7 +407,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">hdf5_outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
         <span class="k">return</span>
 
-<div class="viewcode-block" id="AnyItem.runtest"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyItem.runtest">[docs]</a>    <span class="k">def</span> <span class="nf">runtest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyTestItem.runtest"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestItem.runtest">[docs]</a>    <span class="k">def</span> <span class="nf">runtest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run an AnyScript test item.&quot;&quot;&quot;</span>
 
         <span class="n">tmpdir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
@@ -456,7 +474,7 @@
 
         <span class="k">return</span></div>
 
-<div class="viewcode-block" id="AnyItem.save_output_files"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyItem.save_output_files">[docs]</a>    <span class="k">def</span> <span class="nf">save_output_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src_folder</span><span class="p">,</span> <span class="n">target_folder</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">hdf5files</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyTestItem.save_output_files"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestItem.save_output_files">[docs]</a>    <span class="k">def</span> <span class="nf">save_output_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src_folder</span><span class="p">,</span> <span class="n">target_folder</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">hdf5files</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Saves hdf5, macro, and log files from a test run</span>
 <span class="sd">            and copy it to the target_folder</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -494,7 +512,7 @@
             <span class="p">)</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">anybodygui</span><span class="si">}</span><span class="s1">&quot; -m &quot;%~dp0</span><span class="si">{</span><span class="n">target_macro</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AnyItem.repr_failure"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyItem.repr_failure">[docs]</a>    <span class="k">def</span> <span class="nf">repr_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">excinfo</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyTestItem.repr_failure"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestItem.repr_failure">[docs]</a>    <span class="k">def</span> <span class="nf">repr_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">excinfo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Print a representation when a test failes.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">excinfo</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">AnyException</span><span class="p">):</span>
             <span class="n">rtn</span> <span class="o">=</span> <span class="s2">&quot;Main file:</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -512,7 +530,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">excinfo</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AnyItem.reportinfo"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.AnyItem.reportinfo">[docs]</a>    <span class="k">def</span> <span class="nf">reportinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AnyTestItem.reportinfo"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.AnyTestItem.reportinfo">[docs]</a>    <span class="k">def</span> <span class="nf">reportinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;AnyBody Simulation: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div></div>
 
 
@@ -588,6 +606,7 @@
     <span class="p">)</span></div>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -641,16 +660,17 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.4.3 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.4.4 documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
