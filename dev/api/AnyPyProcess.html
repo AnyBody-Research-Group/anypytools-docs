@@ -6,8 +6,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>anypytools.AnyPyProcess &#8212; AnyPyTools 1.4.5 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>anypytools.AnyPyProcess &#8212; AnyPyTools 1.4.6 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
@@ -63,7 +63,7 @@
         <li class="right" >
           <a href="index.html" title="AnyPyTools API"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.5 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.AnyPyProcess</a></li> 
@@ -116,35 +116,35 @@ a given anyscript macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>num_processes</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of anybody models to start in parallel.
+<li><p><strong>num_processes</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <em>optional</em>) – Number of anybody models to start in parallel.
 This defaults to the number of logical CPU cores in the computer.</p></li>
-<li><p><strong>anybodycon_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Overwrite the default anybodycon.exe file to
+<li><p><strong>anybodycon_path</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <em>optional</em>) – Overwrite the default anybodycon.exe file to
 use in batch processing. Defaults to what is found in the windows
 registry.</p></li>
-<li><p><strong>timeout</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum time (i seconds) a model can run until it is terminated.
+<li><p><strong>timeout</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <em>optional</em>) – Maximum time (i seconds) a model can run until it is terminated.
 Defaults to 3600 sec (1 hour).</p></li>
-<li><p><strong>silent</strong> (<em>bool</em><em>, </em><em>optional</em>) – Set to True to suppress any output such as progress bar and error
+<li><p><strong>silent</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <em>optional</em>) – Set to True to suppress any output such as progress bar and error
 messages. (Defaults to False).</p></li>
-<li><p><strong>ignore_errors</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of AnyBody Errors substrings to ignore when running the models.
+<li><p><strong>ignore_errors</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <em>optional</em>) – List of AnyBody Errors substrings to ignore when running the models.
 (Defaults to None)</p></li>
-<li><p><strong>warnings_to_include</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of strings that are matched to warnings in the model
+<li><p><strong>warnings_to_include</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <em>optional</em>) – List of strings that are matched to warnings in the model
 output. If a warning with that string is found the warning
 is returned in the output. (Defaults to None)</p></li>
-<li><p><strong>fatal_warnings</strong> (<em>bool</em><em>, </em><em>optional</em>) – Treat warnings as errors. This only triggers for specific warnings given
+<li><p><strong>fatal_warnings</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <em>optional</em>) – Treat warnings as errors. This only triggers for specific warnings given
 by <code class="docutils literal notranslate"><span class="pre">warnings_to_include</span></code> argument.</p></li>
-<li><p><strong>keep_logfiles</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True logfile will never be removed. Even if a simulations successeds
+<li><p><strong>keep_logfiles</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <em>optional</em>) – If True logfile will never be removed. Even if a simulations successeds
 without error. (Defautls to False)</p></li>
-<li><p><strong>logfile_prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – String which will be prefixed to the generated log files. This can be used
+<li><p><strong>logfile_prefix</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <em>optional</em>) – String which will be prefixed to the generated log files. This can be used
 to assign a more meaningfull name to a batch of logfiles.
 (Defaults to None)</p></li>
-<li><p><strong>python_env</strong> (<em>pathlike</em><em>, </em><em>optional</em>) – Path to a python environment/installation that the AnyBody Modeling System
+<li><p><strong>python_env</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">pathlike</span></code>, <em>optional</em>) – Path to a python environment/installation that the AnyBody Modeling System
 should use for Python Hooks. This will added the <code class="docutils literal notranslate"><span class="pre">PYTHONHOME</span></code> environment variable and
 prepended to the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> before starting the AnyBody Console application.
 (Defaults to None, which will use the default Python installation on the computer.)</p></li>
-<li><p><strong>debug_mode</strong> (<em>int</em><em>, </em><em>optional</em>) – Sets the debug mode flag for the AnyBodyConsole appplication (e.g. the /deb &lt;number&gt; flag)</p></li>
-<li><p><strong>use_gui</strong> (<em>bool</em><em>, </em><em>optional</em>) – Swictch to use the GUI instead of the console version of AMS. This works by replacing the ‘anybodycon’ part
+<li><p><strong>debug_mode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <em>optional</em>) – Sets the debug mode flag for the AnyBodyConsole appplication (e.g. the /deb &lt;number&gt; flag)</p></li>
+<li><p><strong>use_gui</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <em>optional</em>) – Swictch to use the GUI instead of the console version of AMS. This works by replacing the ‘anybodycon’ part
 of the executable with ‘anybody’ of the <cite>anybodycon_path</cite> arguments. I.e. “…/anybdoycon.exe” becomes “…/anybody.exe”</p></li>
-<li><p><strong>priority</strong> (<em>int</em><em>, </em><em>optional</em>) – The priority of the subprocesses. This can be on of the following:
+<li><p><strong>priority</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <em>optional</em>) – The priority of the subprocesses. This can be on of the following:
 <code class="docutils literal notranslate"><span class="pre">anypytools.IDLE_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">anypytools.BELOW_NORMAL_PRIORITY_CLASS</span></code>,
 <code class="docutils literal notranslate"><span class="pre">anypytools.NORMAL_PRIORITY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">anypytools.HIGH_PRIORITY_CLASS</span></code>
 Default is BELOW_NORMAL_PRIORITY_CLASS.</p></li>
@@ -178,7 +178,7 @@ parameter studies and pertubation jobs.</p>
 a partial finished processing process.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – filename of the file where processing was stored.</p>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – filename of the file where processing was stored.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A list with the output from each macro executed. This maybe empty
@@ -212,8 +212,8 @@ results at a later time.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>str</em>) – filename of the file where processing was stored.</p></li>
-<li><p><strong>append</strong> (<em>bool</em>) – If true append data to what ever is already saved. This allows
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – filename of the file where processing was stored.</p></li>
+<li><p><strong>append</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – If true append data to what ever is already saved. This allows
 for saving data in batches.</p></li>
 </ul>
 </dd>
@@ -241,8 +241,8 @@ for saving data in batches.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>str</em>) – filename where data should be stored</p></li>
-<li><p><strong>batch_name</strong> (<em>str</em>) – Name of the group in the HDF5 file to
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – filename where data should be stored</p></li>
+<li><p><strong>batch_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Name of the group in the HDF5 file to
 save the data within. If not specified
 the group hash value of the macro will
 be used.</p></li>
@@ -268,15 +268,15 @@ to include all subdirectories that match the regular expression</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>macrolist</strong> (<em>list of macrocommands</em><em>, </em><em>optional</em>) – List of anyscript macro commands. This may also be obmitted in
+<li><p><strong>macrolist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">macrocommands</span></code>, <em>optional</em>) – List of anyscript macro commands. This may also be obmitted in
 which case the previous macros will be re-run.</p></li>
-<li><p><strong>folderlist</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of folders in which to excute the macro commands. If <cite>None</cite> the
+<li><p><strong>folderlist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <em>optional</em>) – List of folders in which to excute the macro commands. If <cite>None</cite> the
 current working directory is used. This may also be a list of
 tuples to specify a name to appear in the output</p></li>
-<li><p><strong>search_subdirs</strong> (<em>str</em><em>, </em><em>optional</em>) – Regular expression used to extend the folderlist with all the
+<li><p><strong>search_subdirs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <em>optional</em>) – Regular expression used to extend the folderlist with all the
 subdirectories that match the regular expression.
 Defaults to None: No subdirectories are included.</p></li>
-<li><p><strong>logfile</strong> (<em>str</em><em>, </em><em>optional</em>) – If specified an explicit name will be used for the log files generated.
+<li><p><strong>logfile</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <em>optional</em>) – If specified an explicit name will be used for the log files generated.
 Otherwise, random names are used for logfiles</p></li>
 </ul>
 </dd>
@@ -382,7 +382,7 @@ the macros did not output any data.</p>
         <li class="right" >
           <a href="index.html" title="AnyPyTools API"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.5 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.AnyPyProcess</a></li> 
@@ -392,7 +392,7 @@ the macros did not output any data.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

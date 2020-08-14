@@ -6,8 +6,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>anypytools.AnyMacro &#8212; AnyPyTools 1.4.5 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>anypytools.AnyMacro &#8212; AnyPyTools 1.4.6 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
@@ -63,7 +63,7 @@
         <li class="right" >
           <a href="AnyPyProcess.html" title="anypytools.AnyPyProcess"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.5 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.AnyMacro</a></li> 
@@ -115,13 +115,13 @@ E.g. for parameter studies, Monte Carlo, Latin Hyper Cube studies.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>maco_commands</strong> (<em>list</em><em> or </em><em>positional arguments</em>) – A list of macro command classes. These may also be given a arbitrary number
+<li><p><strong>maco_commands</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">positional</span> <span class="pre">arguments</span></code>) – A list of macro command classes. These may also be given a arbitrary number
 of positional arguments.</p></li>
-<li><p><strong>counter_token</strong> (<em>str</em>) – A string in the macro commands which will be replace with a counter
+<li><p><strong>counter_token</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – A string in the macro commands which will be replace with a counter
 for every macro generated</p></li>
-<li><p><strong>number_of_macros</strong> (<em>int</em>) – The default number of macros which are created. This can be overruled when
+<li><p><strong>number_of_macros</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The default number of macros which are created. This can be overruled when
 calling the AnyMacro.create_macros() function. Defults to 1.</p></li>
-<li><p><strong>seed</strong> (<em>int</em><em> or </em><em>array_like</em>) – A constant seed value used which will be used every time macros are created.
+<li><p><strong>seed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">array_like</span></code>) – A constant seed value used which will be used every time macros are created.
 Must be convertable to 32 bit unsigned integers.</p></li>
 </ul>
 </dd>
@@ -176,8 +176,8 @@ as generator object (memory efficient when generating many macros)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>number_of_macros</strong> (<em>int</em><em> (</em><em>Optional</em><em>)</em>) – The number of macro to create.</p></li>
-<li><p><strong>batch_size</strong> (<em>int</em><em> (</em><em>Optional</em><em>)</em>) – If specified the function will return a generator which creates macros in
+<li><p><strong>number_of_macros</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span> <span class="pre">(Optional)</span></code>) – The number of macro to create.</p></li>
+<li><p><strong>batch_size</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span> <span class="pre">(Optional)</span></code>) – If specified the function will return a generator which creates macros in
 batches.</p></li>
 </ul>
 </dd>
@@ -234,10 +234,10 @@ of generated macros determines the number of LHS samples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>number_of_macros</strong> (<em>int</em><em> (</em><em>Optional</em><em>)</em>) – The number of macro to create.</p></li>
-<li><p><strong>batch_size</strong> (<em>int</em><em> (</em><em>Optional</em><em>)</em>) – If specified the function will return a generator which creates macros in
+<li><p><strong>number_of_macros</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span> <span class="pre">(Optional)</span></code>) – The number of macro to create.</p></li>
+<li><p><strong>batch_size</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span> <span class="pre">(Optional)</span></code>) – If specified the function will return a generator which creates macros in
 batches.</p></li>
-<li><p><strong>criterion</strong> (<em>{None</em><em>, </em><em>'c'</em><em>, </em><em>'m'</em><em>, </em><em>'cm'</em><em>, </em><em>'corr'}</em>) – A a string that specifies how points are sampled
+<li><p><strong>criterion</strong> (<code class="docutils literal notranslate"><span class="pre">{None,</span> <span class="pre">'c',</span> <span class="pre">'m',</span> <span class="pre">'cm',</span> <span class="pre">'corr'}</span></code>) – A a string that specifies how points are sampled
 (see: <a class="reference external" href="http://pythonhosted.org/pyDOE/randomized.html">http://pythonhosted.org/pyDOE/randomized.html</a>)
 <cite>None</cite> (Default) points are randomizes within the intervals.
 “center” or “c” center the points within the sampling intervals
@@ -245,8 +245,8 @@ batches.</p></li>
 the point in a randomized location within its interval
 “centermaximin” or “cm”: same as “maximin”, but centered within the intervals
 “corr” minimize the maximum correlation coefficient</p></li>
-<li><p><strong>iterations</strong> (<em>int</em>) – Specifies how many iterations are used to accomplished the selected criterion</p></li>
-<li><p><strong>append_default</strong> (<em>bool</em>) – If True a macro with default (mean) values is appended to the returned list
+<li><p><strong>iterations</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Specifies how many iterations are used to accomplished the selected criterion</p></li>
+<li><p><strong>append_default</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – If True a macro with default (mean) values is appended to the returned list
 of returned macros</p></li>
 </ul>
 </dd>
@@ -290,8 +290,8 @@ is the defaut mean value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>number_of_macros</strong> (<em>int</em><em> (</em><em>Optional</em><em>)</em>) – The number of macro to create.</p></li>
-<li><p><strong>batch_size</strong> (<em>int</em><em> (</em><em>Optional</em><em>)</em>) – If specified the function will return a generator which creates macros in
+<li><p><strong>number_of_macros</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span> <span class="pre">(Optional)</span></code>) – The number of macro to create.</p></li>
+<li><p><strong>batch_size</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span> <span class="pre">(Optional)</span></code>) – If specified the function will return a generator which creates macros in
 batches.</p></li>
 </ul>
 </dd>
@@ -410,7 +410,7 @@ batches.</p></li>
         <li class="right" >
           <a href="AnyPyProcess.html" title="anypytools.AnyPyProcess"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.5 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.AnyMacro</a></li> 
@@ -420,7 +420,7 @@ batches.</p></li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
