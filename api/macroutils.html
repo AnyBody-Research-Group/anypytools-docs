@@ -6,8 +6,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>anypytools.macroutils &#8212; AnyPyTools 1.4.5 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>anypytools.macroutils &#8212; AnyPyTools 1.4.6 documentation</title>
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
@@ -63,7 +63,7 @@
         <li class="right" >
           <a href="datautils.html" title="anypytools.datautils"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.5 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.macroutils</a></li> 
@@ -114,8 +114,8 @@ div.admonition.inline-title p.admonition-title {
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>var</strong> (<em>str</em><em> or </em><em>list of str</em>) – The anyscript values to create a ‘Dump’ macro command for</p></li>
-<li><p><strong>include_in_macro</strong> (<em>int</em><em> or </em><em>list of int</em>) – Specifices in which macros [0,1,2….NumberOfMacros] to include the
+<li><p><strong>var</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The anyscript values to create a ‘Dump’ macro command for</p></li>
+<li><p><strong>include_in_macro</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Specifices in which macros [0,1,2….NumberOfMacros] to include the
 dump command.
 If None, the command is included in all macros.</p></li>
 </ul>
@@ -146,7 +146,7 @@ If None, the command is included in all macros.</p></li>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -168,9 +168,9 @@ index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>str</em>) – Path of the file to load</p></li>
-<li><p><strong>defs</strong> (<em>dict</em>) – Dictionary of defines statements to set during load</p></li>
-<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of path staements to set during load</p></li>
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path of the file to load</p></li>
+<li><p><strong>defs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of defines statements to set during load</p></li>
+<li><p><strong>paths</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of path staements to set during load</p></li>
 </ul>
 </dd>
 </dl>
@@ -200,7 +200,7 @@ index.</p>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -222,8 +222,8 @@ index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>operation</strong> (<em>str</em>) – The AnyScript operation</p></li>
-<li><p><strong>filename</strong> (<em>str</em>) – The file in which to load the design from</p></li>
+<li><p><strong>operation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The AnyScript operation</p></li>
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The file in which to load the design from</p></li>
 </ul>
 </dd>
 </dl>
@@ -240,7 +240,7 @@ index.</p>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -261,7 +261,7 @@ index.</p>
 <dd><p>Create a Load Values classoperation macro command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – The anyset file to load the values from.</p>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The anyset file to load the values from.</p>
 </dd>
 </dl>
 <div class="admonition-examples admonition">
@@ -277,7 +277,7 @@ index.</p>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -311,7 +311,7 @@ index.</p>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -351,7 +351,7 @@ index.</p>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -375,8 +375,8 @@ HDF5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>operation</strong> (<em>str</em>) – Operation to save the h5 from</p></li>
-<li><p><strong>filename</strong> (<em>str</em>) – The anyset file to save the values to</p></li>
+<li><p><strong>operation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Operation to save the h5 from</p></li>
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The anyset file to save the values to</p></li>
 </ul>
 </dd>
 </dl>
@@ -393,7 +393,7 @@ HDF5 file.</p>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -415,8 +415,8 @@ index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>operation</strong> (<em>str</em>) – The AnyScript operation</p></li>
-<li><p><strong>filename</strong> (<em>str</em>) – The filename in which to save the design</p></li>
+<li><p><strong>operation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The AnyScript operation</p></li>
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The filename in which to save the design</p></li>
 </ul>
 </dd>
 </dl>
@@ -433,7 +433,7 @@ index.</p>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -454,7 +454,7 @@ index.</p>
 <dd><p>Create a Save Values classoperation macro command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – The anyset file to save the values to</p>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The anyset file to save the values to</p>
 </dd>
 </dl>
 <div class="admonition-examples admonition">
@@ -470,7 +470,7 @@ index.</p>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -492,8 +492,8 @@ index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>var</strong> (<em>string</em>) – An AnyScript variable.</p></li>
-<li><p><strong>value</strong> (<em>number</em><em> or </em><em>list of number</em>) – A value or list of values to assign to the AnyScript variable.</p></li>
+<li><p><strong>var</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – An AnyScript variable.</p></li>
+<li><p><strong>value</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">number</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">number</span></code>) – A value or list of values to assign to the AnyScript variable.</p></li>
 </ul>
 </dd>
 </dl>
@@ -559,7 +559,7 @@ repeated</p>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -582,9 +582,9 @@ index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>var</strong> (<em>str</em>) – An AnyScript variable.</p></li>
-<li><p><strong>frozen_distribution</strong> (<em>&lt;scipy.stats.distributions.rv_frozen&gt;</em>) – A frozen distribution from scipy.stats.distributions</p></li>
-<li><p><strong>default_lower_tail_probability</strong> (<em>float</em>) – The lower tail probability of the default value. Defaults to 0.5 which
+<li><p><strong>var</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – An AnyScript variable.</p></li>
+<li><p><strong>frozen_distribution</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">&lt;scipy.stats.distributions.rv_frozen&gt;</span></code>) – A frozen distribution from scipy.stats.distributions</p></li>
+<li><p><strong>default_lower_tail_probability</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – The lower tail probability of the default value. Defaults to 0.5 which
 is the mean value.</p></li>
 </ul>
 </dd>
@@ -636,7 +636,7 @@ first value is still the defaut mean values</p>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -668,7 +668,7 @@ index.</p>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -763,7 +763,7 @@ index.</p>
         <li class="right" >
           <a href="datautils.html" title="anypytools.datautils"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.5 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.macroutils</a></li> 
@@ -773,7 +773,7 @@ index.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
