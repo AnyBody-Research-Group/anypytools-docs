@@ -7,9 +7,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Getting Started with AnyPyTools &#8212; AnyPyTools 1.4.6 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <title>Getting Started with AnyPyTools &#8212; AnyPyTools 1.6.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
@@ -17,8 +17,9 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
 
     
     
@@ -63,7 +64,7 @@
         <li class="right" >
           <a href="../install_guide.html" title="Install guide"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">Getting Started with AnyPyTools</a></li> 
       </ul>
@@ -81,21 +82,35 @@
 /* CSS for nbsphinx extension */
 
 /* remove conflicting styling from Sphinx themes */
-div.nbinput.container,
-div.nbinput.container div.prompt,
-div.nbinput.container div.input_area,
-div.nbinput.container div[class*=highlight],
-div.nbinput.container div[class*=highlight] pre,
-div.nboutput.container,
-div.nboutput.container div.prompt,
-div.nboutput.container div.output_area,
-div.nboutput.container div[class*=highlight],
-div.nboutput.container div[class*=highlight] pre {
-    background: none;
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
     border: none;
-    padding: 0 0;
+    padding: 0;
     margin: 0;
     box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
 }
 
 /* avoid gaps between output lines */
@@ -196,7 +211,7 @@ div.nboutput.container div.output_area {
 div.nbinput.container div.input_area {
     border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
 }
 
 /* override MathJax center alignment in output cells */
@@ -262,6 +277,7 @@ div.nboutput.container div.output_area.rendered_html,
 div.nboutput.container div.output_area > div.output_javascript,
 div.nboutput.container div.output_area:not(.rendered_html) > img{
     padding: 5px;
+    margin: 0;
 }
 
 /* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
@@ -337,7 +353,7 @@ div.admonition.inline-title p.admonition-title {
 <h1>Getting Started with AnyPyTools<a class="headerlink" href="#Getting-Started-with-AnyPyTools" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Running-a-simple-macro">
 <h2>Running a simple macro<a class="headerlink" href="#Running-a-simple-macro" title="Permalink to this headline">¶</a></h2>
-<p><img alt="Drawing" src="Tutorial/Tutorialfiles/knee.gif" /></p>
+<p><img alt="Drawing" src="../_images/knee.gif" /></p>
 <p>For the sake of the tutorial we will use a small ‘toy’ model of a simplified knee joint (see the figure.) The model is defined in the file <a class="reference external" href="Knee.any">Knee.any</a>, which is placed in the current working directory.</p>
 <p>Next, let us run the model from python. First, we import the <code class="docutils literal notranslate"><span class="pre">AnyPyProcess</span></code> class and create an instance of the class.</p>
 <div class="nbinput nblast docutils container">
@@ -353,9 +369,9 @@ div.admonition.inline-title p.admonition-title {
 <p>Next, we need to instruct the AnyBody Modelling System to load the and run the model. We do this using <em>AnyScript</em> macro commands. These are short commands that can automate operations in the AnyBody Modeling System (AMS). Operation that are normally done by pointing and clicking in the AMS graphical user interface.</p>
 <p>You can read more on <em>AnyScript</em> macros in the “User Interface Features” tutorial that accompanies the AnyBody Modeling System.</p>
 <p>Now we define an <em>AnyScript</em> macro that we want to run on the model.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">load</span> <span class="s2">&quot;Knee.any&quot;</span>
-<span class="n">operation</span> <span class="n">Main</span><span class="o">.</span><span class="n">MyStudy</span><span class="o">.</span><span class="n">Kinematics</span>
-<span class="n">run</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>load &quot;Knee.any&quot;
+operation Main.MyStudy.Kinematics
+run
 </pre></div>
 </div>
 <p>The macro will command AnyBody to load the model and run the Kinematics operation.</p>
@@ -379,14 +395,13 @@ div.admonition.inline-title p.admonition-title {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "80cf6d94fd3f4c6fb140500c4897212d", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3894a7240733488091f71282139f093b", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-
 Completed: 1
 </pre></div></div>
 </div>
@@ -415,14 +430,13 @@ Completed: 1
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3ae2b6c918b04effafba4b068957f58a", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4b4642f56e5344c783603a3f1fd4f4af", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-
 Completed: 2
 </pre></div></div>
 </div>
@@ -463,14 +477,13 @@ Completed: 2
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "6cc9a9b3566240bba2008101d5a1dbcc", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "507936e5207e44ec9d4272e9d3f743bd", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-
 Completed: 40
 </pre></div></div>
 </div>
@@ -489,14 +502,13 @@ Completed: 40
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b373fb6fac094cdeb71c8b7756e70eb3", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "6b8f17ee499b4320bbef4ac064cffc59", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-
 Completed: 40
 </pre></div></div>
 </div>
@@ -510,7 +522,8 @@ Completed: 40
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">macrolist</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;load &quot;Knee.any&quot;&#39;</span><span class="p">,</span>
     <span class="s1">&#39;operation Main.MyStudy.InverseDynamics&#39;</span><span class="p">,</span>
     <span class="s1">&#39;run&#39;</span><span class="p">,</span>
@@ -518,7 +531,6 @@ Completed: 40
 <span class="p">]</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="n">macrolist</span><span class="p">)</span>
-<span class="n">results</span>
 </pre></div>
 </div>
 </div>
@@ -526,44 +538,14 @@ Completed: 40
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "e1872ca142374757b35640f72863c4f5", "version_major": 2, "version_minor": 0}</script></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-
-Completed: 1
-</pre></div></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "0ceec8ad7db7414fbba5fcf560b2597a", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
+<div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[{&#39;Main.MyStudy.Output.MaxMuscleActivity&#39;:
-    array([0.00890538, 0.00927552, 0.00986515, 0.01067729, 0.01171374,
-           0.01297502, 0.01446022, 0.0161669 , 0.01809102, 0.02022675,
-           0.02256637, 0.02510015, 0.0278161 , 0.03069982, 0.03373426,
-           0.0368995 , 0.0401725 , 0.04352691, 0.04693299, 0.05035756,
-           0.05376422, 0.05711384, 0.06036528, 0.06347664, 0.06640681,
-           0.0691175 , 0.07157552, 0.07375524, 0.07564093, 0.07722862,
-           0.07852727, 0.0795589 , 0.08035747, 0.08096676, 0.0814373 ,
-           0.08182288, 0.0821771 , 0.08255065, 0.08298457, 0.08333915,
-           0.08355467, 0.08365939, 0.08367977, 0.08364023, 0.08356287,
-           0.08346721, 0.08336996, 0.08328478, 0.08322211, 0.083189  ,
-           0.083189  , 0.08322211, 0.08328478, 0.08336996, 0.08346721,
-           0.08356287, 0.08364023, 0.08367977, 0.08365939, 0.08355467,
-           0.08333915, 0.08298458, 0.08255065, 0.0821771 , 0.08182288,
-           0.0814373 , 0.08096676, 0.08035746, 0.07955889, 0.07852727,
-           0.07722861, 0.07564092, 0.07375524, 0.07157551, 0.06911749,
-           0.06640681, 0.06347663, 0.06036528, 0.05711384, 0.05376422,
-           0.05035756, 0.04693299, 0.04352691, 0.0401725 , 0.0368995 ,
-           0.03373426, 0.03069982, 0.0278161 , 0.02510015, 0.02256637,
-           0.02022675, 0.01809102, 0.0161669 , 0.01446022, 0.01297502,
-           0.01171374, 0.01067729, 0.00986515, 0.00927552, 0.00890538])]
+Completed: 1
 </pre></div></div>
 </div>
 <p>We can export more variables by adding more <code class="docutils literal notranslate"><span class="pre">classoperation</span></code>. But there is a better way of doing this, as we shall see in the next tutorials.</p>
@@ -586,7 +568,7 @@ Completed: 1
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">max_muscle_act</span> <span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">max_muscle_act</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -597,16 +579,9 @@ Completed: 1
 <img alt="../_images/Tutorial_01_Getting_started_with_anypytools_21_0.png" src="../_images/Tutorial_01_Getting_started_with_anypytools_21_0.png" />
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
-</pre></div>
-</div>
-</div>
-</div>
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"038e0133795041578af6416b3b529338": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "0ceec8ad7db7414fbba5fcf560b2597a": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_32b83ed3340b47e9b3f1dbf2a126171e", "IPY_MODEL_3148078fc5d642f8b3fe98693504a9f4", "IPY_MODEL_e1405d7ecc124975bd680a577805cc22"], "layout": "IPY_MODEL_d4f9534578a94f9d8cc6d0c0befd1c5f"}}, "150aad3e6a4a415a90fc227a79665b9e": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_038e0133795041578af6416b3b529338", "style": "IPY_MODEL_83acbfecc0594dcaba2d3bd1533fcef3", "value": "100%"}}, "1a375fe6b4384b6fb9bff4d0552c7673": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_21637136d4884f0e95d39329d3abaf62", "style": "IPY_MODEL_7c8a586e484b4a719de1eca2272fb178", "value": "100%"}}, "1af44622829c4294955ef5cbe7d1d607": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "208d149848f34d0ebfff66a0e5b7135d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "21637136d4884f0e95d39329d3abaf62": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "2bc61f27c9434772a5f222bf38bc6148": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "2da674cf084344189789d2f8281548bb": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "3148078fc5d642f8b3fe98693504a9f4": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatProgressModel", "state": {"bar_style": "success", "layout": "IPY_MODEL_fda2cf827ee049e3a7664a7b36ba5e0a", "max": 1, "style": "IPY_MODEL_855981dd6596479e8daf6421a721c351", "value": 1}}, "32b83ed3340b47e9b3f1dbf2a126171e": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_e9cc6f729bd840b7baef014b0e9eefe7", "style": "IPY_MODEL_fb94187b176a4f079a17684f810528f5", "value": "100%"}}, "3894a7240733488091f71282139f093b": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_c27aec8b6b274003a21dc8ed20995983", "IPY_MODEL_5f2700786493433cb05f0de916b7a01a", "IPY_MODEL_9c13066159d1421585fc4956305f845f"], "layout": "IPY_MODEL_7a17bd77ad224b9cb11d9ec77dc65e4a"}}, "3cb00413495246b5bf8ba65871c170dd": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "46d2e908baf8439fbcaecccfc9829643": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_3cb00413495246b5bf8ba65871c170dd", "style": "IPY_MODEL_4ba3800318ac477cb56657e6dce06793", "value": "100%"}}, "4b4642f56e5344c783603a3f1fd4f4af": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_1a375fe6b4384b6fb9bff4d0552c7673", "IPY_MODEL_b2a9ffa2983d4848a81a563e173c8e87", "IPY_MODEL_d9d138d1fcb441498a8c61e3b72933e4"], "layout": "IPY_MODEL_208d149848f34d0ebfff66a0e5b7135d"}}, "4ba3800318ac477cb56657e6dce06793": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "4d7ebb51ea4641bba8a4ad134916637d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "4e29c8e0a7ff4e29b87299813951d83e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "4ef9c185f96b4e35877d408cc677f531": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "4f0eb23d26cf4cfc9b990cc9369b700b": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "507936e5207e44ec9d4272e9d3f743bd": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_150aad3e6a4a415a90fc227a79665b9e", "IPY_MODEL_f8f0e173843142aab52a6067dde5562f", "IPY_MODEL_5ce047b5e97841f8a44c84d4f081ce48"], "layout": "IPY_MODEL_4e29c8e0a7ff4e29b87299813951d83e"}}, "5ce047b5e97841f8a44c84d4f081ce48": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_91e0d6541c844a9cbb70958295566b29", "style": "IPY_MODEL_e895e4089e3246729983c6dc68991c2f", "value": " 40/40 [00:39&lt;00:00,  1.07it/s]"}}, "5f2700786493433cb05f0de916b7a01a": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatProgressModel", "state": {"bar_style": "success", "layout": "IPY_MODEL_e4951310a5c6493caa7aa4e30b48d73d", "max": 1, "style": "IPY_MODEL_bb123cf25e9e457f896fd4e900b055c3", "value": 1}}, "61cdbc29d5964aaba79332b6c1b9fd71": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "6ab49f196f694e0e942a8ad1c2083ba5": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "6b8f17ee499b4320bbef4ac064cffc59": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_46d2e908baf8439fbcaecccfc9829643", "IPY_MODEL_ecdc9b9531484f38a3bac6a8073516b6", "IPY_MODEL_a0330762cf2e413f8f237fd588a37670"], "layout": "IPY_MODEL_76cd35d330fa4801a729f67c776b60e6"}}, "6dd8b36b2c67400d93a8c99f0c9709b7": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "76cd35d330fa4801a729f67c776b60e6": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "7a17bd77ad224b9cb11d9ec77dc65e4a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "7be5e9eceb61402ab2e5da1d7464351f": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ProgressStyleModel", "state": {"description_width": ""}}, "7c8a586e484b4a719de1eca2272fb178": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "83a53e7dab034d21b5fb6b75c441a32b": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "83acbfecc0594dcaba2d3bd1533fcef3": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "855981dd6596479e8daf6421a721c351": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ProgressStyleModel", "state": {"description_width": ""}}, "91e0d6541c844a9cbb70958295566b29": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "939f80052ca54a84be271383a422dc6e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "9c13066159d1421585fc4956305f845f": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_939f80052ca54a84be271383a422dc6e", "style": "IPY_MODEL_83a53e7dab034d21b5fb6b75c441a32b", "value": " 1/1 [00:00&lt;00:00,  1.39it/s]"}}, "a0330762cf2e413f8f237fd588a37670": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_1af44622829c4294955ef5cbe7d1d607", "style": "IPY_MODEL_4f0eb23d26cf4cfc9b990cc9369b700b", "value": " 40/40 [00:28&lt;00:00,  1.59it/s]"}}, "b2a9ffa2983d4848a81a563e173c8e87": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatProgressModel", "state": {"bar_style": "success", "layout": "IPY_MODEL_c17b6bbe95944540b88d061ee4feb409", "max": 2, "style": "IPY_MODEL_b9a15dd9ccdb4372acf1b0d6c1d0ba3d", "value": 2}}, "b9a15dd9ccdb4372acf1b0d6c1d0ba3d": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ProgressStyleModel", "state": {"description_width": ""}}, "bb123cf25e9e457f896fd4e900b055c3": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ProgressStyleModel", "state": {"description_width": ""}}, "c17b6bbe95944540b88d061ee4feb409": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "c27aec8b6b274003a21dc8ed20995983": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_c9f3bb94474c44dea0bfa5dfbce63642", "style": "IPY_MODEL_61cdbc29d5964aaba79332b6c1b9fd71", "value": "100%"}}, "c9f3bb94474c44dea0bfa5dfbce63642": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "d4f9534578a94f9d8cc6d0c0befd1c5f": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "d9d138d1fcb441498a8c61e3b72933e4": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_4d7ebb51ea4641bba8a4ad134916637d", "style": "IPY_MODEL_2bc61f27c9434772a5f222bf38bc6148", "value": " 2/2 [00:01&lt;00:00,  1.27s/it]"}}, "e1405d7ecc124975bd680a577805cc22": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_4ef9c185f96b4e35877d408cc677f531", "style": "IPY_MODEL_2da674cf084344189789d2f8281548bb", "value": " 1/1 [00:01&lt;00:00,  1.13s/it]"}}, "e4951310a5c6493caa7aa4e30b48d73d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "e895e4089e3246729983c6dc68991c2f": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "e9cc6f729bd840b7baef014b0e9eefe7": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "ecdc9b9531484f38a3bac6a8073516b6": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatProgressModel", "state": {"bar_style": "success", "layout": "IPY_MODEL_6dd8b36b2c67400d93a8c99f0c9709b7", "max": 40, "style": "IPY_MODEL_f0cdf787876949e5a299b19803e7985c", "value": 40}}, "f0cdf787876949e5a299b19803e7985c": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ProgressStyleModel", "state": {"description_width": ""}}, "f8f0e173843142aab52a6067dde5562f": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatProgressModel", "state": {"bar_style": "success", "layout": "IPY_MODEL_6ab49f196f694e0e942a8ad1c2083ba5", "max": 40, "style": "IPY_MODEL_7be5e9eceb61402ab2e5da1d7464351f", "value": 40}}, "fb94187b176a4f079a17684f810528f5": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "fda2cf827ee049e3a7664a7b36ba5e0a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}}, "version_major": 2, "version_minor": 0}
+</script></div>
 </div>
 
 
@@ -699,7 +674,7 @@ Completed: 1
         <li class="right" >
           <a href="../install_guide.html" title="Install guide"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">Getting Started with AnyPyTools</a></li> 
       </ul>
@@ -708,7 +683,7 @@ Completed: 1
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

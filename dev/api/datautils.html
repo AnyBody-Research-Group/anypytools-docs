@@ -7,9 +7,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.datautils &#8212; AnyPyTools 1.4.6 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <title>anypytools.datautils &#8212; AnyPyTools 1.6.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
@@ -17,7 +17,6 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 
     
@@ -63,7 +62,7 @@
         <li class="right" >
           <a href="abcutils.html" title="anypytools.abcutils"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.datautils</a></li> 
@@ -109,21 +108,21 @@ div.admonition.inline-title p.admonition-title {
 <p>&#64;author: mel</p>
 <dl class="py function">
 <dt id="anypytools.datautils.anydatah5_generator">
-<code class="sig-prename descclassname">anypytools.datautils.</code><code class="sig-name descname">anydatah5_generator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">match</span><span class="o">=</span><span class="default_value">'.*(\\.h5)'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/datautils.html#anydatah5_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.datautils.anydatah5_generator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.datautils.</span></code><code class="sig-name descname"><span class="pre">anydatah5_generator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.*(\\.h5)'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/datautils.html#anydatah5_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.datautils.anydatah5_generator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a generator which opens anydata.h5 files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>folder</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <em>optional</em>) – path of the directory to look for anydata.h5 files. Defaults is the
+<li><p><strong>folder</strong> (<em>str</em><em>, </em><em>optional</em>) – path of the directory to look for anydata.h5 files. Defaults is the
 current working directory</p></li>
-<li><p><strong>match</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – regular expression to match with filenames. Default is to include
+<li><p><strong>match</strong> (<em>str</em>) – regular expression to match with filenames. Default is to include
 file ending with .h5 ‘.*(.h5)’</p></li>
 </ul>
 </dd>
 <dt class="field-even">Yields</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>h5py_file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array_like</span></code>) – a h5_py file opened with anypytools.h5py_wrapper</p></li>
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – name of the file from which the data was read</p></li>
+<li><p><strong>h5py_file</strong> (<em>array_like</em>) – a h5_py file opened with anypytools.h5py_wrapper</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – name of the file from which the data was read</p></li>
 </ul>
 </dd>
 </dl>
@@ -138,23 +137,23 @@ file ending with .h5 ‘.*(.h5)’</p></li>
 
 <dl class="py function">
 <dt id="anypytools.datautils.anyoutputfile_generator">
-<code class="sig-prename descclassname">anypytools.datautils.</code><code class="sig-name descname">anyoutputfile_generator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">match</span><span class="o">=</span><span class="default_value">'.*\\.(csv|txt)'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/datautils.html#anyoutputfile_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.datautils.anyoutputfile_generator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.datautils.</span></code><code class="sig-name descname"><span class="pre">anyoutputfile_generator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.*\\.(csv|txt)'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/datautils.html#anyoutputfile_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.datautils.anyoutputfile_generator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a generator which opens AnyOutput files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>folder</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <em>optional</em>) – path of the directory to look for AnyOutput files. Defaults is the
+<li><p><strong>folder</strong> (<em>str</em><em>, </em><em>optional</em>) – path of the directory to look for AnyOutput files. Defaults is the
 current working directory</p></li>
-<li><p><strong>match</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – regular expression to match with filenames. Default is to include
+<li><p><strong>match</strong> (<em>str</em>) – regular expression to match with filenames. Default is to include
 file ending with .csv or .txt ‘.*(.csv|.txt)’</p></li>
 </ul>
 </dd>
 <dt class="field-even">Yields</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array_like</span></code>) – data collumns  in the anyoutput file</p></li>
-<li><p><strong>header</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – list of the collumn names</p></li>
-<li><p><strong>constants</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – mapping with constants found in the file</p></li>
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – name of the file from which the data was read</p></li>
+<li><p><strong>data</strong> (<em>array_like</em>) – data collumns  in the anyoutput file</p></li>
+<li><p><strong>header</strong> (<em>list</em>) – list of the collumn names</p></li>
+<li><p><strong>constants</strong> (<em>dict</em>) – mapping with constants found in the file</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – name of the file from which the data was read</p></li>
 </ul>
 </dd>
 </dl>
@@ -171,17 +170,17 @@ file ending with .csv or .txt ‘.*(.csv|.txt)’</p></li>
 
 <dl class="py function">
 <dt id="anypytools.datautils.read_anyoutputfile">
-<code class="sig-prename descclassname">anypytools.datautils.</code><code class="sig-name descname">read_anyoutputfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/datautils.html#read_anyoutputfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.datautils.read_anyoutputfile" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.datautils.</span></code><code class="sig-name descname"><span class="pre">read_anyoutputfile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/datautils.html#read_anyoutputfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.datautils.read_anyoutputfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read an AnyOutput file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filepath</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – </p>
+<dd class="field-odd"><p><strong>filepath</strong> (<em>str</em>) – </p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>data</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array_like</span></code>) – data collumns  in the anyoutput file</p></li>
-<li><p><strong>header</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – list of the collumn names</p></li>
-<li><p><strong>constants</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – mapping with constants found in the file</p></li>
+<li><p><strong>data</strong> (<em>array_like</em>) – data collumns  in the anyoutput file</p></li>
+<li><p><strong>header</strong> (<em>list</em>) – list of the collumn names</p></li>
+<li><p><strong>constants</strong> (<em>dict</em>) – mapping with constants found in the file</p></li>
 </ul>
 </p>
 </dd>
@@ -268,7 +267,7 @@ file ending with .csv or .txt ‘.*(.csv|.txt)’</p></li>
         <li class="right" >
           <a href="abcutils.html" title="anypytools.abcutils"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.datautils</a></li> 
@@ -278,7 +277,7 @@ file ending with .csv or .txt ‘.*(.csv|.txt)’</p></li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

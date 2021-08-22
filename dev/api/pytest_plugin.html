@@ -7,9 +7,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.4.6 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.6.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
@@ -17,7 +17,6 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 
     
@@ -63,7 +62,7 @@
         <li class="right" >
           <a href="macroutils.html" title="anypytools.macroutils"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 
@@ -109,109 +108,115 @@ div.admonition.inline-title p.admonition-title {
 <p>&#64;author: Morten</p>
 <dl class="py exception">
 <dt id="anypytools.pytest_plugin.AnyException">
-<em class="property">exception </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">AnyException</code><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyException" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">AnyException</span></code><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Custom exception for error reporting.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="anypytools.pytest_plugin.AnyTestFile">
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">AnyTestFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">k</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">AnyTestFile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>pytest.File subclass for AnyScript files.</p>
 <dl class="py method">
 <dt id="anypytools.pytest_plugin.AnyTestFile.collect">
-<code class="sig-name descname">collect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestFile.collect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.collect" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">collect</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestFile.collect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.collect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Yield test cases from a AnyScript test file.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestFile.config">
-<code class="sig-name descname">config</code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">config</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.config" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestFile.fspath">
-<code class="sig-name descname">fspath</code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.fspath" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname"><span class="pre">fspath</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.fspath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filesystem path where this node was collected from (can be None).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestFile.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname"><span class="pre">name</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A unique name within the scope of the parent node.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestFile.parent">
-<code class="sig-name descname">parent</code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.parent" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname"><span class="pre">parent</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>The parent collector node.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestFile.session">
-<code class="sig-name descname">session</code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.session" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">session</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.session" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="anypytools.pytest_plugin.AnyTestItem">
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">AnyTestItem</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">k</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">AnyTestItem</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestItem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem" title="Permalink to this definition">¶</a></dt>
 <dd><p>pytest.Item subclass representing individual collected tests.</p>
 <dl class="py method">
 <dt id="anypytools.pytest_plugin.AnyTestItem.reportinfo">
-<code class="sig-name descname">reportinfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestItem.reportinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.reportinfo" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">reportinfo</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestItem.reportinfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.reportinfo" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="anypytools.pytest_plugin.AnyTestItem.repr_failure">
-<code class="sig-name descname">repr_failure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">excinfo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestItem.repr_failure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.repr_failure" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">repr_failure</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">excinfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestItem.repr_failure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.repr_failure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a representation when a test failes.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="anypytools.pytest_plugin.AnyTestItem.runtest">
-<code class="sig-name descname">runtest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestItem.runtest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.runtest" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">runtest</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestItem.runtest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.runtest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run an AnyScript test item.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="anypytools.pytest_plugin.AnyTestItem.save_output_files">
-<code class="sig-name descname">save_output_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src_folder</span></em>, <em class="sig-param"><span class="n">target_folder</span></em>, <em class="sig-param"><span class="n">result</span></em>, <em class="sig-param"><span class="n">hdf5files</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestItem.save_output_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.save_output_files" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">save_output_files</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hdf5files</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestItem.save_output_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.save_output_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves hdf5, macro, and log files from a test run
 and copy it to the target_folder</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestItem.config">
-<code class="sig-name descname">config</code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">config</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.config" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestItem.fspath">
-<code class="sig-name descname">fspath</code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.fspath" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname"><span class="pre">fspath</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.fspath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filesystem path where this node was collected from (can be None).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestItem.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname"><span class="pre">name</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A unique name within the scope of the parent node.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestItem.parent">
-<code class="sig-name descname">parent</code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.parent" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname"><span class="pre">parent</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>The parent collector node.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestItem.session">
-<code class="sig-name descname">session</code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.session" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">session</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.session" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="anypytools.pytest_plugin.AnyTestSession">
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">AnyTestSession</code><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestSession"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestSession" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">AnyTestSession</span></code><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestSession"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestSession" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for storing configuation of the AnyTest plugin to pytest.</p>
 <dl class="py method">
 <dt id="anypytools.pytest_plugin.AnyTestSession.configure">
-<code class="sig-name descname">configure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestSession.configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestSession.configure" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">configure</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestSession.configure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestSession.configure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Configure the AnyTestSession object.</p>
 <p>This can’t be in __init__()
 since it is instantiated and added to the pytest namespace very
@@ -222,11 +227,11 @@ early in the pytest startup.</p>
 
 <dl class="py class">
 <dt id="anypytools.pytest_plugin.DeferPlugin">
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">DeferPlugin</code><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#DeferPlugin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.DeferPlugin" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">DeferPlugin</span></code><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#DeferPlugin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.DeferPlugin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple plugin to defer pytest-xdist hook functions.</p>
 <dl class="py method">
 <dt id="anypytools.pytest_plugin.DeferPlugin.pytest_xdist_setupnodes">
-<code class="sig-name descname">pytest_xdist_setupnodes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">specs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#DeferPlugin.pytest_xdist_setupnodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.DeferPlugin.pytest_xdist_setupnodes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">pytest_xdist_setupnodes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#DeferPlugin.pytest_xdist_setupnodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.DeferPlugin.pytest_xdist_setupnodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>called before any remote node is set up.</p>
 </dd></dl>
 
@@ -234,40 +239,40 @@ early in the pytest startup.</p>
 
 <dl class="py function">
 <dt id="anypytools.pytest_plugin.change_dir">
-<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">change_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#change_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.change_dir" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">change_dir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#change_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.change_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Context manager for changing directories.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.pytest_plugin.cwd">
-<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">cwd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#cwd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.cwd" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">cwd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#cwd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.cwd" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.pytest_plugin.pytest_addoption">
-<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">pytest_addoption</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parser</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_addoption"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_addoption" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">pytest_addoption</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_addoption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_addoption" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.pytest_plugin.pytest_collect_file">
-<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">pytest_collect_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parent</span></em>, <em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_collect_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_collect_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">pytest_collect_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_collect_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_collect_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collect AnyScript test files.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.pytest_plugin.pytest_collection_finish">
-<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">pytest_collection_finish</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_collection_finish"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_collection_finish" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">pytest_collection_finish</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_collection_finish"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_collection_finish" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the AnyBodyCon executable used in the test.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.pytest_plugin.pytest_collection_modifyitems">
-<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">pytest_collection_modifyitems</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">items</span></em>, <em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_collection_modifyitems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_collection_modifyitems" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">pytest_collection_modifyitems</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_collection_modifyitems"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_collection_modifyitems" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.pytest_plugin.pytest_configure">
-<code class="sig-prename descclassname">anypytools.pytest_plugin.</code><code class="sig-name descname">pytest_configure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_configure" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">pytest_configure</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_configure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_configure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Configure the AnyTest framework.</p>
 </dd></dl>
 
@@ -351,7 +356,7 @@ early in the pytest startup.</p>
         <li class="right" >
           <a href="macroutils.html" title="anypytools.macroutils"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 
@@ -361,7 +366,7 @@ early in the pytest startup.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

@@ -7,9 +7,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.abcutils &#8212; AnyPyTools 1.4.6 documentation</title>
-    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
+    <title>anypytools.abcutils &#8212; AnyPyTools 1.6.0 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
@@ -17,7 +17,6 @@
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 
     
@@ -55,7 +54,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.abcutils</a></li> 
@@ -232,7 +231,7 @@
 <span class="sd">        ``anypytools.NORMAL_PRIORITY_CLASS``, ``anypytools.HIGH_PRIORITY_CLASS``</span>
 <span class="sd">        Default is BELOW_NORMAL_PRIORITY_CLASS.</span>
 <span class="sd">    debug_mode : int</span>
-<span class="sd">        The AMS debug mode to use. Defaults to 0 which is disabled. 1 correspond to </span>
+<span class="sd">        The AMS debug mode to use. Defaults to 0 which is disabled. 1 correspond to</span>
 <span class="sd">        crashdump enabled</span>
 <span class="sd">    folder : the folder in which AnyBody is executed</span>
 
@@ -244,7 +243,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">folder</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-        
+
     <span class="k">try</span><span class="p">:</span>
         <span class="n">macro_filename</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">logfile</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span> <span class="o">+</span> <span class="s2">&quot;.anymcr&quot;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
@@ -339,7 +338,7 @@
 <span class="sd">        macro: list of macro commands to execute</span>
 <span class="sd">        number: id number of the task</span>
 <span class="sd">        name: name of the task, which is used for printing status informations</span>
-<span class="sd">        logfile: If provided will specify an explicit logfile to use. </span>
+<span class="sd">        logfile: If provided will specify an explicit logfile to use.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -759,7 +758,7 @@
 <span class="sd">            subdirectories that match the regular expression.</span>
 <span class="sd">            Defaults to None: No subdirectories are included.</span>
 <span class="sd">        logfile: str, optional</span>
-<span class="sd">            If specified an explicit name will be used for the log files generated. </span>
+<span class="sd">            If specified an explicit name will be used for the log files generated.</span>
 <span class="sd">            Otherwise, random names are used for logfiles</span>
 
 <span class="sd">        Returns</span>
@@ -1041,7 +1040,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.abcutils</a></li> 
@@ -1051,7 +1050,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

@@ -7,9 +7,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Batch processing &#8212; AnyPyTools 1.4.6 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <title>Batch processing &#8212; AnyPyTools 1.6.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
@@ -17,8 +17,9 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
 
     
     
@@ -63,7 +64,7 @@
         <li class="right" >
           <a href="03_Working_with_output_from_Anybody.html" title="Working with data from AnyBody"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">Batch processing</a></li> 
       </ul>
@@ -81,21 +82,35 @@
 /* CSS for nbsphinx extension */
 
 /* remove conflicting styling from Sphinx themes */
-div.nbinput.container,
-div.nbinput.container div.prompt,
-div.nbinput.container div.input_area,
-div.nbinput.container div[class*=highlight],
-div.nbinput.container div[class*=highlight] pre,
-div.nboutput.container,
-div.nboutput.container div.prompt,
-div.nboutput.container div.output_area,
-div.nboutput.container div[class*=highlight],
-div.nboutput.container div[class*=highlight] pre {
-    background: none;
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
     border: none;
-    padding: 0 0;
+    padding: 0;
     margin: 0;
     box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
 }
 
 /* avoid gaps between output lines */
@@ -196,7 +211,7 @@ div.nboutput.container div.output_area {
 div.nbinput.container div.input_area {
     border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
 }
 
 /* override MathJax center alignment in output cells */
@@ -262,6 +277,7 @@ div.nboutput.container div.output_area.rendered_html,
 div.nboutput.container div.output_area > div.output_javascript,
 div.nboutput.container div.output_area:not(.rendered_html) > img{
     padding: 5px;
+    margin: 0;
 }
 
 /* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
@@ -340,9 +356,9 @@ div.admonition.inline-title p.admonition-title {
 <p>The following shows how to batch process models where each trials is its own main file.</p>
 <div class="section" id="Model-with-many-main-files">
 <h2>Model with many main files<a class="headerlink" href="#Model-with-many-main-files" title="Permalink to this headline">¶</a></h2>
-<p>This (<a class="reference external" href="files/Tutorial_files/BatchProcessExample.zip">zip</a>) illustrates the concept of a single model with many main files. The model is based on the Arm2D demo from the AnyBody tutorials. The main files are located in subfolders (<code class="docutils literal notranslate"><span class="pre">model1</span></code>-<code class="docutils literal notranslate"><span class="pre">model9</span></code>).</p>
+<p>This (<a class="reference external" href="Tutorial_files/BatchProcessExample.zip">zip</a>) illustrates the concept of a single model with many main files. The model is based on the Arm2D demo from the AnyBody tutorials. The main files are located in subfolders (<code class="docutils literal notranslate"><span class="pre">model1</span></code>-<code class="docutils literal notranslate"><span class="pre">model9</span></code>).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -364,12 +380,12 @@ div.admonition.inline-title p.admonition-title {
 [..]              [model2]          [model6]          [Output]
 batchprocess.py   [model3]          [model7]          RunExample.bat
 Demo.Arm2D.any    [model4]          [model8]
-               3 File(s)         10&#39;870 bytes
-              12 Dir(s)  111&#39;300&#39;411&#39;392 bytes free
+               3 File(s)         10.870 bytes
+              12 Dir(s)  83.615.764.480 bytes free
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -395,7 +411,7 @@ C:\Users\mel\Documents\AnyBodySource\AnyPyTools\docs\Tutorial\Tutorial_files\Bat
 </div>
 <p>Each of main files <code class="docutils literal notranslate"><span class="pre">main.any</span></code> has it own set of parameters, and they all include the same common fiile <code class="docutils literal notranslate"><span class="pre">Demo.Arm2D.any</span></code>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -417,27 +433,19 @@ C:\Users\mel\Documents\AnyBodySource\AnyPyTools\docs\Tutorial\Tutorial_files\Bat
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4b89fc10dc8d4979ae860a8b0ecee01c", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "0f2c2eb9595046978fcb835589f7c5e1", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-
 Completed: 9
 </pre></div></div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
-</pre></div>
-</div>
-</div>
-</div>
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"025ef9b0e7f3484faf153ecb56d6ae68": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "0f2c2eb9595046978fcb835589f7c5e1": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_15c3edb098b14c28819b20b7a50e640a", "IPY_MODEL_173fcd5a3d914ba1a3487bdd86adde70", "IPY_MODEL_a154eb85c9c34831bf3796f044adf0af"], "layout": "IPY_MODEL_025ef9b0e7f3484faf153ecb56d6ae68"}}, "15c3edb098b14c28819b20b7a50e640a": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_3c8fca072d99418ea579550e2b50ce62", "style": "IPY_MODEL_db2c7be2f1c6471c876dafeffb4b9f68", "value": "100%"}}, "173fcd5a3d914ba1a3487bdd86adde70": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatProgressModel", "state": {"bar_style": "success", "layout": "IPY_MODEL_a257ba9983524ff48b818a3819d21f4a", "max": 9, "style": "IPY_MODEL_17e79745bba84620874a8166423132d1", "value": 9}}, "17e79745bba84620874a8166423132d1": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ProgressStyleModel", "state": {"description_width": ""}}, "222fbecdea744b9da9ee1cdbb40105bc": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "3c8fca072d99418ea579550e2b50ce62": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "79629d3e114049178ff848db92194800": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "a154eb85c9c34831bf3796f044adf0af": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_222fbecdea744b9da9ee1cdbb40105bc", "style": "IPY_MODEL_79629d3e114049178ff848db92194800", "value": " 9/9 [00:06&lt;00:00,  1.61it/s]"}}, "a257ba9983524ff48b818a3819d21f4a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "db2c7be2f1c6471c876dafeffb4b9f68": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}}, "version_major": 2, "version_minor": 0}
+</script></div>
 </div>
 
 
@@ -527,7 +535,7 @@ Completed: 9
         <li class="right" >
           <a href="03_Working_with_output_from_Anybody.html" title="Working with data from AnyBody"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">Batch processing</a></li> 
       </ul>
@@ -536,7 +544,7 @@ Completed: 9
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

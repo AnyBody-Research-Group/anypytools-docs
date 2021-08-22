@@ -7,9 +7,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.macro_commands &#8212; AnyPyTools 1.4.6 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <title>anypytools.macro_commands &#8212; AnyPyTools 1.6.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
@@ -17,7 +17,6 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 
     
@@ -63,7 +62,7 @@
         <li class="right" >
           <a href="AnyMacro.html" title="anypytools.AnyMacro"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.macro_commands</a></li> 
@@ -109,13 +108,13 @@ div.admonition.inline-title p.admonition-title {
 <p>&#64;author: mel</p>
 <dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.macro_commands.</code><code class="sig-name descname">Dump</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">var</span></em>, <em class="sig-param"><span class="n">include_in_macro</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#Dump"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.macro_commands.</span></code><code class="sig-name descname"><span class="pre">Dump</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_in_macro</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#Dump"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a Dump classoperation macro command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>var</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The anyscript values to create a ‘Dump’ macro command for</p></li>
-<li><p><strong>include_in_macro</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Specifices in which macros [0,1,2….NumberOfMacros] to include the
+<li><p><strong>var</strong> (<em>str</em><em> or </em><em>list of str</em>) – The anyscript values to create a ‘Dump’ macro command for</p></li>
+<li><p><strong>include_in_macro</strong> (<em>int</em><em> or </em><em>list of int</em>) – Specifices in which macros [0,1,2….NumberOfMacros] to include the
 dump command.
 If None, the command is included in all macros.</p></li>
 </ul>
@@ -142,11 +141,11 @@ If None, the command is included in all macros.</p></li>
 </div>
 <dl class="py method">
 <dt>
-<code class="sig-name descname">get_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwarg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#Dump.get_macro"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname"><span class="pre">get_macro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#Dump.get_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -163,14 +162,14 @@ index.</p>
 
 <dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.macro_commands.</code><code class="sig-name descname">Load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">defs</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">paths</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#Load"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.macro_commands.</span></code><code class="sig-name descname"><span class="pre">Load</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#Load"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a load macro command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path of the file to load</p></li>
-<li><p><strong>defs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of defines statements to set during load</p></li>
-<li><p><strong>paths</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – Dictionary of path staements to set during load</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – Path of the file to load</p></li>
+<li><p><strong>defs</strong> (<em>dict</em>) – Dictionary of defines statements to set during load</p></li>
+<li><p><strong>paths</strong> (<em>dict</em>) – Dictionary of path staements to set during load</p></li>
 </ul>
 </dd>
 </dl>
@@ -196,11 +195,11 @@ index.</p>
 </div>
 <dl class="py method">
 <dt>
-<code class="sig-name descname">get_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwarg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#Load.get_macro"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname"><span class="pre">get_macro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#Load.get_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -217,13 +216,13 @@ index.</p>
 
 <dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.macro_commands.</code><code class="sig-name descname">LoadDesign</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">operation</span></em>, <em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#LoadDesign"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.macro_commands.</span></code><code class="sig-name descname"><span class="pre">LoadDesign</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#LoadDesign"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a Load Design classoperation macro command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>operation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The AnyScript operation</p></li>
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The file in which to load the design from</p></li>
+<li><p><strong>operation</strong> (<em>str</em>) – The AnyScript operation</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – The file in which to load the design from</p></li>
 </ul>
 </dd>
 </dl>
@@ -236,11 +235,11 @@ index.</p>
 </div>
 <dl class="py method">
 <dt>
-<code class="sig-name descname">get_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwarg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#LoadDesign.get_macro"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname"><span class="pre">get_macro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#LoadDesign.get_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -257,11 +256,11 @@ index.</p>
 
 <dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.macro_commands.</code><code class="sig-name descname">LoadValues</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#LoadValues"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.macro_commands.</span></code><code class="sig-name descname"><span class="pre">LoadValues</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#LoadValues"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a Load Values classoperation macro command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The anyset file to load the values from.</p>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – The anyset file to load the values from.</p>
 </dd>
 </dl>
 <div class="admonition-examples admonition">
@@ -273,11 +272,11 @@ index.</p>
 </div>
 <dl class="py method">
 <dt>
-<code class="sig-name descname">get_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwarg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#LoadValues.get_macro"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname"><span class="pre">get_macro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#LoadValues.get_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -294,7 +293,7 @@ index.</p>
 
 <dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.macro_commands.</code><code class="sig-name descname">MacroCommand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">command</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#MacroCommand"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.macro_commands.</span></code><code class="sig-name descname"><span class="pre">MacroCommand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#MacroCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Class for custom macro commands.</p>
 <p>This class also serves as base class for other macro commands.</p>
 <div class="admonition-examples admonition">
@@ -307,11 +306,11 @@ index.</p>
 </div>
 <dl class="py method">
 <dt>
-<code class="sig-name descname">get_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwarg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#MacroCommand.get_macro"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname"><span class="pre">get_macro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#MacroCommand.get_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -328,7 +327,7 @@ index.</p>
 
 <dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.macro_commands.</code><code class="sig-name descname">OperationRun</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">operation</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#OperationRun"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.macro_commands.</span></code><code class="sig-name descname"><span class="pre">OperationRun</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#OperationRun"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a macro command to select and run an operation.</p>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
@@ -347,11 +346,11 @@ index.</p>
 </div>
 <dl class="py method">
 <dt>
-<code class="sig-name descname">get_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwarg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#OperationRun.get_macro"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname"><span class="pre">get_macro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#OperationRun.get_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -368,15 +367,15 @@ index.</p>
 
 <dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.macro_commands.</code><code class="sig-name descname">SaveData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">operation</span></em>, <em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveData"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.macro_commands.</span></code><code class="sig-name descname"><span class="pre">SaveData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveData"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a Save Data classoperation macro command.</p>
 <p>This macro operation will save all data from a study to a
 HDF5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>operation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Operation to save the h5 from</p></li>
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The anyset file to save the values to</p></li>
+<li><p><strong>operation</strong> (<em>str</em>) – Operation to save the h5 from</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – The anyset file to save the values to</p></li>
 </ul>
 </dd>
 </dl>
@@ -389,11 +388,11 @@ HDF5 file.</p>
 </div>
 <dl class="py method">
 <dt>
-<code class="sig-name descname">get_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwarg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveData.get_macro"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname"><span class="pre">get_macro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveData.get_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -410,13 +409,13 @@ index.</p>
 
 <dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.macro_commands.</code><code class="sig-name descname">SaveDesign</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">operation</span></em>, <em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveDesign"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.macro_commands.</span></code><code class="sig-name descname"><span class="pre">SaveDesign</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveDesign"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a Save Design classoperation macro command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>operation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The AnyScript operation</p></li>
-<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The filename in which to save the design</p></li>
+<li><p><strong>operation</strong> (<em>str</em>) – The AnyScript operation</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – The filename in which to save the design</p></li>
 </ul>
 </dd>
 </dl>
@@ -429,11 +428,11 @@ index.</p>
 </div>
 <dl class="py method">
 <dt>
-<code class="sig-name descname">get_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwarg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveDesign.get_macro"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname"><span class="pre">get_macro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveDesign.get_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -450,11 +449,11 @@ index.</p>
 
 <dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.macro_commands.</code><code class="sig-name descname">SaveValues</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveValues"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.macro_commands.</span></code><code class="sig-name descname"><span class="pre">SaveValues</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveValues"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a Save Values classoperation macro command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The anyset file to save the values to</p>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – The anyset file to save the values to</p>
 </dd>
 </dl>
 <div class="admonition-examples admonition">
@@ -466,11 +465,11 @@ index.</p>
 </div>
 <dl class="py method">
 <dt>
-<code class="sig-name descname">get_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwarg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveValues.get_macro"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname"><span class="pre">get_macro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SaveValues.get_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -487,13 +486,13 @@ index.</p>
 
 <dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.macro_commands.</code><code class="sig-name descname">SetValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">var</span></em>, <em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SetValue"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.macro_commands.</span></code><code class="sig-name descname"><span class="pre">SetValue</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SetValue"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create ‘Set Value’ classoperation macro command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>var</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – An AnyScript variable.</p></li>
-<li><p><strong>value</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">number</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">number</span></code>) – A value or list of values to assign to the AnyScript variable.</p></li>
+<li><p><strong>var</strong> (<em>string</em>) – An AnyScript variable.</p></li>
+<li><p><strong>value</strong> (<em>number</em><em> or </em><em>list of number</em>) – A value or list of values to assign to the AnyScript variable.</p></li>
 </ul>
 </dd>
 </dl>
@@ -555,11 +554,11 @@ repeated</p>
 </div>
 <dl class="py method">
 <dt>
-<code class="sig-name descname">get_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwarg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SetValue.get_macro"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname"><span class="pre">get_macro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SetValue.get_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -576,15 +575,15 @@ index.</p>
 
 <dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.macro_commands.</code><code class="sig-name descname">SetValue_random</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">var</span></em>, <em class="sig-param"><span class="n">frozen_distribution</span></em>, <em class="sig-param"><span class="n">default_lower_tail_probability</span><span class="o">=</span><span class="default_value">0.5</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SetValue_random"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.macro_commands.</span></code><code class="sig-name descname"><span class="pre">SetValue_random</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen_distribution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_lower_tail_probability</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SetValue_random"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a ‘Set Value’ macro command from a distribution.</p>
 <p>The value is connected to a distibution in scipy.stats.distributions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>var</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – An AnyScript variable.</p></li>
-<li><p><strong>frozen_distribution</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">&lt;scipy.stats.distributions.rv_frozen&gt;</span></code>) – A frozen distribution from scipy.stats.distributions</p></li>
-<li><p><strong>default_lower_tail_probability</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – The lower tail probability of the default value. Defaults to 0.5 which
+<li><p><strong>var</strong> (<em>str</em>) – An AnyScript variable.</p></li>
+<li><p><strong>frozen_distribution</strong> (<em>&lt;scipy.stats.distributions.rv_frozen&gt;</em>) – A frozen distribution from scipy.stats.distributions</p></li>
+<li><p><strong>default_lower_tail_probability</strong> (<em>float</em>) – The lower tail probability of the default value. Defaults to 0.5 which
 is the mean value.</p></li>
 </ul>
 </dd>
@@ -632,11 +631,11 @@ first value is still the defaut mean values</p>
 </div>
 <dl class="py method">
 <dt>
-<code class="sig-name descname">get_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="n">lower_tail_probability</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwarg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SetValue_random.get_macro"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname"><span class="pre">get_macro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_tail_probability</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#SetValue_random.get_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -653,7 +652,7 @@ index.</p>
 
 <dl class="py class">
 <dt>
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.macro_commands.</code><code class="sig-name descname">UpdateValues</code><a class="reference internal" href="../_modules/anypytools/macroutils.html#UpdateValues"><span class="viewcode-link">[source]</span></a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.macro_commands.</span></code><code class="sig-name descname"><span class="pre">UpdateValues</span></code><a class="reference internal" href="../_modules/anypytools/macroutils.html#UpdateValues"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create an ‘Update Values’ classoperation macro command.</p>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
@@ -664,11 +663,11 @@ index.</p>
 </div>
 <dl class="py method">
 <dt>
-<code class="sig-name descname">get_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwarg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#UpdateValues.get_macro"><span class="viewcode-link">[source]</span></a></dt>
+<code class="sig-name descname"><span class="pre">get_macro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/macroutils.html#UpdateValues.get_macro"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>Create a string representation of the macro.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The index for the macro beeing generated. Some child classes
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – The index for the macro beeing generated. Some child classes
 use the index to generate different macros depending on the
 index.</p>
 </dd>
@@ -763,7 +762,7 @@ index.</p>
         <li class="right" >
           <a href="AnyMacro.html" title="anypytools.AnyMacro"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.macro_commands</a></li> 
@@ -773,7 +772,7 @@ index.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

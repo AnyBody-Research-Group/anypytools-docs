@@ -7,9 +7,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Creating AnyScript Macros &#8212; AnyPyTools 1.4.6 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <title>Creating AnyScript Macros &#8212; AnyPyTools 1.6.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
@@ -17,8 +17,9 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
 
     
     
@@ -63,7 +64,7 @@
         <li class="right" >
           <a href="01_Getting_started_with_anypytools.html" title="Getting Started with AnyPyTools"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">Creating AnyScript Macros</a></li> 
       </ul>
@@ -81,21 +82,35 @@
 /* CSS for nbsphinx extension */
 
 /* remove conflicting styling from Sphinx themes */
-div.nbinput.container,
-div.nbinput.container div.prompt,
-div.nbinput.container div.input_area,
-div.nbinput.container div[class*=highlight],
-div.nbinput.container div[class*=highlight] pre,
-div.nboutput.container,
-div.nboutput.container div.prompt,
-div.nboutput.container div.output_area,
-div.nboutput.container div[class*=highlight],
-div.nboutput.container div[class*=highlight] pre {
-    background: none;
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
     border: none;
-    padding: 0 0;
+    padding: 0;
     margin: 0;
     box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
 }
 
 /* avoid gaps between output lines */
@@ -196,7 +211,7 @@ div.nboutput.container div.output_area {
 div.nbinput.container div.input_area {
     border: 1px solid #e0e0e0;
     border-radius: 2px;
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
 }
 
 /* override MathJax center alignment in output cells */
@@ -262,6 +277,7 @@ div.nboutput.container div.output_area.rendered_html,
 div.nboutput.container div.output_area > div.output_javascript,
 div.nboutput.container div.output_area:not(.rendered_html) > img{
     padding: 5px;
+    margin: 0;
 }
 
 /* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
@@ -392,14 +408,13 @@ div.admonition.inline-title p.admonition-title {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "c4181645d0a048e29e9f5bffbfde366e", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5940522ac2ac4f4498362576316f72e6", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-
 Completed: 1
 </pre></div></div>
 </div>
@@ -425,7 +440,7 @@ Completed: 1
 <p>The macro in the previous example would have been easy to write manually. However, in some cases we want to create many macros. Then it is a big advantage to generate them programmatically.</p>
 <p>To generate many macros we need an extra class <code class="docutils literal notranslate"><span class="pre">AnyMacro</span></code> to wrap our macro list.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -442,7 +457,7 @@ Completed: 1
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -452,7 +467,7 @@ Completed: 1
 </div>
 <p>By default <code class="docutils literal notranslate"><span class="pre">AnyMacro</span></code> just behaves as a container for our macro. But has additional attributes that specify how many macros we want.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -462,7 +477,7 @@ Completed: 1
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -476,7 +491,7 @@ Completed: 1
 </div>
 <p>This can also be overidden when calling its <code class="docutils literal notranslate"><span class="pre">create_macros()</span></code> function</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -485,7 +500,7 @@ Completed: 1
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -496,7 +511,7 @@ Completed: 1
 </div>
 <p>This list of macros can also be passed to the ‘start_macro’ function to executed in parallel.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -511,21 +526,20 @@ Completed: 1
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "1bee4c769f054fbeb9a71e4bdfab6935", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "ecadd240db804134983e5cb348f2bd9c", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-
 Completed: 100
 </pre></div></div>
 </div>
 <p>Running many macros is only really useful if the macros are different. Some macros classes, like <code class="docutils literal notranslate"><span class="pre">SetValue()</span></code>, accepts lists of values which it distributes across the generated macros.</p>
 <p>Imagine a list of 5 parameters. We want to create five macros that use these values:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -537,7 +551,7 @@ Completed: 100
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -554,7 +568,7 @@ Completed: 100
 <p>Let us combine the previous to create a parameter study. We will continue with the simplified knee model where we left off in the previous tutorial. The parameter study will vary the patella tendon length from 2.0cm to 8.0cm, and observe the effect on maximum muscle activity.</p>
 <p>First we create a list of patella length parameters.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -576,7 +590,7 @@ Completed: 100
 </div>
 <p>This list of values is added to the macros with the <code class="docutils literal notranslate"><span class="pre">SetValue</span></code> class.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -595,7 +609,7 @@ Completed: 100
 </div>
 <p>We can now run the model and analyze the resulting maximum muscle activity by plotting the data in the <code class="docutils literal notranslate"><span class="pre">output</span></code> variable:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -607,19 +621,18 @@ Completed: 100
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "ac2795b7c9d649f782fcbc03e38fa4b6", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "1c66b897ee8d41febdcecef7385de4a4", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-
 Completed: 7
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -647,16 +660,9 @@ Completed: 7
 <img alt="../_images/Tutorial_02_Generating_macros_27_0.png" src="../_images/Tutorial_02_Generating_macros_27_0.png" />
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
-</pre></div>
-</div>
-</div>
-</div>
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"00afe1ba02f541ce9a2b88eecc1f6369": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "0d24beb4bb6c448c8ad08daee160b953": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "11400b7db356447ea8aac81532c4d29b": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "129faf74be434ae5a6a86e415ab146be": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_9bf5fdef05354997a6b1dd190ec64406", "style": "IPY_MODEL_4a01d95b762645e19efde9885e2e15a4", "value": " 7/7 [00:05&lt;00:00,  1.51it/s]"}}, "17e49e989fbc434aab2750a95cdde67d": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_ef217a21fbc14bc4ba20dfd22df8dc87", "style": "IPY_MODEL_f3595b4e49284744819a231e9c51e8c4", "value": "100%"}}, "1c66b897ee8d41febdcecef7385de4a4": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_faea7a5f646b4b868292362cee8de848", "IPY_MODEL_617aad94c3694b65ba34ebd3526f985a", "IPY_MODEL_129faf74be434ae5a6a86e415ab146be"], "layout": "IPY_MODEL_66200b9858c44bb8bb641b8a8fc76854"}}, "20391c25a3b445f7a557ab1e1fce540f": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "3312a61e86cd4882885876566c4f4e47": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "491df559ec114a96a78d45693942d632": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ProgressStyleModel", "state": {"description_width": ""}}, "4a01d95b762645e19efde9885e2e15a4": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "538d4d1164654bfeb4790eba111a80f6": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ProgressStyleModel", "state": {"description_width": ""}}, "5940522ac2ac4f4498362576316f72e6": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_17e49e989fbc434aab2750a95cdde67d", "IPY_MODEL_b3cc349ecb98417aa750825299954ce9", "IPY_MODEL_ba1149019846494790d1537fb0538583"], "layout": "IPY_MODEL_6470d5e0229542c1b9072c84719713f7"}}, "5bb3362c9dde40a39f4dcc4cc9565f0c": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ProgressStyleModel", "state": {"description_width": ""}}, "617aad94c3694b65ba34ebd3526f985a": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatProgressModel", "state": {"bar_style": "success", "layout": "IPY_MODEL_11400b7db356447ea8aac81532c4d29b", "max": 7, "style": "IPY_MODEL_5bb3362c9dde40a39f4dcc4cc9565f0c", "value": 7}}, "6470d5e0229542c1b9072c84719713f7": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "66200b9858c44bb8bb641b8a8fc76854": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "9bf5fdef05354997a6b1dd190ec64406": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "b315904563164fcd97d1dd927e497746": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_d1ad0fe2f4be4bdfa609cd21bdaa8c7e", "style": "IPY_MODEL_fdba769187dd404492050b07eb6a988d", "value": " 100/100 [01:11&lt;00:00,  1.85it/s]"}}, "b3cc349ecb98417aa750825299954ce9": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatProgressModel", "state": {"bar_style": "success", "layout": "IPY_MODEL_bc5b863d4b474764b0249385d1a2d64c", "max": 1, "style": "IPY_MODEL_538d4d1164654bfeb4790eba111a80f6", "value": 1}}, "b4ad4e0acecc44c0858c2f3f724fdef3": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatProgressModel", "state": {"bar_style": "success", "layout": "IPY_MODEL_f74c78d721ad46e481e56f51e901a8c1", "style": "IPY_MODEL_491df559ec114a96a78d45693942d632", "value": 100}}, "ba1149019846494790d1537fb0538583": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_3312a61e86cd4882885876566c4f4e47", "style": "IPY_MODEL_20391c25a3b445f7a557ab1e1fce540f", "value": " 1/1 [00:00&lt;00:00,  1.49it/s]"}}, "bc5b863d4b474764b0249385d1a2d64c": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "bcde6938a81a413f8c73f6c4c4c10417": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_00afe1ba02f541ce9a2b88eecc1f6369", "style": "IPY_MODEL_c4cb956fafbf4a2fb6fb4e117178ef6f", "value": "100%"}}, "c3a80d0e39984ab5aeb333b04fdac280": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "c4cb956fafbf4a2fb6fb4e117178ef6f": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "d1ad0fe2f4be4bdfa609cd21bdaa8c7e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "ecadd240db804134983e5cb348f2bd9c": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HBoxModel", "state": {"children": ["IPY_MODEL_bcde6938a81a413f8c73f6c4c4c10417", "IPY_MODEL_b4ad4e0acecc44c0858c2f3f724fdef3", "IPY_MODEL_b315904563164fcd97d1dd927e497746"], "layout": "IPY_MODEL_c3a80d0e39984ab5aeb333b04fdac280"}}, "ef217a21fbc14bc4ba20dfd22df8dc87": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "f02ba3aea9ca4b219777b14c4c3a0d11": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "f3595b4e49284744819a231e9c51e8c4": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}, "f74c78d721ad46e481e56f51e901a8c1": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "faea7a5f646b4b868292362cee8de848": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "HTMLModel", "state": {"layout": "IPY_MODEL_0d24beb4bb6c448c8ad08daee160b953", "style": "IPY_MODEL_f02ba3aea9ca4b219777b14c4c3a0d11", "value": "100%"}}, "fdba769187dd404492050b07eb6a988d": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"description_width": ""}}}, "version_major": 2, "version_minor": 0}
+</script></div>
 </div>
 </div>
 
@@ -752,7 +758,7 @@ Completed: 7
         <li class="right" >
           <a href="01_Getting_started_with_anypytools.html" title="Getting Started with AnyPyTools"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">Creating AnyScript Macros</a></li> 
       </ul>
@@ -761,7 +767,7 @@ Completed: 7
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

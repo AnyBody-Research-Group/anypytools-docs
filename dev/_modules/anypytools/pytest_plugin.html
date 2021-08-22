@@ -7,9 +7,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.4.6 documentation</title>
-    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
+    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.6.0 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
@@ -17,7 +17,6 @@
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 
     
@@ -55,7 +54,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 
@@ -272,7 +271,7 @@
     <span class="sd">&quot;&quot;&quot;Simple plugin to defer pytest-xdist hook functions.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="DeferPlugin.pytest_xdist_setupnodes"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.DeferPlugin.pytest_xdist_setupnodes">[docs]</a>    <span class="k">def</span> <span class="nf">pytest_xdist_setupnodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">specs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; called before any remote node is set up. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;called before any remote node is set up.&quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span>
             <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Using AnyBodyCon: &quot;</span><span class="p">,</span>
             <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anybodycon&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">get_anybodycon_path</span><span class="p">(),</span>
@@ -475,8 +474,8 @@
         <span class="k">return</span></div>
 
 <div class="viewcode-block" id="AnyTestItem.save_output_files"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestItem.save_output_files">[docs]</a>    <span class="k">def</span> <span class="nf">save_output_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src_folder</span><span class="p">,</span> <span class="n">target_folder</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">hdf5files</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Saves hdf5, macro, and log files from a test run</span>
-<span class="sd">            and copy it to the target_folder</span>
+        <span class="sd">&quot;&quot;&quot;Saves hdf5, macro, and log files from a test run</span>
+<span class="sd">        and copy it to the target_folder</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">h5py</span>
 
@@ -660,7 +659,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 
@@ -670,7 +669,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

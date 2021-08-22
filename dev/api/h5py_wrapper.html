@@ -7,9 +7,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.h5py_wrapper &#8212; AnyPyTools 1.4.6 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <title>anypytools.h5py_wrapper &#8212; AnyPyTools 1.6.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
@@ -17,7 +17,6 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 
     
@@ -63,7 +62,7 @@
         <li class="right" >
           <a href="anyoutputfile_generator.html" title="anypytools.datautils.anyoutputfile_generator"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.h5py_wrapper</a></li> 
@@ -109,7 +108,7 @@ div.admonition.inline-title p.admonition-title {
 <p>&#64;author: mel</p>
 <dl class="py class">
 <dt id="anypytools.h5py_wrapper.File">
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.h5py_wrapper.</code><code class="sig-name descname">File</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#File"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.h5py_wrapper.File" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.h5py_wrapper.</span></code><code class="sig-name descname"><span class="pre">File</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#File"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.h5py_wrapper.File" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an HDF5 file.</p>
 <p>Create a new file object.</p>
 <p>See the h5py user guide for a detailed explanation of the options.</p>
@@ -118,20 +117,20 @@ div.admonition.inline-title p.admonition-title {
 created with the ‘core’ driver, HDF5 still requires this be
 non-empty.</p>
 </dd>
-<dt>mode</dt><dd><p>r        Readonly, file must exist
+<dt>mode</dt><dd><p>r        Readonly, file must exist (default)
 r+       Read/write, file must exist
 w        Create file, truncate if exists
 w- or x  Create file, fail if exists
-a        Read/write if exists, create otherwise (default)</p>
+a        Read/write if exists, create otherwise</p>
 </dd>
 <dt>driver</dt><dd><p>Name of the driver to use.  Legal values are None (default,
-recommended), ‘core’, ‘sec2’, ‘stdio’, ‘mpio’.</p>
+recommended), ‘core’, ‘sec2’, ‘stdio’, ‘mpio’, ‘ros3’.</p>
 </dd>
 <dt>libver</dt><dd><p>Library version bounds.  Supported values: ‘earliest’, ‘v108’,
-‘v110’,  and ‘latest’. The ‘v108’ and ‘v110’ options can only be
-specified with the HDF5 1.10.2 library or later.</p>
+‘v110’, ‘v112’  and ‘latest’. The ‘v108’, ‘v110’ and ‘v112’
+options can only be specified with the HDF5 1.10.2 library or later.</p>
 </dd>
-<dt>userblock</dt><dd><p>Desired size of user block.  Only allowed when creating a new
+<dt>userblock_size</dt><dd><p>Desired size of user block.  Only allowed when creating a new
 file (mode w, w- or x).</p>
 </dd>
 <dt>swmr</dt><dd><p>Open the file in SWMR read mode. Only used when mode = ‘r’.</p>
@@ -163,18 +162,34 @@ chunks. The default value is 521.</p>
 <dt>track_order</dt><dd><p>Track dataset/group/attribute creation order under root group
 if True. If None use global default h5.get_config().track_order.</p>
 </dd>
+<dt>fs_strategy</dt><dd><p>The file space handling strategy to be used.  Only allowed when
+creating a new file (mode w, w- or x).  Defined as:
+“fsm”        FSM, Aggregators, VFD
+“page”       Paged FSM, VFD
+“aggregate”  Aggregators, VFD
+“none”       VFD
+If None use HDF5 defaults.</p>
+</dd>
+<dt>fs_persist</dt><dd><p>A boolean value to indicate whether free space should be persistent
+or not.  Only allowed when creating a new file.  The default value
+is False.</p>
+</dd>
+<dt>fs_threshold</dt><dd><p>The smallest free-space section size that the free space manager
+will track.  Only allowed when creating a new file.  The default
+value is 1.</p>
+</dd>
 <dt>Additional keywords</dt><dd><p>Passed on to the selected file driver.</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="anypytools.h5py_wrapper.File.file">
-<em class="property">property </em><code class="sig-name descname">file</code><a class="headerlink" href="#anypytools.h5py_wrapper.File.file" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">file</span></code><a class="headerlink" href="#anypytools.h5py_wrapper.File.file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a File instance associated with this object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="anypytools.h5py_wrapper.File.parent">
-<em class="property">property </em><code class="sig-name descname">parent</code><a class="headerlink" href="#anypytools.h5py_wrapper.File.parent" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">parent</span></code><a class="headerlink" href="#anypytools.h5py_wrapper.File.parent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the parent group of this object.</p>
 <p>This is always equivalent to obj.file[posixpath.dirname(obj.name)].
 ValueError if this object is anonymous.</p>
@@ -184,18 +199,18 @@ ValueError if this object is anonymous.</p>
 
 <dl class="py class">
 <dt id="anypytools.h5py_wrapper.Group">
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.h5py_wrapper.</code><code class="sig-name descname">Group</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#Group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.h5py_wrapper.Group" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.h5py_wrapper.</span></code><code class="sig-name descname"><span class="pre">Group</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#Group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.h5py_wrapper.Group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an HDF5 group.</p>
 <p>Create a new Group object by binding to a low-level GroupID.</p>
 <dl class="py method">
 <dt id="anypytools.h5py_wrapper.Group.file">
-<em class="property">property </em><code class="sig-name descname">file</code><a class="headerlink" href="#anypytools.h5py_wrapper.Group.file" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">file</span></code><a class="headerlink" href="#anypytools.h5py_wrapper.Group.file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a File instance associated with this object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="anypytools.h5py_wrapper.Group.parent">
-<em class="property">property </em><code class="sig-name descname">parent</code><a class="headerlink" href="#anypytools.h5py_wrapper.Group.parent" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">parent</span></code><a class="headerlink" href="#anypytools.h5py_wrapper.Group.parent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the parent group of this object.</p>
 <p>This is always equivalent to obj.file[posixpath.dirname(obj.name)].
 ValueError if this object is anonymous.</p>
@@ -283,7 +298,7 @@ ValueError if this object is anonymous.</p>
         <li class="right" >
           <a href="anyoutputfile_generator.html" title="anypytools.datautils.anyoutputfile_generator"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.h5py_wrapper</a></li> 
@@ -293,7 +308,7 @@ ValueError if this object is anonymous.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

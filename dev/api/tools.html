@@ -7,9 +7,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.tools &#8212; AnyPyTools 1.4.6 documentation</title>
-    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
+    <title>anypytools.tools &#8212; AnyPyTools 1.6.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
@@ -17,7 +17,6 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 
     
@@ -63,7 +62,7 @@
         <li class="right" >
           <a href="pytest_plugin.html" title="anypytools.pytest_plugin"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.tools</a></li> 
@@ -109,31 +108,85 @@ div.admonition.inline-title p.admonition-title {
 <p>&#64;author: Morten</p>
 <dl class="py class">
 <dt id="anypytools.tools.AnyPyProcessOutput">
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">AnyPyProcessOutput</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutput" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">AnyPyProcessOutput</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutput" title="Permalink to this definition">¶</a></dt>
 <dd><p>Subclassed OrderedDict which supports partial key access.</p>
+<dl class="py method">
+<dt id="anypytools.tools.AnyPyProcessOutput.to_dataframe">
+<code class="sig-name descname"><span class="pre">to_dataframe</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_var</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cubic'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutput.to_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutput.to_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the output to a pandas dataframe.</p>
+<div class="desc-section desc-section-1 section" id="anypytools.tools.AnyPyProcessOutput.to_dataframe-parameters">
+<h2 class="section-header">Parameters:<a class="headerlink" href="#anypytools.tools.AnyPyProcessOutput.to_dataframe-parameters" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>index_var: str</dt><dd><p>Name of the variable to use as axis 0 in the dataframe.
+If “auto” is given the system will look for variables ending with
+“Ouput.Abcsissa.t”. If ‘None’ no index variable is used an only a single
+row is returned in the dataframe.</p>
+</dd>
+<dt>interp_var: str</dt><dd><p>Name of the variable on which the data is interpolating/resampled.</p>
+</dd>
+<dt>interp_val: np.ndarray</dt><dd><p>Values to use when re-interpolating/resampling the data.</p>
+</dd>
+<dt>interp_method: str</dt><dd><p>Method to use when re-interpolating/resampling the data. Defaults to ‘cubic’.</p>
+</dd>
+</dl>
+</div>
+<div class="desc-section desc-section-1 section" id="anypytools.tools.AnyPyProcessOutput.to_dataframe-returns">
+<h2 class="section-header">Returns:<a class="headerlink" href="#anypytools.tools.AnyPyProcessOutput.to_dataframe-returns" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>df: pandas.DataFrame</dt><dd><p>Dataframe with the output data.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt id="anypytools.tools.AnyPyProcessOutputList">
-<em class="property">class </em><code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">AnyPyProcessOutputList</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutputList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">AnyPyProcessOutputList</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutputList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList" title="Permalink to this definition">¶</a></dt>
 <dd><p>List like class to wrap the output of model simulations.</p>
 <p>The class behaves as a normal list but provide
 extra function to easily access data.</p>
 <dl class="py method">
 <dt id="anypytools.tools.AnyPyProcessOutputList.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutputList.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList.filter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">filter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutputList.filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filter elements for whichfunction returns true.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="anypytools.tools.AnyPyProcessOutputList.insert">
-<code class="sig-name descname">insert</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">v</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutputList.insert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList.insert" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">insert</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutputList.insert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList.insert" title="Permalink to this definition">¶</a></dt>
 <dd><p>S.insert(index, value) – insert value before index</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="anypytools.tools.AnyPyProcessOutputList.to_dataframe">
+<code class="sig-name descname"><span class="pre">to_dataframe</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutputList.to_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList.to_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return output of all simuations as a concatenated pandas dataframe.</p>
+<div class="desc-section desc-section-1 section" id="anypytools.tools.AnyPyProcessOutputList.to_dataframe-parameters">
+<h2 class="section-header">Parameters:<a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList.to_dataframe-parameters" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>index_var: str</dt><dd><p>Name of the variable to use as axis 0 in the dataframe.
+If not given system will look for variables ending with
+“Ouput.Abcsissa.t”</p>
+</dd>
+<dt>interp_var: str</dt><dd><p>Name of the variable on which the data is interpolating/resampled.</p>
+</dd>
+<dt>interp_val: np.ndarray</dt><dd><p>Values to use when re-interpolating/resampling the data.</p>
+</dd>
+<dt>interp_method: str</dt><dd><p>Method to use when re-interpolating/resampling the data. Defaults to ‘cubic’.</p>
+</dd>
+</dl>
+</div>
+<div class="desc-section desc-section-1 section" id="anypytools.tools.AnyPyProcessOutputList.to_dataframe-returns">
+<h2 class="section-header">Returns:<a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList.to_dataframe-returns" title="Permalink to this headline">¶</a></h2>
+<p>pandas.DataFrame</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt id="anypytools.tools.AnyPyProcessOutputList.tolist">
-<code class="sig-name descname">tolist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutputList.tolist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList.tolist" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">tolist</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutputList.tolist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutputList.tolist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return as native python types (list of dicts).</p>
 </dd></dl>
 
@@ -141,31 +194,31 @@ extra function to easily access data.</p>
 
 <dl class="py function">
 <dt id="anypytools.tools.anybodycon_version">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">anybodycon_version</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">anybodyconpath</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#anybodycon_version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.anybodycon_version" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">anybodycon_version</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">anybodyconpath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#anybodycon_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.anybodycon_version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the AnyBodyCon version.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.tools.array2anyscript">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">array2anyscript</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#array2anyscript"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.array2anyscript" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">array2anyscript</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#array2anyscript"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.array2anyscript" title="Permalink to this definition">¶</a></dt>
 <dd><p>Format a numpy array as an anyscript variable.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.tools.case_preserving_replace">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">case_preserving_replace</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em>, <em class="sig-param"><span class="n">old</span></em>, <em class="sig-param"><span class="n">new</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#case_preserving_replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.case_preserving_replace" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">case_preserving_replace</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#case_preserving_replace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.case_preserving_replace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Replace string while preserving the case</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.tools.correct_dump_prefix">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">correct_dump_prefix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raw</span></em>, <em class="sig-param"><span class="n">idx</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#correct_dump_prefix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.correct_dump_prefix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">correct_dump_prefix</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#correct_dump_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.correct_dump_prefix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the correct prefix to use in the output</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.tools.find_ammr_path">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">find_ammr_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#find_ammr_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.find_ammr_path" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">find_ammr_path</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#find_ammr_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.find_ammr_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the root AMMR path if possible .</p>
 <p>The function will walk up a directory tree looking
 for a ammr_verion.any file to parse.</p>
@@ -173,7 +226,7 @@ for a ammr_verion.any file to parse.</p>
 
 <dl class="py function">
 <dt id="anypytools.tools.get_ammr_version">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">get_ammr_version</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_ammr_version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.get_ammr_version" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">get_ammr_version</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_ammr_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.get_ammr_version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the AMMR version if possible.</p>
 <p>The function will walk up a directory tree looking
 for a ammr_verion.any file to parse.</p>
@@ -181,13 +234,13 @@ for a ammr_verion.any file to parse.</p>
 
 <dl class="py function">
 <dt id="anypytools.tools.get_anybodycon_path">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">get_anybodycon_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_anybodycon_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.get_anybodycon_path" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">get_anybodycon_path</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_anybodycon_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.get_anybodycon_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the path to default AnyBody console application.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.tools.get_bm_constants">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">get_bm_constants</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ammr_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ammr_version</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_bm_constants"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.get_bm_constants" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">get_bm_constants</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ammr_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ammr_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_bm_constants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.get_bm_constants" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the BM_CONSTANT mapping.</p>
 <p>It will try to locate the mapping in the AMMR:
 Body/AAUHuman/Documentation/bm_constants.py</p>
@@ -197,19 +250,19 @@ specification to select a value.</p>
 
 <dl class="py function">
 <dt id="anypytools.tools.get_git_branch_info">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">get_git_branch_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_git_branch_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.get_git_branch_info" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">get_git_branch_info</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_git_branch_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.get_git_branch_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the branch name for git repository.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.tools.get_ncpu">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">get_ncpu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_ncpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.get_ncpu" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">get_ncpu</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_ncpu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.get_ncpu" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the number of CPUs in the computer.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.tools.getsubdirs">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">getsubdirs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">toppath</span></em>, <em class="sig-param"><span class="n">search_string</span><span class="o">=</span><span class="default_value">'.'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#getsubdirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.getsubdirs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">getsubdirs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toppath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_string</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#getsubdirs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.getsubdirs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find all directories below a given top path.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>toppath: top directory when searching for sub directories
@@ -222,7 +275,7 @@ search_string: Limit to directories matching the this regular expression</p>
 
 <dl class="py function">
 <dt id="anypytools.tools.make_hash">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">make_hash</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">o</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#make_hash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.make_hash" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">make_hash</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#make_hash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.make_hash" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a hash from a dictionary, list, tuple or set.</p>
 <p>Create the hash to any sublevel that contains
 only other hashable types (including any lists, tuples, sets, and
@@ -232,7 +285,7 @@ dictionaries).
 
 <dl class="py function">
 <dt id="anypytools.tools.parse_anybodycon_output">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">parse_anybodycon_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raw</span></em>, <em class="sig-param"><span class="n">errors_to_ignore</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">warnings_to_include</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fatal_warnings</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#parse_anybodycon_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.parse_anybodycon_output" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">parse_anybodycon_output</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors_to_ignore</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warnings_to_include</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fatal_warnings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#parse_anybodycon_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.parse_anybodycon_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse the output log file from AnyBodyConsole to
 for data, errors and warnings. If fatal_warnins is
 True, then warnings are also added to the error list.</p>
@@ -240,25 +293,25 @@ True, then warnings are also added to the error list.</p>
 
 <dl class="py function">
 <dt id="anypytools.tools.replace_bm_constants">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">replace_bm_constants</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">bm_constants</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#replace_bm_constants"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.replace_bm_constants" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">replace_bm_constants</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bm_constants</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#replace_bm_constants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.replace_bm_constants" title="Permalink to this definition">¶</a></dt>
 <dd><p>Replace BM constants with value represenation.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.tools.silentremove">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">silentremove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#silentremove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.silentremove" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">silentremove</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#silentremove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.silentremove" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove a file ignoring cases where the file does not exits.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.tools.walk_up">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">walk_up</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bottom</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#walk_up"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.walk_up" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">walk_up</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bottom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#walk_up"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.walk_up" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mimic os.walk, but walk ‘up’ instead of down the directory tree.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="anypytools.tools.wraptext">
-<code class="sig-prename descclassname">anypytools.tools.</code><code class="sig-name descname">wraptext</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elem</span></em>, <em class="sig-param"><span class="n">initial_indent</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">subsequent_indent</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#wraptext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#anypytools.tools.wraptext" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">wraptext</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsequent_indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#wraptext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.wraptext" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wraps text to fit the terminal window.</p>
 </dd></dl>
 
@@ -342,7 +395,7 @@ True, then warnings are also added to the error list.</p>
         <li class="right" >
           <a href="pytest_plugin.html" title="anypytools.pytest_plugin"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.tools</a></li> 
@@ -352,7 +405,7 @@ True, then warnings are also added to the error list.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

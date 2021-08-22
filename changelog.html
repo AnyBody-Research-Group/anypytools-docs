@@ -7,9 +7,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AnyPyTools Change Log &#8212; AnyPyTools 1.4.6 documentation</title>
-    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
+    <title>AnyPyTools Change Log &#8212; AnyPyTools 1.6.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/table_styling.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
@@ -17,7 +17,6 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 
     
@@ -59,7 +58,7 @@
         <li class="right" >
           <a href="devguide.html" title="Developer’s Guide"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">AnyPyTools Change Log</a></li> 
       </ul>
@@ -100,6 +99,52 @@ div.admonition.inline-title p.admonition-title {
 </style>
 <div class="section" id="anypytools-change-log">
 <h1>AnyPyTools Change Log<a class="headerlink" href="#anypytools-change-log" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v1-6-0">
+<h2>v1.6.0<a class="headerlink" href="#v1-6-0" title="Permalink to this headline">¶</a></h2>
+<p><strong>Changed</strong>:</p>
+<ul>
+<li><p>The <cite>to_dataframe()</cite> methods have been updated.
+They now return a dataframe without an index by default.</p>
+<p>They also now support interpolation of the data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span>  <span class="n">AnyPyProcess</span><span class="p">()</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_marco</span><span class="p">(</span><span class="n">macro_list</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span>
+  <span class="n">interp_var</span><span class="o">=</span><span class="s2">&quot;Main.MyStudy.Output.Abscissa.t&quot;</span><span class="p">,</span>
+  <span class="n">interp_val</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p><strong>Added</strong>:</p>
+<ul class="simple">
+<li><p>Documentation on how to use the <cite>to_dataframe()</cite> method has been added to the tutorials.</p></li>
+</ul>
+</div>
+<div class="section" id="v1-5-0">
+<h2>v1.5.0<a class="headerlink" href="#v1-5-0" title="Permalink to this headline">¶</a></h2>
+<p>Add methods for exporing simuation output as a pandas dataframe.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span>  <span class="n">AnyPyProcess</span><span class="p">()</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">start_marco</span><span class="p">(</span><span class="n">macro_list</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">index_var</span><span class="o">=</span><span class="s2">&quot;Main.MyStudy.Output.Abscissa.t&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The data has too be consistent across all macros. That means that the
+<cite>index_var</cite> must be present in all simulations. Also note that since
+pandas dataframes are 2D any 3D data will be flattened. For example 3D vectors
+which will be saved into three columns in the dataframe. E.g. <code class="docutils literal notranslate"><span class="pre">r[0]</span></code>, <code class="docutils literal notranslate"><span class="pre">r[1]</span></code>, <code class="docutils literal notranslate"><span class="pre">r[2]</span></code>.</p>
+</div>
+<div class="section" id="v1-4-7">
+<h2>v1.4.7<a class="headerlink" href="#v1-4-7" title="Permalink to this headline">¶</a></h2>
+<p>Ensure that ‘nan’ values returned from AnyBody are treated as “float(‘nan’)” when returned to Python.</p>
+</div>
+<div class="section" id="v1-4-6">
+<h2>v1.4.6<a class="headerlink" href="#v1-4-6" title="Permalink to this headline">¶</a></h2>
+<p>Fixed a bug when using explicit logfile arguments to <code class="docutils literal notranslate"><span class="pre">start_macro</span></code> did not work with the
+<code class="docutils literal notranslate"><span class="pre">search_subdirs</span></code> argument.</p>
+</div>
 <div class="section" id="v1-4-5">
 <h2>v1.4.5<a class="headerlink" href="#v1-4-5" title="Permalink to this headline">¶</a></h2>
 <p>Fixed a small issue with using AnyPyTools with pytest 6.0.0rc1</p>
@@ -130,13 +175,11 @@ happend because empty folders (represented by “…”) would become the python
 </div>
 <div class="section" id="v1-4-0">
 <h2>v1.4.0<a class="headerlink" href="#v1-4-0" title="Permalink to this headline">¶</a></h2>
-<p><strong>Changed:</strong>
-- Progressbars are now draw using <a class="reference external" href="https://github.com/tqdm/tqdm">tqdm</a>. This enables error</p>
-<blockquote>
-<div><p>messages while the progress bar is rendering, and solves a problem with detecting when the
-code is running in Jupyter notebook and not.</p>
-</div></blockquote>
+<p><strong>Changed:</strong></p>
 <ul class="simple">
+<li><p>Progressbars are now draw using <a class="reference external" href="https://github.com/tqdm/tqdm">tqdm</a>. This enables error
+messages while the progress bar is rendering, and solves a problem with detecting when the
+code is running in Jupyter notebook and not.</p></li>
 <li><p>Running the pytest plugin with the <code class="docutils literal notranslate"><span class="pre">--anytest-save</span></code> argument now deselects
 all tests which doesn’t save data to HDF 5 files.</p></li>
 <li><p>New option for running the GUI version of AMS with AnyPyTools instead of the console.</p></li>
@@ -148,17 +191,17 @@ always include in the output.</p></li>
 </div>
 <div class="section" id="v1-3-0">
 <h2>v1.3.0<a class="headerlink" href="#v1-3-0" title="Permalink to this headline">¶</a></h2>
-<p><strong>Changed:</strong>
-- Changed the interface for the pytest plugin when saving hdf5 files from anybody tests.</p>
+<p><strong>Changed:</strong></p>
+<ul class="simple">
+<li><p>Changed the interface for the pytest plugin when saving hdf5 files from anybody tests.</p></li>
+</ul>
 </div>
 <div class="section" id="v1-2-2">
 <h2>v1.2.2<a class="headerlink" href="#v1-2-2" title="Permalink to this headline">¶</a></h2>
-<p><strong>Fixed:</strong>
-- Fixed problem with Ctrl-C events not working. <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> used</p>
-<blockquote>
-<div><p>some fortran routines which hijacked the key event and caused a crash instead.</p>
-</div></blockquote>
+<p><strong>Fixed:</strong></p>
 <ul class="simple">
+<li><p>Fixed problem with Ctrl-C events not working. <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> used
+some fortran routines which hijacked the key event and caused a crash instead.</p></li>
 <li><p>Fixed an issue with process time not being reported correctly.</p></li>
 <li><p>Fixed an issue with macros which were a mixture of normal strings and macro-command helper
 classes from <code class="docutils literal notranslate"><span class="pre">anypytools.macro_commands</span></code>.</p></li>
@@ -166,20 +209,20 @@ classes from <code class="docutils literal notranslate"><span class="pre">anypyt
 </div>
 <div class="section" id="v1-2-1">
 <h2>v1.2.1<a class="headerlink" href="#v1-2-1" title="Permalink to this headline">¶</a></h2>
-<p><strong>Fixed:</strong>
-- Add a work-around for a bug in AnyBody &lt; 7.2.2 which cause the AnyBody console</p>
-<blockquote>
-<div><p>to start in interactive mode when launched from AnyPyTools. This could cause the
-console application to hang if something fails in AnyBody.</p>
-</div></blockquote>
+<p><strong>Fixed:</strong></p>
+<ul class="simple">
+<li><p>Add a work-around for a bug in AnyBody &lt; 7.2.2 which cause the AnyBody console
+to start in interactive mode when launched from AnyPyTools. This could cause the
+console application to hang if something fails in AnyBody.</p></li>
+</ul>
 </div>
 <div class="section" id="v1-2-0">
 <h2>v1.2.0<a class="headerlink" href="#v1-2-0" title="Permalink to this headline">¶</a></h2>
-<p><strong>Added:</strong>
-- Pytest plugin: Option to set the <code class="docutils literal notranslate"><span class="pre">faltal_warnings</span></code> variable as a list</p>
-<blockquote>
-<div><p>to select the warnings which should trigger an error.</p>
-</div></blockquote>
+<p><strong>Added:</strong></p>
+<ul class="simple">
+<li><p>Pytest plugin: Option to set the <code class="docutils literal notranslate"><span class="pre">faltal_warnings</span></code> variable as a list
+to select the warnings which should trigger an error.</p></li>
+</ul>
 <p><strong>Removed:</strong></p>
 <ul class="simple">
 <li><p>Pytest plugin: Deprecated the <code class="docutils literal notranslate"><span class="pre">warnings_to_include</span></code> variable. Instead use the <cite>fatal_warnings</cite>
@@ -563,6 +606,10 @@ that in the log files.</p></li>
     <h3><a href="index.html">Page contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">AnyPyTools Change Log</a><ul>
+<li><a class="reference internal" href="#v1-6-0">v1.6.0</a></li>
+<li><a class="reference internal" href="#v1-5-0">v1.5.0</a></li>
+<li><a class="reference internal" href="#v1-4-7">v1.4.7</a></li>
+<li><a class="reference internal" href="#v1-4-6">v1.4.6</a></li>
 <li><a class="reference internal" href="#v1-4-5">v1.4.5</a></li>
 <li><a class="reference internal" href="#v1-4-4">v1.4.4</a></li>
 <li><a class="reference internal" href="#v1-4-3">v1.4.3</a></li>
@@ -676,7 +723,7 @@ that in the log files.</p></li>
         <li class="right" >
           <a href="devguide.html" title="Developer’s Guide"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 1.4.6 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 1.6.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">AnyPyTools Change Log</a></li> 
       </ul>
@@ -685,7 +732,7 @@ that in the log files.</p></li>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Morten Enemark Lund.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
