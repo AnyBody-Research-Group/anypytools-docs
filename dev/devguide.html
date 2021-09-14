@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Developer’s Guide &#8212; AnyPyTools 1.7.1 documentation</title>
+    <title>Developer’s Guide &#8212; AnyPyTools 1.7.2 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/table_styling.css" />
@@ -18,6 +18,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
 
     
     
@@ -62,7 +63,7 @@
         <li class="right" >
           <a href="pytest_plugin.html" title="PyTest plugin."
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 1.7.1 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 1.7.2 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">Developer’s Guide</a></li> 
       </ul>
@@ -101,9 +102,12 @@ div.admonition.inline-title p.admonition-title {
     padding-left: .2em;
 }
 </style>
-<div class="section" id="developer-s-guide">
-<h1>Developer’s Guide<a class="headerlink" href="#developer-s-guide" title="Permalink to this headline">¶</a></h1>
-<a class="reference internal image-reference" href="_images/relax.png"><img alt="Don't panic" class="align-center" src="_images/relax.png" style="width: 80%;" /></a>
+<div class="tex2jax_ignore mathjax_ignore section" id="developer-s-guide">
+<span id="devguide"></span><h1>Developer’s Guide<a class="headerlink" href="#developer-s-guide" title="Permalink to this headline">¶</a></h1>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="_images/relax.png"><img alt="don't panic" src="_images/relax.png" style="width: 80%;" /></a>
+<p class="caption"><span class="caption-text">Don’t panic</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
 <p>This is place for developer information that does not belong in the user
 guides or the API reference, but is useful for people developing or contributing
 to AnyPyTools.</p>
@@ -203,7 +207,7 @@ tree).</p>
 <div class="section" id="building-the-website">
 <h2>Building the Website<a class="headerlink" href="#building-the-website" title="Permalink to this headline">¶</a></h2>
 <p>Building the website/documentation requires the following dependencies:</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p><a class="reference external" href="http://sphinx-doc.org/">Sphinx</a></p></li>
 <li><p><a class="reference external" href="https://pythonhosted.org/cloud_sptheme/cloud_theme.html">Cloud Sphinx Theme</a></p></li>
 <li><p><a class="reference external" href="https://recommonmark.readthedocs.io/en/latest/">recommonmark</a></p></li>
@@ -253,14 +257,14 @@ $ rm -fr build
 <div class="section" id="performing-the-release">
 <h3>Performing the Release<a class="headerlink" href="#performing-the-release" title="Permalink to this headline">¶</a></h3>
 <blockquote>
-<div><ol class="arabic simple">
+<div><ol class="simple">
 <li><p>Update and push the release log</p></li>
 <li><p>Update version number in <code class="docutils literal notranslate"><span class="pre">anypytools.__init__.py</span></code></p></li>
 <li><p>Ensure test pass</p></li>
 <li><p>Make PR on GitHub, and check docs compile correctly on Github Actions</p></li>
 <li><p>Create a tag with the version number and push it.</p></li>
-<li><dl class="simple">
-<dt>Crate PYPI pckage</dt><dd><ol class="loweralpha simple">
+<li><dl class="simple myst">
+<dt>Crate PYPI pckage</dt><dd><ol class="simple">
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">sdist</span></code></p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">twine</span> <span class="pre">upload</span> <span class="pre">dist/*</span></code></p></li>
 </ol>
@@ -337,7 +341,7 @@ $ rm -fr build
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/devguide.rst.txt"
+      <li><a href="_sources/devguide.md.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -392,7 +396,7 @@ $ rm -fr build
         <li class="right" >
           <a href="pytest_plugin.html" title="PyTest plugin."
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 1.7.1 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 1.7.2 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">Developer’s Guide</a></li> 
       </ul>
@@ -400,7 +404,7 @@ $ rm -fr build
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017, Morten Enemark Lund.
+        &#169; Copyright 2021, Morten Enemark Lund.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.4.
     </div>
     <!-- cloud_sptheme 1.4 -->
