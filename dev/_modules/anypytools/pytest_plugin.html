@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.7.3 documentation</title>
+    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.7.4 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.7.3 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.7.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 
@@ -93,7 +93,7 @@
 <span class="kn">import</span> <span class="nn">pytest</span>
 
 
-<span class="kn">from</span> <span class="nn">pytest</span> <span class="kn">import</span> <span class="n">TempdirFactory</span><span class="p">,</span> <span class="n">TempPathFactory</span>
+<span class="kn">from</span> <span class="nn">pytest</span> <span class="kn">import</span> <span class="n">TempPathFactory</span>
 
 <span class="kn">from</span> <span class="nn">anypytools</span> <span class="kn">import</span> <span class="n">AnyPyProcess</span><span class="p">,</span> <span class="n">macro_commands</span>
 <span class="kn">from</span> <span class="nn">anypytools.tools</span> <span class="kn">import</span> <span class="p">(</span>
@@ -422,8 +422,8 @@
 <div class="viewcode-block" id="AnyTestItem.runtest"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestItem.runtest">[docs]</a>    <span class="k">def</span> <span class="nf">runtest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run an AnyScript test item.&quot;&quot;&quot;</span>
 
-        <span class="n">tmpdir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
-            <span class="n">TempdirFactory</span><span class="p">(</span><span class="n">TempPathFactory</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">))</span><span class="o">.</span><span class="n">mktemp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">tmpdir</span> <span class="o">=</span> <span class="n">TempPathFactory</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">_ispytest</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mktemp</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         <span class="p">)</span>
 
         <span class="k">with</span> <span class="n">change_dir</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">):</span>
@@ -678,7 +678,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.7.3 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.7.4 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 
