@@ -311,7 +311,7 @@
                 <span class="nb">str</span><span class="p">(</span><span class="n">debug_mode</span><span class="p">),</span>
                 <span class="s2">&quot;/ni&quot;</span><span class="p">,</span>
             <span class="p">]</span>
-            <span class="n">proc</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">folder</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">logfile</span><span class="p">)</span>
+            <span class="n">proc</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">folder</span><span class="p">,</span> <span class="n">close_fds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">logfile</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># ON Linux/Wine we use a bat file to redirect the output into a file on wine/windows</span>
             <span class="c1"># side. This prevents a bug with AnyBody starts it&#39;s builtin python.</span>
