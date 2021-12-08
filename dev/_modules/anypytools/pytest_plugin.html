@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.7.5 documentation</title>
+    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.7.6 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.7.5 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.7.6 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 
@@ -429,7 +429,9 @@
         <span class="k">with</span> <span class="n">change_dir</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">AnyPyProcess</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">app_opts</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">ON_WINDOWS</span><span class="p">:</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">macro</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">start_macro</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">macro</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.txt&quot;</span><span class="p">)</span>
+                <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># Disable caputure on linux due to a bug when AMS lauches it own python</span>
                 <span class="n">capmanager</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">pluginmanager</span><span class="o">.</span><span class="n">getplugin</span><span class="p">(</span><span class="s2">&quot;capturemanager&quot;</span><span class="p">)</span>
@@ -478,14 +480,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">save_output_files</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hdf5_outputs</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--create-macros&quot;</span><span class="p">):</span>
-            <span class="n">logfile</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;task_logfile&quot;</span><span class="p">]</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">logfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fspath</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.txt&quot;</span><span class="p">))</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span>
-                <span class="n">logfile</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.anymcr&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">fspath</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.anymcr&quot;</span><span class="p">)</span>
-            <span class="p">)</span>
-            <span class="n">macro_name</span> <span class="o">=</span> <span class="n">_write_macro_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">dirname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">macro</span><span class="p">)</span>
+            <span class="n">logfile</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;task_logfile&quot;</span><span class="p">])</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">logfile</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">logfile</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.anymcr&quot;</span><span class="p">),</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
 
-        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># shutil.rmtree(tmpdir, ignore_errors=True)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">AnyException</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -678,7 +677,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.7.5 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.7.6 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 
