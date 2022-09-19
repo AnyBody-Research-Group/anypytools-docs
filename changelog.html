@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AnyPyTools Change Log &#8212; AnyPyTools 1.7.8 documentation</title>
+    <title>AnyPyTools Change Log &#8212; AnyPyTools 1.8.1 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/table_styling.css" />
@@ -18,7 +18,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
 
     
     
@@ -59,7 +59,7 @@
         <li class="right" >
           <a href="devguide.html" title="Developer’s Guide"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">AnyPyTools Change Log</a></li> 
       </ul>
@@ -100,6 +100,36 @@ div.admonition.inline-title p.admonition-title {
 </style>
 <div class="tex2jax_ignore mathjax_ignore section" id="anypytools-change-log">
 <span id="changelog"></span><h1>AnyPyTools Change Log<a class="headerlink" href="#anypytools-change-log" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v1-8-1">
+<h2>v1.8.1<a class="headerlink" href="#v1-8-1" title="Permalink to this headline">¶</a></h2>
+<p><strong>Added:</strong></p>
+<ul>
+<li><p>pytest plugin: Added an option to avoid deselecting tests which doesn’t
+save hdf5 files when using the <code class="docutils literal notranslate"><span class="pre">--anytest-output</span></code> option.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="o">--</span><span class="n">anytest</span><span class="o">-</span><span class="n">output</span><span class="o">=</span><span class="n">some</span><span class="o">-</span><span class="n">folder</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">anytest</span><span class="o">-</span><span class="n">deselect</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="v1-8">
+<h2>v1.8<a class="headerlink" href="#v1-8" title="Permalink to this headline">¶</a></h2>
+<p><strong>Fixed:</strong></p>
+<ul class="simple">
+<li><p>Fixed deprecation warning from the pytest plugin</p></li>
+</ul>
+<p><strong>Added:</strong></p>
+<ul class="simple">
+<li><p>When writting AnyScript test files it is now possible to access the
+pytest test-file object in the header section of the AnyScript file.
+The file object is available in the name space as the <code class="docutils literal notranslate"><span class="pre">self</span></code> variable.</p></li>
+</ul>
+<p><strong>Removed:</strong></p>
+<ul class="simple">
+<li><p>Removed the option of implicitly writting <code class="docutils literal notranslate"><span class="pre">defines</span></code> in the headers
+of any test files.</p></li>
+</ul>
+</div>
 <div class="section" id="v1-7-8">
 <h2>v1.7.8<a class="headerlink" href="#v1-7-8" title="Permalink to this headline">¶</a></h2>
 <p><strong>Fixed:</strong></p>
@@ -682,6 +712,8 @@ that in the log files.</p></li>
     <h3><a href="index.html">Page contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">AnyPyTools Change Log</a><ul>
+<li><a class="reference internal" href="#v1-8-1">v1.8.1</a></li>
+<li><a class="reference internal" href="#v1-8">v1.8</a></li>
 <li><a class="reference internal" href="#v1-7-8">v1.7.8</a></li>
 <li><a class="reference internal" href="#v1-7-7">v1.7.7</a></li>
 <li><a class="reference internal" href="#v1-7-6">v1.7.6</a></li>
@@ -809,7 +841,7 @@ that in the log files.</p></li>
         <li class="right" >
           <a href="devguide.html" title="Developer’s Guide"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">AnyPyTools Change Log</a></li> 
       </ul>

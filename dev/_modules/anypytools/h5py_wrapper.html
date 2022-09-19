@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.h5py_wrapper &#8212; AnyPyTools 1.7.8 documentation</title>
+    <title>anypytools.h5py_wrapper &#8212; AnyPyTools 1.8.1 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
@@ -18,7 +18,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
 
     
     
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.h5py_wrapper</a></li> 
@@ -127,7 +127,8 @@
                     <span class="n">elem</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">try</span><span class="p">:</span>
-                        <span class="n">elem</span> <span class="o">=</span> <span class="n">_follow_reftarget</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="s2">&quot;RefTarget&quot;</span> <span class="ow">in</span> <span class="n">elem</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
+                            <span class="n">elem</span> <span class="o">=</span> <span class="n">_follow_reftarget</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
                         <span class="n">elem</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
                     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;Entry not found: &quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">)</span>
@@ -137,6 +138,14 @@
             <span class="k">return</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">File</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<div class="viewcode-block" id="File.get"><a class="viewcode-back" href="../../api/h5py_wrapper.html#anypytools.h5py_wrapper.File.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span>
+            <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa</span>
@@ -158,7 +167,12 @@
                 <span class="k">return</span> <span class="kc">True</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                 <span class="k">pass</span>
-        <span class="k">return</span> <span class="kc">False</span></div>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="File.resolve_anyreference"><a class="viewcode-back" href="../../api/h5py_wrapper.html#anypytools.h5py_wrapper.File.resolve_anyreference">[docs]</a>    <span class="k">def</span> <span class="nf">resolve_anyreference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Resolve anyreference in the file.&quot;&quot;&quot;</span>
+        <span class="n">elem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">elem</span><span class="o">.</span><span class="n">id</span></div></div>
 
 
 <div class="viewcode-block" id="Group"><a class="viewcode-back" href="../../api/h5py_wrapper.html#anypytools.h5py_wrapper.Group">[docs]</a><span class="k">class</span> <span class="nc">Group</span><span class="p">(</span><span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="p">):</span>  <span class="c1"># noqa</span>
@@ -184,7 +198,8 @@
                     <span class="n">elem</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">try</span><span class="p">:</span>
-                        <span class="n">elem</span> <span class="o">=</span> <span class="n">_follow_reftarget</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="s2">&quot;RefTarget&quot;</span> <span class="ow">in</span> <span class="n">elem</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
+                            <span class="n">elem</span> <span class="o">=</span> <span class="n">_follow_reftarget</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
                         <span class="n">elem</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
                     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                         <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;Entry not found: &quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">)</span>
@@ -194,6 +209,14 @@
             <span class="k">return</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">File</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Group.get"><a class="viewcode-back" href="../../api/h5py_wrapper.html#anypytools.h5py_wrapper.Group.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span>
+            <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa</span>
@@ -290,7 +313,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.h5py_wrapper</a></li> 

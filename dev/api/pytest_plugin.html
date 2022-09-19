@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.7.8 documentation</title>
+    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.8.1 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
@@ -18,7 +18,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
 
     
     
@@ -63,7 +63,7 @@
         <li class="right" >
           <a href="macroutils.html" title="anypytools.macroutils"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 
@@ -126,12 +126,16 @@ div.admonition.inline-title p.admonition-title {
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestFile.config">
 <code class="sig-name descname"><span class="pre">config</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.config" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The pytest config object.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestFile.fspath">
-<code class="sig-name descname"><span class="pre">fspath</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.fspath" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filesystem path where this node was collected from (can be None).</p>
+<code class="sig-name descname"><span class="pre">fspath</span></code><em class="property"><span class="pre">:</span> <span class="pre">py._path.local.LocalPath</span></em><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.fspath" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">LEGACY_PATH</span></code> copy of the <a class="reference internal" href="#anypytools.pytest_plugin.AnyTestFile.path" title="anypytools.pytest_plugin.AnyTestFile.path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">path</span></code></a> attribute. Intended for usage
+for methods not migrated to <code class="docutils literal notranslate"><span class="pre">pathlib.Path</span></code> yet, such as
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">Item.reportinfo()</span></code>. Will be deprecated in a future release, prefer
+using <a class="reference internal" href="#anypytools.pytest_plugin.AnyTestFile.path" title="anypytools.pytest_plugin.AnyTestFile.path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">path</span></code></a> instead.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -147,9 +151,16 @@ div.admonition.inline-title p.admonition-title {
 </dd></dl>
 
 <dl class="py attribute">
+<dt id="anypytools.pytest_plugin.AnyTestFile.path">
+<code class="sig-name descname"><span class="pre">path</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filesystem path where this node was collected from (can be None).</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestFile.session">
 <code class="sig-name descname"><span class="pre">session</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestFile.session" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The pytest session this node is part of.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -160,7 +171,18 @@ div.admonition.inline-title p.admonition-title {
 <dl class="py method">
 <dt id="anypytools.pytest_plugin.AnyTestItem.reportinfo">
 <code class="sig-name descname"><span class="pre">reportinfo</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#AnyTestItem.reportinfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.reportinfo" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get location information for this item for test reports.</p>
+<p>Returns a tuple with three elements:</p>
+<ul class="simple">
+<li><p>The path of the test (default <code class="docutils literal notranslate"><span class="pre">self.path</span></code>)</p></li>
+<li><p>The line number of the test (default <code class="docutils literal notranslate"><span class="pre">None</span></code>)</p></li>
+<li><p>A name of the test to be shown (default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>)</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><span class="xref std std-ref">non-python tests</span></p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="anypytools.pytest_plugin.AnyTestItem.repr_failure">
@@ -184,12 +206,16 @@ and copy it to the target_folder</p>
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestItem.config">
 <code class="sig-name descname"><span class="pre">config</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.config" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The pytest config object.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestItem.fspath">
-<code class="sig-name descname"><span class="pre">fspath</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.fspath" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filesystem path where this node was collected from (can be None).</p>
+<code class="sig-name descname"><span class="pre">fspath</span></code><em class="property"><span class="pre">:</span> <span class="pre">py._path.local.LocalPath</span></em><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.fspath" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">LEGACY_PATH</span></code> copy of the <a class="reference internal" href="#anypytools.pytest_plugin.AnyTestItem.path" title="anypytools.pytest_plugin.AnyTestItem.path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">path</span></code></a> attribute. Intended for usage
+for methods not migrated to <code class="docutils literal notranslate"><span class="pre">pathlib.Path</span></code> yet, such as
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">Item.reportinfo()</span></code>. Will be deprecated in a future release, prefer
+using <a class="reference internal" href="#anypytools.pytest_plugin.AnyTestItem.path" title="anypytools.pytest_plugin.AnyTestItem.path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">path</span></code></a> instead.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -205,9 +231,16 @@ and copy it to the target_folder</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt id="anypytools.pytest_plugin.AnyTestItem.path">
+<code class="sig-name descname"><span class="pre">path</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filesystem path where this node was collected from (can be None).</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt id="anypytools.pytest_plugin.AnyTestItem.session">
 <code class="sig-name descname"><span class="pre">session</span></code><a class="headerlink" href="#anypytools.pytest_plugin.AnyTestItem.session" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The pytest session this node is part of.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -276,6 +309,11 @@ early in the pytest startup.</p>
 <code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">pytest_configure</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#pytest_configure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.pytest_configure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Configure the AnyTest framework.</p>
 </dd></dl>
+
+<dl class="py function">
+<dt id="anypytools.pytest_plugin.split_string_eq_1">
+<code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">split_string_eq_1</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/pytest_plugin.html#split_string_eq_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.pytest_plugin.split_string_eq_1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 
@@ -357,7 +395,7 @@ early in the pytest startup.</p>
         <li class="right" >
           <a href="macroutils.html" title="anypytools.macroutils"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 

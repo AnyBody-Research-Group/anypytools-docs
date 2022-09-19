@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.h5py_wrapper &#8212; AnyPyTools 1.7.8 documentation</title>
+    <title>anypytools.h5py_wrapper &#8212; AnyPyTools 1.8.1 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
@@ -18,7 +18,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
 
     
     
@@ -63,7 +63,7 @@
         <li class="right" >
           <a href="anyoutputfile_generator.html" title="anypytools.datautils.anyoutputfile_generator"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.h5py_wrapper</a></li> 
@@ -125,7 +125,7 @@ w- or x  Create file, fail if exists
 a        Read/write if exists, create otherwise</p>
 </dd>
 <dt>driver</dt><dd><p>Name of the driver to use.  Legal values are None (default,
-recommended), ‘core’, ‘sec2’, ‘stdio’, ‘mpio’, ‘ros3’.</p>
+recommended), ‘core’, ‘sec2’, ‘direct’, ‘stdio’, ‘mpio’, ‘ros3’.</p>
 </dd>
 <dt>libver</dt><dd><p>Library version bounds.  Supported values: ‘earliest’, ‘v108’,
 ‘v110’, ‘v112’  and ‘latest’. The ‘v108’, ‘v110’ and ‘v112’
@@ -204,9 +204,49 @@ Warning: The HDF5_USE_FILE_LOCKING environment variable can override
 this parameter.
 Only available with HDF5 &gt;= 1.12.1 or 1.10.x &gt;= 1.10.7.</p>
 </dd>
+<dt>alignment_threshold</dt><dd><p>Together with <code class="docutils literal notranslate"><span class="pre">alignment_interval</span></code>, this property ensures that
+any file object greater than or equal in size to the alignement
+threshold (in bytes) will be aligned on an address which is a
+multiple of alignment interval.</p>
+</dd>
+<dt>alignment_interval</dt><dd><p>This property should be used in conjunction with
+<code class="docutils literal notranslate"><span class="pre">alignment_threshold</span></code>. See the description above. For more
+details, see
+<a class="reference external" href="https://portal.hdfgroup.org/display/HDF5/H5P_SET_ALIGNMENT">https://portal.hdfgroup.org/display/HDF5/H5P_SET_ALIGNMENT</a></p>
+</dd>
 <dt>Additional keywords</dt><dd><p>Passed on to the selected file driver.</p>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="anypytools.h5py_wrapper.File.get">
+<code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#File.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.h5py_wrapper.File.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve an item or other information.</p>
+<dl class="simple">
+<dt>“name” given only:</dt><dd><p>Return the item, or “default” if it doesn’t exist</p>
+</dd>
+<dt>“getclass” is True:</dt><dd><p>Return the class of object (Group, Dataset, etc.), or “default”
+if nothing with that name exists</p>
+</dd>
+<dt>“getlink” is True:</dt><dd><p>Return HardLink, SoftLink or ExternalLink instances.  Return
+“default” if nothing with that name exists.</p>
+</dd>
+<dt>“getlink” and “getclass” are True:</dt><dd><p>Return HardLink, SoftLink and ExternalLink classes.  Return
+“default” if nothing with that name exists.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">cls</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">getclass</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="bp">cls</span> <span class="o">==</span> <span class="n">SoftLink</span><span class="p">:</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="anypytools.h5py_wrapper.File.resolve_anyreference">
+<code class="sig-name descname"><span class="pre">resolve_anyreference</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#File.resolve_anyreference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.h5py_wrapper.File.resolve_anyreference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolve anyreference in the file.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt id="anypytools.h5py_wrapper.File.file">
 <em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">file</span></code><a class="headerlink" href="#anypytools.h5py_wrapper.File.file" title="Permalink to this definition">¶</a></dt>
@@ -228,6 +268,30 @@ ValueError if this object is anonymous.</p>
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.h5py_wrapper.</span></code><code class="sig-name descname"><span class="pre">Group</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#Group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.h5py_wrapper.Group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents an HDF5 group.</p>
 <p>Create a new Group object by binding to a low-level GroupID.</p>
+<dl class="py method">
+<dt id="anypytools.h5py_wrapper.Group.get">
+<code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/h5py_wrapper.html#Group.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.h5py_wrapper.Group.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve an item or other information.</p>
+<dl class="simple">
+<dt>“name” given only:</dt><dd><p>Return the item, or “default” if it doesn’t exist</p>
+</dd>
+<dt>“getclass” is True:</dt><dd><p>Return the class of object (Group, Dataset, etc.), or “default”
+if nothing with that name exists</p>
+</dd>
+<dt>“getlink” is True:</dt><dd><p>Return HardLink, SoftLink or ExternalLink instances.  Return
+“default” if nothing with that name exists.</p>
+</dd>
+<dt>“getlink” and “getclass” are True:</dt><dd><p>Return HardLink, SoftLink and ExternalLink classes.  Return
+“default” if nothing with that name exists.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">cls</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">getclass</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="bp">cls</span> <span class="o">==</span> <span class="n">SoftLink</span><span class="p">:</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="py method">
 <dt id="anypytools.h5py_wrapper.Group.file">
 <em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">file</span></code><a class="headerlink" href="#anypytools.h5py_wrapper.Group.file" title="Permalink to this definition">¶</a></dt>
@@ -324,7 +388,7 @@ ValueError if this object is anonymous.</p>
         <li class="right" >
           <a href="anyoutputfile_generator.html" title="anypytools.datautils.anyoutputfile_generator"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.h5py_wrapper</a></li> 

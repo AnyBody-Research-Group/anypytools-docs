@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.7.8 documentation</title>
+    <title>anypytools.pytest_plugin &#8212; AnyPyTools 1.8.1 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
@@ -18,7 +18,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
 
     
     
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 
@@ -109,8 +109,6 @@
     <span class="n">wraptext</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">PYTEST_PRE_54</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">pytest</span><span class="o">.</span><span class="n">__version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]))</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-
 
 <div class="viewcode-block" id="cwd"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.cwd">[docs]</a><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">cwd</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
@@ -120,6 +118,9 @@
         <span class="k">yield</span>
     <span class="k">finally</span><span class="p">:</span>
         <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">oldpwd</span><span class="p">)</span></div>
+
+
+<span class="n">DEFAULT_ANYTEST_OUTPUT</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;anytest-output&quot;</span>
 
 
 <div class="viewcode-block" id="AnyTestSession"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestSession">[docs]</a><span class="k">class</span> <span class="nc">AnyTestSession</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -141,7 +142,7 @@
 <span class="sd">        early in the pytest startup.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">ammr_path</span> <span class="o">=</span> <span class="n">find_ammr_path</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--ammr&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">config</span><span class="o">.</span><span class="n">rootdir</span><span class="o">.</span><span class="n">strpath</span><span class="p">)</span>
+        <span class="n">ammr_path</span> <span class="o">=</span> <span class="n">find_ammr_path</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--ammr&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">config</span><span class="o">.</span><span class="n">rootdir</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ammr_version</span> <span class="o">=</span> <span class="n">get_ammr_version</span><span class="p">(</span><span class="n">ammr_path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ams_path</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anybodycon&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">get_anybodycon_path</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ams_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ams_path</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ams_path</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
@@ -196,11 +197,9 @@
 
 <div class="viewcode-block" id="pytest_collect_file"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.pytest_collect_file">[docs]</a><span class="k">def</span> <span class="nf">pytest_collect_file</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Collect AnyScript test files.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;.any&quot;</span> <span class="ow">and</span> <span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;test_&quot;</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">PYTEST_PRE_54</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">AnyTestFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">AnyTestFile</span><span class="o">.</span><span class="n">from_parent</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">fspath</span><span class="o">=</span><span class="n">path</span><span class="p">)</span></div>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;.any&quot;</span> <span class="ow">and</span> <span class="n">path</span><span class="o">.</span><span class="n">stem</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;test_&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">AnyTestFile</span><span class="o">.</span><span class="n">from_parent</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">_format_switches</span><span class="p">(</span><span class="n">defs</span><span class="p">):</span>
@@ -223,6 +222,7 @@
 <span class="k">def</span> <span class="nf">_as_absolute_paths</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()):</span>
     <span class="kn">import</span> <span class="nn">ntpath</span> <span class="k">as</span> <span class="nn">os_path</span>
 
+    <span class="n">start</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
     <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">start</span> <span class="k">if</span> <span class="n">ON_WINDOWS</span> <span class="k">else</span> <span class="n">winepath</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="s2">&quot;-w&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -246,17 +246,14 @@
 <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_parse_header</span><span class="p">(</span><span class="n">header</span><span class="p">):</span>
-    <span class="n">ns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">_parse_header</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">test_file</span><span class="p">):</span>
+    <span class="n">ns</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="n">test_file</span><span class="p">}</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">exec</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="n">ns</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">SyntaxError</span><span class="p">:</span>
         <span class="k">pass</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">ns</span><span class="p">[</span><span class="s2">&quot;define&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">SyntaxError</span><span class="p">:</span>
-            <span class="k">pass</span>
+    <span class="c1"># Remove test-file object from namespace since it should not be passed on</span>
+    <span class="n">ns</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;self&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">types</span> <span class="ow">in</span> <span class="n">HEADER_ENSURES</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">ns</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ns</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">types</span><span class="p">):</span>
             <span class="n">typestr</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">types</span><span class="p">])</span>
@@ -301,7 +298,10 @@
 <div class="viewcode-block" id="pytest_collection_modifyitems"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.pytest_collection_modifyitems">[docs]</a><span class="k">def</span> <span class="nf">pytest_collection_modifyitems</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
     <span class="n">selected_items</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">deselected_items</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-output&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-deselect&quot;</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-output&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="p">):</span>
         <span class="c1"># Deselect all test items which doesn&#39;t save data.</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">&quot;hdf5_outputs&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
@@ -317,9 +317,10 @@
 
 <div class="viewcode-block" id="AnyTestFile.collect"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestFile.collect">[docs]</a>    <span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Yield test cases from a AnyScript test file.&quot;&quot;&quot;</span>
+
         <span class="c1"># Collect define statements from the header</span>
-        <span class="n">strheader</span> <span class="o">=</span> <span class="n">_read_header</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">strpath</span><span class="p">)</span>
-        <span class="n">header</span> <span class="o">=</span> <span class="n">_parse_header</span><span class="p">(</span><span class="n">strheader</span><span class="p">)</span>
+        <span class="n">strheader</span> <span class="o">=</span> <span class="n">_read_header</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">_parse_header</span><span class="p">(</span><span class="n">strheader</span><span class="p">,</span> <span class="n">test_file</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">def_list</span> <span class="o">=</span> <span class="n">_format_switches</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;define&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
         <span class="n">def_list</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">replace_bm_constants</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">bm_constants_map</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">def_list</span>
@@ -327,26 +328,16 @@
         <span class="n">path_list</span> <span class="o">=</span> <span class="n">_format_switches</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
         <span class="n">combinations</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">def_list</span><span class="p">,</span> <span class="n">path_list</span><span class="p">)</span>
         <span class="c1"># Run though the defines an create a test case for each</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">defs</span><span class="p">,</span> <span class="n">paths</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">combinations</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">defs</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">PYTEST_PRE_54</span><span class="p">:</span>
-                    <span class="k">yield</span> <span class="n">AnyTestItem</span><span class="p">(</span>
-                        <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">basename</span><span class="p">,</span>
-                        <span class="nb">id</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
-                        <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
-                        <span class="n">defs</span><span class="o">=</span><span class="n">defs</span><span class="p">,</span>
-                        <span class="n">paths</span><span class="o">=</span><span class="n">paths</span><span class="p">,</span>
-                        <span class="o">**</span><span class="n">header</span><span class="p">,</span>
-                    <span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">yield</span> <span class="n">AnyTestItem</span><span class="o">.</span><span class="n">from_parent</span><span class="p">(</span>
-                        <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">basename</span><span class="p">,</span>
-                        <span class="nb">id</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
-                        <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
-                        <span class="n">defs</span><span class="o">=</span><span class="n">defs</span><span class="p">,</span>
-                        <span class="n">paths</span><span class="o">=</span><span class="n">paths</span><span class="p">,</span>
-                        <span class="o">**</span><span class="n">header</span><span class="p">,</span>
-                    <span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">any_defs</span><span class="p">,</span> <span class="n">any_paths</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">combinations</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">any_defs</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">any_paths</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="n">AnyTestItem</span><span class="o">.</span><span class="n">from_parent</span><span class="p">(</span>
+                    <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">stem</span><span class="p">,</span>
+                    <span class="nb">id</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+                    <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">any_defs</span><span class="o">=</span><span class="n">any_defs</span><span class="p">,</span>
+                    <span class="n">any_paths</span><span class="o">=</span><span class="n">any_paths</span><span class="p">,</span>
+                    <span class="o">**</span><span class="n">header</span><span class="p">,</span>
+                <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Malformed input: &quot;</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span></div></div>
 
@@ -354,17 +345,17 @@
 <div class="viewcode-block" id="AnyTestItem"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestItem">[docs]</a><span class="k">class</span> <span class="nc">AnyTestItem</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">Item</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;pytest.Item subclass representing individual collected tests.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">defs</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">any_defs</span><span class="p">,</span> <span class="n">any_paths</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">test_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">test_name</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">defs</span> <span class="o">=</span> <span class="n">defs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">any_defs</span> <span class="o">=</span> <span class="n">any_defs</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;define_kw&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="p">[</span><span class="s2">&quot;TEST_NAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">any_defs</span><span class="p">[</span><span class="s2">&quot;TEST_NAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_name</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--ammr&quot;</span><span class="p">):</span>
-            <span class="n">paths</span><span class="p">[</span><span class="s2">&quot;AMMR_PATH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--ammr&quot;</span><span class="p">)</span>
-            <span class="n">paths</span><span class="p">[</span><span class="s2">&quot;ANYBODY_PATH_AMMR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--ammr&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="o">=</span> <span class="n">_as_absolute_paths</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">rootdir</span><span class="o">.</span><span class="n">strpath</span><span class="p">)</span>
+            <span class="n">any_paths</span><span class="p">[</span><span class="s2">&quot;AMMR_PATH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--ammr&quot;</span><span class="p">)</span>
+            <span class="n">any_paths</span><span class="p">[</span><span class="s2">&quot;ANYBODY_PATH_AMMR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--ammr&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">any_paths</span> <span class="o">=</span> <span class="n">_as_absolute_paths</span><span class="p">(</span><span class="n">any_paths</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">rootdir</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">test_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">expect_errors</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;expect_errors&quot;</span><span class="p">,</span> <span class="p">[])</span>
 
@@ -373,10 +364,10 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--timeout&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">mainfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">strpath</span>
+        <span class="n">mainfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">ON_WINDOWS</span><span class="p">:</span>
             <span class="n">mainfile</span> <span class="o">=</span> <span class="n">winepath</span><span class="p">(</span><span class="n">mainfile</span><span class="p">,</span> <span class="s2">&quot;-w&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="n">macro_commands</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="n">mainfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">macro</span> <span class="o">=</span> <span class="p">[</span><span class="n">macro_commands</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="n">mainfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">any_defs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">any_paths</span><span class="p">)]</span>
 
         <span class="n">fatal_warnings</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fatal_warnings&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="n">warnings_to_include</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;warnings_to_include&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -409,7 +400,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">hdf5_outputs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">save_study</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;save_study&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-output&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">save_study</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">save_study</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-output&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">save_study</span> <span class="o">=</span> <span class="p">[</span><span class="n">save_study</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">save_study</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">save_study</span>
             <span class="k">for</span> <span class="n">study</span> <span class="ow">in</span> <span class="n">save_study</span><span class="p">:</span>
                 <span class="n">fname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">study</span><span class="si">}</span><span class="s2">.anydata.h5&quot;</span>
@@ -474,15 +465,17 @@
 
         <span class="c1"># Add info to the hdf5 file if compare output was set</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hdf5_outputs</span><span class="p">:</span>
-            <span class="n">base</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-output&quot;</span><span class="p">))</span>
+            <span class="n">base</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-output&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">DEFAULT_ANYTEST_OUTPUT</span>
+            <span class="p">)</span>
             <span class="n">subfolder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--anytest-name&quot;</span><span class="p">))</span>
             <span class="n">target</span> <span class="o">=</span> <span class="n">base</span> <span class="o">/</span> <span class="n">subfolder</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">save_output_files</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hdf5_outputs</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getoption</span><span class="p">(</span><span class="s2">&quot;--create-macros&quot;</span><span class="p">):</span>
             <span class="n">logfile</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;task_logfile&quot;</span><span class="p">])</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">logfile</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">logfile</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.anymcr&quot;</span><span class="p">),</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">logfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">logfile</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.anymcr&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
 
         <span class="c1"># shutil.rmtree(tmpdir, ignore_errors=True)</span>
 
@@ -533,11 +526,11 @@
         <span class="sd">&quot;&quot;&quot;Print a representation when a test failes.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">excinfo</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">AnyException</span><span class="p">):</span>
             <span class="n">rtn</span> <span class="o">=</span> <span class="s2">&quot;Main file:</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="n">rtn</span> <span class="o">+=</span> <span class="n">wraptext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="o">.</span><span class="n">strpath</span><span class="p">,</span> <span class="n">initial_indent</span><span class="o">=</span><span class="s2">&quot;  &quot;</span><span class="p">)</span>
+            <span class="n">rtn</span> <span class="o">+=</span> <span class="n">wraptext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">initial_indent</span><span class="o">=</span><span class="s2">&quot;  &quot;</span><span class="p">)</span>
             <span class="n">rtn</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Special model configuration:&quot;</span>
-            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">any_defs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">rtn</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  #define </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">any_paths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">rtn</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  #path </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
             <span class="n">rtn</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Errors:&quot;</span>
             <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">:</span>
@@ -547,12 +540,16 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">excinfo</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AnyTestItem.reportinfo"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.AnyTestItem.reportinfo">[docs]</a>    <span class="k">def</span> <span class="nf">reportinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fspath</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;AnyBody Simulation: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div></div>
+<div class="viewcode-block" id="AnyTestItem.reportinfo"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyTestItem.reportinfo">[docs]</a>    <span class="k">def</span> <span class="nf">reportinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;AnyBody Simulation: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div></div>
 
 
 <div class="viewcode-block" id="AnyException"><a class="viewcode-back" href="../../pytest_plugin.html#anypytools.pytest_plugin.AnyException">[docs]</a><span class="k">class</span> <span class="nc">AnyException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Custom exception for error reporting.&quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="split_string_eq_1"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.split_string_eq_1">[docs]</a><span class="k">def</span> <span class="nf">split_string_eq_1</span><span class="p">(</span><span class="n">kv</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">kv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="pytest_addoption"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.pytest_addoption">[docs]</a><span class="k">def</span> <span class="nf">pytest_addoption</span><span class="p">(</span><span class="n">parser</span><span class="p">):</span>
@@ -586,7 +583,7 @@
     <span class="n">group</span><span class="o">.</span><span class="n">addoption</span><span class="p">(</span>
         <span class="s2">&quot;--define&quot;</span><span class="p">,</span>
         <span class="n">action</span><span class="o">=</span><span class="s2">&quot;append&quot;</span><span class="p">,</span>
-        <span class="nb">type</span><span class="o">=</span><span class="k">lambda</span> <span class="n">kv</span><span class="p">:</span> <span class="n">kv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="nb">type</span><span class="o">=</span><span class="n">split_string_eq_1</span><span class="p">,</span>
         <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;define_kw&quot;</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Add custom define statements parse to all AnyScript models. &quot;</span>
         <span class="s2">&quot;Must be given in the form: --define MYDEF=6&quot;</span><span class="p">,</span>
@@ -612,13 +609,22 @@
     <span class="p">)</span>
 
     <span class="n">group</span><span class="o">.</span><span class="n">addoption</span><span class="p">(</span>
+        <span class="s2">&quot;--anytest-deselect&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;anytest_deselect&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">BooleanOptionalAction</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Will deselect any test which does not produce hdf5 output.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">group</span><span class="o">.</span><span class="n">addoption</span><span class="p">(</span>
         <span class="s2">&quot;--anytest-output&quot;</span><span class="p">,</span>
         <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;path&quot;</span><span class="p">,</span>
         <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;?&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">const</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;anytest-output&quot;</span><span class="p">),</span>
+        <span class="n">const</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">DEFAULT_ANYTEST_OUTPUT</span><span class="p">),</span>
         <span class="n">help</span><span class="o">=</span><span class="p">(</span>
-            <span class="s2">&quot;Specify if hdf5 files are saved from the tests. Can be assined a value to specify the base folder where data will be saved. Default save directory is </span><span class="si">%(const)r</span><span class="s2">.&quot;</span>
+            <span class="s2">&quot;Specify if hdf5 files are saved from the tests. Can be assined a value to specify the base &quot;</span>
+            <span class="s2">&quot;folder where data will be saved. Default save directory is </span><span class="si">%(const)r</span><span class="s2">.&quot;</span>
         <span class="p">),</span>
     <span class="p">)</span></div>
 </pre></div>
@@ -677,7 +683,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.pytest_plugin</a></li> 

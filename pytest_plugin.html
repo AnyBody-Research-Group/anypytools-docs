@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PyTest plugin. &#8212; AnyPyTools 1.7.8 documentation</title>
+    <title>PyTest plugin. &#8212; AnyPyTools 1.8.1 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/table_styling.css" />
@@ -18,7 +18,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
 
     
     
@@ -63,7 +63,7 @@
         <li class="right" >
           <a href="api/tools.html" title="anypytools.tools"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">PyTest plugin.</a></li> 
       </ul>
@@ -134,6 +134,22 @@ loading and running, the framework considers it a failed test.</p>
 <dt>
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">anypytools.pytest_plugin.</span></code><code class="sig-name descname"><span class="pre">AnyTestItem</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyTestItem"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
 <dd><p>pytest.Item subclass representing individual collected tests.</p>
+<dl class="py method">
+<dt>
+<code class="sig-name descname"><span class="pre">reportinfo</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyTestItem.reportinfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Get location information for this item for test reports.</p>
+<p>Returns a tuple with three elements:</p>
+<ul class="simple">
+<li><p>The path of the test (default <code class="docutils literal notranslate"><span class="pre">self.path</span></code>)</p></li>
+<li><p>The line number of the test (default <code class="docutils literal notranslate"><span class="pre">None</span></code>)</p></li>
+<li><p>A name of the test to be shown (default <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>)</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><span class="xref std std-ref">non-python tests</span></p>
+</div>
+</dd></dl>
+
 <dl class="py method">
 <dt>
 <code class="sig-name descname"><span class="pre">repr_failure</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">excinfo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/anypytools/pytest_plugin.html#AnyTestItem.repr_failure"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
@@ -286,7 +302,7 @@ early in the pytest startup.</p>
         <li class="right" >
           <a href="api/tools.html" title="anypytools.tools"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href="">PyTest plugin.</a></li> 
       </ul>

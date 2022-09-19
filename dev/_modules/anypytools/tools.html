@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.tools &#8212; AnyPyTools 1.7.8 documentation</title>
+    <title>anypytools.tools &#8212; AnyPyTools 1.8.1 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
@@ -18,7 +18,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
 
     
     
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.tools</a></li> 
@@ -212,7 +212,10 @@
         <span class="n">width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">shutil</span><span class="o">.</span><span class="n">get_terminal_size</span><span class="p">()</span><span class="o">.</span><span class="n">columns</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">subsequent_indent</span> <span class="o">=</span> <span class="n">subsequent_indent</span> <span class="ow">or</span> <span class="n">initial_indent</span>
     <span class="k">return</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span>
-        <span class="n">elem</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">initial_indent</span><span class="o">=</span><span class="n">initial_indent</span><span class="p">,</span> <span class="n">subsequent_indent</span><span class="o">=</span><span class="n">subsequent_indent</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">elem</span><span class="p">),</span>
+        <span class="n">width</span><span class="p">,</span>
+        <span class="n">initial_indent</span><span class="o">=</span><span class="n">initial_indent</span><span class="p">,</span>
+        <span class="n">subsequent_indent</span><span class="o">=</span><span class="n">subsequent_indent</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -237,7 +240,7 @@
 <span class="sd">    The function will walk up a directory tree looking</span>
 <span class="sd">    for a ammr_verion.any file to parse.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">folder</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
     <span class="n">version_files</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;AMMR.version.any&quot;</span><span class="p">,</span> <span class="s2">&quot;AMMR.version.xml&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">basedir</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">walk_up</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">fn</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">version_files</span><span class="p">):</span>
@@ -1154,7 +1157,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.7.8 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.tools</a></li> 
