@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.abcutils &#8212; AnyPyTools 1.8.1 documentation</title>
+    <title>anypytools.abcutils &#8212; AnyPyTools 1.8.2 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.8.2 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.abcutils</a></li> 
@@ -331,7 +331,7 @@
                 <span class="sa">r</span><span class="s2">&quot;@exit /b </span><span class="si">%E</span><span class="s2">RRORLEVEL%&quot;</span>
             <span class="p">)</span>
             <span class="c1"># Wine can have problems with arbitrary names. Create simple uniqe name for the file</span>
-            <span class="n">hash_id</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">hash</span><span class="p">(</span><span class="n">logfile</span><span class="o">.</span><span class="n">name</span><span class="p">))</span> <span class="o">%</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">8</span><span class="p">)</span>
+            <span class="n">hash_id</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">hash</span><span class="p">(</span><span class="n">logfile</span><span class="o">.</span><span class="n">name</span><span class="p">))</span> <span class="o">%</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">8</span><span class="p">)</span>
             <span class="n">batfile</span> <span class="o">=</span> <span class="n">macrofile_path</span><span class="o">.</span><span class="n">with_name</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;wine_</span><span class="si">{</span><span class="n">hash_id</span><span class="si">}</span><span class="s2">.bat&quot;</span><span class="p">)</span>
             <span class="n">batfile</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">anybodycmd</span><span class="p">)</span>
             <span class="n">macrofile_cleanup</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">batfile</span><span class="p">)</span>
@@ -1099,7 +1099,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.8.2 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.abcutils</a></li> 

@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.tools &#8212; AnyPyTools 1.8.1 documentation</title>
+    <title>anypytools.tools &#8212; AnyPyTools 1.8.2 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
@@ -55,7 +55,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.8.2 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.tools</a></li> 
@@ -810,6 +810,7 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The `interp_var` should not be a constant&quot;</span><span class="p">)</span>
 
             <span class="n">dfout</span> <span class="o">=</span> <span class="n">dfout</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">interp_var</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">time_columns</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">interp_var</span><span class="p">)</span>
             <span class="n">dfout</span> <span class="o">=</span> <span class="n">dfout</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">dfout</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">interp_val</span><span class="p">))</span>
             <span class="n">dfout</span><span class="p">[</span><span class="n">time_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfout</span><span class="p">[</span><span class="n">time_columns</span><span class="p">]</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">interp_method</span><span class="p">)</span>
             <span class="n">dfout</span><span class="p">[</span><span class="n">constant_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfout</span><span class="p">[</span><span class="n">constant_columns</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span>
@@ -1157,7 +1158,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.8.1 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.8.2 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.tools</a></li> 
