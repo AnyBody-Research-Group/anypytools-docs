@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -77,33 +83,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  
-<style>
-/* CSS overrides for cloud theme */
-
-/* nicer titles and more space for info and warning logos */
-
-div.admonition p.admonition-title {
-    background: rgba(0, 0, 0, .05);
-    margin: .5em -1em;
-    margin-top: -.5em !important;
-    padding: .5em .5em .5em 2.65em;
-}
-
-/* indent single paragraph */
-div.admonition {
-    text-indent: 20px;
-}
-/* don't indent multiple paragraphs */
-div.admonition > p {
-    text-indent: 0;
-}
-/* remove excessive padding */
-div.admonition.inline-title p.admonition-title {
-    padding-left: .2em;
-}
-</style>
-<div class="tex2jax_ignore mathjax_ignore section" id="module-anypytools.h5py_wrapper">
+  <div class="tex2jax_ignore mathjax_ignore section" id="module-anypytools.h5py_wrapper">
 <span id="anypytools-h5py-wrapper"></span><h1>anypytools.h5py_wrapper<a class="headerlink" href="#module-anypytools.h5py_wrapper" title="Permalink to this headline">¶</a></h1>
 <p>Created on Mon Jan 16 11:40:42 2012.</p>
 <p>&#64;author: mel</p>
@@ -113,7 +93,7 @@ div.admonition.inline-title p.admonition-title {
 <dd><p>Represents an HDF5 file.</p>
 <p>Create a new file object.</p>
 <p>See the h5py user guide for a detailed explanation of the options.</p>
-<dl class="simple">
+<dl>
 <dt>name</dt><dd><p>Name of the file on disk, or file-like object.  Note: for files
 created with the ‘core’ driver, HDF5 still requires this be
 non-empty.</p>
@@ -136,8 +116,8 @@ file (mode w, w- or x).</p>
 </dd>
 <dt>swmr</dt><dd><p>Open the file in SWMR read mode. Only used when mode = ‘r’.</p>
 </dd>
-<dt>rdcc_nbytes</dt><dd><p>Total size of the raw data chunk cache in bytes. The default size
-is 1024**2 (1 MB) per dataset.</p>
+<dt>rdcc_nbytes</dt><dd><p>Total size of the dataset chunk cache in bytes. The default size
+is 1024**2 (1 MiB) per dataset. Applies to all datasets unless individually changed.</p>
 </dd>
 <dt>rdcc_w0</dt><dd><p>The chunk preemption policy for all datasets.  This must be
 between 0 and 1 inclusive and indicates the weighting according to
@@ -149,7 +129,7 @@ means fully read or written chunks are always preempted before
 other chunks.  If your application only reads or writes data once,
 this can be safely set to 1.  Otherwise, this should be set lower
 depending on how often you re-read or re-write the same data.  The
-default value is 0.75.</p>
+default value is 0.75. Applies to all datasets unless individually changed.</p>
 </dd>
 <dt>rdcc_nslots</dt><dd><p>The number of chunk slots in the raw data chunk cache for this
 file. Increasing this value reduces the number of cache collisions,
@@ -158,7 +138,7 @@ strategy, this value should ideally be a prime number. As a rule of
 thumb, this value should be at least 10 times the number of chunks
 that can fit in rdcc_nbytes bytes. For maximum performance, this
 value should be set approximately 100 times that number of
-chunks. The default value is 521.</p>
+chunks. The default value is 521. Applies to all datasets unless individually changed.</p>
 </dd>
 <dt>track_order</dt><dd><p>Track dataset/group/attribute creation order under root group
 if True. If None use global default h5.get_config().track_order.</p>
@@ -195,14 +175,19 @@ page_buf_size is set. Default value is zero.</p>
 allowing pages containing raw data to be evicted. Applicable only if
 page_buf_size is set. Default value is zero.</p>
 </dd>
-<dt>locking</dt><dd><p>The file locking behavior. Defined as:
-False (or “false”)  Disable file locking
-True (or “true”)    Enable file locking
-“best-effort”       Enable file locking but ignore some errors
-None                Use HDF5 defaults
-Warning: The HDF5_USE_FILE_LOCKING environment variable can override
-this parameter.
-Only available with HDF5 &gt;= 1.12.1 or 1.10.x &gt;= 1.10.7.</p>
+<dt>locking</dt><dd><p>The file locking behavior. Defined as:</p>
+<ul class="simple">
+<li><p>False (or “false”) –  Disable file locking</p></li>
+<li><p>True (or “true”)   –  Enable file locking</p></li>
+<li><p>“best-effort”      –  Enable file locking but ignore some errors</p></li>
+<li><p>None               –  Use HDF5 defaults</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The HDF5_USE_FILE_LOCKING environment variable can override
+this parameter.</p>
+</div>
+<p>Only available with HDF5 &gt;= 1.12.1 or 1.10.x &gt;= 1.10.7.</p>
 </dd>
 <dt>alignment_threshold</dt><dd><p>Together with <code class="docutils literal notranslate"><span class="pre">alignment_interval</span></code>, this property ensures that
 any file object greater than or equal in size to the alignement
@@ -213,6 +198,9 @@ multiple of alignment interval.</p>
 <code class="docutils literal notranslate"><span class="pre">alignment_threshold</span></code>. See the description above. For more
 details, see
 <a class="reference external" href="https://portal.hdfgroup.org/display/HDF5/H5P_SET_ALIGNMENT">https://portal.hdfgroup.org/display/HDF5/H5P_SET_ALIGNMENT</a></p>
+</dd>
+<dt>meta_block_size</dt><dd><p>Set the current minimum size, in bytes, of new metadata block allocations.
+See <a class="reference external" href="https://portal.hdfgroup.org/display/HDF5/H5P_SET_META_BLOCK_SIZE">https://portal.hdfgroup.org/display/HDF5/H5P_SET_META_BLOCK_SIZE</a></p>
 </dd>
 <dt>Additional keywords</dt><dd><p>Passed on to the selected file driver.</p>
 </dd>

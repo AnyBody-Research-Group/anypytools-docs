@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -118,7 +124,7 @@
 
 
 <div class="viewcode-block" id="MacroCommand"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.MacroCommand">[docs]</a><span class="k">class</span> <span class="nc">MacroCommand</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class for custom macro commands.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for custom macro commands.</span>
 
 <span class="sd">    This class also serves as base class for other macro commands.</span>
 
@@ -140,7 +146,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_macro</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <div class="viewcode-block" id="MacroCommand.get_macro"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.MacroCommand.get_macro">[docs]</a>    <span class="k">def</span> <span class="nf">get_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a string representation of the macro.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a string representation of the macro.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -159,7 +165,7 @@
 
 
 <div class="viewcode-block" id="Load"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.Load">[docs]</a><span class="k">class</span> <span class="nc">Load</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a load macro command.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a load macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -207,7 +213,7 @@
 
 
 <div class="viewcode-block" id="SetValue"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SetValue">[docs]</a><span class="k">class</span> <span class="nc">SetValue</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create &#39;Set Value&#39; classoperation macro command.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create &#39;Set Value&#39; classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -302,7 +308,7 @@
 
 
 <div class="viewcode-block" id="SetValue_random"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SetValue_random">[docs]</a><span class="k">class</span> <span class="nc">SetValue_random</span><span class="p">(</span><span class="n">SetValue</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a &#39;Set Value&#39; macro command from a distribution.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a &#39;Set Value&#39; macro command from a distribution.</span>
 
 <span class="sd">    The value is connected to a distibution in scipy.stats.distributions.</span>
 
@@ -400,7 +406,7 @@
 
 
 <div class="viewcode-block" id="Dump"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.Dump">[docs]</a><span class="k">class</span> <span class="nc">Dump</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a Dump classoperation macro command.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Dump classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -446,7 +452,7 @@
 
 
 <div class="viewcode-block" id="SaveDesign"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SaveDesign">[docs]</a><span class="k">class</span> <span class="nc">SaveDesign</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a Save Design classoperation macro command.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Save Design classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -473,7 +479,7 @@
 
 
 <div class="viewcode-block" id="LoadDesign"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.LoadDesign">[docs]</a><span class="k">class</span> <span class="nc">LoadDesign</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a Load Design classoperation macro command.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Load Design classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -500,7 +506,7 @@
 
 
 <div class="viewcode-block" id="SaveValues"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SaveValues">[docs]</a><span class="k">class</span> <span class="nc">SaveValues</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a Save Values classoperation macro command.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Save Values classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -522,7 +528,7 @@
 
 
 <div class="viewcode-block" id="SaveData"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.SaveData">[docs]</a><span class="k">class</span> <span class="nc">SaveData</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a Save Data classoperation macro command.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Save Data classoperation macro command.</span>
 
 <span class="sd">    This macro operation will save all data from a study to a</span>
 <span class="sd">    HDF5 file.</span>
@@ -551,7 +557,7 @@
 
 
 <div class="viewcode-block" id="LoadValues"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.LoadValues">[docs]</a><span class="k">class</span> <span class="nc">LoadValues</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a Load Values classoperation macro command.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Load Values classoperation macro command.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -573,7 +579,7 @@
 
 
 <div class="viewcode-block" id="UpdateValues"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.UpdateValues">[docs]</a><span class="k">class</span> <span class="nc">UpdateValues</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create an &#39;Update Values&#39; classoperation macro command.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an &#39;Update Values&#39; classoperation macro command.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -590,7 +596,7 @@
 
 
 <div class="viewcode-block" id="OperationRun"><a class="viewcode-back" href="../../api/macroutils.html#anypytools.OperationRun">[docs]</a><span class="k">class</span> <span class="nc">OperationRun</span><span class="p">(</span><span class="n">MacroCommand</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a macro command to select and run an operation.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a macro command to select and run an operation.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -614,7 +620,7 @@
 
 
 <div class="viewcode-block" id="AnyMacro"><a class="viewcode-back" href="../../api/AnyMacro.html#anypytools.AnyMacro">[docs]</a><span class="k">class</span> <span class="nc">AnyMacro</span><span class="p">(</span><span class="n">MutableSequence</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class to generate multiple macros.</span>
 
 <span class="sd">    Use the class to contruct multiple anyscript macros from a single macro.</span>
@@ -725,7 +731,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">list_idx</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AnyMacro.create_macros"><a class="viewcode-back" href="../../api/AnyMacro.html#anypytools.AnyMacro.create_macros">[docs]</a>    <span class="k">def</span> <span class="nf">create_macros</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_macros</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generate a given number of macros.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a given number of macros.</span>
 
 <span class="sd">        The function return its output either as list (batch_size = None) or in batches</span>
 <span class="sd">        as generator object (memory efficient when generating many macros)</span>
@@ -795,7 +801,7 @@
         <span class="k">return</span> <span class="n">macro_list</span></div>
 
 <div class="viewcode-block" id="AnyMacro.create_macros_MonteCarlo"><a class="viewcode-back" href="../../api/AnyMacro.html#anypytools.AnyMacro.create_macros_MonteCarlo">[docs]</a>    <span class="k">def</span> <span class="nf">create_macros_MonteCarlo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_macros</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># noqa</span>
-        <span class="sd">&quot;&quot;&quot;Generate AnyScript macros for monte carlos studies.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate AnyScript macros for monte carlos studies.</span>
 
 <span class="sd">        The function returns macros for Monte Carlo parameter studies. This methods</span>
 <span class="sd">        extends the `create_macros` methods with functionality to randomly vary</span>
@@ -876,7 +882,7 @@
         <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">append_default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generate AnyScript macros for Latin Hyper Cube Studies studies.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate AnyScript macros for Latin Hyper Cube Studies studies.</span>
 
 <span class="sd">        Generates AnyScript macros for parameter studies using Latin hyper cube</span>
 <span class="sd">        sampling. The macros added with the `SetValue_random` are created with</span>
@@ -984,7 +990,6 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-
     <span class="c1">#    mg = PertubationMacroGenerator()</span>
     <span class="c1">#    mg.add_set_value_designvar(&#39;test&#39;,1)</span>
     <span class="c1">#    mg.add_set_value_designvar(&#39;test&#39;,2)</span>

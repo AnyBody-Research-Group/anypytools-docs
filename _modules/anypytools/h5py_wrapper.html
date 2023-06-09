@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -94,7 +100,7 @@
 
 
 <span class="k">def</span> <span class="nf">_check_input_path</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert dot notation to stardard h5py path.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert dot notation to stardard h5py path.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="s2">&quot;/&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
         <span class="c1"># path does not have traditional h5 format.</span>
         <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Main.&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;Output&quot;</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
@@ -104,7 +110,6 @@
 
 
 <div class="viewcode-block" id="File"><a class="viewcode-back" href="../../api/h5py_wrapper.html#anypytools.h5py_wrapper.File">[docs]</a><span class="k">class</span> <span class="nc">File</span><span class="p">(</span><span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">):</span>  <span class="c1"># noqa</span>
-
     <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="o">.</span><span class="vm">__doc__</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># noqa</span>
@@ -112,7 +117,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>  <span class="c1"># noqa</span>
-        <span class="sd">&quot;&quot;&quot;.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;.&quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">_check_input_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">elem</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">File</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">file</span><span class="p">[</span><span class="n">path</span><span class="p">]</span>
@@ -158,7 +163,7 @@
         <span class="k">return</span> <span class="n">Group</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>  <span class="c1"># noqa</span>
-        <span class="sd">&quot;&quot;&quot;Test if a member name exists&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test if a member name exists&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">super</span><span class="p">(</span><span class="n">File</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
@@ -170,13 +175,12 @@
         <span class="k">return</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="File.resolve_anyreference"><a class="viewcode-back" href="../../api/h5py_wrapper.html#anypytools.h5py_wrapper.File.resolve_anyreference">[docs]</a>    <span class="k">def</span> <span class="nf">resolve_anyreference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Resolve anyreference in the file.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve anyreference in the file.&quot;&quot;&quot;</span>
         <span class="n">elem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">elem</span><span class="o">.</span><span class="n">id</span></div></div>
 
 
 <div class="viewcode-block" id="Group"><a class="viewcode-back" href="../../api/h5py_wrapper.html#anypytools.h5py_wrapper.Group">[docs]</a><span class="k">class</span> <span class="nc">Group</span><span class="p">(</span><span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="p">):</span>  <span class="c1"># noqa</span>
-
     <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="o">.</span><span class="vm">__doc__</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>  <span class="c1"># noqa</span>
@@ -229,7 +233,7 @@
         <span class="k">return</span> <span class="n">Group</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>  <span class="c1"># noqa</span>
-        <span class="sd">&quot;&quot;&quot;Test if a member name exists&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test if a member name exists&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">super</span><span class="p">(</span><span class="n">Group</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>

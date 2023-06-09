@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/table_styling.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -76,59 +82,34 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  
-<style>
-/* CSS overrides for cloud theme */
-
-/* nicer titles and more space for info and warning logos */
-
-div.admonition p.admonition-title {
-    background: rgba(0, 0, 0, .05);
-    margin: .5em -1em;
-    margin-top: -.5em !important;
-    padding: .5em .5em .5em 2.65em;
-}
-
-/* indent single paragraph */
-div.admonition {
-    text-indent: 20px;
-}
-/* don't indent multiple paragraphs */
-div.admonition > p {
-    text-indent: 0;
-}
-/* remove excessive padding */
-div.admonition.inline-title p.admonition-title {
-    padding-left: .2em;
-}
-</style>
-<div class="tex2jax_ignore mathjax_ignore section" id="install-guide">
+  <div class="tex2jax_ignore mathjax_ignore section" id="install-guide">
 <h1>Install guide<a class="headerlink" href="#install-guide" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="the-easy-way">
 <h3>The easy way<a class="headerlink" href="#the-easy-way" title="Permalink to this headline">¶</a></h3>
-<p>The easiest way to install AnyPyTools on windows is through the Anaconda Python
+<p>The easiest way to install AnyPyTools on Windows (along with all dependencies) is through the Anaconda Python
 Distribution and the conda package manager.</p>
 <p>Install AnyPyTools with the following command:</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="p">&gt;</span> conda config --add channels conda-forge
 <span class="p">&gt;</span> conda install anypytools
 </pre></div>
 </div>
-<p>This will install xonsh and all the recommended dependencies. Next, try to launch the
+<p>This will install <code class="docutils literal notranslate"><span class="pre">anypytools</span></code> and all the recommended dependencies. Next, try to launch the
 interactive AnyPyTools notebook tutorial :</p>
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="p">&gt;</span> AnyPyToolsTutorial.bat
 </pre></div>
 </div>
 </div>
-<div class="section" id="install-from-source">
-<h3>Install from source<a class="headerlink" href="#install-from-source" title="Permalink to this headline">¶</a></h3>
-<p>To install xonsh from source on Windows, first install <a class="reference external" href="https://www.python.org/downloads/windows/">Python</a>. Remember to select “Add python to PATH” during installation.</p>
-<p>Download the latest <a class="reference external" href="https://github.com/anybody-research-group/anypytools/archive/master.zip">anypytools-master.zip</a> from github and unzip it
-to <code class="docutils literal notranslate"><span class="pre">anypytools-master</span></code>.</p>
-<p>Now install anypytools:</p>
-<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="p">&gt;</span> cd anypytools-master
-<span class="p">&gt;</span> pip install -e
+<div class="section" id="other-installations-options">
+<h3>Other installations options<a class="headerlink" href="#other-installations-options" title="Permalink to this headline">¶</a></h3>
+<p>It is also possible to install directly from the python package index.</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="p">&gt;</span> pip install AnyPyTools 
+</pre></div>
+</div>
+<p>or clone/download the source files from <a class="reference external" href="https://github.com/AnyBody-Research-Group/AnyPyTools">GitHub</a>:</p>
+<p>To install run the following command in the source folder:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="p">&gt;</span> pip install -e .
 </pre></div>
 </div>
 </div>
@@ -150,7 +131,7 @@ to <code class="docutils literal notranslate"><span class="pre">anypytools-maste
 <li><a class="reference internal" href="#">Install guide</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a><ul>
 <li><a class="reference internal" href="#the-easy-way">The easy way</a></li>
-<li><a class="reference internal" href="#install-from-source">Install from source</a></li>
+<li><a class="reference internal" href="#other-installations-options">Other installations options</a></li>
 </ul>
 </li>
 </ul>
