@@ -132,6 +132,9 @@
 
 <span class="n">DEFAULT_ANYTEST_OUTPUT</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;anytest-output&quot;</span>
 
+<span class="n">LOAD_TIME_VARIABLE</span> <span class="o">=</span> <span class="s2">&quot;Global.System.LoadedModel.LoadDurationCPUThread&quot;</span>
+<span class="n">RUN_TEST_TIME_VARIABLE</span> <span class="o">=</span> <span class="s2">&quot;Main.RunTest.RunDurationCPUThread&quot;</span>
+
 
 <div class="viewcode-block" id="load_duration_supported"><a class="viewcode-back" href="../../api/pytest_plugin.html#anypytools.pytest_plugin.load_duration_supported">[docs]</a><span class="k">def</span> <span class="nf">load_duration_supported</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">AMSVersion</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">pytest</span><span class="o">.</span><span class="n">anytest</span><span class="o">.</span><span class="n">ams_version</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10759</span><span class="p">)</span></div>
@@ -387,7 +390,7 @@
 
         <span class="k">if</span> <span class="n">load_duration_supported</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">macro</span> <span class="o">+=</span> <span class="p">[</span>
-                <span class="n">macro_commands</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s2">&quot;Global.System.LoadedModel.LoadDurationCPUThread&quot;</span><span class="p">),</span>
+                <span class="n">macro_commands</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="n">LOAD_TIME_VARIABLE</span><span class="p">),</span>
             <span class="p">]</span>
 
         <span class="n">fatal_warnings</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fatal_warnings&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
@@ -421,7 +424,7 @@
 
         <span class="k">if</span> <span class="n">load_duration_supported</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">macro</span> <span class="o">+=</span> <span class="p">[</span>
-                <span class="n">macro_commands</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s2">&quot;Main.RunTest.RunDurationCPUThread&quot;</span><span class="p">),</span>
+                <span class="n">macro_commands</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="n">RUN_TEST_TIME_VARIABLE</span><span class="p">),</span>
             <span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">hdf5_outputs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -470,12 +473,14 @@
                     <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">load_duration_supported</span><span class="p">():</span>
-            <span class="n">loadtime</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;Global.System.LoadedModel.LoadDurationCPUThread&quot;</span><span class="p">]</span>
-            <span class="n">runtesttime</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;Main.RunTest.RunDurationCPUThread&quot;</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">user_properties</span> <span class="o">+=</span> <span class="p">[</span>
-                <span class="p">(</span><span class="s2">&quot;Load time&quot;</span><span class="p">,</span> <span class="n">loadtime</span><span class="p">),</span>
-                <span class="p">(</span><span class="s2">&quot;RunTest time&quot;</span><span class="p">,</span> <span class="n">runtesttime</span><span class="p">),</span>
-            <span class="p">]</span>
+            <span class="n">load_time</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">LOAD_TIME_VARIABLE</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">load_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">user_properties</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Load time&quot;</span><span class="p">,</span> <span class="n">load_time</span><span class="p">))</span>
+
+            <span class="n">run_test_time</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">RUN_TEST_TIME_VARIABLE</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">run_test_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">user_properties</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;Run time&quot;</span><span class="p">,</span> <span class="n">run_test_time</span><span class="p">))</span>
+
         <span class="c1"># Ignore error due to missing Main.RunTest</span>
         <span class="k">if</span> <span class="s2">&quot;ERROR&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
             <span class="n">runtest_missing</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span>
