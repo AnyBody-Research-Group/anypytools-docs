@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.tools &#8212; AnyPyTools 1.10.1 documentation</title>
+    <title>anypytools.tools &#8212; AnyPyTools 1.11.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/table_styling.css" />
@@ -69,7 +69,7 @@
         <li class="right" >
           <a href="pytest_plugin.html" title="anypytools.pytest_plugin"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.10.1 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.11.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.tools</a></li> 
@@ -98,7 +98,7 @@
 <dd><p>Subclassed OrderedDict which supports partial key access.</p>
 <dl class="py method">
 <dt id="anypytools.tools.AnyPyProcessOutput.to_dataframe">
-<code class="sig-name descname"><span class="pre">to_dataframe</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_var</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cubic'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutput.to_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutput.to_dataframe" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">to_dataframe</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_var</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span> <span class="p"><span class="pre">|</span></span> <span class="pre">None</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cubic'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#AnyPyProcessOutput.to_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.AnyPyProcessOutput.to_dataframe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the output to a pandas dataframe.</p>
 <div class="desc-section desc-section-1 section" id="anypytools.tools.AnyPyProcessOutput.to_dataframe-parameters">
 <h2 class="section-header">Parameters:<a class="headerlink" href="#anypytools.tools.AnyPyProcessOutput.to_dataframe-parameters" title="Permalink to this headline">¶</a></h2>
@@ -220,8 +220,10 @@ for a ammr_verion.any file to parse.</p>
 
 <dl class="py function">
 <dt id="anypytools.tools.get_anybodycon_path">
-<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">get_anybodycon_path</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_anybodycon_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.get_anybodycon_path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the path to default AnyBody console application.</p>
+<code class="sig-prename descclassname"><span class="pre">anypytools.tools.</span></code><code class="sig-name descname"><span class="pre">get_anybodycon_path</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span> <span class="p"><span class="pre">|</span></span> <span class="pre">None</span><a class="reference internal" href="../_modules/anypytools/tools.html#get_anybodycon_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#anypytools.tools.get_anybodycon_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the path to default AnyBody console application.
+If AnyBodyCon.exe is on path it will take precedence over
+the registry lookup.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -387,7 +389,7 @@ True, then warnings are also added to the error list.</p>
         <li class="right" >
           <a href="pytest_plugin.html" title="anypytools.pytest_plugin"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">AnyPyTools 1.10.1 documentation</a> &#187;</li>
+    <li><a href="../index.html">AnyPyTools 1.11.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >AnyPyTools API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.tools</a></li> 

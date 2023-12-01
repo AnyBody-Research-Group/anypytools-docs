@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>anypytools.tools &#8212; AnyPyTools 1.10.1 documentation</title>
+    <title>anypytools.tools &#8212; AnyPyTools 1.11.0 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/table_styling.css" />
@@ -61,7 +61,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              accesskey="C">toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.10.1 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.11.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.tools</a></li> 
@@ -82,6 +82,8 @@
 
 <span class="sd">@author: Morten</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -104,7 +106,7 @@
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span> <span class="nn">_thread</span> <span class="kn">import</span> <span class="n">get_ident</span> <span class="k">as</span> <span class="n">_get_ident</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span>
 
 <span class="c1"># external imports</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -597,8 +599,15 @@
     <span class="k">return</span> <span class="n">long_path_name</span>
 
 
-<div class="viewcode-block" id="get_anybodycon_path"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.get_anybodycon_path">[docs]</a><span class="k">def</span> <span class="nf">get_anybodycon_path</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the path to default AnyBody console application.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="get_anybodycon_path"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.get_anybodycon_path">[docs]</a><span class="k">def</span> <span class="nf">get_anybodycon_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the path to default AnyBody console application.</span>
+<span class="sd">    If AnyBodyCon.exe is on path it will take precedence over</span>
+<span class="sd">    the registry lookup.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">anybodycon_paths</span> <span class="o">:=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;AnyBodyCon.exe&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">anybodycon_paths</span>
+
     <span class="k">if</span> <span class="ow">not</span> <span class="n">ON_WINDOWS</span><span class="p">:</span>
         <span class="n">wineprefix</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;WINEPREFIX&quot;</span><span class="p">,</span> <span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;.wine&quot;</span><span class="p">))</span>
         <span class="n">abtpath</span> <span class="o">=</span> <span class="n">wineprefix</span> <span class="o">/</span> <span class="s2">&quot;drive_c/Program Files/AnyBody Technology&quot;</span>
@@ -618,10 +627,10 @@
     <span class="k">except</span> <span class="ne">WindowsError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">WindowsError</span><span class="p">(</span><span class="s2">&quot;Could not locate AnyBody in registry&quot;</span><span class="p">)</span>
     <span class="n">abpath</span> <span class="o">=</span> <span class="n">abpath</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
-    <span class="n">abpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">abpath</span><span class="p">),</span> <span class="s2">&quot;AnyBodyCon.exe&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="s2">&quot;~&quot;</span> <span class="ow">in</span> <span class="n">abpath</span><span class="p">:</span>
-        <span class="n">abpath</span> <span class="o">=</span> <span class="n">_expand_short_path_name</span><span class="p">(</span><span class="n">abpath</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">abpath</span></div>
+    <span class="n">anybodycon_paths</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">abpath</span><span class="p">),</span> <span class="s2">&quot;AnyBodyCon.exe&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;~&quot;</span> <span class="ow">in</span> <span class="n">anybodycon_paths</span><span class="p">:</span>
+        <span class="n">anybodycon_paths</span> <span class="o">=</span> <span class="n">_expand_short_path_name</span><span class="p">(</span><span class="n">anybodycon_paths</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">anybodycon_paths</span></div>
 
 
 <span class="k">def</span> <span class="nf">define2str</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -796,7 +805,7 @@
 
 <div class="viewcode-block" id="AnyPyProcessOutput.to_dataframe"><a class="viewcode-back" href="../../api/tools.html#anypytools.tools.AnyPyProcessOutput.to_dataframe">[docs]</a>    <span class="k">def</span> <span class="nf">to_dataframe</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">index_var</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+        <span class="n">index_var</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span>
         <span class="n">interp_var</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">interp_val</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">interp_method</span><span class="o">=</span><span class="s2">&quot;cubic&quot;</span><span class="p">,</span>
@@ -1216,7 +1225,7 @@
         <li class="right" >
           <a href="../../index.html" title="Table Of Contents"
              >toc</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">AnyPyTools 1.10.1 documentation</a> &#187;</li>
+    <li><a href="../../index.html">AnyPyTools 1.11.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">anypytools.tools</a></li> 
